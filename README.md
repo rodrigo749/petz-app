@@ -1,10 +1,10 @@
-# 🐾 Petz App
+# 🐾 Patas Perdidas
 
 Sistema web para gestão de ONGs de proteção animal, facilitando o cadastro de organizações, busca de animais perdidos, processo de adoção e muito mais.
 
 ## 📋 Sobre o Projeto
 
-O **Petz App** é uma plataforma desenvolvida como parte do curso de Desenvolvimento de Sistemas do SENAC, com o objetivo de conectar ONGs de proteção animal, tutores que perderam seus pets e pessoas interessadas em adotar animais.
+O **Patas Perdidas** é uma plataforma desenvolvida como parte do curso de Desenvolvimento de Sistemas do SENAC, com o objetivo de conectar ONGs de proteção animal, tutores que perderam seus pets e pessoas interessadas em adotar animais.
 
 ### Funcionalidades Planejadas
 
@@ -50,7 +50,7 @@ petz-app/
 
 1. Clone o repositório:
 ```bash
-git clone https://github.com/gaelos7k/Desenvolvimento-de-sistemas-Senac.git
+git clone https://github.com/rodrigo749/petz-app.git
 cd petz-app
 ```
 
