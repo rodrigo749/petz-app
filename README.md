@@ -1,49 +1,55 @@
 # 🐾 Patas Perdidas
 
-Sistema web para gestão de ONGs de proteção animal, facilitando o cadastro de organizações, busca de animais perdidos, processo de adoção e muito mais.
+Sistema web para gestão de ONGs de proteção animal, facilitando o cadastro de organizações, busca de animais perdidos e processo de adoção.
 
 ## 📋 Sobre o Projeto
 
-O **Patas Perdidas** é uma plataforma desenvolvida como parte do curso de Desenvolvimento de Sistemas do SENAC, com o objetivo de conectar ONGs de proteção animal, tutores que perderam seus pets e pessoas interessadas em adotar animais.
+**Patas Perdidas** é uma plataforma desenvolvida como parte do curso de Desenvolvimento de Sistemas do SENAC, com o objetivo de conectar ONGs de proteção animal, tutores que perderam seus pets e pessoas interessadas em adotar animais.
 
 ### Funcionalidades Planejadas
 
-- 🏢 **Cadastro de ONGs**: Registro e gerenciamento de organizações de proteção animal
-- 🔍 **Busca de Animais Perdidos**: Sistema para reportar e encontrar pets desaparecidos
+- 👤 **Login**: Sistema de autenticação de usuários
 - 🏠 **Adoção de Animais**: Plataforma para divulgar animais disponíveis para adoção
-- 📱 **Interface Responsiva**: Acesso através de diferentes dispositivos
+- � **Busca de Animais Perdidos**: Sistema para reportar e encontrar pets desaparecidos
+- 💝 **Apoiar**: Formas de contribuir com a causa animal
 
 ## 🚀 Tecnologias Utilizadas
 
-Este projeto foi inicializado com [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app) em configuração customizável e utiliza as seguintes tecnologias:
-
-- **[Next.js 16.0.1](https://nextjs.org/)** - Framework React para produção
-- **[React 19.2.0](https://react.dev/)** - Biblioteca JavaScript para interfaces de usuário
+- **[Next.js 16.0.1](https://nextjs.org/)** - Framework React com Server Components e App Router
+- **[React 19.2.0](https://react.dev/)** - Biblioteca para construção de interfaces
 - **[React Compiler](https://react.dev/learn/react-compiler)** - Otimização automática de performance
-- **[ESLint](https://eslint.org/)** - Linter para garantir qualidade do código
-- **[Geist Font](https://vercel.com/font)** - Tipografia otimizada da Vercel
+- **[Lucide React](https://lucide.dev/)** - Biblioteca de ícones moderna e leve
+- **[ESLint](https://eslint.org/)** - Linter para qualidade de código
 
 ### Estrutura do Projeto
 
 ```
 petz-app/
+├── public/
+│   ├── images/
+│   │   └── Logo.png         # Logo do projeto
+│   └── favicon.ico          # Ícone da aplicação
 ├── src/
-│   └── app/
-│       ├── layout.js       # Layout principal da aplicação
-│       ├── page.js         # Página inicial
-│       ├── globals.css     # Estilos globais
-│       └── favicon.ico     # Ícone da aplicação
-├── public/                 # Arquivos estáticos
-├── next.config.mjs        # Configuração do Next.js
-├── eslint.config.mjs      # Configuração do ESLint
-└── package.json           # Dependências do projeto
+│   ├── app/
+│   │   ├── layout.js        # Layout raiz com metadata
+│   │   ├── page.js          # Página inicial
+│   │   └── globals.css      # Estilos globais
+│   ├── components/
+│   │   └── Header.js        # Componente de navegação
+│   ├── constants/
+│   │   └── navigation.js    # Links de navegação
+│   └── styles/
+│       └── Header.module.css # Estilos do Header
+├── next.config.mjs          # Configuração do Next.js
+├── eslint.config.mjs        # Configuração do ESLint
+└── package.json             # Dependências do projeto
 ```
 
 ## 💻 Como Executar
 
 ### Pré-requisitos
 
-- Node.js (versão 18 ou superior)
+- Node.js 18+ 
 - npm, yarn, pnpm ou bun
 
 ### Instalação
@@ -64,17 +70,35 @@ npm install
 npm run dev
 ```
 
-4. Abra [http://localhost:3000](http://localhost:3000) no seu navegador para ver o resultado.
+4. Abra [http://localhost:3000](http://localhost:3000) no navegador.
 
 ### Scripts Disponíveis
 
-- `npm run dev` - Inicia o servidor de desenvolvimento
-- `npm run build` - Cria a build de produção
-- `npm start` - Inicia o servidor de produção
-- `npm run lint` - Executa o linter para verificar o código
+- `npm run dev` - Servidor de desenvolvimento com Turbopack
+- `npm run build` - Build de produção
+- `npm start` - Servidor de produção
+- `npm run lint` - Análise de código com ESLint
 
-## 🎨 Personalização
+## 🎨 Componentes
 
-Você pode começar a editar a página modificando o arquivo `src/app/page.js`. A página é atualizada automaticamente conforme você edita o arquivo.
+### Header
 
-O projeto utiliza [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) para otimizar e carregar automaticamente a família de fontes Geist.
+Componente de navegação responsivo com:
+- **Desktop**: Menu horizontal com links estilizados
+- **Mobile**: Menu hambúrguer com drawer lateral (desliza da direita)
+- **Logo**: Otimizada com Next.js Image
+- **Hover effects**: Animações suaves em dourado (#ffd700)
+
+### Navegação
+
+Links configurados em `src/constants/navigation.js`:
+- Login (`/login`)
+- Adoção (`/adocao`)
+- Pets perdidos (`/perdidos`)
+- Apoiar (`/apoiar`)
+
+## 📱 Responsividade
+
+- **Desktop (1024px+)**: Menu horizontal completo
+- **Tablet (768px-1023px)**: Menu hambúrguer com logo reduzida
+- **Mobile (<768px)**: Menu lateral otimizado para touch
