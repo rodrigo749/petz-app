@@ -1,42 +1,53 @@
+/* ...existing code... */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --nav:#10374a;
+  --bg:#f0f4f6;
+  --muted:#475b5f;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html,
+* { box-sizing: border-box; }
+html,body,#root { height:100%; }
 body {
-  max-width: 100vw;
-  overflow-x: hidden;
+  margin:0;
+  font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+  background: var(--bg);
+  color: #12303a;
+  -webkit-font-smoothing:antialiased;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* topbar */
+.topbar {
+  background: var(--nav);
+  color: #fff;
+}
+.topbar .container {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:14px 20px;
+  max-width:1100px;
+  margin:0 auto;
+}
+.brand { display:flex; align-items:center; gap:12px; }
+.logo {
+  width:58px; height:58px;
+  background: url('https://i.imgur.com/3yKQd8B.png') center/cover no-repeat;
+  border-radius:8px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.15);
+}
+.brand-title { font-weight:700; }
+.brand-sub { font-size:12px; color:#bcdbe3; }
+
+.toplinks a {
+  color:#dbeef6;
+  margin-left:18px;
+  text-decoration:none;
+  font-weight:600;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+.site-footer {
+  padding:18px 20px;
+  text-align:center;
+  color:#38515a;
 }
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-}
+/* ...existing code... */

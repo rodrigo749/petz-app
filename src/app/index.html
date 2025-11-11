@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Patas Perdidas</title>
+
+</head>
+<body>
+  <header class="topbar">
+    <div class="container">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <div style="font-weight:700">Patas Perdidas</div>
+          <div style="font-size:12px;color:#bcdbe3">Encontre • Adote • Ajude</div>
+        </div>
+      </div>
+
+      <nav class="toplinks" aria-label="menu">
+        <a href="#">Entrar</a>
+        <a href="#">Adoção</a>
+        <a href="#">Pets perdidos</a>
+        <a href="#">Apoiar</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <img class="left-img" src="https://i.imgur.com/4AiXzf8.png" alt="" />
+    <img class="right-img" src="https://i.imgur.com/3WQbQbG.png" alt="" />
+    <div class="inner">
+      <h1>Bem Vindo!</h1>
+      <p>Cada clique transforma vidas: aqui você pode reencontrar seu pet, adotar com amor ou doar para quem precisa. Juntos, criamos lindas histórias de afeto, esperança e recomeços.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <h3 class="title">Resgatados recentemente</h3>
+
+    <div style="position:relative;">
+      <div class="nav-arrow left" aria-hidden="true">&#8249;</div>
+      <div class="carousel" tabindex="0" role="list">
+        <article class="card">
+          <img src="https://place-puppy.com/300x200" alt="Mingau">
+          <div class="info">
+            <div class="name">Mingau</div>
+            <div class="meta">Raça: Abissínio<br>Gênero: Fêmea<br>Local: Avenida Vicente Simões, 715 - Centro</div>
+          </div>
+        </article>
+
+        <article class="card highlight">
+          <img src="https://place-puppy.com/320x220" alt="Lola">
+          <div class="info">
+            <div class="name">Lola</div>
+            <div class="meta">Raça: Leonberger<br>Gênero: Fêmea<br>Local: Rua A, 212 - Pouso Alegre</div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="https://placekitten.com/320/220" alt="Pom Pom">
+          <div class="info">
+            <div class="name">Pom Pom</div>
+            <div class="meta">Raça: Persa<br>Gênero: Macho<br>Local: Avenida Doutor Lisboa, 05 - Centro</div>
+          </div>
+        </article>
+
+        <!-- duplicar cards para preencher -->
+        <article class="card">
+          <img src="https://place-puppy.com/330x220" alt="Buddy">
+          <div class="info">
+            <div class="name">Buddy</div>
+            <div class="meta">Raça: SRD<br>Gênero: Macho<br>Local: Bairro Jardim</div>
+          </div>
+        </article>
+      </div>
+      <div class="nav-arrow right" aria-hidden="true">&#8250;</div>
+    </div>
+    
+  </section>
+
+  
+
+  <script>
+    // pequenas melhorias de usabilidade (scroll suave ao clicar flecha)
+    const carousel = document.querySelector('.carousel');
+    document.querySelector('.nav-arrow.left').addEventListener('click', ()=> {
+      carousel.scrollBy({left:-300, behavior:'smooth'});
+    });
+    document.querySelector('.nav-arrow.right').addEventListener('click', ()=> {
+      carousel.scrollBy({left:300, behavior:'smooth'});
+    });
+  </script>
+</body>
+</html>

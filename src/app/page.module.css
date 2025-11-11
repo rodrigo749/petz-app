@@ -1,14 +1,6 @@
 .page {
-  --background: #fafafa;
-  --foreground: #fff;
-
+  --background-color: #eeffff;
   --text-primary: #000;
-  --text-secondary: #666;
-
-  --button-primary-hover: #383838;
-  --button-secondary-hover: #f2f2f2;
-  --button-secondary-border: #ebebeb;
-
   display: flex;
   min-height: 100vh;
   align-items: center;
@@ -17,80 +9,145 @@
   background-color: var(--background);
 }
 
-.main {
-  display: flex;
-  min-height: 100vh;
-  width: 100%;
-  max-width: 800px;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
-  background-color: var(--foreground);
-  padding: 120px 60px;
+.pageWrap {
+  --maxw: 1100px;
+  margin: 0 auto;
 }
 
-.intro {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  gap: 24px;
+.hero {
+  background: #e9fbfb;
+  padding: 36px 20px;
+  position: relative;
+  text-align: center;
+  overflow: hidden;
 }
 
-.intro h1 {
-  max-width: 320px;
-  font-size: 40px;
-  font-weight: 600;
-  line-height: 48px;
-  letter-spacing: -2.4px;
-  text-wrap: balance;
-  color: var(--text-primary);
+.hero .inner {
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-.intro p {
-  max-width: 440px;
+.hero h1 {
+  margin: 0 0 10px;
+  font-size: 42px;
+  color: #475b5f;
+  font-weight: 700;
+}
+
+.hero p {
+  margin: 0;
+  color: #475b5f;
   font-size: 18px;
-  line-height: 32px;
-  text-wrap: balance;
-  color: var(--text-secondary);
+  line-height: 1.4;
 }
 
-.intro a {
-  font-weight: 500;
-  color: var(--text-primary);
+.leftImg,
+.rightImg {
+  position: absolute;
+  top: 18px;
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
 }
 
-.ctas {
+.leftImg {
+  left: 8px;
+}
+
+.rightImg {
+  right: 8px;
+}
+
+.block {
+  padding: 28px 20px;
+  background: #3f6b81;
+  color: white;
+}
+
+.title {
+  max-width: var(--maxw);
+  margin: 0 auto 18px;
+  text-align: center;
+  font-weight: 700;
+}
+
+/* carousel */
+.carouselWrap {
   display: flex;
-  flex-direction: row;
-  width: 100%;
-  max-width: 440px;
-  gap: 16px;
-  font-size: 14px;
-}
-
-.ctas a {
-  display: flex;
-  justify-content: center;
   align-items: center;
-  height: 40px;
-  padding: 0 16px;
-  border-radius: 128px;
-  border: 1px solid transparent;
-  transition: 0.2s;
+  justify-content: center;
+  gap: 12px;
+  position: relative;
+}
+
+.carousel {
+  max-width: var(--maxw);
+  display: flex;
+  gap: 22px;
+  padding: 18px 10px 40px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.card {
+  min-width: 260px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.08);
+  scroll-snap-align: center;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.highlight {
+  background: #f5b25c;
+  color: #102a2e;
+  min-width: 320px;
+  transform: scale(1.03);
+}
+
+.card img {
+  width: 110px;
+  height: 90px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 4px solid rgba(255, 255, 255, 0.08);
+}
+
+.info {
+  font-size: 13px;
+  line-height: 1.25;
+}
+
+.name {
+  font-weight: 800;
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+
+.meta {
+  background: #fff;
+  color: #111;
+  padding: 8px;
+  border-radius: 8px;
+  display: inline-block;
+  font-size: 12px;
+}
+
+/* arrows */
+.arrow {
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  color: #fff;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
   cursor: pointer;
-  width: fit-content;
-  font-weight: 500;
-}
-
-a.primary {
-  background: var(--text-primary);
-  color: var(--background);
-  gap: 8px;
-}
-
-a.secondary {
-  border-color: var(--button-secondary-border);
+  font-size: 18px;
 }
 
 /* Enable hover only on non-touch devices */
@@ -122,20 +179,31 @@ a.secondary {
   }
 }
 
+@media (max-width: 900px) {
+  .hero h1 {
+    font-size: 28px;
+  }
+
+  .leftImg,
+  .rightImg {
+    display: none;
+  }
+
+  .card {
+    min-width: 220px;
+  }
+
+  .highlight {
+    min-width: 260px;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   .logo {
     filter: invert();
   }
 
   .page {
-    --background: #000;
-    --foreground: #000;
-
-    --text-primary: #ededed;
-    --text-secondary: #999;
-
-    --button-primary-hover: #ccc;
-    --button-secondary-hover: #1a1a1a;
-    --button-secondary-border: #1a1a1a;
+    background-color: #eeffff;
   }
 }
