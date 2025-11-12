@@ -12,14 +12,16 @@
 .pageWrap {
   --maxw: 1100px;
   margin: 0 auto;
+  background-color: #e9fbfb;
 }
 
 .hero {
   background: #e9fbfb;
   padding: 36px 20px;
   position: relative;
+  bottom: -170px;
   text-align: center;
-  overflow: hidden;
+  
 }
 
 .hero .inner {
@@ -39,6 +41,8 @@
   color: #475b5f;
   font-size: 18px;
   line-height: 1.4;
+  position: relative;
+  bottom: -130px;
 }
 
 .leftImg,
@@ -59,14 +63,16 @@
 }
 
 .block {
-  padding: 28px 20px;
-  background: #3f6b81;
+  padding: 60px 20px 0px;
+  background: #46799e;
   color: white;
+  position: relative;
+  bottom: -350px;
 }
 
 .title {
   max-width: var(--maxw);
-  margin: 0 auto 18px;
+  margin: 0 auto 50px;
   text-align: center;
   font-weight: 700;
 }
@@ -83,16 +89,22 @@
 .carousel {
   max-width: var(--maxw);
   display: flex;
-  gap: 22px;
+  gap: 70px;
   padding: 18px 10px 40px;
-  overflow-x: auto;
+  overflow-x: hidden;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
 }
 
+.cards {
+  display: flex;
+  gap: 70px;
+  align-items: center;
+}
+
 .card {
-  min-width: 260px;
-  background: rgba(255, 255, 255, 0.06);
+  min-width: 300px;
+  background: #274b65;
   border-radius: 12px;
   padding: 14px;
   box-shadow: 0 6px 0 rgba(0, 0, 0, 0.08);
@@ -102,12 +114,11 @@
   align-items: center;
 }
 
-.highlight {
-  background: #f5b25c;
-  color: #102a2e;
-  min-width: 320px;
-  transform: scale(1.03);
+.card:hover {
+  transform: translateY(-2px);
+  background-color: #f5b25c;
 }
+
 
 .card img {
   width: 110px;
@@ -204,6 +215,6 @@
   }
 
   .page {
-    background-color: #eeffff;
+    background-color: #e9fbfb;
   }
 }
