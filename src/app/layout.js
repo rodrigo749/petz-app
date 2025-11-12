@@ -41,9 +41,7 @@ export default function RootLayout({ children }) {
 
         <main>{children}</main>
 
-        <footer className="site-footer">
-          © 2025 Patas Perdidas — Projeto exemplo
-        </footer>
+       
       </body>
     </html>
   );
