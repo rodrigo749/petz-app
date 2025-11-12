@@ -88,35 +88,48 @@
 
 .carousel {
   max-width: var(--maxw);
+  width: 100%;
   display: flex;
   gap: 70px;
   padding: 18px 10px 40px;
-  overflow-x: hidden;
+  overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  justify-content: flex-start;
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
 }
 
 .cards {
   display: flex;
   gap: 70px;
   align-items: center;
+  padding: 0 calc(50% - 150px);
 }
 
 .card {
   min-width: 300px;
+  max-width: 300px;
   background: #274b65;
   border-radius: 12px;
   padding: 14px;
-  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   scroll-snap-align: center;
   display: flex;
   gap: 12px;
   align-items: center;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
 }
 
-.card:hover {
-  transform: translateY(-2px);
-  background-color: #f5b25c;
+.highlight {
+  background-color: #f5b25c !important;
+  transform: scale(1.08);
+  box-shadow: 0 12px 24px rgba(245, 178, 92, 0.4);
+  z-index: 10;
 }
 
 
@@ -151,14 +164,26 @@
 
 /* arrows */
 .arrow {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.15);
   border: none;
   color: #fff;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 24px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.arrow:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.1);
+}
+
+.arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
 }
 
 /* Enable hover only on non-touch devices */

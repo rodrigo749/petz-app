@@ -1,123 +1,127 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import styles from './page.module.css'
 
 export default function Home() {
   const carouselRef1 = useRef(null)
   const carouselRef2 = useRef(null)
+  const [centerIndex1, setCenterIndex1] = useState(0)
+  const [centerIndex2, setCenterIndex2] = useState(0)
 
-  const scroll = (dir = 'next', carouselRef) => {
-    const el = carouselRef.current
-    if (!el) return
-    const delta = dir === 'next' ? 320 : -320
-    el.scrollBy({ left: delta, behavior: 'smooth' })
+  const perdidos = [
+    { id: 1, name: "Mingau", breed: "Abissínio", gender: "Fêmea", location: "Avenida Vicente Simões, 715 - Centro", img: "https://placekitten.com/300/200" },
+    { id: 2, name: "Lola", breed: "Leonberger", gender: "Fêmea", location: "Rua A, 212 - Fátima 1 - Pouso Alegre", img: "https://place-puppy.com/320/220" },
+    { id: 3, name: "Pom Pom", breed: "Persa", gender: "Macho", location: "Avenida Doutor Lisboa, 05 - Centro", img: "https://placekitten.com/320/220" },
+    { id: 4, name: "Buddy", breed: "SRD", gender: "Macho", location: "Bairro Jardim", img: "https://place-puppy.com/330/220" },
+    { id: 5, name: "Nina", breed: "Siamês", gender: "Fêmea", location: "Centro", img: "https://placekitten.com/310/210" }
+  ]
+
+  const adotados = [
+    { id: 6, name: "Pulga", breed: "Vira-lata", gender: "Macho", age: "Adulto", location: "XXXXXX", ong: "XXXXXX", img: "https://place-puppy.com/300/200" },
+    { id: 7, name: "Lola", breed: "Vira-lata", gender: "Fêmea", age: "Filhote", location: "XXXXXX", ong: "XXXXXX", img: "https://placekitten.com/320/220" },
+    { id: 8, name: "Lolô", breed: "Vira-lata", gender: "Macho", age: "1 ano", location: "XXXXXX", ong: "XXXXXX", img: "https://place-puppy.com/320/220" },
+    { id: 9, name: "Max", breed: "SRD", gender: "Macho", age: "2 anos", location: "XXXXXX", ong: "XXXXXX", img: "https://place-puppy.com/330/220" }
+  ]
+
+  useEffect(() => {
+    const centerCard = (ref, index) => {
+      if (ref.current) {
+        const cards = ref.current.querySelectorAll('article')
+        if (cards[index]) {
+          cards[index].scrollIntoView({ block: 'nearest', inline: 'center' })
+        }
+      }
+    }
+    centerCard(carouselRef1, centerIndex1)
+    centerCard(carouselRef2, centerIndex2)
+  }, [])
+
+  const scroll = (dir, carouselRef, currentIndex, setIndex, maxLength) => {
+    let newIndex
+    if (dir === 'next') {
+      newIndex = (currentIndex + 1) % maxLength
+    } else {
+      newIndex = (currentIndex - 1 + maxLength) % maxLength
+    }
+    
+    setIndex(newIndex)
+    setTimeout(() => {
+      const el = carouselRef.current
+      if (el) {
+        const cards = el.querySelectorAll('article')
+        if (cards[newIndex]) {
+          cards[newIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+        }
+      }
+    }, 0)
   }
 
   return (
+    <div className={styles.pageWrap}>
+      <section className={styles.hero}>
+        <img className={styles.leftImg} src="https://i.imgur.com/4AiXzf8.png" alt="" />
+        <img className={styles.rightImg} src="https://i.imgur.com/3WQbQbG.png" alt="" />
+        <div className={styles.inner}>
+          <h1>Bem Vindo!</h1>
+          <p>Cada clique transforma vidas: aqui você pode reencontrar seu pet, adotar com amor ou doar para quem precisa. Juntos, criamos lindas histórias de afeto, esperança e recomeços.</p>
+        </div>
+      </section>
 
-        <div className={styles.pageWrap}>
-          <section className={styles.hero}>
-            <img className={styles.leftImg} src="https://i.imgur.com/4AiXzf8.png" alt="" />
-            <img className={styles.rightImg} src="https://i.imgur.com/3WQbQbG.png" alt="" />
-            <div className={styles.inner}>
-              <h1>Bem Vindo!</h1>
-              <p>Cada clique transforma vidas: aqui você pode reencontrar seu pet, adotar com amor ou doar para quem precisa. Juntos, criamos lindas histórias de afeto, esperança e recomeços.</p>
+      <section className={styles.block}>
+        <h3 className={styles.title}>Perdidos recentemente</h3>
+        <div className={styles.carouselWrap}>
+          <button className={styles.arrow} onClick={() => scroll('prev', carouselRef1, centerIndex1, setCenterIndex1, perdidos.length)} aria-label="anterior">&#8249;</button>
+          
+          <div ref={carouselRef1} className={styles.carousel}>
+            <div className={styles.cards}>
+              {perdidos.map((pet, index) => (
+                <article key={pet.id} className={`${styles.card} ${index === centerIndex1 ? styles.highlight : ''}`}>
+                  <img src={pet.img} alt={pet.name} />
+                  <div className={styles.info}>
+                    <div className={styles.name}>{pet.name}</div>
+                    <div className={styles.meta}>
+                      Raça: {pet.breed}<br/>
+                      Gênero: {pet.gender}<br/>
+                      Local: {pet.location}
+                    </div>
+                  </div>
+                </article>
+              ))}
             </div>
-          </section>
-      
-          <section className={styles.block}>
-            <h3 className={styles.title}>Resgatados recentemente</h3>
-      
-            <div className={styles.carouselWrap}>
-              <button className={styles.arrow} onClick={() => scroll('prev', carouselRef1)} aria-label="anterior">&#8249;</button>
-      
-              <div ref={carouselRef1} className={styles.carousel} role="list" tabIndex={0}>
-                <div className={styles.cards}>
-                  <article className={styles.card}>
-                    <img src="https://place-puppy.com/300x200" alt="Mingau" />
-                    <div className={styles.info}>
-                      <div className={styles.name}>Mingau</div>
-                      <div className={styles.meta}>Raça: Abissínio<br/>Gênero: Fêmea<br/>Local: Avenida Vicente Simões, 715 - Centro</div>
+          </div>
+          
+          <button className={styles.arrow} onClick={() => scroll('next', carouselRef1, centerIndex1, setCenterIndex1, perdidos.length)} aria-label="próximo">&#8250;</button>
+        </div>
+      </section>
+
+      <section className={styles.block}>
+        <h3 className={styles.title}>Adotados recentemente</h3>
+        <div className={styles.carouselWrap}>
+          <button className={styles.arrow} onClick={() => scroll('prev', carouselRef2, centerIndex2, setCenterIndex2, adotados.length)} aria-label="anterior">&#8249;</button>
+          
+          <div ref={carouselRef2} className={styles.carousel}>
+            <div className={styles.cards}>
+              {adotados.map((pet, index) => (
+                <article key={pet.id} className={`${styles.card} ${index === centerIndex2 ? styles.highlight : ''}`}>
+                  <img src={pet.img} alt={pet.name} />
+                  <div className={styles.info}>
+                    <div className={styles.name}>{pet.name}</div>
+                    <div className={styles.meta}>
+                      Raça: {pet.breed}<br/>
+                      Gênero: {pet.gender}<br/>
+                      {pet.age && <>Idade: {pet.age}<br/></>}
+                      {pet.ong && <>ONG: {pet.ong}</>}
                     </div>
-                  </article>
-        
-                  <article className={`${styles.card} ${styles.highlight}`}>
-                    <img src="https://place-puppy.com/320x220" alt="Lola" />
-                    <div className={styles.info}>
-                      <div className={styles.name}>Lola</div>
-                      <div className={styles.meta}>Raça: Leonberger<br/>Gênero: Fêmea<br/>Local: Rua A, 212 - Pouso Alegre</div>
-                    </div>
-                  </article>
-        
-                  <article className={styles.card}>
-                    <img src="https://placekitten.com/320/220" alt="Pom Pom" />
-                    <div className={styles.info}>
-                      <div className={styles.name}>Pom Pom</div>
-                      <div className={styles.meta}>Raça: Persa<br/>Gênero: Macho<br/>Local: Avenida Doutor Lisboa, 05 - Centro</div>
-                    </div>
-                  </article>
-        
-                  <article className={styles.card}>
-                    <img src="https://place-puppy.com/330x220" alt="Buddy" />
-                    <div className={styles.info}>
-                      <div className={styles.name}>Buddy</div>
-                      <div className={styles.meta}>Raça: SRD<br/>Gênero: Macho<br/>Local: Bairro Jardim</div>
-                    </div>
-                  </article>
-                </div>
-              </div>
-      
-              <button className={styles.arrow} onClick={() => scroll('next', carouselRef1)} aria-label="próximo">&#8250;</button>
+                  </div>
+                </article>
+              ))}
             </div>
-          </section>
-          <div>
-                 <section className={styles.block}>
-            <h3 className={styles.title}>adotados recentemente</h3>
-      
-            <div className={styles.carouselWrap}>
-              <button className={styles.arrow} onClick={() => scroll('prev', carouselRef2)} aria-label="anterior">&#8249;</button>
-      
-              <div ref={carouselRef2} className={styles.carousel} role="list" tabIndex={0}>
-                <div className={styles.cards}>
-                <article className={styles.card}>
-                  <img src="https://place-puppy.com/300x200" alt="Mingau" />
-                  <div className={styles.info}>
-                    <div className={styles.name}>Mingau</div>
-                    <div className={styles.meta}>Raça: Abissínio<br/>Gênero: Fêmea<br/>Local: Avenida Vicente Simões, 715 - Centro</div>
-                  </div>
-                </article>
-      
-                <article className={`${styles.card} ${styles.highlight}`}>
-                  <img src="https://place-puppy.com/320x220" alt="Lola" />
-                  <div className={styles.info}>
-                    <div className={styles.name}>Lola</div>
-                    <div className={styles.meta}>Raça: Leonberger<br/>Gênero: Fêmea<br/>Local: Rua A, 212 - Pouso Alegre</div>
-                  </div>
-                </article>
-      
-                <article className={styles.card}>
-                  <img src="https://placekitten.com/320/220" alt="Pom Pom" />
-                  <div className={styles.info}>
-                    <div className={styles.name}>Pom Pom</div>
-                    <div className={styles.meta}>Raça: Persa<br/>Gênero: Macho<br/>Local: Avenida Doutor Lisboa, 05 - Centro</div>
-                  </div>
-                </article>
-      
-                <article className={styles.card}>
-                  <img src="https://place-puppy.com/330x220" alt="Buddy" />
-                  <div className={styles.info}>
-                    <div className={styles.name}>Buddy</div>
-                    <div className={styles.meta}>Raça: SRD<br/>Gênero: Macho<br/>Local: Bairro Jardim</div>
-                  </div>
-                </article>
-                </div>
-              </div>
-      
-              <button className={styles.arrow} onClick={() => scroll('next', carouselRef2)} aria-label="próximo">&#8250;</button>
-            </div>
-          </section>
-    </div>
+          </div>
+          
+          <button className={styles.arrow} onClick={() => scroll('next', carouselRef2, centerIndex2, setCenterIndex2, adotados.length)} aria-label="próximo">&#8250;</button>
+        </div>
+      </section>
     </div>
   )
 }
