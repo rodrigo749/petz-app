@@ -50,11 +50,17 @@
   transition: all 0.2s;
   padding: 0.5rem 0;
   border-bottom: 2px solid transparent;
+  border-radius: 12px;
+  background-color: #143750;
+  width: 135px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
 }
 
 .link:hover {
-  color: #ffd700;
-  border-bottom-color: #ffd700;
+  background-color:#2e4b60;
 }
 
 /* Mobile Toggle */
@@ -143,6 +149,9 @@
   padding: 1rem;
   border-radius: 0.5rem;
   transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .mobileLink:hover {

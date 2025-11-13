@@ -60,8 +60,8 @@ export default function Home() {
   return (
     <div className={styles.pageWrap}>
       <section className={styles.hero}>
-        <img className={styles.leftImg} src="https://i.imgur.com/4AiXzf8.png" alt="" />
-        <img className={styles.rightImg} src="https://i.imgur.com/3WQbQbG.png" alt="" />
+        <img className={styles.leftImg} src="/images/cachorro-pagina-principal%202.png" alt="" />
+        <img className={styles.rightImg} src="/images/cachorro-pagina-principal.png" alt="" />
         <div className={styles.inner}>
           <h1>Bem Vindo!</h1>
           <p>Cada clique transforma vidas: aqui você pode reencontrar seu pet, adotar com amor ou doar para quem precisa. Juntos, criamos lindas histórias de afeto, esperança e recomeços.</p>
