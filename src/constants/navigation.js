@@ -4,3 +4,6 @@ export const NAV_LINKS = [
   { id: "perdidos", label: "Pets perdidos", href: "/perdidos" },
   { id: "apoiar", label: "Apoiar", href: "/apoiar" },
 ];
+export const cadastro_link = [
+  { id: "cadastro", label: "Cadastro", href: "/cadastro" },
+];
