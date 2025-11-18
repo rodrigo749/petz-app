@@ -5,8 +5,9 @@
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --nav:#10374a;
+  --bg:#f0f4f6;
+  --muted:#475b5f;
 }
 
 html,

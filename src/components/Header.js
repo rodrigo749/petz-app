@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
+import { FaChevronDown } from "react-icons/fa";
 import { NAV_LINKS } from "@/constants/navigation";
 import styles from "@/styles/Header.module.css";
 
@@ -29,6 +30,7 @@ export default function Header() {
           {NAV_LINKS.map(({ id, label, href }) => (
             <Link key={id} href={href} className={styles.link}>
               {label}
+              {id !== 'apoiar' && <FaChevronDown size={12} className="chevron-icon" />}
             </Link>
           ))}
         </div>
@@ -74,6 +76,7 @@ export default function Header() {
                     className={styles.mobileLink}
                   >
                     {label}
+                    {id !== 'apoiar' && <FaChevronDown size={12} />}
                   </Link>
                 ))}
               </nav>
