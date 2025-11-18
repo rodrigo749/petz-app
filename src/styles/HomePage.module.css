@@ -1,0 +1,255 @@
+.page {
+  --background-color: #eeffff;
+  --text-primary: #000;
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-geist-sans);
+  background-color: var(--background);
+}
+
+.pageWrap {
+  max-height: fit-content;
+  --maxw: 1100px;
+  margin: 0 auto;
+  background-color: #e9fbfb;
+}
+
+.hero {
+  background: #e9fbfb;
+  padding: 36px 20px;
+  position: relative;
+  bottom: -170px;
+  text-align: center;
+}
+
+.hero .inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.hero h1 {
+  margin: 0 0 10px;
+  font-size: 42px;
+  color: #475b5f;
+  font-weight: 700;
+}
+
+.hero p {
+  margin: 20px;
+  color: #475b5f;
+  font-size: 30px;
+  line-height: 2;
+  position: relative;
+  bottom: -130px;
+  font-weight: bold;
+}
+
+.leftImg,
+.rightImg {
+  position: absolute;
+  top: 18px;
+  object-fit: contain;
+  background-color: #e9fbfb;
+}
+
+.leftImg {
+  left: 8px;
+  width: 260px;
+  height: 290px;
+}
+
+.rightImg {
+  right: 8px;
+  width: 300px;
+  height: 390px;
+  padding-bottom: 40px;
+}
+
+.block {
+  padding: 60px 20px 0px;
+  background: #46799e;
+  color: white;
+  position: relative;
+  bottom: -350px;
+}
+
+.title {
+  max-width: var(--maxw);
+  margin: 0 auto 50px;
+  text-align: center;
+  font-weight: 700;
+}
+
+/* carousel */
+.carouselWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  position: relative;
+}
+
+.carousel {
+  max-width: var(--maxw);
+  width: 100%;
+  display: flex;
+  gap: 70px;
+  padding: 18px 10px 40px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  justify-content: flex-start;
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.cards {
+  display: flex;
+  gap: 100px;
+  align-items: center;
+  padding: 0 calc(50% - 150px);
+}
+
+.card {
+  min-width: 528px;
+  max-width: 528px;
+  background: #274b65;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  scroll-snap-align: center;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.highlight {
+  background-color: #f5b25c !important;
+  transform: scale(1.08);
+  box-shadow: 0 12px 24px rgba(245, 178, 92, 0.4);
+  z-index: 10;
+}
+
+.card img {
+  width: 180px;
+  height: 150px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 4px solid rgba(255, 255, 255, 0.08);
+}
+
+.info {
+  font-size: 16px;
+  line-height: 1.4;
+  flex: 1;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.name {
+  font-weight: 800;
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.meta {
+  background: #fff;
+  color: #111;
+  padding: 12px 14px;
+  border-radius: 8px;
+  display: inline-block;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* arrows */
+.arrow {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: #fff;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 24px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.arrow:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.1);
+}
+
+.arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Enable hover only on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  a.primary:hover {
+    background: var(--button-primary-hover);
+    border-color: transparent;
+  }
+
+  a.secondary:hover {
+    background: var(--button-secondary-hover);
+    border-color: transparent;
+  }
+}
+
+@media (max-width: 600px) {
+  .main {
+    padding: 48px 24px;
+  }
+
+  .intro {
+    gap: 16px;
+  }
+
+  .intro h1 {
+    font-size: 32px;
+    line-height: 40px;
+    letter-spacing: -1.92px;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero h1 {
+    font-size: 28px;
+  }
+
+  .leftImg,
+  .rightImg {
+    display: none;
+  }
+
+  .card {
+    min-width: 220px;
+  }
+
+  .highlight {
+    min-width: 260px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .logo {
+    filter: invert();
+  }
+
+  .page {
+    background-color: #e9fbfb;
+  }
+}
