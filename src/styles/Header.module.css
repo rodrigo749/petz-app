@@ -42,6 +42,10 @@
   gap: 2.5rem;
 }
 
+.dropdown {
+  position: relative;
+}
+
 .link {
   color: white;
   text-decoration: none;
@@ -57,10 +61,50 @@
   align-items: center;
   justify-content: center;
   gap: 5px;
+  border: none;
+  cursor: pointer;
 }
 
 .link:hover {
   background-color:#2e4b60;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #eeeeee;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  min-width: 180px;
+  z-index: 1000;
+  animation: fadeInDown 0.4s;
+  border-radius: 6px;
+  border-color: #696969;
+  
+}
+
+.dropdownItem {
+  display: block;
+  color: rgb(87, 87, 87);
+  text-decoration: none;
+  padding: 0.75rem 1rem;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.dropdownItem:hover {
+  background-color: #bdbdbd;
+}
+
+.dropdownItem:first-child {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.dropdownItem:last-child {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 
 /* Mobile Toggle */
@@ -158,6 +202,28 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
+.mobileSubLinks {
+  margin-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.mobileSubLink {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.mobileSubLink:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
 /* Animations */
 @keyframes fadeIn {
   from {
@@ -174,6 +240,17 @@
   }
   to {
     transform: translateX(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

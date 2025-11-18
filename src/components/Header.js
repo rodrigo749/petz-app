@@ -4,12 +4,13 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
-import { FaChevronDown } from "react-icons/fa";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { NAV_LINKS } from "@/constants/navigation";
 import styles from "@/styles/Header.module.css";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(null);
 
   return (
     <header className={styles.header}>
@@ -27,11 +28,38 @@ export default function Header() {
 
         {/* Desktop Menu */}
         <div className={styles.desktop}>
-          {NAV_LINKS.map(({ id, label, href }) => (
-            <Link key={id} href={href} className={styles.link}>
-              {label}
-              {id !== 'apoiar' && <FaChevronDown size={12} className="chevron-icon" />}
-            </Link>
+          {NAV_LINKS.map(({ id, label, href, subLinks }) => (
+            <div key={id} className={styles.dropdown}>
+              <button
+                className={styles.link}
+                onClick={() => setDropdownOpen(dropdownOpen === id ? null : id)}
+                aria-expanded={dropdownOpen === id}
+                aria-haspopup={subLinks ? "true" : "false"}
+              >
+                {label}
+                {subLinks && (
+                  dropdownOpen === id ? (
+                    <FaChevronUp size={12} className="chevron-icon" />
+                  ) : (
+                    <FaChevronDown size={12} className="chevron-icon" />
+                  )
+                )}
+              </button>
+              {subLinks && dropdownOpen === id && (
+                <div className={styles.dropdownMenu}>
+                  {subLinks.map((subLink, index) => (
+                    <Link
+                      key={index}
+                      href={subLink.href}
+                      className={styles.dropdownItem}
+                      onClick={() => setDropdownOpen(null)}
+                    >
+                      {subLink.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
           ))}
         </div>
 
@@ -68,16 +96,31 @@ export default function Header() {
               </div>
 
               <nav className={styles.sheetLinks}>
-                {NAV_LINKS.map(({ id, label, href }) => (
-                  <Link
-                    key={id}
-                    href={href}
-                    onClick={() => setMenuOpen(false)}
-                    className={styles.mobileLink}
-                  >
-                    {label}
-                    {id !== 'apoiar' && <FaChevronDown size={12} />}
-                  </Link>
+                {NAV_LINKS.map(({ id, label, href, subLinks }) => (
+                  <div key={id}>
+                    <Link
+                      href={href}
+                      onClick={() => setMenuOpen(false)}
+                      className={styles.mobileLink}
+                    >
+                      {label}
+                      {subLinks && <FaChevronDown size={12} />}
+                    </Link>
+                    {subLinks && (
+                      <div className={styles.mobileSubLinks}>
+                        {subLinks.map((subLink, index) => (
+                          <Link
+                            key={index}
+                            href={subLink.href}
+                            onClick={() => setMenuOpen(false)}
+                            className={styles.mobileSubLink}
+                          >
+                            {subLink.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 ))}
               </nav>
             </div>

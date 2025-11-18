@@ -1,4 +1,0 @@
-- [x] Import FaChevronDown in Header.js
-- [x] Add conditional arrow after label in desktop and mobile links
-- [x] Update CSS for .link and .mobileLink to use flexbox with gap
-- [x] Test the changes
