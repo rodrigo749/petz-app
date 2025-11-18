@@ -1,7 +1,7 @@
-import { FaTiktok, FaFacebook, FaInstagram } from 'react-icons/fa'
+import { FaTiktok, FaFacebook, FaInstagram } from "react-icons/fa";
 
 export default function Footer() {
-  const year = new Date().getFullYear()
+  const year = new Date().getFullYear();
 
   return (
     <footer className="footer">
@@ -11,7 +11,7 @@ export default function Footer() {
           <p>Conectando pessoas e pets com amor 💕</p>
         </div>
 
-       {/*<div className="footer-links">
+        {/*<div className="footer-links">
           <a href="#">Sobre</a>
           <a href="#">Contato</a>
           <a href="#">Apoiar</a>
@@ -48,10 +48,9 @@ export default function Footer() {
         </div>
 
         <div className="footer-copy">
-          <p>© {year} Petz-App. Todos os direitos reservados.</p>
+          <p>© {year} Patas Perdidas. Todos os direitos reservados.</p>
         </div>
       </div>
     </footer>
-  )
+  );
 }
-
