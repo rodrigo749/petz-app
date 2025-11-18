@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import "./globals.css";
+import Footer from '../components/Footer'
 
 export const metadata = {
   title: "Patas Perdidas",
@@ -14,8 +15,9 @@ export default function RootLayout({ children }) {
     <html lang="pt-BR">
       <body>
         <Header />
+               <Footer /> {/* ✅ Footer global */}
         {children}
       </body>
     </html>
-  );
+  )
 }
