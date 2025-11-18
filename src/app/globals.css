@@ -5,9 +5,9 @@
 }
 
 :root {
-  --nav:#10374a;
-  --bg:#f0f4f6;
-  --muted:#475b5f;
+  --nav: #10374a;
+  --bg: #f0f4f6;
+  --muted: #475b5f;
 }
 
 html,
@@ -17,10 +17,11 @@ body {
 }
 
 body {
+  position: relative;
   color: var(--foreground);
   background: var(--background);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -40,11 +41,13 @@ a {
 /* footer styles */
 
 .footer {
-  background-color: #143A66;
+  background-color: #143750;
   color: #fff;
   padding: 2rem 1rem;
   text-align: center;
-  margin-top: 3rem;
+  margin-top: 21rem;
+  position: relative;
+  z-index: 10;
 }
 
 .footer-container {
@@ -79,7 +82,7 @@ a {
 }
 
 .footer-links a:hover {
-  color: #D9783A;
+  color: #d9783a;
 }
 
 .footer-copy {
@@ -110,7 +113,6 @@ a {
 }
 
 .footer-icons a:hover {
-  color: #D9783A; /* cor de destaque */
+  color: #d9783a; /* cor de destaque */
   transform: scale(1.15);
 }
-

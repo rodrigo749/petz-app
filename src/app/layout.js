@@ -1,5 +1,5 @@
 import "./globals.css";
-import Footer from '../components/Footer'
+import Footer from "../components/Footer";
 import { Geist } from "next/font/google";
 import Header from "@/components/Header";
 
@@ -21,9 +21,9 @@ export default function RootLayout({ children }) {
     <html lang="pt-BR" className={geistSans.variable}>
       <body>
         <Header />
-        <Footer /> {/* ✅ Footer global */}
         {children}
+        <Footer /> {/* ✅ Footer global */}
       </body>
     </html>
-  )
+  );
 }
