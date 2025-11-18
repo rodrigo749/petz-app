@@ -7,17 +7,11 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-logo">
-          <h2>Petz-App 🐾</h2>
+          <h2>Patas Perdidas 🐾</h2>
           <p>Conectando pessoas e pets com amor 💕</p>
         </div>
 
-       {/*<div className="footer-links">
-          <a href="#">Sobre</a>
-          <a href="#">Contato</a>
-          <a href="#">Apoiar</a>
-        </div>*/}
 
-        {/* Ícones sociais */}
         <div className="footer-icons">
           <a
             href="https://www.tiktok.com"

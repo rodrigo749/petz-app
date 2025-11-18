@@ -1,0 +1,20 @@
+/*
+🎨 Paleta de Cores - Petz-App
+
+  Cores principais:
+  --color-primary: #143A66;    Azul escuro do header e botões
+  --color-secondary: #DDAA4F;  Laranja/amarelo das pegadas e botões de destaque
+  --color-background: #EAF3F7; Fundo das seções
+  --color-card: #5E7E99;       Azul intermediário dos cards
+  --color-border: #F5DCA5;     Contorno dourado suave
+  
+  Tipografia e detalhes:
+  --color-text: #1C1C1C;       Texto principal
+  --color-text-light: #FFFFFF; Texto branco
+  --color-accent: #FFD479;     Amarelo claro para destaques
+  --color-muted: #8899AA;      Cinza-azulado dos textos secundários
+
+  Estados:
+  --color-success: #4CAF50;    Verde (sucesso)
+  --color-error: #E63946;      Vermelho (erro)
+*/

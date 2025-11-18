@@ -118,3 +118,7 @@ a {
   transform: scale(1.15);
 }
 
+body {
+  background-color: #274b65; /* azul escuro do protótipo */
+}
+

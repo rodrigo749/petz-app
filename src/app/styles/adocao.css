@@ -1,0 +1,173 @@
+.cadastro-pet-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 80px 20px;
+    background: transparent; /* deixa o fundo aparecer */
+  }
+  
+  
+  
+  .cadastro-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    background: #F4FEFF; /* fundo claro do protótipo */
+    border-radius: 24px;
+    padding: 50px;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 50px;
+    box-shadow: 0px 4px 18px rgba(0,0,0,0.12); /* leve sombra */
+  }
+  
+  
+  /* Coluna esquerda */
+  .col-esquerda {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  /* Caixa de upload */
+  .upload-imagem {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .upload-box {
+    width: 260px;
+    height: 220px;
+    border-radius: 24px;
+    background: #5a7c99;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .upload-box:hover {
+    background: #4a6c87;
+  }
+  
+  
+  
+  /* Descrição */
+  .descricao-box {
+    border-radius: 24px;
+    padding: 16px;
+    border: 2px solid #254460;
+    background: #ffffff;
+  }
+  
+  .descricao-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  
+  .descricao-textarea {
+    width: 100%;
+    border: none;
+    outline: none;
+    resize: none;
+    min-height: 150px;
+    font-size: 14px;
+  }
+  
+  /* Coluna direita */
+  .col-direita {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .titulo-cadastro {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+  
+  .form-cadastro {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  /* Campos do formulário */
+  .campo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .campo label {
+    font-weight: 600;
+  }
+  
+  .campo input {
+    height: 40px;
+    padding: 0 14px;
+    border-radius: 999px;
+    border: 2px solid #254460;
+    outline: none;
+  }
+  
+  /* Botão */
+  .btn-cadastrar {
+    margin-top: 12px;
+    height: 46px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 16px;
+    background: #0053a4;
+    color: #ffffff;
+  }
+  
+  /* Campos estilizados com ícone */
+.campo {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .campo input {
+    width: 100%;
+    height: 52px;
+    padding-left: 50px; /* espaço pro ícone */
+    padding-right: 16px;
+    border-radius: 999px;
+    border: 2px solid #254460;
+    outline: none;
+    font-size: 16px;
+    background: #ffffff;
+  }
+  
+  /* Ícone da patinha */
+  .icone-input {
+    width: 26px;
+    height: 26px;
+    position: absolute;
+    left: 14px;
+    top: 20%;
+    transform: translateY(6px); /* AJUSTE DE QUEDA DO ÍCONE */
+  }
+
+  /* Ícone do botão de upload */
+.icone-add-img {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 8px;
+    opacity: 0.9;
+    user-select: none;
+    pointer-events: none;
+  }
+  
+  
+  

@@ -1,6 +1,6 @@
 import './globals.css'
 import { GeistSans } from 'geist/font/sans'
-import Footer from '../components/footer'
+import Footer from './components/footer'
 
 export const metadata = {
   title: 'Petz-App',
