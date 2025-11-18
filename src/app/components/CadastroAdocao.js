@@ -27,7 +27,7 @@ export default function CadastroAdocao() {
           <div className="upload-imagem">
             <label htmlFor="pet-imagem">
             <div className="upload-box">
-              <img src="/iconephoto.png" alt="Adicionar" className="icone-add-img" />
+              <img src="/images/iconephoto.png" alt="Adicionar" className="icone-add-img" />
               <span>Adicionar imagem</span>
             </div>
 
@@ -61,7 +61,7 @@ export default function CadastroAdocao() {
 
             {/* Nome */}
             <div className="campo">
-              <img src="/patinha.png" className="icone-input" alt="patinha" />
+              <img src="/images/patinha.png" className="icone-input" alt="patinha" />
               <input
                 type="text"
                 name="nome"
@@ -73,7 +73,7 @@ export default function CadastroAdocao() {
 
             {/* Raça */}
             <div className="campo">
-              <img src="/patinha.png" className="icone-input" alt="patinha" />
+              <img src="/images/patinha.png" className="icone-input" alt="patinha" />
               <input
                 type="text"
                 name="raca"
@@ -85,7 +85,7 @@ export default function CadastroAdocao() {
 
             {/* Gênero */}
             <div className="campo">
-              <img src="/patinha.png" className="icone-input" alt="patinha" />
+              <img src="/images/patinha.png" className="icone-input" alt="patinha" />
               <input
                 type="text"
                 name="genero"
@@ -97,7 +97,7 @@ export default function CadastroAdocao() {
 
             {/* Idade */}
             <div className="campo">
-              <img src="/patinha.png" className="icone-input" alt="patinha" />
+              <img src="/images/patinha.png" className="icone-input" alt="patinha" />
               <input
                 type="text"
                 name="idade"
