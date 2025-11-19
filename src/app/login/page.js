@@ -26,7 +26,7 @@ export default function LoginPage() {
     );
 
     if (!usuarioEncontrado) {
-      setError("CPF ou senha incorretos, caso vc nao tenha um cadastro clique em se cadastrar.");
+      setError("CPF ou senha incorretos, caso vc não tenha um cadastro clique em se cadastrar.");
       return;
     }
 
