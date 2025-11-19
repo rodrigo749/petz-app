@@ -1,14 +1,13 @@
-.cadastro-pet-container {
+.cadastroPetContainer {
     width: 100%;
     display: flex;
     justify-content: center;
     padding: 80px 20px;
-    background: #284c65; /* NOVA COR DO FUNDO */
+    background: #284c65;
 }
 
-
 /* CARD */
-.cadastro-wrapper {
+.cadastroWrapper {
     width: 100%;
     max-width: 1200px;
     background: #F4FEFF;
@@ -21,19 +20,19 @@
 }
 
 /* Coluna esquerda */
-.col-esquerda {
+.colEsquerda {
     display: flex;
     flex-direction: column;
     gap: 30px;
 }
 
 /* Upload */
-.upload-imagem {
+.uploadImagem {
     display: flex;
     justify-content: center;
 }
 
-.upload-box {
+.uploadBox {
     width: 260px;
     height: 220px;
     border-radius: 24px;
@@ -49,24 +48,24 @@
     transition: 0.3s;
 }
 
-.upload-box:hover {
+.uploadBox:hover {
     background: #4a6c87;
 }
 
 /* Descrição */
-.descricao-box {
+.descricaoBox {
     border-radius: 24px;
     padding: 16px;
     border: 2px solid #254460;
     background: #ffffff;
 }
 
-.descricao-label {
+.descricaoLabel {
     margin-bottom: 8px;
     font-weight: 600;
 }
 
-.descricao-textarea {
+.descricaoTextarea {
     width: 100%;
     border: none;
     outline: none;
@@ -76,23 +75,22 @@
 }
 
 /* Coluna direita */
-.col-direita {
+.colDireita {
     display: flex;
     flex-direction: column;
     gap: 24px;
 }
 
-.titulo-cadastro {
+.tituloCadastro {
     text-align: center;
     font-size: 24px;
     margin-bottom: 8px;
-    color: #46799e;; /* azul do protótipo */
+    color: #46799e;;
     font-weight: 700;
 }
 
-
 /* FORM */
-.form-cadastro {
+.formCadastro {
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -119,7 +117,7 @@
 }
 
 /* Ícone da patinha */
-.icone-input {
+.iconeInput {
     width: 26px;
     height: 26px;
     position: absolute;
@@ -129,7 +127,7 @@
 }
 
 /* Ícone de upload */
-.icone-add-img {
+.iconeAddImg {
     width: 48px;
     height: 48px;
     margin-bottom: 8px;
@@ -139,7 +137,7 @@
 }
 
 /* Botão */
-.btn-cadastrar {
+.btnCadastrar {
     margin-top: 12px;
     height: 46px;
     border-radius: 999px;
@@ -150,6 +148,3 @@
     background: #0053a4;
     color: #ffffff;
 }
-
-  
-  

@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, useState, useEffect } from 'react'
-import styles from '@/styles/HomePage.module.css'
+import styles from './homePage.module.css'
 
 /**
  * Componente HomePage - Página inicial da aplicação
