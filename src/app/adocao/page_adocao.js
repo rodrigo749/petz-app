@@ -1,7 +1,6 @@
 "use client";
 
-import "@/styles/adocao.css";
-
+import styles from "./adocao.module.css";
 
 export default function CadastroAdocao() {
 
@@ -17,17 +16,17 @@ export default function CadastroAdocao() {
   };
 
   return (
-    <main className="cadastro-pet-container">
-      <div className="cadastro-wrapper">
+    <main className={styles.cadastroPetContainer}>
+      <div className={styles.cadastroWrapper}>
 
         {/* COLUNA ESQUERDA */}
-        <section className="col-esquerda">
+        <section className={styles.colEsquerda}>
 
           {/* Upload da imagem */}
-          <div className="upload-imagem">
+          <div className={styles.uploadImagem}>
             <label htmlFor="pet-imagem">
-            <div className="upload-box">
-              <img src="/images/iconephoto.png" alt="Adicionar" className="icone-add-img" />
+            <div className={styles.uploadBox}>
+              <img src="/images/iconephoto.png" alt="Adicionar" className={styles.iconeAddImg} />
               <span>Adicionar imagem</span>
             </div>
 
@@ -36,15 +35,15 @@ export default function CadastroAdocao() {
           </div>
 
           {/* Descrição */}
-          <div className="descricao-box">
-            <label htmlFor="descricao-pet" className="descricao-label">
+          <div className={styles.descricaoBox}>
+            <label htmlFor="descricao-pet" className={styles.descricaoLabel}>
               Descrição:
             </label>
 
             <textarea
               id="descricao-pet"
               rows="8"
-              className="descricao-textarea"
+              className={styles.descricaoTextarea}
               placeholder="Descreva o pet aqui..."
               onFocus={handleFocus}
               onBlur={handleBlur}
@@ -54,14 +53,14 @@ export default function CadastroAdocao() {
         </section>
 
         {/* COLUNA DIREITA */}
-        <section className="col-direita">
-          <h2 className="titulo-cadastro">Cadastro Pet Adoção</h2>
+        <section className={styles.colDireita}>
+          <h2 className={styles.tituloCadastro}>Cadastro Pet Adoção</h2>
 
-          <form id="form-cadastro-pet" className="form-cadastro">
+          <form id="form-cadastro-pet" className={styles.formCadastro}>
 
             {/* Nome */}
-            <div className="campo">
-              <img src="/images/patinha.png" className="icone-input" alt="patinha" />
+            <div className={styles.campo}>
+              <img src="/images/patinha.png" className={styles.iconeInput} alt="patinha" />
               <input
                 type="text"
                 name="nome"
@@ -72,8 +71,8 @@ export default function CadastroAdocao() {
             </div>
 
             {/* Raça */}
-            <div className="campo">
-              <img src="/images/patinha.png" className="icone-input" alt="patinha" />
+            <div className={styles.campo}>
+              <img src="/images/patinha.png" className={styles.iconeInput} alt="patinha" />
               <input
                 type="text"
                 name="raca"
@@ -84,8 +83,8 @@ export default function CadastroAdocao() {
             </div>
 
             {/* Gênero */}
-            <div className="campo">
-              <img src="/images/patinha.png" className="icone-input" alt="patinha" />
+            <div className={styles.campo}>
+              <img src="/images/patinha.png" className={styles.iconeInput} alt="patinha" />
               <input
                 type="text"
                 name="genero"
@@ -96,8 +95,8 @@ export default function CadastroAdocao() {
             </div>
 
             {/* Idade */}
-            <div className="campo">
-              <img src="/images/patinha.png" className="icone-input" alt="patinha" />
+            <div className={styles.campo}>
+              <img src="/images/patinha.png" className={styles.iconeInput} alt="patinha" />
               <input
                 type="text"
                 name="idade"
@@ -107,7 +106,7 @@ export default function CadastroAdocao() {
               />
             </div>
 
-            <button type="submit" className="btn-cadastrar">
+            <button type="submit" className={styles.btnCadastrar}>
               Cadastrar
             </button>
 

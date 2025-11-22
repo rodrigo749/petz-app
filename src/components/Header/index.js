@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { NAV_LINKS } from "@/constants/navigation";
-import styles from "@/styles/Header.module.css";
+import styles from "./header.module.css";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
