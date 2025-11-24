@@ -1,8 +1,17 @@
 "use client";
 
+import { useState } from "react";
 import styles from "./adocao.module.css";
 
 export default function CadastroAdocao() {
+  const [formData, setFormData] = useState({
+    nome: "",
+    raca: "",
+    genero: "",
+    idade: "",
+    descricao: "",
+    imagem: "", // aqui vamos salvar apenas o nome ou caminho da imagem
+  });
 
   // Função para sumir o placeholder ao clicar
   const handleFocus = (e) => {
@@ -15,23 +24,75 @@ export default function CadastroAdocao() {
     e.target.placeholder = e.target.dataset.placeholder;
   };
 
+  // Atualizar valores dos inputs
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // Upload da imagem (apenas armazenamos o nome por enquanto)
+  const handleImagem = (e) => {
+    const arquivo = e.target.files[0];
+    if (arquivo) {
+      setFormData((prev) => ({ ...prev, imagem: arquivo.name }));
+    }
+  };
+
+  // Enviar dados para /api/pets
+  const salvarPet = async (e) => {
+    e.preventDefault();
+
+    const res = await fetch("/api/pets", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+
+    if (res.ok) {
+      alert("Pet cadastrado com sucesso!");
+
+      // limpar formulário
+      setFormData({
+        nome: "",
+        raca: "",
+        genero: "",
+        idade: "",
+        descricao: "",
+        imagem: "",
+      });
+
+      document.getElementById("form-cadastro-pet").reset();
+    } else {
+      alert("Erro ao cadastrar pet.");
+    }
+  };
+
   return (
     <main className={styles.cadastroPetContainer}>
       <div className={styles.cadastroWrapper}>
 
         {/* COLUNA ESQUERDA */}
         <section className={styles.colEsquerda}>
-
           {/* Upload da imagem */}
           <div className={styles.uploadImagem}>
             <label htmlFor="pet-imagem">
-            <div className={styles.uploadBox}>
-              <img src="/images/iconephoto.png" alt="Adicionar" className={styles.iconeAddImg} />
-              <span>Adicionar imagem</span>
-            </div>
-
+              <div className={styles.uploadBox}>
+                <img
+                  src="/images/iconephoto.png"
+                  alt="Adicionar"
+                  className={styles.iconeAddImg}
+                />
+                <span>Adicionar imagem</span>
+              </div>
             </label>
-            <input type="file" id="pet-imagem" accept="image/*" hidden />
+
+            <input
+              type="file"
+              id="pet-imagem"
+              accept="image/*"
+              hidden
+              onChange={handleImagem}
+            />
           </div>
 
           {/* Descrição */}
@@ -44,19 +105,20 @@ export default function CadastroAdocao() {
               id="descricao-pet"
               rows="8"
               className={styles.descricaoTextarea}
+              name="descricao"
               placeholder="Descreva o pet aqui..."
               onFocus={handleFocus}
               onBlur={handleBlur}
+              onChange={handleChange}
             ></textarea>
           </div>
-
         </section>
 
         {/* COLUNA DIREITA */}
         <section className={styles.colDireita}>
           <h2 className={styles.tituloCadastro}>Cadastro Pet Adoção</h2>
 
-          <form id="form-cadastro-pet" className={styles.formCadastro}>
+          <form id="form-cadastro-pet" className={styles.formCadastro} onSubmit={salvarPet}>
 
             {/* Nome */}
             <div className={styles.campo}>
@@ -67,6 +129,7 @@ export default function CadastroAdocao() {
                 placeholder="Nome"
                 onFocus={handleFocus}
                 onBlur={handleBlur}
+                onChange={handleChange}
               />
             </div>
 
@@ -79,6 +142,7 @@ export default function CadastroAdocao() {
                 placeholder="Raça"
                 onFocus={handleFocus}
                 onBlur={handleBlur}
+                onChange={handleChange}
               />
             </div>
 
@@ -91,6 +155,7 @@ export default function CadastroAdocao() {
                 placeholder="Gênero"
                 onFocus={handleFocus}
                 onBlur={handleBlur}
+                onChange={handleChange}
               />
             </div>
 
@@ -103,13 +168,13 @@ export default function CadastroAdocao() {
                 placeholder="Idade"
                 onFocus={handleFocus}
                 onBlur={handleBlur}
+                onChange={handleChange}
               />
             </div>
 
             <button type="submit" className={styles.btnCadastrar}>
               Cadastrar
             </button>
-
           </form>
         </section>
 
