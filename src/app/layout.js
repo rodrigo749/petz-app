@@ -19,9 +19,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="pt-BR" className={geistSans.variable}>
-      <body>
+      <body style={{display: "flex", flexDirection: "column", minHeight: "100vh"}}>
         <Header />
-        {children}
+        <main style={{ flexGrow: 1 }}>
+          {children}
+        </main>
         <Footer /> {/* ✅ Footer global */}
       </body>
     </html>

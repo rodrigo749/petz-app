@@ -53,6 +53,7 @@
   border-radius: 999px;
   background: transparent;
   box-shadow: inset 0 -3px 0 rgba(255,255,255,0.02);
+  color: black;
 }
 
 .icon {
@@ -80,6 +81,7 @@
   width: 100%;
   font-size: 1rem;
   padding: 10px 6px;
+  color: black;
 }
 
 .button {
