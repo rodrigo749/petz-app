@@ -25,11 +25,27 @@ export default function CadastroOngPage() {
   const [HorarioFunc2, setHorarioFunc2] = useState('')
   const [error, setError] = useState('')
 
+  // Field aceita className para controlar span/posição no grid
+  const Field = ({ label, required, children, className = '' }) => (
+    <div className={`${styles.inputWrapper} ${className}`}>
+      <label className={styles.fieldLabel}>
+        <span className={styles.labelText}>{label}{required ? '*' : ''}</span>
+
+        <div className={styles.inputInner}>
+          <div className={styles.iconInside} aria-hidden>
+            <FaPaw />
+          </div>
+
+          {children}
+        </div>
+      </label>
+    </div>
+  )
+
   const handleSubmit = (e) => {
     e.preventDefault()
     setError('')
-    // validar e salvar...
-    // após sucesso, redirecione para /login/ong
+    // salvar/validar...
     router.push('/login/ong')
   }
 
@@ -39,12 +55,8 @@ export default function CadastroOngPage() {
         <h1 className={styles.title}>Cadastro de ONG</h1>
 
         <div className={styles.inputGroup}>
-
-          <span className={styles.icon} aria-hidden>
-            <FaPaw />
-          </span>
-          <label className={styles.label}>
-            Nome da ONG*
+          {/* Nome (ocupa 2 colunas) */}
+          <Field label="Nome da ONG" required className={styles.full}>
             <input
               className={styles.input}
               type="text"
@@ -55,13 +67,10 @@ export default function CadastroOngPage() {
               autoComplete="organization"
               aria-label="Nome da ONG"
             />
-          </label>
+          </Field>
 
-          <span className={styles.icon} aria-hidden>
-            <FaPaw />
-          </span>
-          <label className={styles.label}>
-            Email de contato*
+          {/* Email ocupa 2 colunas */}
+          <Field label="Email de contato" required className={styles.full}>
             <input
               className={styles.input}
               type="email"
@@ -72,13 +81,10 @@ export default function CadastroOngPage() {
               autoComplete="email"
               aria-label="Email de contato"
             />
-          </label>
+          </Field>
 
-          <span className={styles.icon} aria-hidden>
-            <FaPaw />
-          </span>
-          <label className={styles.label}>
-            Telefone fixo*
+          {/* Telefone e Celular — cada um ocupa 1 coluna (lado a lado) */}
+          <Field label="Telefone fixo" required className={styles.half}>
             <input
               className={styles.input}
               type="tel"
@@ -90,13 +96,9 @@ export default function CadastroOngPage() {
               autoComplete="tel"
               aria-label="Telefone fixo"
             />
-          </label>
+          </Field>
 
-          <span className={styles.icon} aria-hidden>
-            <FaPaw />
-          </span>
-          <label className={styles.label}>
-            Celular*
+          <Field label="Celular" required className={styles.half}>
             <input
               className={styles.input}
               type="tel"
@@ -108,13 +110,10 @@ export default function CadastroOngPage() {
               autoComplete="tel"
               aria-label="Celular"
             />
-          </label>
+          </Field>
 
-          <span className={styles.icon} aria-hidden>
-            <FaPaw />
-          </span>
-          <label className={styles.label}>
-            Senha*
+          {/* Senha ocupa 1 coluna — pode ocupar 2 se preferir, ajuste className */}
+          <Field label="Senha" required className={styles.full}>
             <input
               className={styles.input}
               type="password"
@@ -124,29 +123,10 @@ export default function CadastroOngPage() {
               required
               aria-label="Senha"
             />
-          </label>
+          </Field>
 
-          <span className={styles.icon} aria-hidden>
-            <FaPaw />
-          </span>
-          <label className={styles.label}>
-            Confirmar senha*
-            <input
-              className={styles.input}
-              type="password"
-              value={confirmSenha}
-              onChange={(e) => setConfirmSenha(e.target.value)}
-              placeholder="Repita a senha"
-              required
-              aria-label="Confirmar senha"
-            />
-          </label>
-
-          <span className={styles.icon} aria-hidden>
-            <FaPaw />
-          </span>
-          <label className={styles.label}>
-            CNPJ*
+          {/* CNPJ ocupa 1 coluna */}
+          <Field label="CNPJ" required className={styles.half}>
             <input
               className={styles.input}
               type="text"
@@ -157,13 +137,10 @@ export default function CadastroOngPage() {
               required
               aria-label="CNPJ"
             />
-          </label>
+          </Field>
 
-          <span className={styles.icon} aria-hidden>
-            <FaPaw />
-          </span>
-          <label className={styles.label}>
-            CEP*
+          {/* CEP e Número lado a lado */}
+          <Field label="CEP" required className={styles.half}>
             <input
               className={styles.input}
               type="text"
@@ -174,29 +151,9 @@ export default function CadastroOngPage() {
               required
               aria-label="CEP"
             />
-          </label>
+          </Field>
 
-          <span className={styles.icon} aria-hidden>
-            <FaPaw />
-          </span>
-          <label className={styles.label}>
-            Rua*
-            <input
-              className={styles.input}
-              type="text"
-              value={rua}
-              onChange={(e) => setRua(e.target.value)}
-              placeholder="Nome da rua"
-              required
-              aria-label="Rua"
-            />
-          </label>
-
-          <span className={styles.icon} aria-hidden>
-            <FaPaw />
-          </span>
-          <label className={styles.label}>
-            Número*
+          <Field label="Número" required className={styles.half}>
             <input
               className={styles.input}
               type="text"
@@ -206,13 +163,22 @@ export default function CadastroOngPage() {
               required
               aria-label="Número"
             />
-          </label>
+          </Field>
 
-          <span className={styles.icon} aria-hidden>
-            <FaPaw />
-          </span>
-          <label className={styles.label}>
-            Complemento
+          {/* Rua, Complemento, Bairro, Cidade, Estado */}
+          <Field label="Rua" required className={styles.full}>
+            <input
+              className={styles.input}
+              type="text"
+              value={rua}
+              onChange={(e) => setRua(e.target.value)}
+              placeholder="Nome da rua"
+              required
+              aria-label="Rua"
+            />
+          </Field>
+
+          <Field label="Complemento" className={styles.full}>
             <input
               className={styles.input}
               type="text"
@@ -221,13 +187,9 @@ export default function CadastroOngPage() {
               placeholder="Apto / sala / complemento"
               aria-label="Complemento"
             />
-          </label>
+          </Field>
 
-          <span className={styles.icon} aria-hidden>
-            <FaPaw />
-          </span>
-          <label className={styles.label}>
-            Bairro*
+          <Field label="Bairro" required className={styles.half}>
             <input
               className={styles.input}
               type="text"
@@ -237,13 +199,9 @@ export default function CadastroOngPage() {
               required
               aria-label="Bairro"
             />
-          </label>
+          </Field>
 
-          <span className={styles.icon} aria-hidden>
-            <FaPaw />
-          </span>
-          <label className={styles.label}>
-            Cidade*
+          <Field label="Cidade" required className={styles.half}>
             <input
               className={styles.input}
               type="text"
@@ -253,13 +211,9 @@ export default function CadastroOngPage() {
               required
               aria-label="Cidade"
             />
-          </label>
+          </Field>
 
-          <span className={styles.icon} aria-hidden>
-            <FaPaw />
-          </span>
-          <label className={styles.label}>
-            Estado*
+          <Field label="Estado" required className={styles.half}>
             <input
               className={styles.input}
               type="text"
@@ -269,14 +223,10 @@ export default function CadastroOngPage() {
               required
               aria-label="Estado"
             />
-          </label>
+          </Field>
 
-          {/* Adicionado: horários de funcionamento (início e fim) */}
-          <span className={styles.icon} aria-hidden>
-            <FaPaw />
-          </span>
-          <label className={styles.label}>
-            Horário de funcionamento (início)*
+          {/* Horários: centralizados em uma linha — cada um meia largura */}
+          <Field label="Horário de funcionamento (início)" required className={styles.time}>
             <input
               className={styles.input}
               type="time"
@@ -285,22 +235,18 @@ export default function CadastroOngPage() {
               required
               aria-label="Horário de funcionamento início"
             />
-          </label>
+          </Field>
 
-          <span className={styles.icon} aria-hidden>
-            <FaPaw />
-          </span>
-          <label className={styles.label}>
-            Horário de funcionamento (até)*
+          <Field label="Horário de funcionamento (até)" required className={styles.time}>
             <input
               className={styles.input}
               type="time"
               value={HorarioFunc2}
               onChange={(e) => setHorarioFunc2(e.target.value)}
-              required
+              required  
               aria-label="Horário de funcionamento fim"
             />
-          </label>
+          </Field>
         </div>
 
         <button className={styles.button} type="submit">
