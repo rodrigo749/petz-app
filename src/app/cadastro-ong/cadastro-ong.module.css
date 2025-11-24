@@ -1,0 +1,132 @@
+.container {
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  background-color: #274b65;
+  
+}
+
+.form {
+  width: 100%;
+  max-width: 760px;
+  background: #f8ffff;
+  padding: 3rem 2.5rem;
+  border-radius: 24px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  align-items: center;
+  border: 6px solid #d9d9d9;
+  /* melhor alinhamento interno para aparência da segunda imagem */
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
+/* centraliza o grupo e coloca em coluna (sem duas colunas) */
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 560px;
+}
+
+/* Faz com que o span.icon imediatamente antes do label forme um "pill" com o label */
+.inputGroup .icon + .label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 16px;
+  border: 6px solid #143750;
+  border-radius: 999px;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Ajuste do ícone para ficar proporcional dentro do pill */
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #ffd28b;
+  color: #0b3746;
+  font-size: 22px;
+  flex: 0 0 46px;
+  margin-top: 2px;
+}
+
+/* O label agora organiza o texto (label/placeholder) e o input verticalmente */
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #0b3746;
+  width: 100%;
+  font-weight: 700;
+  padding: 0; /* padding já está no pill */
+  background: transparent;
+  min-width: 0;
+}
+
+/* estilo para o texto explicativo do campo (se houver) */
+.label > span {
+  font-weight: 700;
+  color: #0b3746;
+  font-size: 0.95rem;
+}
+
+/* input ocupa toda a área restante e sem borda (aparência limpa como na imagem) */
+.input {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  font-size: 1rem;
+  padding: 6px 0;
+  color: #0b3746;
+}
+.button {
+  margin-top: 0.5rem;
+  padding: 14px 56px;
+  background: linear-gradient(180deg,#0d66a6,#0a4f86);
+  color: white;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1.15rem;
+  box-shadow: 0 6px 0 rgba(0,0,0,0.08), inset 0 -6px 0 rgba(255,255,255,0.03);
+}
+
+
+/* aumenta espaço entre título e formulário para ficar como a segunda imagem */
+.title {
+  margin: 0 0 1.25rem 0;
+  font-weight: 700;
+  text-align: center;
+  color: #0b3b52;
+}
+
+/* responsividade: reduz paddings em telas pequenas */
+@media (max-width: 640px) {
+  .form {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  .icon {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    flex: 0 0 40px;
+  }
+  .inputGroup { max-width: 100%; }
+}
+
+/* ...existing code... */
