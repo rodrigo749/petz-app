@@ -4,7 +4,7 @@ export const NAV_LINKS = [
     label: "Entrar ",
     href: "#",
     subLinks: [
-      { label: "ONG", href: "/login/ong" },
+      { label: "ONG", href: "/login-ong" },
       { label: "Usuário", href: "/login" },
     ],
   },
