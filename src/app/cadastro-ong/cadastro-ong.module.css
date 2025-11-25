@@ -1,0 +1,128 @@
+/* fundo geral */
+.container {
+  min-height: 100vh;
+  background: #274B65;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+/* card */
+.form {
+  width: 100%;
+  max-width: 1500px;
+  background: #F8FFFF;
+  padding: 50px 40px;
+  border-radius: 25px;
+  border: 6px solid #d9d9d9;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+
+
+}
+
+/* título */
+.title {
+  text-align: center;
+  font-size: 2rem;
+  color: #0b3b52;
+  margin-bottom: 35px;
+  font-weight: 700;
+}
+
+/* GRID igual imagem */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px 40px;
+}
+
+/* colunas que ocupam linhas completas */
+.full {
+  grid-column: span 2;
+}
+
+/* wrappers dos campos */
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fieldLabel {
+  font-weight: 700;
+  color: #0b3b52;
+}
+
+/* estilo do campo */
+.inputInner {
+  position: relative;
+  border: 6px solid #143750;
+  border-radius: 999px;
+  background: transparent;
+  height: 58px;
+  display: flex;
+  align-items: center;
+}
+
+/* ícone */
+.iconInside {
+  position: absolute;
+  left: 12px;
+  width: 45px;
+  height: 45px;
+  background: #FFD28B;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0b3b52;
+  font-size: 20px;
+}
+
+
+/* input */
+.input {
+  border: none;
+  outline: none;
+  background: transparent;
+  padding-left: 70px;
+  width: 100%;
+  font-size: 1rem;
+  color: #0b3b52;
+}
+
+/* botão */
+.button {
+  margin-top: 40px;
+  padding: 15px 60px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #0d66a6, #0a4f86);
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.gridContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.colEsquerda {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.colDireita {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.colBaixo {
+  grid-column: span 2;
+  display: flex;
+  gap: 16px;
+}
