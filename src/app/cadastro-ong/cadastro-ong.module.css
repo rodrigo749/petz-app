@@ -2,8 +2,8 @@
 .container {
   min-height: 100vh;
   background: #274B65;
-  display: flex;
-  justify-content: center;
+  display: grid;
+  place-items: center;
   padding: 40px 20px;
 }
 
@@ -43,8 +43,7 @@
 
 /* wrappers dos campos */
 .inputWrapper {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 8px;
 }
 
@@ -60,7 +59,7 @@
   border-radius: 999px;
   background: transparent;
   height: 58px;
-  display: flex;
+  display: grid;
   align-items: center;
 }
 
@@ -72,9 +71,8 @@
   height: 45px;
   background: #FFD28B;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-items: center;
   color: #0b3b52;
   font-size: 20px;
 }
@@ -93,7 +91,7 @@
 
 /* botão */
 .button {
-  margin-top: 40px;
+  margin: 40px auto 0;
   padding: 15px 60px;
   border: none;
   border-radius: 999px;
@@ -102,6 +100,7 @@
   font-size: 1.2rem;
   font-weight: 700;
   cursor: pointer;
+  display: block;
 }
 .gridContainer {
   display: grid;
@@ -110,19 +109,73 @@
 }
 
 .colEsquerda {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 16px;
 }
 
 .colDireita {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 16px;
 }
 
 .colBaixo {
-  grid-column: span 2;
-  display: flex;
+  grid-column: 1 / 3;
+  display: grid;
+  grid-template-columns: 0fr auto 1fr;
   gap: 16px;
+  align-items: end;
+  justify-self: center;
+  max-width: 800px;
+}
+
+.full{
+  width: 100%;
+}
+.half{
+  width: 48%;
+}
+.bottomLink {
+  margin-top: 0.75rem;
+  color: #0b3b52;
+  font-size: 1.45rem;
+  text-align: center;
+}
+
+.bottomLink a {
+  color: #0b66a6;
+  text-decoration: underline;
+  margin-left: 6px;
+}
+.separador {
+  color: black;
+  font-size: 1rem;
+  font-weight: 700;
+  display: grid;
+  align-items: end;
+  padding-bottom: 15px;
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+  .gridContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .colBaixo {
+    grid-column: 1;
+    grid-template-columns: 1fr;
+  }
+
+  .separador {
+    text-align: center;
+    padding-bottom: 0;
+  }
+
+  .half {
+    width: 100%;
+  }
+
+  .button {
+    width: 100%;
+  }
 }

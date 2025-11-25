@@ -12,13 +12,11 @@
     const [telefone, setTelefone] = useState('')
     const [celular, setCelular] = useState('')
     const [senha, setSenha] = useState('')
-    const [confirmSenha, setConfirmSenha] = useState('')
     const [cnpj, setCnpj] = useState('')
     const [cep, setCep] = useState('')
     const [rua, setRua] = useState('')
     const [numero, setNumero] = useState('')
     const [complemento, setComplemento] = useState('')
-    const [bairro, setBairro] = useState('')
     const [cidade, setCidade] = useState('')
     const [estado, setEstado] = useState('')
     const [HorarioFunc1, setHorarioFunc1] = useState('')
@@ -79,30 +77,30 @@ return (
               required
             />
           </Field>
-
-          <Field label="Telefone fixo" required>
-            <input
-              className={styles.input}
-              type="tel"
-              value={telefone}
-              onChange={(e) => setTelefone(e.target.value)}
-              placeholder="(31) 0000-0000"
-              required
-            />
-          </Field>
-
-          <Field label="Celular" required>
-            <input
-              className={styles.input}
-              type="tel"
-              value={celular}
-              onChange={(e) => setCelular(e.target.value)}
-              placeholder="(31) 9 0000-0000"
-              required
-            />
-          </Field>
-
-          <Field label="Senha" required>
+           <div style={{display: 'flex', gap: '16px'}}>
+             <Field label="Telefone fixo" required className={styles.half}>
+               <input
+                 className={styles.input}
+                 type="tel"
+                 value={telefone}
+                 onChange={(e) => setTelefone(e.target.value)}
+                 placeholder="(31) 0000-0000"
+                 required
+               />
+             </Field>
+     
+             <Field label="Celular" required className={styles.half}>
+               <input
+                 className={styles.input}
+                 type="tel"
+                 value={celular}
+                 onChange={(e) => setCelular(e.target.value)}
+                 placeholder="(31) 9 0000-0000"
+                 required
+               />
+             </Field>
+            </div>
+          <Field label="Senha" required className={styles.half}>
             <input
               className={styles.input}
               type="password"
@@ -113,7 +111,7 @@ return (
             />
           </Field>
 
-          <Field label="CNPJ" required>
+          <Field label="CNPJ" required className={styles.half}>
             <input
               className={styles.input}
               type="text"
@@ -127,28 +125,7 @@ return (
 
         {/* ---- DIREITA ---- */}
         <div className={styles.colDireita}>
-          <Field label="CEP" required>
-            <input
-              className={styles.input}
-              type="text"
-              value={cep}
-              onChange={(e) => setCep(e.target.value)}
-              placeholder="00000-000"
-              required
-            />
-          </Field>
-
-          <Field label="Número" required>
-            <input
-              className={styles.input}
-              type="text"
-              value={numero}
-              onChange={(e) => setNumero(e.target.value)}
-              placeholder="Número"
-              required
-            />
-          </Field>
-
+            
           <Field label="Rua" required>
             <input
               className={styles.input}
@@ -170,16 +147,6 @@ return (
             />
           </Field>
 
-          <Field label="Bairro" required className={styles.half}>
-            <input
-              className={styles.input}
-              type="text"
-              value={bairro}
-              onChange={(e) => setBairro(e.target.value)}
-              placeholder="Bairro"
-              required
-            />
-          </Field>
 
           <Field label="Cidade" required>
             <input
@@ -202,11 +169,34 @@ return (
               required
             />
           </Field>
+          <div style={{display: 'flex', gap: '16px'}}> 
+                <Field label="CEP" required className={styles.half}>
+                  <input
+                    className={styles.input}
+                    type="text"
+                    value={cep}
+                    onChange={(e) => setCep(e.target.value)}
+                    placeholder="00000-000"
+                    required
+                  />
+                </Field>
+
+                <Field label="Número" required className={styles.half}>
+                  <input
+                    className={styles.input}
+                    type="text"
+                    value={numero}
+                    onChange={(e) => setNumero(e.target.value)}
+                    placeholder="Número"
+                    required
+                  />
+                </Field>
+            </div>
         </div>
 
         {/* ---- BAIXO ---- */}
         <div className={styles.colBaixo}>
-          <Field label="Horário de funcionamento (início)" required>
+          <Field label="Horário de funcionamento (início)" required className={styles.half}>
             <input
               className={styles.input}
               type="time"
@@ -216,7 +206,9 @@ return (
             />
           </Field>
 
-          <Field label="Horário de funcionamento (fim)" required>
+          <aspan className={styles.separador}>até</aspan>
+
+          <Field label="Horário de funcionamento (fim)" required className={styles.half}>
             <input
               className={styles.input}
               type="time"
@@ -236,6 +228,9 @@ return (
       <div className={styles.note}>
         Campos com * são obrigatórios.
       </div>
+      <div className={styles.bottomLink}>
+          Já tem conta? <a href="/login-ong">Faça login aqui</a>.
+        </div>
     </form>
   </div>
 )
