@@ -129,6 +129,7 @@
   object-fit: cover;
   flex-shrink: 0;
   border: 4px solid rgba(255, 255, 255, 0.08);
+  transition: width 0.3s ease, height 0.3s ease;
 }
 
 .info {
@@ -180,21 +181,104 @@
   cursor: not-allowed;
 }
 
-@media (max-width: 900px) {
+@media screen and (max-width: 900px) {
   .hero h1 {
     font-size: 28px;
   }
-
+  .hero p {
+    font-size: 20px;
+  }
+  .meta {
+    font-size: 12px;
+    min-width: 150px;
+  }
+  .card {
+    min-width: 220px;
+    max-width: 220px;
+    height: auto;
+    flex-direction: column;
+    padding: 12px;
+  }
+  .card img {
+    width: 100%;
+    height: auto;
+    max-height: 170px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+  }
+  .info {
+    font-size: 14px;
+    min-height: auto;
+    min-width: 100px;
+  }
   .leftImg,
   .rightImg {
     display: none;
   }
-
-  .card {
-    min-width: 220px;
+  .carousel {
+    gap: 20px;
+    padding: 10px 5px 30px;
   }
-
+  .cards {
+    gap: 40px;
+    padding: 0 20px;
+  }
   .highlight {
     min-width: 260px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .hero h1 {
+    font-size: 24px;
+  }
+  .hero p {
+    font-size: 18px;
+    line-height: 1.4;
+    margin: 16px 12px;
+  }
+  .meta {
+    font-size: 11px;
+    min-width: 150px;
+  }
+  .card {
+    min-width: 180px;
+    max-width: 180px;
+    padding: 10px;
+    gap: 10px;
+  }
+  .card img {
+    max-height: 120px;
+  }
+  .info {
+    font-size: 13px;
+    min-width: 40px
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .hero h1 {
+    font-size: 20px;
+  }
+  .hero p {
+    font-size: 16px;
+    line-height: 1.3;
+    margin: 12px 10px;
+  }
+  .meta {
+    font-size: 10px;
+    min-width: 130px;
+  }
+  .card {
+    min-width: 140px;
+    max-width: 140px;
+    padding: 8px;
+  }
+  .card img {
+    max-height: 90px;
+  }
+  .info {
+    font-size: 12px;
+    min-width: 40px
   }
 }
