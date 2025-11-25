@@ -16,6 +16,8 @@
   border-radius: 25px;
   border: 6px solid #d9d9d9;
   box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+
+
 }
 
 /* título */
@@ -77,6 +79,7 @@
   font-size: 20px;
 }
 
+
 /* input */
 .input {
   border: none;
@@ -99,4 +102,27 @@
   font-size: 1.2rem;
   font-weight: 700;
   cursor: pointer;
+}
+.gridContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.colEsquerda {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.colDireita {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.colBaixo {
+  grid-column: span 2;
+  display: flex;
+  gap: 16px;
 }
