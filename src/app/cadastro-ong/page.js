@@ -5,6 +5,22 @@
   import { FaPaw } from 'react-icons/fa'
   import styles from './cadastro-ong.module.css'
 
+  const Field = ({ label, required, children, className = '' }) => (
+    <div className={`${styles.inputWrapper} ${className}`}>
+      <label className={styles.fieldLabel}>
+        <span className={styles.labelText}>{label}{required ? '*' : ''}</span>
+
+        <div className={styles.inputInner}>
+          <div className={styles.iconInside} aria-hidden>
+            <FaPaw />
+          </div>
+
+          {children}
+        </div>
+      </label>
+    </div>
+  )
+
   export default function CadastroOngPage() {
     const router = useRouter()
     const [nome, setNome] = useState('')
@@ -23,21 +39,7 @@
     const [HorarioFunc2, setHorarioFunc2] = useState('')
     const [error, setError] = useState('')
 
-    const Field = ({ label, required, children, className = '' }) => (
-      <div className={`${styles.inputWrapper} ${className}`}>
-        <label className={styles.fieldLabel}>
-          <span className={styles.labelText}>{label}{required ? '*' : ''}</span>
-
-          <div className={styles.inputInner}>
-            <div className={styles.iconInside} aria-hidden>
-              <FaPaw />
-            </div>
-
-            {children}
-          </div>
-        </label>
-      </div>
-    )
+    
 
     const handleSubmit = (e) => {
       e.preventDefault()
