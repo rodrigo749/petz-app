@@ -23,7 +23,6 @@
     const [HorarioFunc2, setHorarioFunc2] = useState('')
     const [error, setError] = useState('')
 
-    // Field aceita className para controlar span/posição no grid
     const Field = ({ label, required, children, className = '' }) => (
       <div className={`${styles.inputWrapper} ${className}`}>
         <label className={styles.fieldLabel}>
