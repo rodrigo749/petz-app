@@ -10,58 +10,58 @@ export default function CadastroAdocao() {
     genero: "",
     idade: "",
     descricao: "",
-    imagem: "", // aqui vamos salvar apenas o nome ou caminho da imagem
   });
 
-  // Função para sumir o placeholder ao clicar
+  const [imagemFile, setImagemFile] = useState(null);
+
   const handleFocus = (e) => {
     e.target.dataset.placeholder = e.target.placeholder;
     e.target.placeholder = "";
   };
 
-  // Função para voltar o placeholder ao sair
   const handleBlur = (e) => {
     e.target.placeholder = e.target.dataset.placeholder;
   };
 
-  // Atualizar valores dos inputs
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Upload da imagem (apenas armazenamos o nome por enquanto)
   const handleImagem = (e) => {
     const arquivo = e.target.files[0];
-    if (arquivo) {
-      setFormData((prev) => ({ ...prev, imagem: arquivo.name }));
-    }
+    if (arquivo) setImagemFile(arquivo);
   };
 
-  // Enviar dados para /api/pets
   const salvarPet = async (e) => {
     e.preventDefault();
+
+    let imagemURL = "";
+
+    if (imagemFile) {
+      const imgData = new FormData();
+      imgData.append("file", imagemFile);
+
+      const uploadRes = await fetch("/api/upload", {
+        method: "POST",
+        body: imgData,
+      });
+
+      const uploadData = await uploadRes.json();
+      imagemURL = uploadData.url;
+    }
+
+    const novoPet = { ...formData, imagem: imagemURL };
 
     const res = await fetch("/api/pets", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(novoPet),
     });
 
     if (res.ok) {
       alert("Pet cadastrado com sucesso!");
-
-      // limpar formulário
-      setFormData({
-        nome: "",
-        raca: "",
-        genero: "",
-        idade: "",
-        descricao: "",
-        imagem: "",
-      });
-
-      document.getElementById("form-cadastro-pet").reset();
+      window.location.reload();
     } else {
       alert("Erro ao cadastrar pet.");
     }
@@ -69,20 +69,29 @@ export default function CadastroAdocao() {
 
   return (
     <main className={styles.cadastroPetContainer}>
-      <div className={styles.cadastroWrapper}>
+      <div className={styles.adocaoContainer}>
 
         {/* COLUNA ESQUERDA */}
-        <section className={styles.colEsquerda}>
-          {/* Upload da imagem */}
+        <section className={styles.leftSide}>
           <div className={styles.uploadImagem}>
             <label htmlFor="pet-imagem">
               <div className={styles.uploadBox}>
-                <img
-                  src="/images/iconephoto.png"
-                  alt="Adicionar"
-                  className={styles.iconeAddImg}
-                />
-                <span>Adicionar imagem</span>
+                {imagemFile ? (
+    <img
+      src={URL.createObjectURL(imagemFile)}
+      alt="Pré-visualização"
+      className={styles.previewImagem}
+    />
+  ) : (
+    <>
+      <img
+        src="/images/iconephoto.png"
+        alt="Adicionar"
+        className={styles.iconeAddImg}
+      />
+      <span>Adicionar imagem</span>
+    </>
+  )}
               </div>
             </label>
 
@@ -95,34 +104,32 @@ export default function CadastroAdocao() {
             />
           </div>
 
-          {/* Descrição */}
-          <div className={styles.descricaoBox}>
-            <label htmlFor="descricao-pet" className={styles.descricaoLabel}>
-              Descrição:
-            </label>
+            <div className={styles.campoDescricao}>
+            <img
+              src="/images/patinha.png"
+              alt="patinha"
+              className={styles.iconeDescricao}
+            />
 
             <textarea
-              id="descricao-pet"
-              rows="8"
-              className={styles.descricaoTextarea}
               name="descricao"
+              className={styles.descricaoTextarea}
               placeholder="Descreva o pet aqui..."
               onFocus={handleFocus}
               onBlur={handleBlur}
               onChange={handleChange}
             ></textarea>
-          </div>
+            </div>
         </section>
 
         {/* COLUNA DIREITA */}
-        <section className={styles.colDireita}>
+        <section className={styles.rightSide}>
           <h2 className={styles.tituloCadastro}>Cadastro Pet Adoção</h2>
 
-          <form id="form-cadastro-pet" className={styles.formCadastro} onSubmit={salvarPet}>
+          <form className={styles.formCadastro} onSubmit={salvarPet}>
 
-            {/* Nome */}
             <div className={styles.campo}>
-              <img src="/images/patinha.png" className={styles.iconeInput} alt="patinha" />
+              <img src="/images/patinha.png" className={styles.iconeInput} />
               <input
                 type="text"
                 name="nome"
@@ -133,9 +140,8 @@ export default function CadastroAdocao() {
               />
             </div>
 
-            {/* Raça */}
             <div className={styles.campo}>
-              <img src="/images/patinha.png" className={styles.iconeInput} alt="patinha" />
+              <img src="/images/patinha.png" className={styles.iconeInput} />
               <input
                 type="text"
                 name="raca"
@@ -146,9 +152,8 @@ export default function CadastroAdocao() {
               />
             </div>
 
-            {/* Gênero */}
             <div className={styles.campo}>
-              <img src="/images/patinha.png" className={styles.iconeInput} alt="patinha" />
+              <img src="/images/patinha.png" className={styles.iconeInput} />
               <input
                 type="text"
                 name="genero"
@@ -159,9 +164,8 @@ export default function CadastroAdocao() {
               />
             </div>
 
-            {/* Idade */}
             <div className={styles.campo}>
-              <img src="/images/patinha.png" className={styles.iconeInput} alt="patinha" />
+              <img src="/images/patinha.png" className={styles.iconeInput} />
               <input
                 type="text"
                 name="idade"

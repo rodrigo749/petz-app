@@ -1,0 +1,135 @@
+.pets-container {
+  width: 95%;
+  max-width: 1500px;
+  margin: 40px auto;
+}
+
+.titulo {
+  font-size: 28px;
+  font-weight: bold;
+  color: #ffffff;               /* texto branco */
+
+  background-color: #254d6b;    /* fundo azul */
+  border: 5px solid #143750;    /* borda azul escuro */
+
+  padding: 5px 20px;           /* tamanho do quadrado */
+  border-radius: 0px;           /* sem cantos arredondados */
+
+  text-align: center;
+  display: block;
+  width: fit-content;
+
+  margin: 0 auto 30px auto;     /* centralizar */
+}
+
+
+
+.grid-pets {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 25px; /* diminui distância entre cards */
+}
+
+
+.card-pet {
+  background: #254b6b;
+  border-radius: 16px;
+  padding: 15px;
+  display: flex;
+  gap: 12px;
+  position: relative;
+  color: white;
+}
+
+
+.card-image-wrapper {
+  width: 120px;
+  height: 150px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-info h3 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.card-info p {
+  font-size: 13px;
+  margin-bottom: 3px;
+  line-height: 1.2;
+}
+
+
+.icone-casa {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 26px;
+  opacity: 0.9;
+}
+
+
+/* Caixa branca onde ficam os textos */
+.card-text-box {
+  background: white;
+  border-radius: 12px;
+  padding: 5px 5px;
+
+  max-width: 170px;      /* controla o tamanho do quadrado branco */
+  flex-grow: 1;          /* permite expandir um pouco */
+  flex-shrink: 0;        /* impede encolhimento demais */
+  
+  color: #0f2a3d;
+}
+
+
+/* Título dentro da caixa branca */
+.card-text-box h3 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+/* Parágrafos dentro da caixa branca */
+.card-text-box p {
+  font-size: 13px;
+  margin-bottom: 4px;
+  line-height: 1.25;
+}
+
+.icone-casa-circle {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+
+  width: 27px;
+  height: 27px;
+
+  background: white;
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;   /* centraliza horizontal */
+  align-items: center;       /* centraliza vertical */
+
+  overflow: hidden;
+}
+
+
+
+.icone-casa {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  transform: translate(6px, -6px); /* ajuste fino manual */
+}
+
