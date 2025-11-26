@@ -86,7 +86,7 @@ const formatCNPJ = (value) => {
         <button className={styles.button} type="submit">Entrar</button>
 
         <div className={styles.bottomLink}>
-          Cadastre-se <a href="/cadastro">aqui</a>.
+          Cadastre-se <a href="/cadastro-ong">aqui</a>.
         </div>
       </form>
     </div>
