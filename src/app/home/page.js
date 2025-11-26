@@ -1,13 +1,11 @@
-'use client'
+"use client"
 
-import { useRef, useState, useEffect } from 'react'
+import { useState } from 'react'
 import styles from './home.module.css'
+import Carousel from '../../components/Carousel'
 
 export default function HomePage() {
-  const carouselRef1 = useRef(null)
-  const carouselRef2 = useRef(null)
-  const [centerIndex1, setCenterIndex1] = useState(0)
-  const [centerIndex2, setCenterIndex2] = useState(0)
+  const [dummy, setDummy] = useState(false) // placeholder to keep this as a client component
 
   const perdidos = [
     { id: 1, name: "Mingau", breed: "Abissínio", gender: "Fêmea", location: "Avenida Vicente Simões, 715 - Centro", img: "https://placekitten.com/300/200" },
@@ -23,39 +21,6 @@ export default function HomePage() {
     { id: 8, name: "Lolô", breed: "Vira-lata", gender: "Macho", age: "1 ano", location: "XXXXXX", ong: "XXXXXX", img: "https://place-puppy.com/320/220" },
     { id: 9, name: "Max", breed: "SRD", gender: "Macho", age: "2 anos", location: "XXXXXX", ong: "XXXXXX", img: "https://place-puppy.com/330/220" }
   ]
-
-  useEffect(() => {
-    const centerCard = (ref, index) => {
-      if (ref.current) {
-        const cards = ref.current.querySelectorAll('article')
-        if (cards[index]) {
-          cards[index].scrollIntoView({ block: 'nearest', inline: 'center' })
-        }
-      }
-    }
-    centerCard(carouselRef1, centerIndex1)
-    centerCard(carouselRef2, centerIndex2)
-  }, [centerIndex1, centerIndex2])
-
-  const scroll = (dir, carouselRef, currentIndex, setIndex, maxLength) => {
-    let newIndex
-    if (dir === 'next') {
-      newIndex = (currentIndex + 1) % maxLength
-    } else {
-      newIndex = (currentIndex - 1 + maxLength) % maxLength
-    }
-    
-    setIndex(newIndex)
-    setTimeout(() => {
-      const el = carouselRef.current
-      if (el) {
-        const cards = el.querySelectorAll('article')
-        if (cards[newIndex]) {
-          cards[newIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
-        }
-      }
-    }, 0)
-  }
 
   return (
     <div className={styles.pageWrap}>
@@ -73,81 +38,12 @@ export default function HomePage() {
 
       <section className={styles.block}>
         <h3 className={styles.title}>Perdidos recentemente</h3>
-        <div className={styles.carouselWrap}>
-          <button 
-            className={styles.arrow} 
-            onClick={() => scroll('prev', carouselRef1, centerIndex1, setCenterIndex1, perdidos.length)} 
-            aria-label="anterior"
-          >
-            &#8249;
-          </button>
-          
-          <div ref={carouselRef1} className={styles.carousel}>
-            <div className={styles.cards}>
-              {perdidos.map((pet, index) => (
-                <article key={pet.id} className={`${styles.card} ${index === centerIndex1 ? styles.highlight : ''}`}>
-                  <img src={pet.img} alt={pet.name} />
-                  <div className={styles.info}>
-                    <div className={styles.name}>{pet.name}</div>
-                    <div className={styles.meta}>
-                      Raça: {pet.breed}<br/>
-                      Gênero: {pet.gender}<br/>
-                      Local: {pet.location}
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-          
-          <button 
-            className={styles.arrow} 
-            onClick={() => scroll('next', carouselRef1, centerIndex1, setCenterIndex1, perdidos.length)} 
-            aria-label="próximo"
-          >
-            &#8250;
-          </button>
-        </div>
+        <Carousel items={perdidos} />
       </section>
 
       <section className={styles.block}>
         <h3 className={styles.title}>Adotados recentemente</h3>
-        <div className={styles.carouselWrap}>
-          <button 
-            className={styles.arrow} 
-            onClick={() => scroll('prev', carouselRef2, centerIndex2, setCenterIndex2, adotados.length)} 
-            aria-label="anterior"
-          >
-            &#8249;
-          </button>
-          
-          <div ref={carouselRef2} className={styles.carousel}>
-            <div className={styles.cards}>
-              {adotados.map((pet, index) => (
-                <article key={pet.id} className={`${styles.card} ${index === centerIndex2 ? styles.highlight : ''}`}>
-                  <img src={pet.img} alt={pet.name} />
-                  <div className={styles.info}>
-                    <div className={styles.name}>{pet.name}</div>
-                    <div className={styles.meta}>
-                      Raça: {pet.breed}<br/>
-                      Gênero: {pet.gender}<br/>
-                      {pet.age && <>Idade: {pet.age}<br/></>}
-                      {pet.ong && <>ONG: {pet.ong}</>}
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-          
-          <button 
-            className={styles.arrow} 
-            onClick={() => scroll('next', carouselRef2, centerIndex2, setCenterIndex2, adotados.length)} 
-            aria-label="próximo"
-          >
-            &#8250;
-          </button>
-        </div>
+        <Carousel items={adotados} />
       </section>
     </div>
   )
