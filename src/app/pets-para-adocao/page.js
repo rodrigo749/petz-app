@@ -18,7 +18,8 @@ export default function PetsParaAdocao() {
   }, []);
 
   return (
-    <main className="pets-container">
+   <main className="pets-page">
+    <div className="cards-wrapper-container">
       <h1 className="titulo">Pets para Adoção</h1>
 
       <section className="grid-pets">
@@ -26,6 +27,9 @@ export default function PetsParaAdocao() {
           <PetCard key={pet.id} pet={pet} />
         ))}
       </section>
-    </main>
+    </div>
+  </main>
   );
 }
+
+
