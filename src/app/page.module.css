@@ -1,14 +1,14 @@
 .page {
   --background-color: #eeffff;
   --text-primary: #000;
-  display: flex;
   min-height: 100vh;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-geist-sans);
+  width: 100%;
+  display: block;
   background-color: var(--background);
+  font-family: var(--font-geist-sans);
 }
 
+/* Conteúdo central da home */
 .pageWrap {
   max-height: fit-content;
   --maxw: 1100px;
@@ -16,13 +16,12 @@
   background-color: #e9fbfb;
 }
 
+/* HERO (faixa superior) */
 .hero {
   background: #e9fbfb;
-  padding: 36px 20px;
-  position: relative;
-  bottom: -170px;
+  padding: 36px 20px 140px; /* substitui bottom negativo */
   text-align: center;
-  
+  position: relative;
 }
 
 .hero .inner {
@@ -38,15 +37,14 @@
 }
 
 .hero p {
-  margin: 20x;
+  margin: 20px; /* corrigido */
   color: #475b5f;
   font-size: 30px;
   line-height: 2;
-  position: relative;
-  bottom: -130px;
-font-weight: bold;
+  font-weight: bold;
 }
 
+/* IMAGENS LATERAIS */
 .leftImg,
 .rightImg {
   position: absolute;
@@ -68,14 +66,16 @@ font-weight: bold;
   padding-bottom: 40px;
 }
 
+/* BLOCO AZUL DA HOME (Perdidos recentemente) */
 .block {
-  padding: 60px 20px 0px;
+  padding: 100px 20px 40px; /* substitui margin-top gigante */
   background: #46799e;
   color: white;
   position: relative;
-  bottom: -350px;
+  margin-top: 0;
 }
 
+/* Título da seção azul */
 .title {
   max-width: var(--maxw);
   margin: 0 auto 50px;
@@ -83,7 +83,7 @@ font-weight: bold;
   font-weight: 700;
 }
 
-/* carousel */
+/* CARROSSEL */
 .carouselWrap {
   display: flex;
   align-items: center;
@@ -138,7 +138,6 @@ font-weight: bold;
   z-index: 10;
 }
 
-
 .card img {
   width: 180px;
   height: 150px;
@@ -174,7 +173,7 @@ font-weight: bold;
   line-height: 1.6;
 }
 
-/* arrows */
+/* SETAS */
 .arrow {
   background: rgba(255, 255, 255, 0.15);
   border: none;
@@ -198,35 +197,7 @@ font-weight: bold;
   cursor: not-allowed;
 }
 
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  a.primary:hover {
-    background: var(--button-primary-hover);
-    border-color: transparent;
-  }
-
-  a.secondary:hover {
-    background: var(--button-secondary-hover);
-    border-color: transparent;
-  }
-}
-
-@media (max-width: 600px) {
-  .main {
-    padding: 48px 24px;
-  }
-
-  .intro {
-    gap: 16px;
-  }
-
-  .intro h1 {
-    font-size: 32px;
-    line-height: 40px;
-    letter-spacing: -1.92px;
-  }
-}
-
+/* MEDIA QUERIES */
 @media (max-width: 900px) {
   .hero h1 {
     font-size: 28px;

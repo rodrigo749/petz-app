@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "nome": "mingau",
+    "raca": "vira-lata",
+    "genero": "feminino",
+    "idade": "2 aninhos",
+    "descricao": "pet peludo.",
+    "imagem": ""
+  },
+  {
+    "id": 2,
+    "nome": "Caramelo",
+    "raca": "Vira - Lata",
+    "genero": "Macho",
+    "idade": "1 ano",
+    "descricao": "Visto pela última vez próximo ao senac na avenida vicente simões.",
+    "imagem": "/uploads/caramelo02.jpg"
+  },
+  {
+    "id": 3,
+    "nome": "Spike",
+    "raca": "golden",
+    "genero": "Macho",
+    "idade": "2 anos",
+    "descricao": "Esta com uma coleira azul.",
+    "imagem": "/uploads/pet05.jpg"
+  }
+]

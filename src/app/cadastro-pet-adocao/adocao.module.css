@@ -1,162 +1,197 @@
+/* CONTAINER GERAL DA PÁGINA */
 .cadastroPetContainer {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 80px 20px;
-    background: #284c65;
+  width: 100%;
+  background-color: #244c66;
+  display: flex;
+  justify-content: center;
+  padding: 50px 0;
+
+  /* AQUI ESTÁ A CORREÇÃO */
+  min-height: calc(100vh - 120px); 
 }
 
-/* CARD */
-.cadastroWrapper {
-    width: 100%;
-    max-width: 1200px;
-    background: #F4FEFF;
-    border-radius: 24px;
-    padding: 50px;
-    display: grid;
-    grid-template-columns: 1.1fr 1fr;
-    gap: 50px;
-    box-shadow: 0px 4px 18px rgba(0,0,0,0.12);
+
+/* BLOCO CENTRAL DIVIDIDO EM DUAS PARTES */
+.adocaoContainer {
+  width: 90%;
+  max-width: 1300px;
+  background: #244c66;
+  padding: 40px;
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  border-radius: 28px;
+  border: 6px solid #244c66;
 }
 
-/* Coluna esquerda */
-.colEsquerda {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
+/* ===========================
+   COLUNA ESQUERDA
+=========================== */
+
+.leftSide {
+  width: 48%;
+  background: #f6feff;
+  padding: 30px;
+  border-radius: 25px;
+  border: 5px solid #c9e4ee;
+  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.08);
 }
 
-/* Upload */
-.uploadImagem {
-    display: flex;
-    justify-content: center;
-}
-
+/* UPLOAD DE IMAGEM */
 .uploadBox {
-    width: 260px;
-    height: 220px;
-    border-radius: 24px;
-    background: #5a7c99;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #ffffff;
-    font-weight: 600;
-    text-align: center;
-    cursor: pointer;
-    transition: 0.3s;
+  width: 240px;
+  height: 240px;
+  background-color: #a7c7dd;
+  margin: 0 auto;
+  border-radius: 22px;
+  border: 4px solid #6088a4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.2s ease;
 }
 
 .uploadBox:hover {
-    background: #4a6c87;
+  background-color: #98b9d0;
 }
 
-/* Descrição */
-.descricaoBox {
-    border-radius: 24px;
-    padding: 16px;
-    border: 2px solid #254460;
-    background: #ffffff;
+.iconeAddImg {
+  width: 90px;
+  height: 90px;
+  opacity: 0.9;
 }
 
-.descricaoLabel {
-    margin-bottom: 8px;
-    font-weight: 600;
+.uploadBox span {
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* DESCRIÇÃO */
+.campoDescricao {
+  position: relative;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.iconeDescricao {
+  position: absolute;
+  left: 15px;
+  top: 18px;
+  width: 28px;
+  height: 28px;
+  opacity: 0.9;
 }
 
 .descricaoTextarea {
-    width: 100%;
-    border: none;
-    outline: none;
-    resize: none;
-    min-height: 150px;
-    font-size: 14px;
-    background-color: white;
+  width: 100%;
+  min-height: 150px;
+  padding: 20px 20px 20px 60px; /* deixa espaço para a patinha */
+  border-radius: 25px;
+  border: 4px solid #0f3b61;
+  font-size: 16px;
+  outline: none;
+  resize: none;
+  background-color: white;
+  font-family: inherit;
 }
 
-/* Coluna direita */
-.colDireita {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+.descricaoTextarea:focus {
+  border-color: #1b5b8f;
 }
 
+/* ===========================
+   COLUNA DIREITA
+=========================== */
+
+.rightSide {
+  width: 48%;
+  background: #f6feff;
+  padding: 30px;
+  border-radius: 25px;
+  border: 5px solid #c9e4ee;
+  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* TÍTULO */
 .tituloCadastro {
-    text-align: center;
-    font-size: 24px;
-    margin-bottom: 8px;
-    color: #46799e;;
-    font-weight: 700;
+  font-size: 32px;
+  font-weight: 700;
+  color: #285a78;
+  margin-bottom: 20px;
 }
 
 /* FORM */
 .formCadastro {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
-/* Campo unificado */
+/* CAMPOS COM PATINHA */
 .campo {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    color: black;
+  position: relative;
+  width: 100%;
 }
 
-/* Inputs */
 .campo input {
-    width: 100%;
-    height: 50px;
-    padding-left: 52px;
-    border-radius: 999px;
-    border: 2px solid #254460;
-    outline: none;
-    font-size: 16px;
-    background: #ffffff;
-    color: black;
+  width: 100%;
+  padding: 12px 20px 12px 55px;
+  border-radius: 40px;
+  border: 4px solid #0f3b61;
+  font-size: 16px;
+  outline: none;
+  background-color: #ffffff;
 }
 
-/* Ícone da patinha */
+.campo input:focus {
+  border-color: #1b5b8f;
+}
+
+/* ÍCONE PATINHA NOS INPUTS */
 .iconeInput {
-    width: 26px;
-    height: 26px;
-    position: absolute;
-    left: 14px;
-    top: 50%;
-    transform: translateY(-50%);
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  opacity: 0.9;
 }
 
-/* Ícone de upload */
-.iconeAddImg {
-    width: 48px;
-    height: 48px;
-    margin-bottom: 8px;
-    opacity: 0.9;
-    user-select: none;
-    pointer-events: none;
-}
-
-/* Botão */
+/* BOTÃO */
 .btnCadastrar {
-    margin-top: 12px;
-    height: 46px;
-    border-radius: 999px;
-    border: none;
-    cursor: pointer;
-    font-weight: 700;
-    font-size: 16px;
-    background: #0053a4;
-    color: #ffffff;
+  margin-top: 15px;
+  width: 80%;
+  padding: 12px;
+  border-radius: 18px;
+  font-size: 22px;
+  font-weight: 700;
+  color: white;
+  background-color: #024b91;
+  border: 4px solid #3e8abf;
+  cursor: pointer;
+  transition: 0.25s ease-in-out;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.25);
+  margin-left: 30px;
 }
 
-/* Responsive adjustments for smaller screens */
-@media (max-width: 768px) {
-    .cadastroWrapper {
-        grid-template-columns: 1fr;
-        padding: 30px 20px;
-        gap: 30px;
-    }
+.btnCadastrar:hover {
+  background-color: #004a91;
+  transform: translateY(-2px);
+}
+
+
+.previewImagem {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 18px;
 }
