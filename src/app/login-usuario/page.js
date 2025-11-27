@@ -85,7 +85,7 @@ export default function LoginPage() {
         <button className={styles.button} type="submit">Entrar</button>
 
         <div className={styles.bottomLink}>
-          Cadastre-se <a href="/cadastro">aqui</a>.
+          Cadastre-se <a href="/cadastro-usuario">aqui</a>.
         </div>
       </form>
     </div>

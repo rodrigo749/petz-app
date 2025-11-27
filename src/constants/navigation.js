@@ -4,8 +4,8 @@ export const NAV_LINKS = [
     label: "Entrar ",
     href: "#",
     subLinks: [
-      { label: "ONG", href: "/login/ong" },
-      { label: "Usuário", href: "/login" },
+      { label: "ONG", href: "/login-ong" },
+      { label: "Usuário", href: "/login-usuario" },
     ],
   },
   {
@@ -13,7 +13,7 @@ export const NAV_LINKS = [
     label: "Adoção ",
     href: "/adocao",
     subLinks: [
-      { label: "Pets para Adoção", href: "/adocao" },
+      { label: "Pets para Adoção", href: "/cadastro-pet-adocao" },
       { label: "Pets Adotados", href: "/adocao/adotados" },
     ],
   },

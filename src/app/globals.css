@@ -14,9 +14,15 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
 }
 
 body {
+  flex-grow: 1;
   position: relative;
   color: var(--foreground);
   background: var(--background);

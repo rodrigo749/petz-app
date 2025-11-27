@@ -9,11 +9,12 @@ export default function Input({
   onChange,
   error,
   icon = <FaPaw />,
+  size = "full",
   className = "",
   ...props
 }) {
   return (
-    <div className={`${styles.inputWrapper} ${className}`}>
+    <div className={`${styles.inputWrapper} ${styles[size]} ${className}`}>
       <span className={styles.icon} aria-hidden>
         {icon}
       </span>
