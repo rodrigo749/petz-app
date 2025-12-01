@@ -195,3 +195,267 @@
   object-fit: cover;
   border-radius: 18px;
 }
+
+/* ===========================
+   MEDIA QUERIES - RESPONSIVO
+=========================== */
+
+/* TABLETS (até 1024px) */
+@media (max-width: 1024px) {
+  .adocaoContainer {
+    width: 95%;
+    padding: 30px;
+    gap: 30px;
+    flex-direction: column;
+  }
+
+  .leftSide,
+  .rightSide {
+    width: 100%;
+  }
+
+  .tituloCadastro {
+    font-size: 28px;
+    margin-bottom: 15px;
+  }
+
+  .formCadastro {
+    width: 90%;
+  }
+
+  .uploadBox {
+    width: 200px;
+    height: 200px;
+  }
+
+  .iconeAddImg {
+    width: 75px;
+    height: 75px;
+  }
+
+  .uploadBox span {
+    font-size: 16px;
+  }
+}
+
+/* TABLETS PEQUENOS (até 768px) */
+@media (max-width: 768px) {
+  .cadastroPetContainer {
+    padding: 30px 0;
+    min-height: auto;
+  }
+
+  .adocaoContainer {
+    width: 90%;
+    padding: 25px;
+    gap: 25px;
+    border-radius: 20px;
+  }
+
+  .leftSide,
+  .rightSide {
+    padding: 20px;
+    border-radius: 20px;
+    border: 4px solid #c9e4ee;
+  }
+
+  .tituloCadastro {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+
+  .formCadastro {
+    width: 100%;
+    gap: 15px;
+  }
+
+  .campo input {
+    padding: 10px 15px 10px 45px;
+    font-size: 14px;
+    border-radius: 30px;
+  }
+
+  .iconeInput {
+    width: 24px;
+    height: 24px;
+    left: 12px;
+  }
+
+  .uploadBox {
+    width: 180px;
+    height: 180px;
+    border-radius: 18px;
+    border: 3px solid #6088a4;
+  }
+
+  .iconeAddImg {
+    width: 65px;
+    height: 65px;
+  }
+
+  .uploadBox span {
+    font-size: 14px;
+    margin-top: 8px;
+  }
+
+  .descricaoTextarea {
+    min-height: 120px;
+    padding: 15px 15px 15px 50px;
+    font-size: 14px;
+    border-radius: 20px;
+    border: 3px solid #0f3b61;
+  }
+
+  .btnCadastrar {
+    width: 90%;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 15px;
+    margin-left: 0;
+  }
+}
+
+/* MOBILE (até 480px) */
+@media (max-width: 480px) {
+  .cadastroPetContainer {
+    padding: 20px 0;
+  }
+
+  .adocaoContainer {
+    width: 100%;
+    padding: 15px;
+    gap: 15px;
+    border-radius: 15px;
+    border: 4px solid #244c66;
+  }
+
+  .leftSide,
+  .rightSide {
+    padding: 15px;
+    border-radius: 15px;
+    border: 3px solid #c9e4ee;
+  }
+
+  .tituloCadastro {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+
+  .formCadastro {
+    width: 100%;
+    gap: 12px;
+  }
+
+  .campo input {
+    padding: 8px 12px 8px 40px;
+    font-size: 13px;
+    border-radius: 25px;
+    border: 3px solid #0f3b61;
+  }
+
+  .iconeInput {
+    width: 20px;
+    height: 20px;
+    left: 10px;
+  }
+
+  .uploadBox {
+    width: 150px;
+    height: 150px;
+    border-radius: 15px;
+    border: 3px solid #6088a4;
+  }
+
+  .iconeAddImg {
+    width: 55px;
+    height: 55px;
+  }
+
+  .uploadBox span {
+    font-size: 12px;
+    margin-top: 6px;
+  }
+
+  .campoDescricao {
+    margin-top: 15px;
+  }
+
+  .iconeDescricao {
+    width: 24px;
+    height: 24px;
+    left: 12px;
+    top: 14px;
+  }
+
+  .descricaoTextarea {
+    min-height: 100px;
+    padding: 12px 12px 12px 45px;
+    font-size: 13px;
+    border-radius: 15px;
+    border: 3px solid #0f3b61;
+  }
+
+  .btnCadastrar {
+    width: 95%;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 12px;
+    border: 3px solid #3e8abf;
+    margin-left: 0;
+    margin-top: 10px;
+  }
+
+  .btnCadastrar:hover {
+    transform: translateY(-1px);
+  }
+}
+
+/* MOBILE MUITO PEQUENO (até 360px) */
+@media (max-width: 360px) {
+  .adocaoContainer {
+    width: 100%;
+    padding: 10px;
+    gap: 12px;
+  }
+
+  .leftSide,
+  .rightSide {
+    padding: 12px;
+  }
+
+  .tituloCadastro {
+    font-size: 18px;
+  }
+
+  .uploadBox {
+    width: 130px;
+    height: 130px;
+  }
+
+  .iconeAddImg {
+    width: 45px;
+    height: 45px;
+  }
+
+  .uploadBox span {
+    font-size: 11px;
+  }
+
+  .campo input {
+    padding: 6px 10px 6px 35px;
+    font-size: 12px;
+  }
+
+  .descricaoTextarea {
+    min-height: 80px;
+    padding: 10px 10px 10px 40px;
+    font-size: 12px;
+  }
+
+  .btnCadastrar {
+    width: 100%;
+    padding: 6px;
+    font-size: 14px;
+  }
+}
+
