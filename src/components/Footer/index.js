@@ -6,10 +6,7 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div className="footer-container">
-        <div className="footer-logo">
-          <h2>Patas Perdidas 🐾</h2>
-          <p>Conectando pessoas e pets com amor 💕</p>
-        </div>
+        
 
         {/*<div className="footer-links">
           <a href="#">Sobre</a>
