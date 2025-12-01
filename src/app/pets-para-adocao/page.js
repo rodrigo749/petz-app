@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import PetCard from "@/components/PetCard";
+import PetCard from "@/components/PetCard/PetCard";
 import styles from "./petsparaadocao.module.css";
 
 export default function PetsParaAdocao() {
