@@ -22,8 +22,8 @@ export const NAV_LINKS = [
     label: "Pets perdidos ",
     href: "/perdidos",
     subLinks: [
-      { label: "Pets Perdidos", href: "/perdidos/perdidos" },
-      { label: "Pets Encontrados", href: "/perdidos/encontrados" },
+      { label: "Pets Perdidos", href: "/perdidos" },
+      { label: "Pets Encontrados", href: "/encontrados" },
     ],
   },
   { id: "apoiar", label: "Apoiar", href: "/apoiar" },

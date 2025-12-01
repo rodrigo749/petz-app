@@ -1,0 +1,152 @@
+/* CONTAINER GERAL */
+.cadastroPetContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: #284c65;
+  padding: 50px 20px;
+}
+
+/* CARD CENTRAL COM 2 CONTAINERS */
+.cadastroWrapper {
+  width: 100%;
+  max-width: 1200px;
+  background: #f4feff;
+  border-radius: 20px;
+  padding: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+}
+
+/* COLUNA ESQUERDA */
+.colEsquerda {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* UPLOAD */
+.uploadBox {
+  width: 260px;
+  height: 220px;
+  background: #5a7c99;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  font-weight: 600;
+}
+.iconeAddImg {
+  width: 70px;
+  margin-bottom: 10px;
+}
+
+/* DESCRIÇÃO BOX */
+.descricaoBox {
+  border-radius: 20px;
+  border: 2px solid #254460;
+  padding: 15px;
+}
+.descLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+}
+.descIcon {
+  width: 24px;
+  opacity: 0.8;
+}
+.descricaoTextarea {
+  width: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  min-height: 130px;
+  font-size: 15px;
+  padding-top: 10px;
+}
+
+/* COLUNA DIREITA */
+.colDireita {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.tituloArea {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+.tituloCadastro {
+  font-size: 30px;
+  color: #2d5d80;
+}
+.iconHome {
+  width: 40px;
+}
+
+/* FORM CAMPOS */
+.campo {
+  position: relative;
+}
+.iconeInput {
+  width: 24px;
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.campo input {
+  width: 100%;
+  height: 48px;
+  padding-left: 50px;
+  border-radius: 30px;
+  border: 2px solid #254460;
+  outline: none;
+  font-size: 16px;
+}
+
+/* RECOMPENSA */
+.recompensaBox {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.iconeRecompensa {
+  width: 30px;
+}
+.slider {
+  width: 100%;
+}
+.valorRecompensa {
+  font-weight: bold;
+  color: red;
+}
+
+/* BOTÃO */
+.btnCadastrar {
+  margin-top: 10px;
+  height: 48px;
+  width: 100%;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  background: #0053a4;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* RESPONSIVO */
+@media (max-width: 900px) {
+  .cadastroWrapper {
+    grid-template-columns: 1fr;
+  }
+}
+

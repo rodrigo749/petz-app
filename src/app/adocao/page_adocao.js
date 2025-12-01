@@ -64,7 +64,7 @@ export default function CadastroAdocao() {
               <input
                 type="text"
                 name="nome"
-                placeholder="Nome"
+                placeholder="Nome:"
                 onFocus={handleFocus}
                 onBlur={handleBlur}
               />
@@ -76,7 +76,7 @@ export default function CadastroAdocao() {
               <input
                 type="text"
                 name="raca"
-                placeholder="Raça"
+                placeholder="Raça:"
                 onFocus={handleFocus}
                 onBlur={handleBlur}
               />
@@ -88,7 +88,7 @@ export default function CadastroAdocao() {
               <input
                 type="text"
                 name="genero"
-                placeholder="Gênero"
+                placeholder="Gênero:"
                 onFocus={handleFocus}
                 onBlur={handleBlur}
               />
@@ -100,7 +100,7 @@ export default function CadastroAdocao() {
               <input
                 type="text"
                 name="idade"
-                placeholder="Idade"
+                placeholder="Idade:"
                 onFocus={handleFocus}
                 onBlur={handleBlur}
               />
