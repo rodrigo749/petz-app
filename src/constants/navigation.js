@@ -14,7 +14,7 @@ export const NAV_LINKS = [
     href: "/adocao",
     subLinks: [
       { label: "Pets para Adoção", href: "/cadastro-pet-adocao" },
-      { label: "Pets Adotados", href: "/adocao/adotados" },
+      { label: "Pets Adotados", href: "pets-para-adocao" },
     ],
   },
   {

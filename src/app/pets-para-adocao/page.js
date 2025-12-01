@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import PetCard from "@/components/PetCard";
-import "../../styles/petsAdocao.css";
+import styles from "./petsparaadocao.module.css";
 
 export default function PetsParaAdocao() {
   const [pets, setPets] = useState([]);
@@ -18,18 +18,16 @@ export default function PetsParaAdocao() {
   }, []);
 
   return (
-   <main className="pets-page">
-    <div className="cards-wrapper-container">
-      <h1 className="titulo">Pets para Adoção</h1>
+    <main className={styles["pets-page"]}>
+      <div className={styles["cards-wrapper-container"]}>
+        <h1 className={styles.titulo}>Pets para Adoção</h1>
 
-      <section className="grid-pets">
-        {pets.map((pet) => (
-          <PetCard key={pet.id} pet={pet} />
-        ))}
-      </section>
-    </div>
-  </main>
+        <section className={styles["grid-pets"]}>
+          {pets.map((pet) => (
+            <PetCard key={pet.id} pet={pet} />
+          ))}
+        </section>
+      </div>
+    </main>
   );
 }
-
-
