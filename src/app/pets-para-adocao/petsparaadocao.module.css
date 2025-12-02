@@ -1,0 +1,127 @@
+.pets-page {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #274b65;
+  padding: 40px 0;
+}
+
+
+.cards-wrapper-container {
+  width: 95%;
+  max-width: 1300px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 40px;
+  padding: 40px 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
+}
+
+
+.titulo {
+  font-size: 28px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #254d6b;
+  border: 5px solid #143750;
+  padding: 5px 20px;
+  border-radius: 0;
+  text-align: center;
+  display: block;
+  width: fit-content;
+  margin: 0 auto 30px auto;
+}
+
+
+.grid-pets {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 10px;
+  justify-items: center; /* centraliza os cards em cada coluna */
+}
+
+
+.card-pet {
+  background: #254b6b;
+  border-radius: 16px;
+  padding: 15px;
+  display: flex;
+  gap: 12px;
+  position: relative;
+  color: white;
+
+  width: 100%;
+  max-width: 360px;   /* todos com a mesma largura */
+  height: 190px;      /* todos com a mesma altura */
+  box-sizing: border-box;
+  align-items: flex-start;
+}
+
+
+.card-image-wrapper {
+  width: 130px;
+  height: 160px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;    
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-text-box {
+  background: white;
+  border-radius: 12px;
+  padding: 6px 10px;
+  color: #0f2a3d;
+
+  flex: 1;
+  height: 160px;   
+  width: 170px;
+  max-width: none;
+  flex: none;       /* mesma altura em todos */
+  box-sizing: border-box;
+  overflow: hidden;       /* impede o texto de estourar o card */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.card-text-box h3 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.card-text-box p {
+  font-size: 13px;
+  margin-bottom: 4px;
+  line-height: 1.25;
+}
+
+
+.icone-casa-circle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  width: 30px;
+  height: 30px;
+
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 5;
+}
+
+.icone-casa {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}

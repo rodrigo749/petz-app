@@ -5,7 +5,7 @@ export const NAV_LINKS = [
     href: "#",
     subLinks: [
       { label: "ONG", href: "/login-ong" },
-      { label: "Usuário", href: "/login" },
+      { label: "Usuário", href: "/login-usuario" },
     ],
   },
   {
@@ -13,17 +13,17 @@ export const NAV_LINKS = [
     label: "Adoção ",
     href: "/adocao",
     subLinks: [
-      { label: "Pets para Adoção", href: "/adocao" },
-      { label: "Pets Adotados", href: "/adocao/adotados" },
+      { label: "Pets para Adoção", href: "/pets-para-adocao" },
+      { label: "Pets Adotados", href: "Pets Adotados" },
     ],
   },
   {
     id: "perdidos",
-    label: "Pets perdidos ",
-    href: "/perdidos",
+    label: "Pets-perdidos ",
+    href: "/pets-perdidos",
     subLinks: [
-      { label: "Pets Perdidos", href: "/perdidos" },
-      { label: "Pets Encontrados", href: "/encontrados" },
+      { label: "Pets Perdidos", href: "/pets-perdidos" },
+      { label: "Pets Encontrados", href: "/pets-encontrados" },
     ],
   },
   { id: "apoiar", label: "Apoiar", href: "/apoiar" },

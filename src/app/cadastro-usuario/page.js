@@ -11,6 +11,7 @@ export default function CadastroPage() {
     nome: "",
     cpf: "",
     email: "",
+    telefone:"",
     password: "",
     confirmPassword: ""
   });
@@ -56,10 +57,29 @@ export default function CadastroPage() {
       .replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3")
       .replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d)/, "$1.$2.$3-$4");
   };
+  const formatTelefone = (value) => {
+    const digits = value.replace(/\D/g, "").slice(0, 11); // Máx 11 dígitos (ex: 31999999999)
+
+    if (digits.length <= 2) {
+      return `(${digits}`;
+    }
+    if (digits.length <= 6) {
+      return `(${digits.slice(0,2)}) ${digits.slice(2)}`;
+    }
+    if (digits.length <= 10) {
+      return `(${digits.slice(0,2)}) ${digits.slice(2,6)}-${digits.slice(6)}`;
+    }
+
+    // Para números com 11 dígitos (celular)
+    return `(${digits.slice(0,2)}) ${digits.slice(2,7)}-${digits.slice(7,11)}`;
+};
 
   const handleChange = (field, value) => {
     if (field === "cpf") {
       value = formatCPF(value);
+    }
+    if (field === "telefone"){
+      value = formatTelefone(value);
     }
     setFormData(prev => ({ ...prev, [field]: value }));
   };
@@ -121,7 +141,22 @@ export default function CadastroPage() {
             />
           </label>
         </div>
-
+         <div className={styles.inputWrapper}>
+          <span className={styles.icon} aria-hidden>
+            <FaPaw />
+          </span>
+          <label className={styles.fieldLabel}>
+            telefone:
+            <input
+             className={styles.input}
+             type="tel"
+             value={formData.telefone}
+             onChange={(e) => handleChange("telefone",e.target.value)}
+             placeholder="(35) 0000-0000"
+             required
+            />
+          </label>
+        </div>
         <div className={styles.inputWrapper}>
           <span className={styles.icon} aria-hidden>
             <FaPaw />
@@ -144,7 +179,7 @@ export default function CadastroPage() {
             <FaPaw />
           </span>
           <label className={styles.fieldLabel}>
-            Confirmar:
+            Confirmar Senha:
             <input
               className={styles.input}
               type="password"

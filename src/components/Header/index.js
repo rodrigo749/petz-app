@@ -29,10 +29,14 @@ export default function Header() {
         {/* Desktop Menu */}
         <div className={styles.desktop}>
           {NAV_LINKS.map(({ id, label, href, subLinks }) => (
-            <div key={id} className={styles.dropdown}>
+            <div 
+              key={id} 
+              className={styles.dropdown}
+              onMouseEnter={() => subLinks && setDropdownOpen(id)}
+              onMouseLeave={() => setDropdownOpen(null)}
+            >
               <button
                 className={styles.link}
-                onClick={() => setDropdownOpen(dropdownOpen === id ? null : id)}
                 aria-expanded={dropdownOpen === id}
                 aria-haspopup={subLinks ? "true" : "false"}
               >
@@ -52,7 +56,6 @@ export default function Header() {
                       key={index}
                       href={subLink.href}
                       className={styles.dropdownItem}
-                      onClick={() => setDropdownOpen(null)}
                     >
                       {subLink.label}
                     </Link>
