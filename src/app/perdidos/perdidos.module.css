@@ -11,12 +11,33 @@
 .cadastroWrapper {
   width: 100%;
   max-width: 1200px;
-  background: #f4feff;
+  background:#284c65;
   border-radius: 20px;
   padding: 40px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 50px;
+}
+
+/* Visual grouping: left (upload+descrição) and right (form) cards */
+.colEsquerda,
+.colDireita {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(8, 35, 63, 0.06);
+}
+
+.colEsquerda {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.colDireita {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
 /* COLUNA ESQUERDA */
@@ -28,7 +49,7 @@
 
 /* UPLOAD */
 .uploadBox {
-  width: 260px;
+  width: 220px;
   height: 220px;
   background: #5a7c99;
   border-radius: 20px;
@@ -38,11 +59,27 @@
   justify-content: center;
   cursor: pointer;
   color: white;
-  font-weight: 600;
+  font-weight:880;
+  text-align: center;
+
 }
 .iconeAddImg {
-  width: 70px;
-  margin-bottom: 10px;
+  width: 190px;
+  margin-bottom: 0px;
+ 
+}
+
+/* wrapper que contém a caixa de upload - centraliza horizontalmente */
+.uploadImagem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.uploadImagem label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* DESCRIÇÃO BOX */
@@ -84,8 +121,8 @@
   gap: 8px;
 }
 .tituloCadastro {
-  font-size: 30px;
-  color: #2d5d80;
+  font-size: 33px;
+  color: #46799e;
 }
 .iconHome {
   width: 40px;
@@ -94,6 +131,7 @@
 /* FORM CAMPOS */
 .campo {
   position: relative;
+  margin-bottom: 8px; /* fallback spacing between fields */
 }
 .iconeInput {
   width: 24px;
@@ -110,6 +148,7 @@
   border: 2px solid #254460;
   outline: none;
   font-size: 16px;
+  gap: 20px;
 }
 
 /* RECOMPENSA */
@@ -118,11 +157,48 @@
   align-items: center;
   gap: 14px;
 }
+.recompensaField {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+.recompensaLabel {
+  font-weight: 700;
+  color: #254460;
+  font-size: 14px;
+  text-align: center;
+  width: 100%;
+}
+.recompensaControl, .recompensaRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  justify-content: center;
+}
 .iconeRecompensa {
   width: 30px;
 }
 .slider {
   width: 100%;
+  accent-color: red;
+}
+.recompensaWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.recompensaLabelWrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.formCadastro {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 .valorRecompensa {
   font-weight: bold;
@@ -141,6 +217,12 @@
   color: white;
   font-size: 18px;
   font-weight: bold;
+}
+
+.formCadastro .btnCadastrar {
+  width: 100%;
+  margin: 16px auto 0 auto;
+  display: block;
 }
 
 /* RESPONSIVO */

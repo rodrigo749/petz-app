@@ -75,18 +75,23 @@ export default function CadastroPerdidos() {
 
             {/* SLIDER RECOMPENSA */}
             <div className={styles.recompensaBox}>
-              <img src="/images/patinha.png" className={styles.iconeRecompensa} />
-
-              <input
-                type="range"
-                min="0"
-                max="500"
-                value={recompensa}
-                onChange={(e) => setRecompensa(e.target.value)}
-                className={styles.slider}
-              />
-
-              <span className={styles.valorRecompensa}>R$ {recompensa}</span>
+              <div className={styles.recompensaWrapper}>
+                <div className={styles.recompensaLabelWrapper}>
+                  <label className={styles.recompensaLabel}>Recompensa</label>
+                </div>
+                <div className={styles.recompensaRow}>
+                  <img src="/images/patinha.png" className={styles.iconeRecompensa} />
+                  <input
+                    type="range"
+                    min="0"
+                    max="500"
+                    value={recompensa}
+                    onChange={(e) => setRecompensa(e.target.value)}
+                    className={styles.slider}
+                  />
+                  <span className={styles.valorRecompensa}>R$ {recompensa}</span>
+                </div>
+              </div>
             </div>
 
             <button className={styles.btnCadastrar}>Cadastrar</button>
