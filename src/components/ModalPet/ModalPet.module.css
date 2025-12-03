@@ -1,0 +1,101 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* POP-UP FIXO */
+.modal {
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 40px;                /* padding reduzido – antes estava exagerado */
+  width: 1500px;
+  max-width: 95%;
+  height: 700px;                /* ← ALTURA FIXA DO POP-UP */
+  box-shadow: 0 0 25px rgba(0,0,0,0.25);
+  overflow: hidden;             /* impede o modal de crescer */
+
+  border: 4px solid #ecad5b;
+
+  display: flex;
+  flex-direction: column;       /* permite que modalContent ocupe o espaço restante */
+}
+
+/* ÁREA INTERNA DO MODAL */
+.modalContent {
+  display: flex;
+  gap: 20px;
+  flex: 0.9;                    /* ocupa todo o espaço do modal */
+  min-height: 0;                /* ← ESSENCIAL! permite scroll interno nos filhos */
+}
+
+/* IMAGEM */
+.imageBox {
+  flex: 0.5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 0;
+}
+
+.imageBox img {
+  width: 100%;
+  height: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.petName {
+  margin-top: 15px;
+  padding: 25px 150px;             
+  
+  background-color: #024b91; 
+  color: #f7bb63;               
+  
+  font-size: 40px;
+  font-weight: 700;
+  text-align: center;
+
+  border-radius: 20px;              /* arredondamento */
+  border: 3px solid #143750; 
+
+  display: inline-block;            /* mantém a largura apenas do conteúdo */
+}
+
+
+/* INFORMAÇÕES DO PET */
+.infoBox {
+  flex: 1.2;
+  background: #7a8fa7;
+  padding: 30px;                 /* pode aumentar sem quebrar o modal */
+  border-radius: 20px;
+  color: #f7bb63;
+  font-size: 18px;
+
+  border: 4px solid #143750;
+
+  overflow-y: auto;              /* ← AGORA SCROLLA POR DENTRO */
+  overflow-x: hidden;
+  min-height: 0;                 /* ← impede que empurre o modal */
+}
+
+/* BOTÃO CONTATAR ONG */
+.contactBtn {
+  margin-top: 30px;
+  background: #0B5ED7;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 600;
+}

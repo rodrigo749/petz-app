@@ -5,64 +5,68 @@
   padding: 40px 0;
 }
 
-
 .cards-wrapper-container {
   width: 95%;
-  max-width: 1300px;
+  max-width: 1400px;
   margin: 0 auto;
   background: #ffffff;
   border-radius: 40px;
-  padding: 40px 20px;
+  padding: 20px 20px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
 }
 
-
+/* Título */
 .titulo {
-  font-size: 28px;
-  font-weight: bold;
-  color: #ffffff;
-  background-color: #254d6b;
-  border: 5px solid #143750;
-  padding: 5px 20px;
-  border-radius: 0;
+  background-color: #25455d;
+  color: #FFFFFF;
+  font-size: 20px;
+  font-weight: 700;
+
+  padding: 7px 550px;
+  border-radius: 50px;
+
   text-align: center;
-  display: block;
   width: fit-content;
-  margin: 0 auto 30px auto;
+  margin: 0 auto 50px auto;
+
+  border: 5px solid #0E2A45;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
-
+/* Grid dos cards */
 .grid-pets {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
   gap: 10px;
-  justify-items: center; /* centraliza os cards em cada coluna */
+  justify-items: center;
 }
 
-
+/* CARD HORIZONTAL */
 .card-pet {
   background: #254b6b;
   border-radius: 16px;
   padding: 15px;
-  display: flex;
-  gap: 12px;
-  position: relative;
+
+  display: flex;                  /* card horizontal */
+  flex-direction: row;            /* garante imagem à esquerda */
+  gap: 14px;
+
   color: white;
 
   width: 100%;
-  max-width: 360px;   /* todos com a mesma largura */
-  height: 190px;      /* todos com a mesma altura */
+  max-width: 500px;
+  min-height: 250px;
   box-sizing: border-box;
-  align-items: flex-start;
+  position: relative; 
 }
 
-
+/* Imagem do card */
 .card-image-wrapper {
-  width: 130px;
-  height: 160px;
+  width: 150px;
+  height: 180px;
   border-radius: 12px;
   overflow: hidden;
-  flex-shrink: 0;    
+  flex-shrink: 0;
 }
 
 .card-image {
@@ -71,24 +75,32 @@
   object-fit: cover;
 }
 
+/* Coluna à direita (textos + botão) */
+.content-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;   /* textos em cima, botão embaixo */
+  flex: 1;
+ align-items: center;
+}
+
+/* Caixa branca de textos */
 .card-text-box {
+  width: 100%;
   background: white;
   border-radius: 12px;
-  padding: 6px 10px;
+  padding: 12px;
   color: #0f2a3d;
 
-  flex: 1;
-  height: 160px;   
-  width: 170px;
-  max-width: none;
-  flex: none;       /* mesma altura em todos */
+  height: 180px;        
   box-sizing: border-box;
-  overflow: hidden;       /* impede o texto de estourar o card */
 
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  overflow: hidden;     /* evita estourar se o texto for grande */
 }
+
 
 .card-text-box h3 {
   font-size: 16px;
@@ -103,25 +115,30 @@
 }
 
 
-.icone-casa-circle {
-  position: absolute;
-  top: 10px;
-  right: 10px;
+.btn-adotar {
+  background-color: #024b91;
+  color: white;
+  border: 2px solid #3e8abf;
 
-  width: 30px;
-  height: 30px;
 
-  background: white;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding: 8px 26px;
+  border-radius: 24px;
 
-  z-index: 5;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+
+  position: absolute;            /* botão agora é posicionado no card */
+  bottom: 10px;                  /* distância do rodapé */
+  left: 50%;                     /* centraliza */
+  transform: translateX(-50%);   /* corrige para central exato */
+
+  transition: background-color 0.2s;
 }
 
-.icone-casa {
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
+.btn-adotar:hover {
+  background-color: #e4a34e;
+   border: 2px solid #ee9530;  
 }
+
+
