@@ -43,11 +43,9 @@ export default function ApoiarPage() {
                 <img src={ong.imagem} className={styles['card-image']} alt={ong.nome} />
               </div>
               <div className={styles['card-text-box']}>
-                  <p><strong>Descrição:</strong> {ong.descricao}</p>
+                  <p><strong><span className={styles.descricao}>Descrição:</span></strong> {ong.descricao}</p>
 
-                <div className={styles['apoiar-row']}>
-                  <button className={styles['apoiar-btn']} onClick={() => handleApoiar(ong)}>Apoiar</button>
-                </div>
+
               </div>
 
             </div>

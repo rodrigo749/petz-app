@@ -6,7 +6,8 @@
     "genero": "feminino",
     "idade": "2 aninhos",
     "descricao": "pet peludo.",
-    "imagem": ""
+    "imagem": "",
+    "status": "adocao"
   },
   {
     "id": 2,
@@ -15,7 +16,8 @@
     "genero": "Macho",
     "idade": "1 ano",
     "descricao": "Visto pela última vez próximo ao senac na avenida vicente simões.",
-    "imagem": "/uploads/caramelo02.jpg"
+    "imagem": "/uploads/caramelo02.jpg",
+    "status": "perdido"
   },
   {
     "id": 3,
@@ -24,15 +26,77 @@
     "genero": "Macho",
     "idade": "2 anos",
     "descricao": "Esta com uma coleira azul.",
-    "imagem": "/uploads/pet05.jpg"
+    "imagem": "/uploads/pet05.jpg",
+    "status": "perdido"
   },
   {
     "id": 4,
-    "nome": "",
-    "raca": "",
-    "genero": "",
-    "idade": "",
-    "descricao": "",
-    "imagem": ""
+    "nome": "Jonas",
+    "raca": "Marchador",
+    "genero": "Macho",
+    "idade": "3 anos",
+    "descricao": "Muito energético e amigável. Precisa de espaço para correr.",
+    "imagem": "",
+    "status": "adocao"
+  },
+  {
+    "id": 5,
+    "nome": "Luna",
+    "raca": "Siamês",
+    "genero": "Fêmea",
+    "idade": "3 anos",
+    "descricao": "Gatinha dócil, castrada e muito carinhosa. Ama colo.",
+    "imagem": "/uploads/luna01.jpg",
+    "status": "adocao"
+  },
+  {
+    "id": 6,
+    "nome": "Thor",
+    "raca": "Husky Siberiano",
+    "genero": "Macho",
+    "idade": "4 anos",
+    "descricao": "Muito energético e amigável. Precisa de espaço para correr.",
+    "imagem": "/uploads/thorhusky.jpg",
+    "status": "adocao"
+  },
+  {
+    "id": 7,
+    "nome": "Bolota",
+    "raca": "Pug",
+    "genero": "Fêmea",
+    "idade": "1 ano e 6 meses",
+    "descricao": "Desapareceu no bairro Jardim Paraíso. Atende pelo nome Bolota.",
+    "imagem": "/uploads/bolotapug.jpg",
+    "status": "perdido"
+  },
+  {
+    "id": 8,
+    "nome": "Rex",
+    "raca": "Pastor Alemão",
+    "genero": "Macho",
+    "idade": "5 anos",
+    "descricao": "Cão de grande porte, muito dócil. Está disponível para adoção responsável.",
+    "imagem": "/uploads/rexpastor.jpg",
+    "status": "adocao"
+  },
+  {
+    "id": 9,
+    "nome": "Nina",
+    "raca": "Sem raça definida",
+    "genero": "Fêmea",
+    "idade": "7 meses",
+    "descricao": "Filhote sociável e brincalhona. Perdeu-se na região do centro.",
+    "imagem": "/uploads/ninapet.jpg",
+    "status": "perdido"
+  },
+  {
+    "id": 10,
+    "nome": "Toby",
+    "raca": "Beagle",
+    "genero": "Macho",
+    "idade": "3 anos",
+    "descricao": "Muito educado e obediente. Ideal para famílias com crianças.",
+    "imagem": "/uploads/tobybeagle.jpg",
+    "status": "adocao"
   }
 ]
