@@ -19,19 +19,20 @@
 
 
 .titulo {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: bold;
   color: #ffffff;
   background-color: #254d6b;
   border: 5px solid #143750;
   padding: 5px 20px;
-  border-radius: 0;
+  border-radius: 50;
   text-align: center;
   display: block;
-  width: fit-content;
+  width: 1400px;
   margin: 0 auto 30px auto;
+  width: 100%;
+  top: 70px;
 }
-
 
 .grid-ongs {
   display: grid;
@@ -49,7 +50,6 @@
   border-style: solid;
   border-width: 2px;
   padding: 15px;
-  display: flex;
   gap: 12px;
   position: relative;
   color: white;
@@ -57,36 +57,44 @@
   max-width: 500px;   /* todos com a mesma largura */
   height: 290px;      /* mais alto para descrição */
   box-sizing: border-box;
-  align-items: flex-start;
+  display: flex;
+  flex-direction: row;   /* default: empilha horizontalmente */
+  justify-content: center; /* alinha horizontalmente: flex-start, center, flex-end, space-between */
+  align-items: flex-start;     /* alinha verticalmente: flex-start, center, flex-end */
 }
 
 .card-image-wrapper {
-  width: 190px;
-  height: 120px;
-  border-radius: 12px;
-  overflow: hidden;
+  position: relative;
+  width: 140px;
+  height: 140px;
+  border-radius: 0px;
+  border-color: black;
+  border-width: 1;
+  border-style: solid;
   flex-shrink: 0; 
+  top: 17%;
+  left: 0%;
 }
+
+
 
 
 .card-image {
-  width: 80%;
-  height: 80%;
-  object-fit: contain;
-  margin-left: 80px;
-  margin-top: 35px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 
+
 .card-text-box {
-  margin-top: 10px;   /* empurra para baixo */
-  margin-left: -25px;   /* empurra para a direita */
-  background: #7790a2;
+  background: none;
   border-radius: 12px;
   padding: 10px 12px;
   color: white;
   position: relative;
-  margin-top: 50px;
+  top: 27px;
+  left: 40px;
 
   flex: 1;
   height: 200px;   
@@ -95,73 +103,61 @@
   flex: none;       /* mesma altura em todos */
   box-sizing: border-box;
   overflow: hidden;       /* impede o texto de estourar o card */
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  font-size: 17px;
 }
 
 .card-title {
-  width: 100%;          /* ocupa toda a largura da caixa */
-  display: flex;         /* permite centralizar */
-  justify-content: center; /* centraliza horizontalmente */
+  position: absolute;
+  top: 7%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0 10px; /* um pouco de espaçamento nas laterais */
+  box-sizing: border-box;
 }
 
 .card-title h3 {
-  margin: 10px;             /* remove margens */
-  font-size: 18px;
+  position: relative;
+  margin: 0;             /* remove margens */
+  font-size: 21px;
   font-weight: bold;
   color: #ffb74d;
-  margin-top: 100px;
   text-align: center;  /* centraliza horizontalmente */
-  margin: 0 0 6px 0;
-  margin-left: 50px;
   white-space: nowrap;   /* força o texto a ficar em uma linha */
   overflow: hidden;      /* opcional: esconde o excesso se não couber */
   text-overflow: ellipsis; /* opcional: coloca "..." se cortar */
-  margin-right: -402px;
+  max-width: 100%;
+  flex-shrink: 1;
+  padding: 0;
 }
 
 
 
-.apoiar-btn {
+.apoiar-btn {  
+  position: absolute;
+  top: 83%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background: linear-gradient(180deg,#0d66a6,#0a4f86);
   color: white;
   border: none;
   border-radius: 999px;
-  padding: 10px 22px;
-  font-weight: 700;
+  padding: 5px 70px;
+  font-weight: 900;
   cursor: pointer;
   display: flex;
   gap: 12px;
   align-items: center;
   justify-content: center;
-  margin-top: 210px;
+  border-color: #274b65;
+  border-style: solid;
+  border-width: 4px;
 }
 
-.icone-casa-circle {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-
-  width: 30px;
-  height: 30px;
-
-  background: white;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  z-index: 5;
-}
-
-.icone-casa {
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
-}
 
 .descricao {
   color: #ffb74d;
+  font-size: 17px;
 }
