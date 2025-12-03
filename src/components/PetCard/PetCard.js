@@ -1,12 +1,13 @@
-import styles from "@/app/pets-para-adocao/petsparaadocao.module.css";
+import styles from './pet-card.module.css'
+
 
 export default function PetCard({ pet }) {
   return (
     <div className={styles["card-pet"]}>
-      
+
       <div className={styles["card-image-wrapper"]}>
         <img
-          src={pet.imagem || "/images/default.png"} className={styles["card-image"]} 
+          src={pet.imagem || "/images/default.png"} className={styles["card-image"]}
         />
       </div>
 
@@ -22,6 +23,13 @@ export default function PetCard({ pet }) {
       <div className={styles["icone-casa-circle"]}>
         <img src="/images/icone-casa.png" className={styles["icone-casa"]} />
       </div>
+      
+       {/* Se os children existirem, renderiza o bloco de ações */}
+      {children && (
+        <div className={styles["card-actions"]}>
+          {children}
+        </div>
+      )}
 
     </div>
   );

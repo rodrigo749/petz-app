@@ -52,7 +52,7 @@
 
   width: 100%;
   max-width: 360px;   /* todos com a mesma largura */
-  height: 190px;      /* todos com a mesma altura */
+  height: 220px;      /* todos com a mesma altura */
   box-sizing: border-box;
   align-items: flex-start;
 }
@@ -126,3 +126,19 @@
   height: 20px;
   object-fit: contain;
 }
+
+.ver-button {
+  margin-top: 10px;
+  width: auto;
+  background-color: #254b6b;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
