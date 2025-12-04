@@ -1,3 +1,6 @@
+/* ===========================
+   OVERLAY E POP-UP
+   =========================== */
 .overlay {
   position: fixed;
   top: 0;
@@ -11,91 +14,153 @@
   z-index: 9999;
 }
 
-/* POP-UP FIXO */
 .modal {
   background: #ffffff;
   border-radius: 22px;
-  padding: 40px;                /* padding reduzido – antes estava exagerado */
+  padding: 40px;
   width: 1500px;
   max-width: 95%;
-  height: 700px;                /* ← ALTURA FIXA DO POP-UP */
+  height: 700px;
   box-shadow: 0 0 25px rgba(0,0,0,0.25);
-  overflow: hidden;             /* impede o modal de crescer */
-
+  overflow: hidden;
   border: 4px solid #ecad5b;
 
   display: flex;
-  flex-direction: column;       /* permite que modalContent ocupe o espaço restante */
+  flex-direction: column;
 }
 
-/* ÁREA INTERNA DO MODAL */
 .modalContent {
   display: flex;
   gap: 20px;
-  flex: 0.9;                    /* ocupa todo o espaço do modal */
-  min-height: 0;                /* ← ESSENCIAL! permite scroll interno nos filhos */
+  height: 100%;
 }
 
-/* IMAGEM */
+/* ===========================
+   COLUNA DA IMAGEM
+   =========================== */
 .imageBox {
-  flex: 0.5;
+  flex: 0.9;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 0;
 }
 
 .imageBox img {
   width: 100%;
-  height: 100%;
-  max-height: 400px;
+  max-height: 700px;
   object-fit: cover;
   border-radius: 20px;
 }
 
 .petName {
   margin-top: 15px;
-  padding: 25px 150px;             
-  
-  background-color: #024b91; 
-  color: #f7bb63;               
-  
+  padding: 25px 150px;
+  background-color: #024b91;
+  color: #f7bb63;
   font-size: 40px;
   font-weight: 700;
   text-align: center;
-
-  border-radius: 20px;              /* arredondamento */
-  border: 3px solid #143750; 
-
-  display: inline-block;            /* mantém a largura apenas do conteúdo */
-}
-
-
-/* INFORMAÇÕES DO PET */
-.infoBox {
-  flex: 1.2;
-  background: #7a8fa7;
-  padding: 30px;                 /* pode aumentar sem quebrar o modal */
   border-radius: 20px;
-  color: #f7bb63;
-  font-size: 18px;
-
-  border: 4px solid #143750;
-
-  overflow-y: auto;              /* ← AGORA SCROLLA POR DENTRO */
-  overflow-x: hidden;
-  min-height: 0;                 /* ← impede que empurre o modal */
+  border: 3px solid #143750;
 }
 
-/* BOTÃO CONTATAR ONG */
+/* ===========================
+   COLUNA DA INFOBOX
+   =========================== */
+.infoBox {
+  flex: 1.7;
+  background: #7a8fa7;
+  padding: 40px;
+  border-radius: 20px;
+  border: 4px solid #143750;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* COLUNAS LADO A LADO */
+.infoColumns {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* COLUNA 1 E 2 (TEXTO DE INFOS) */
+.infoColumns p {
+  font-size: 22px;
+  color: #ffffff;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.infoColumns strong {
+  color: #f7bb63;
+  font-weight: 700;
+}
+
+
+.infoGroup {
+  width: 45%;
+}
+
+.respEndGroup {
+  width: 45%;
+}
+
+/* ===========================
+   DESCRIÇÃO
+   =========================== */
+.descriptionBox {
+  margin-top: 110px;
+  background: #f3f7fb;
+  border-radius: 26px;
+  width: 100%;
+  padding: 25px;
+  height: 200px;
+  border: 3px solid #143750;
+  overflow-y: auto;
+}
+
+.descLabel {
+  font-size: 20px;
+  font-weight: 700;
+  color: #f7bb63;
+  margin-bottom: 10px;
+  margin-top: -10px;
+}
+
+.descText {
+  color: #143750;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+/* ===========================
+   BOTÃO
+   =========================== */
 .contactBtn {
-  margin-top: 30px;
-  background: #0B5ED7;
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #024b91;
   color: white;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
+  padding: 15px 150px;
+  border: 3px solid #3e8abf;
+  border-radius: 50px;
   font-size: 18px;
   font-weight: 600;
+  cursor: pointer;
 }
+
+.pawIcon {
+  position: absolute;
+  top: 20px;       /* ajuste fino */
+  right: 10px;     /* ajuste fino */
+  width: 120px;     /* tamanho ideal */
+  height: 65px;
+  object-fit: contain;
+  z-index: 10;
+}
+

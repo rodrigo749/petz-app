@@ -10,35 +10,53 @@ export default function ModalPet({ pet, onClose }) {
   }
 
   return (
-    <div className={styles.overlay} onClick={handleBackgroundClick}>
-      <div className={styles.modal}>
+<div className={styles.overlay} onClick={handleBackgroundClick}>
+  <div className={styles.modal}>
 
-        <div className={styles.modalContent}>
+    <div className={styles.modalContent}>
 
-          {/* IMAGEM GRANDE */}
-          <div className={styles.imageBox}>
-            <img src={pet.imagem || "/images/default.png"} alt={pet.nome} />
-            <h2 className={styles.petName}>{pet.nome}</h2>
-            
-          </div>
+      {/* LADO ESQUERDO - IMAGEM */}
+      <div className={styles.imageBox}>
+        <img src={pet.imagem || "/images/default.png"} alt={pet.nome} />
+        <h2 className={styles.petName}>{pet.nome}</h2>
+      </div>
 
-          {/* INFORMAÇÕES */}
-          <div className={styles.infoBox}>
-            <p><strong>Raça:</strong> {pet.raca}</p>
-            <p><strong>Gênero:</strong> {pet.genero}</p>
-            <p><strong>Idade:</strong> {pet.idade}</p>
-            <p><strong>Descrição:</strong> {pet.descricao}</p>
+      {/* LADO DIREITO - CAIXA AZUL */}
+      <div className={styles.infoBox}>
 
-            <button className={styles.contactBtn}>
-              Contatar ONG
-            </button>
-          </div>
+      <img
+        src="/images/patinhabranca.png"
+        alt="patinha"
+        className={styles.pawIcon}
+      />
 
+      <div className={styles.infoColumns}>
+
+        <div className={styles.infoGroup}>
+          <p><strong>Raça:</strong> {pet.raca}</p>
+          <p><strong>Gênero:</strong> {pet.genero}</p>
+          <p><strong>Idade:</strong> {pet.idade}</p>
         </div>
 
-        
+        <div className={styles.respEndGroup}> 
+          <p><strong>Responsável:</strong> {pet.responsavel}</p>
+          <p><strong>Endereço:</strong> {pet.endereco}</p>
+        </div>
+      </div>  
+
+        {/* DESCRIÇÃO */}
+        <div className={styles.descriptionBox}>
+          <p className={styles.descLabel}>Descrição:</p>
+          <p className={styles.descText}>{pet.descricao}</p>
+        </div>
+
+        {/* BOTÃO */}
+        <button className={styles.contactBtn}>Contatar ONG</button>
 
       </div>
     </div>
+  </div>
+</div>
+
   );
 }
