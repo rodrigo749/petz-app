@@ -17,7 +17,6 @@
 
 /* Título */
 .titulo {
-<<<<<<< HEAD
   background-color: #25455d;
   color: #FFFFFF;
   font-size: 20px;
@@ -32,19 +31,6 @@
 
   border: 5px solid #0E2A45;
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-=======
-  font-size: 24px;
-  font-weight: bold;
-  color: #ffffff;
-  background-color: #254d6b;
-  border: 5px solid #143750;
-  padding: 5px 20px;
-  border-radius: 50;
-  text-align: center;
-  display: block;
-  width: 1250px;
-  margin: 0 auto 30px auto;
->>>>>>> d271b55a75acd7df69c07698c2329f97e26d57c9
 }
 
 /* Grid dos cards */
