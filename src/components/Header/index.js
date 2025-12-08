@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
@@ -64,6 +64,24 @@ export default function Header() {
               )}
             </div>
           ))}
+        </div>
+
+        {/* Profile avatar (desktop) */}
+        <div className={styles.profileWrap}>
+          <Link href="/perfil-usuario" className={styles.avatarLink}>
+            {/** If you store an avatar URL in localStorage.usuarioLogado.avatar it will be used. Otherwise show initials or an icon. **/}
+            {false ? (
+              <></>
+            ) : (
+              <span className={styles.avatarIcon} aria-hidden>
+                <img
+                  src="/images/Avatar.png"
+                  alt="Perfil"
+                  className={styles.avatarImage}
+                />
+              </span>
+            )}
+          </Link>
         </div>
 
         <button
