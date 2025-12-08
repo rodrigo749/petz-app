@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import styles from "./perdidos.module.css";
+import styles from "./encontrados.module.css";
 
-export default function CadastroPerdidos() {
+export default function Encontrados() {
 
   const [recompensa, setRecompensa] = useState(0);
 
@@ -54,7 +54,7 @@ export default function CadastroPerdidos() {
         {/* COLUNA DIREITA */}
         <section className={styles.colDireita}>
           <div className={styles.tituloArea}>
-            <h2 className={styles.tituloCadastro}>Cadastrar Pet Perdido</h2>
+            <h2 className={styles.tituloCadastro}>Editar Pet Perdido</h2>
             <img src="/images/homepet.png" className={styles.iconHome} />
           </div>
 
@@ -94,7 +94,10 @@ export default function CadastroPerdidos() {
               </div>
             </div>
 
-            <button className={styles.btnCadastrar}>Cadastrar</button>
+            <div className={styles.actionsRow}>
+              <button type="button" className={styles.btnEditar}>Editar</button>
+              <button type="button" className={styles.btnExcluir}>Excluir</button>
+            </div>
           </form>
         </section>
       </div>
