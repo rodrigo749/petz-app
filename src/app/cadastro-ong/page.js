@@ -54,9 +54,79 @@
     const handleSubmit = (e) => {
       e.preventDefault()
       setError('')
-      // salvar/validar...
-      router.push('/login/ong')
+      
+      if (!nome || !email || !telefone || !celular || !senha || !cnpj || !rua || !numero || !cidade || !estado || !cep) {
+        setError('Por favor, preencha todos os campos obrigatórios.')
+        return
+      }
+
+      const ongs = JSON.parse(localStorage.getItem('ongs') || '[]')
+      const ongExistente = ongs.find(o => o.cnpj === cnpj || o.email === email)
+      if (ongExistente) {
+        setError('ONG já cadastrada com este CNPJ ou email.')
+        return
+      }
+
+      const novaOng = {
+        nome,
+        email,
+        telefone,
+        celular,
+        senha,
+        cnpj,
+        cep,
+        rua,
+        numero,
+        complemento,
+        cidade,
+        estado,
+        HorarioFunc1,
+        HorarioFunc2,
+        imagem,
+        tipo: 'ong'
+      }
+
+      ongs.push(novaOng)
+      localStorage.setItem('ongs', JSON.stringify(ongs))
+      localStorage.setItem('usuarioLogado', JSON.stringify(novaOng))
+      router.push('/perfil-ong')
     }
+    
+  const formatCNPJ = (value) => {
+    const digits = (value || "").replace(/\D/g, "").slice(0, 14);
+    return digits
+      .replace(/^(\d{2})(\d)/, "$1.$2")
+      .replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3")
+      .replace(/^(\d{2})\.(\d{3})\.(\d{3})(\d)/, "$1.$2.$3/$4")
+      .replace(/^(\d{2})\.(\d{3})\.(\d{3})\/(\d{4})(\d)/, "$1.$2.$3/$4-$5");
+  };
+
+  const formatCEP = (value) => {
+    const digits = (value || "").replace(/\D/g, "").slice(0, 8);
+    return digits.replace(/^(\d{5})(\d)/, "$1-$2");
+  };
+
+  const formatTelefonePadrao = (value) => {
+    const digits = (value || "").replace(/\D/g, "").slice(0, 10);
+    if (digits.length <= 2) {
+      return `(${digits}`;
+    }
+    if (digits.length <= 6) {
+      return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+    }
+    return `(${digits.slice(0, 2)}) ${digits.slice(2, 6)}-${digits.slice(6)}`;
+  };
+
+  const formatCelular = (value) => {
+    const digits = (value || "").replace(/\D/g, "").slice(0, 11);
+    if (digits.length <= 2) {
+      return `(${digits}`;
+    }
+    if (digits.length <= 7) {
+      return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+    }
+    return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+  };
 
 return (
   <div className={styles.container}>
@@ -93,8 +163,9 @@ return (
                <input
                  className={styles.input}
                  type="tel"
+                 inputMode="numeric"
                  value={telefone}
-                 onChange={(e) => setTelefone(e.target.value)}
+                 onChange={(e) => setTelefone(formatTelefonePadrao(e.target.value))}
                  placeholder="(31) 0000-0000"
                  required
                />
@@ -104,8 +175,9 @@ return (
                <input
                  className={styles.input}
                  type="tel"
+                 inputMode="numeric"
                  value={celular}
-                 onChange={(e) => setCelular(e.target.value)}
+                 onChange={(e) => setCelular(formatCelular(e.target.value))}
                  placeholder="(31) 9 0000-0000"
                  required
                />
@@ -128,8 +200,9 @@ return (
               <input
                 className={styles.input}
                 type="text"
+                inputMode="numeric"
                 value={cnpj}
-                onChange={(e) => setCnpj(e.target.value)}
+                onChange={(e) => setCnpj(formatCNPJ(e.target.value))}
                 placeholder="00.000.000/0000-00"
                 required
               />
@@ -212,8 +285,9 @@ return (
                   <input
                     className={styles.input}
                     type="text"
+                    inputMode="numeric"
                     value={cep}
-                    onChange={(e) => setCep(e.target.value)}
+                    onChange={(e) => setCep(formatCEP(e.target.value))}
                     placeholder="00000-000"
                     required
                   />

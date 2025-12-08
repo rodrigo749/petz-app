@@ -6,7 +6,6 @@ export const NAV_LINKS = [
     subLinks: [
       { label: "ONG", href: "/login-ong" },
       { label: "Usuário", href: "/login-usuario" },
-      
     ],
   },
   {
@@ -23,8 +22,8 @@ export const NAV_LINKS = [
     label: "Pets-perdidos ",
     href: "/perdidos/cadastrarperdidos",
     subLinks: [
-  { label: "Pets Perdidos", href: "/perdidos/cadastrarperdidos" },
-  { label: "Pets Encontrados", href: "/perdidos/encontrados" },
+      { label: "Pets Perdidos", href: "/perdidos/cadastrarperdidos" },
+      { label: "Pets Encontrados", href: "/perdidos/encontrados" },
     ],
   },
   { id: "apoiar", label: "Apoiar", href: "/apoiar" },

@@ -40,17 +40,21 @@ export default function CadastroPage() {
       return;
     }
 
-    usuarios.push({
+    const novoUsuario = {
       nome: formData.nome,
       cpf: formData.cpf,
       email: formData.email,
       telefone: formData.telefone,
       password: formData.password,
-      imagem: formData.imagem
-    });
+      imagem: formData.imagem,
+      tipo: "usuario"
+    };
+
+    usuarios.push(novoUsuario);
 
     localStorage.setItem("usuarios", JSON.stringify(usuarios));
-    router.push("/login");
+    localStorage.setItem("usuarioLogado", JSON.stringify(novoUsuario));
+    router.push("/perfil-usuario");
   };
 
   const formatCPF = (value) => {

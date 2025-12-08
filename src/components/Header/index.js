@@ -11,6 +11,21 @@ import styles from "./header.module.css";
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(null);
+  const [usuarioLogado, setUsuarioLogado] = useState(null);
+
+  useEffect(() => {
+    const u = JSON.parse(localStorage.getItem("usuarioLogado") || "null");
+    setUsuarioLogado(u);
+
+    // Listen for changes in localStorage (from other tabs/windows)
+    const handleStorageChange = () => {
+      const updated = JSON.parse(localStorage.getItem("usuarioLogado") || "null");
+      setUsuarioLogado(updated);
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
 
   return (
     <header className={styles.header}>
@@ -67,22 +82,30 @@ export default function Header() {
         </div>
 
         {/* Profile avatar (desktop) */}
-        <div className={styles.profileWrap}>
-          <Link href="/perfil-usuario" className={styles.avatarLink}>
-            {/** If you store an avatar URL in localStorage.usuarioLogado.avatar it will be used. Otherwise show initials or an icon. **/}
-            {false ? (
-              <></>
-            ) : (
+        {usuarioLogado && (
+          <div className={styles.profileWrap}>
+            <Link
+              href={usuarioLogado.tipo === "ong" ? "/perfil-ong" : "/perfil-usuario"}
+              className={styles.avatarLink}
+            >
               <span className={styles.avatarIcon} aria-hidden>
-                <img
-                  src="/images/Avatar.png"
-                  alt="Perfil"
-                  className={styles.avatarImage}
-                />
+                {usuarioLogado.imagem ? (
+                  <img
+                    src={usuarioLogado.imagem}
+                    alt="Perfil"
+                    className={styles.avatarImage}
+                  />
+                ) : (
+                  <img
+                    src="/images/Avatar.png"
+                    alt="Perfil padrão"
+                    className={styles.avatarImage}
+                  />
+                )}
               </span>
-            )}
-          </Link>
-        </div>
+            </Link>
+          </div>
+        )}
 
         <button
           className={styles.toggle}
