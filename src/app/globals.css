@@ -131,3 +131,12 @@ html, body {
   background-color: #244c66; /* cor do fundo do seu site */
 }
 
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+    opacity: 0; /* Torna o ícone invisível */
+    position: absolute;
+    width:70%; /* Expande a área clicável para cobrir todo o input */
+    height: 100%;
+    cursor: pointer;
+}
+

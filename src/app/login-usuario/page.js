@@ -76,8 +76,9 @@ export default function LoginPage() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder=""
-              aria-label="Senha"
+              placeholder="insira sua senha"
+              maxLength={20}
+              
             />
           </label>
         </div>

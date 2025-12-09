@@ -87,6 +87,8 @@
   width: 100%;
   font-size: 1rem;
   color: #0b3b52;
+  appearance: none;
+  
 }
 
 /* botão */
@@ -179,3 +181,5 @@
     width: 100%;
   }
 }
+
+
