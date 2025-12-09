@@ -75,6 +75,7 @@
   position: relative;
   width: 100%;
   margin-top: 20px;
+  height: 220px;  
 }
 
 .iconeDescricao {
@@ -88,7 +89,7 @@
 
 .descricaoTextarea {
   width: 100%;
-  min-height: 150px;
+  min-height: 250px;
   padding: 20px 20px 20px 60px; /* deixa espaço para a patinha */
   border-radius: 25px;
   border: 4px solid #0f3b61;
