@@ -13,7 +13,8 @@ export default function CadastroPage() {
     email: "",
     telefone:"",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
+    imagem: ""
   });
   const [error, setError] = useState("");
 
@@ -43,7 +44,9 @@ export default function CadastroPage() {
       nome: formData.nome,
       cpf: formData.cpf,
       email: formData.email,
-      password: formData.password
+      telefone: formData.telefone,
+      password: formData.password,
+      imagem: formData.imagem
     });
 
     localStorage.setItem("usuarios", JSON.stringify(usuarios));
@@ -83,6 +86,20 @@ export default function CadastroPage() {
     }
     setFormData(prev => ({ ...prev, [field]: value }));
   };
+
+  const handleImageUpload = (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onloadend = () => {
+    setFormData(prev => ({
+      ...prev,
+      imagem: reader.result // Base64
+    }));
+  };
+  reader.readAsDataURL(file);
+};
 
   return (
     <div className={styles.container}>
@@ -187,6 +204,29 @@ export default function CadastroPage() {
               onChange={(e) => handleChange("confirmPassword", e.target.value)}
               placeholder="Confirme sua senha"
               aria-label="Confirmar senha"
+            />
+          </label>
+        </div>
+        <div className={styles.uploadWrapper}>
+          <label className={styles.uploadBox}>
+            {formData.imagem ? (
+              <img
+                src={formData.imagem}
+                alt="Preview"
+                className={styles.uploadPreview}
+              />
+            ) : (
+              <>
+                <span className={styles.uploadIcon}>＋</span>
+                <span className={styles.uploadText}>Adicionar foto de perfil</span>
+              </>
+            )}
+        
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+              hidden
             />
           </label>
         </div>
