@@ -2,9 +2,8 @@
   width: 100%;
   min-height: 100vh;
   background-color: #274b65;
-  padding: 40px 0;
-}
 
+}
 
 .cards-wrapper-container {
   width: 100%;
@@ -16,6 +15,9 @@
   padding: 40px 20px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
 }
+
+
+
 
 
 .titulo {
@@ -65,15 +67,15 @@
 
 .card-image-wrapper {
   position: relative;
-  width: 140px;
-  height: 140px;
+  width: 135px;
+  height: 135px;
   border-radius: 0px;
   border-color: black;
   border-width: 1;
   border-style: solid;
   flex-shrink: 0; 
   top: 17%;
-  left: 0%;
+  left: 2%;
 }
 
 
@@ -95,10 +97,11 @@
   position: relative;
   top: 27px;
   left: 40px;
+ 
 
   flex: 1;
-  height: 200px;   
-  width: 250px;
+  height: 190px;   
+  width: 260px;
   max-width: none;
   flex: none;       /* mesma altura em todos */
   box-sizing: border-box;
@@ -106,8 +109,10 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  font-size: 17px;
+  font-size: 18px;
+
 }
+
 
 .card-title {
   position: absolute;
@@ -135,6 +140,7 @@
 
 
 
+
 .apoiar-btn {  
   position: absolute;
   top: 83%;
@@ -144,7 +150,7 @@
   color: white;
   border: none;
   border-radius: 999px;
-  padding: 5px 70px;
+  padding: 5px 45px;
   font-weight: 900;
   cursor: pointer;
   display: flex;

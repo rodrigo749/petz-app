@@ -36,7 +36,7 @@ export default function ApoiarPage() {
           {ongs.map(ong => (
             <div className={styles['card-ong']} key={ong.id}>
                 <div className={styles['card-title']}><h3>{ong.nome}</h3></div>
-                <div><button className={styles['apoiar-btn']} onClick={() => handleApoiar(ong)}>Apoiar</button>
+                <div><button className={styles['apoiar-btn']} onClick={() => handleApoiar(ong)}>Apoiar <img src="/images/icone-moedas.png" alt="moeda" style={{ width: '24px', height: '24px'}} /></button>
                 </div>
         
               <div className={styles['card-image-wrapper']}>
