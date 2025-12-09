@@ -57,6 +57,29 @@
       // salvar/validar...
       router.push('/login/ong')
     }
+    const buscarCep = async (valorCep) => {
+  const cepLimpo = valorCep.replace(/\D/g, '');
+
+  // só busca quando tiver 8 números
+  if (cepLimpo.length !== 8) return;
+
+  try {
+    const response = await fetch(`https://viacep.com.br/ws/${cepLimpo}/json/`);
+    const data = await response.json();
+
+    if (data.erro) {
+      setError('CEP não encontrado');
+      return;
+    }
+
+    setRua(data.logradouro || '');
+    setCidade(data.localidade || '');
+    setEstado(data.uf || '');
+
+  } catch (err) {
+    setError('Erro ao buscar o CEP');
+  }
+};
 
 return (
   <div className={styles.container}>
@@ -208,17 +231,19 @@ return (
             />
           </Field>
           <div style={{display: 'flex', gap: '16px'}}> 
-                <Field label="CEP" required className={styles.half}>
+               <Field label="CEP" required className={styles.half}>
                   <input
                     className={styles.input}
                     type="text"
                     value={cep}
-                    onChange={(e) => setCep(e.target.value)}
+                    onChange={(e) => {
+                      setCep(e.target.value);
+                      buscarCep(e.target.value);
+                    }}
                     placeholder="00000-000"
                     required
                   />
                 </Field>
-
                 <Field label="Número" required className={styles.half}>
                   <input
                     className={styles.input}
