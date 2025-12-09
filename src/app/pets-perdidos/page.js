@@ -2,17 +2,17 @@
 
 import { useEffect, useState } from "react";
 import PetCard from "@/components/PetCard/PetCard";
-import styles from "./petsparaadocao.module.css";
+import styles from "./pets-perdidos.module.css";
 
-export default function PetsParaAdocao() {
+export default function PetsPerdidos() {
   const [pets, setPets] = useState([]);
 
   async function carregarPets() {
     const res = await fetch("/api/pets");
     const data = await res.json();
-     //Filtrar apenas pets para adoção
-    const petsAdocao = data.filter((pet) => pet.status === "adocao");
-    setPets(petsAdocao);
+    // Filtrar apenas pets perdidos
+    const petsPerdidos = data.filter((pet) => pet.status === "perdido");
+    setPets(petsPerdidos);
   }
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function PetsParaAdocao() {
   return (
     <main className={styles["pets-page"]}>
       <div className={styles["cards-wrapper-container"]}>
-        <h1 className={styles.titulo}>Pets para Adoção</h1>
+        <h1 className={styles.titulo}>Pets Perdidos</h1>
 
         <section className={styles["grid-pets"]}>
           {pets.length > 0 ? (
@@ -30,7 +30,7 @@ export default function PetsParaAdocao() {
               <PetCard key={pet.id} pet={pet} />
             ))
           ) : (
-            <p>Nenhum pet disponível para adoção no momento.</p>
+            <p>Nenhum pet perdido no momento.</p>
           )}
         </section>
       </div>

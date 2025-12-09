@@ -1,0 +1,279 @@
+/* CONTAINER GERAL */
+.cadastroPetContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: #284c65;
+  padding: 50px 20px;
+}
+
+/* CARD CENTRAL COM 2 CONTAINERS */
+.cadastroWrapper {
+  width: 100%;
+  max-width: 1750px;
+  background:#284c65;
+  border-radius: 10px;
+  padding: 40px 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+}
+
+/* Visual grouping: left (upload+descrição) and right (form) cards */
+.colEsquerda,
+.colDireita {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(8, 35, 63, 0.06);
+}
+
+.colEsquerda {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.colDireita {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* COLUNA ESQUERDA */
+.colEsquerda {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* UPLOAD */
+.uploadBox {
+  width: 220px;
+  height: 220px;
+  background: #5a7c99;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  font-weight: 880;
+  text-align: center;
+
+}
+.iconeAddImg {
+  width: 190px;
+  margin-bottom: 0px;
+ 
+}
+
+/* wrapper que contém a caixa de upload - centraliza horizontalmente */
+.uploadImagem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.uploadImagem label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* DESCRIÇÃO BOX */
+.descricaoBox {
+  border-radius: 20px;
+  border: 6px solid #254460;
+  padding: 15px;
+}
+.descLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+}
+.descIcon {
+  width: 24px;
+  opacity: 0.8;
+}
+.descricaoTextarea {
+  width: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  min-height: 130px;
+  font-size: 15px;
+  padding-top: 10px;
+}
+
+/* COLUNA DIREITA */
+.colDireita {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.tituloArea {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+.tituloCadastro {
+  font-size: 33px;
+  color: #285a78;
+}
+.iconHome {
+  width: 40px;
+}
+
+/* FORM CAMPOS */
+.campo {
+  position: relative;
+  margin-bottom: 8px; /* fallback spacing between fields */
+}
+.iconeInput {
+  width: 24px;
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.campo input {
+  width: 100%;
+  height: 48px;
+  padding-left: 50px;
+  border-radius: 30px;
+  border: 2px solid #254460;
+  outline: none;
+  font-size: 16px;
+  gap: 20px;
+}
+
+/* RECOMPENSA */
+.recompensaBox {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.recompensaField {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+.recompensaLabel {
+  font-weight: 700;
+  color: #254460;
+  font-size: 14px;
+  text-align: center;
+  width: 100%;
+}
+.recompensaControl, .recompensaRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  justify-content: center;
+}
+.iconeRecompensa {
+  width: 30px;
+}
+.slider {
+  width: 100%;
+  accent-color: red;
+}
+.recompensaWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.recompensaLabelWrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.formCadastro {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.valorRecompensa {
+  font-weight: bold;
+  color: red;
+}
+
+/* BOTÃO */
+.btnCadastrar {
+  margin-top: 10px;
+  height: 48px;
+  width: 100%;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  background: #0053a4;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.formCadastro .btnCadastrar {
+  width: 100%;
+  margin: 16px auto 0 auto;
+  display: block;
+}
+
+/* ACTIONS ROW */
+.actionsRow {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+.btnEditar, .btnExcluir {
+  flex: 1 1 48%;
+  height: 46px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 16px;
+}
+.btnEditar {
+  background: #28a745; /* green */
+  color: #fff;
+}
+.btnExcluir {
+  background: #dc3545; /* red */
+  color: #fff;
+}
+
+/* GENDER BUTTONS */
+.genderRow {
+  display: flex;
+  gap: 8px;
+}
+.genderBtn {
+  flex: 1;
+  height: 44px;
+  border-radius: 22px;
+  border: 2px solid #254460;
+  background: white;
+  color: #254460;
+  font-weight: 700;
+  cursor: pointer;
+}
+.genderBtnActive {
+  background: #254460;
+  color: white;
+}
+
+/* RESPONSIVO */
+@media (max-width: 900px) {
+  .cadastroWrapper {
+    grid-template-columns: 1fr;
+  }
+}
+

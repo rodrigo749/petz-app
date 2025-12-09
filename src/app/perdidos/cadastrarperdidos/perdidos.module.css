@@ -1,0 +1,150 @@
+.cadastroPetContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 80px 20px;
+    background: #284c65;
+}
+
+/* CARD */
+.cadastroWrapper {
+    width: 100%;
+    max-width: 1200px;
+    background: #F4FEFF;
+    border-radius: 24px;
+    padding: 50px;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 50px;
+    box-shadow: 0px 4px 18px rgba(0,0,0,0.12);
+}
+
+/* Coluna esquerda */
+.colEsquerda {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Upload */
+.uploadImagem {
+    display: flex;
+    justify-content: center;
+}
+
+.uploadBox {
+    width: 260px;
+    height: 220px;
+    border-radius: 24px;
+    background: #5a7c99;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.uploadBox:hover {
+    background: #4a6c87;
+}
+
+/* Descrição */
+.descricaoBox {
+    border-radius: 24px;
+    padding: 16px;
+    border: 2px solid #254460;
+    background: #ffffff;
+}
+
+.descricaoLabel {
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.descricaoTextarea {
+    width: 100%;
+    border: none;
+    outline: none;
+    resize: none;
+    min-height: 150px;
+    font-size: 14px;
+}
+
+/* Coluna direita */
+.colDireita {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.tituloCadastro {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 8px;
+    color: #46799e;;
+    font-weight: 700;
+}
+
+/* FORM */
+.formCadastro {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Campo unificado */
+.campo {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Inputs */
+.campo input {
+    width: 100%;
+    height: 50px;
+    padding-left: 52px;
+    border-radius: 999px;
+    border: 2px solid #254460;
+    outline: none;
+    font-size: 16px;
+    background: #ffffff;
+}
+
+/* Ícone da patinha */
+.iconeInput {
+    width: 26px;
+    height: 26px;
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Ícone de upload */
+.iconeAddImg {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 8px;
+    opacity: 0.9;
+    user-select: none;
+    pointer-events: none;
+}
+
+/* Botão */
+.btnCadastrar {
+    margin-top: 12px;
+    height: 46px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 16px;
+    background: #0053a4;
+    color: #ffffff;
+}
