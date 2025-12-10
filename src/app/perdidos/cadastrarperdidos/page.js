@@ -130,7 +130,7 @@ export default function CadastrarPerdidos() {
         <section className={styles.colDireita}>
           <div className={styles.tituloArea}>
             <h2 className={styles.tituloCadastro}>Cadastrar Pet Perdido</h2>
-            <img src="/images/homepet.png" className={styles.iconHome} />
+           
           </div>
 
           <form className={styles.formCadastro} onSubmit={handleSubmit}>
