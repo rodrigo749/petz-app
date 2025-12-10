@@ -1,4 +1,4 @@
-  'use client'
+'use client'
 
   import { useState } from 'react'
   import { useRouter } from 'next/navigation'
@@ -37,9 +37,19 @@
     const [estado, setEstado] = useState('')
     const [HorarioFunc1, setHorarioFunc1] = useState('')
     const [HorarioFunc2, setHorarioFunc2] = useState('')
+    const [imagem,setImagem] = useState('')
     const [error, setError] = useState('')
 
-    
+    // adiciona função de upload que seta `imagem`
+    const handleImageUpload = (e) => {
+      const file = e.target.files && e.target.files[0]
+      if (!file) return
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        setImagem(reader.result) // Base64
+      }
+      reader.readAsDataURL(file)
+    }
 
     const handleSubmit = (e) => {
       e.preventDefault()
@@ -112,16 +122,43 @@ return (
             />
           </Field>
 
-          <Field label="CNPJ" required className={styles.half}>
-            <input
-              className={styles.input}
-              type="text"
-              value={cnpj}
-              onChange={(e) => setCnpj(e.target.value)}
-              placeholder="00.000.000/0000-00"
-              required
-            />
-          </Field>
+          {/* coloca CNPJ e upload lado a lado */}
+          <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
+            <Field label="CNPJ" required className={styles.half}>
+              <input
+                className={styles.input}
+                type="text"
+                value={cnpj}
+                onChange={(e) => setCnpj(e.target.value)}
+                placeholder="00.000.000/0000-00"
+                required
+              />
+            </Field>
+
+            <div className={styles.half}>
+              <label className={styles.uploadBox}>
+                {imagem ? (
+                  <img
+                    src={imagem}
+                    alt="Preview"
+                    className={styles.uploadPreview}
+                  />
+                ) : (
+                  <>
+                    <span className={styles.uploadIcon}>＋</span>
+                    <span className={styles.uploadText}>Adicionar foto de perfil</span>
+                  </>
+                )}
+
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  hidden
+                />
+              </label>
+            </div>
+          </div>
         </div>
 
         {/* ---- DIREITA ---- */}
@@ -194,6 +231,7 @@ return (
                 </Field>
             </div>
         </div>
+        
 
         {/* ---- BAIXO ---- */}
         <div className={styles.colBaixo}>
@@ -207,7 +245,7 @@ return (
             />
           </Field>
 
-          <aspan className={styles.separador}>até</aspan>
+          <span className={styles.separador}>até</span>  {/* corrigido de <aspan> */}
 
           <Field label="Horário de funcionamento (fim)" required className={styles.half}>
             <input
@@ -219,6 +257,8 @@ return (
             />
           </Field>
         </div>
+
+       
 
       </div>
 

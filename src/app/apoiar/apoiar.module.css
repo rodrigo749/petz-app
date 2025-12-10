@@ -45,6 +45,8 @@
 }
 
 
+
+
 .card-ong {
   background: #7790a2;
   border-radius: 16px;
@@ -70,7 +72,7 @@
   width: 135px;
   height: 135px;
   border-radius: 0px;
-  border-color: black;
+  border-color: #0d66a6;
   border-width: 1;
   border-style: solid;
   flex-shrink: 0; 
@@ -141,7 +143,7 @@
 
 
 
-.apoiar-btn {  
+.apoiar-btn {
   position: absolute;
   top: 83%;
   left: 50%;
@@ -160,10 +162,78 @@
   border-color: #274b65;
   border-style: solid;
   border-width: 4px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.apoiar-btn:hover {
+  transform: translate(-50%, -50%) scale(1.10);
+}
+
+.apoiar-btn img {
+  filter: invert(1);
 }
 
 
 .descricao {
   color: #ffb74d;
   font-size: 17px;
+}
+
+@media (max-width: 600px) {
+
+  .cards-wrapper-container {
+    padding: 20px;
+  }
+
+
+  .grid-ongs {
+    grid-template-columns: 1fr; /* só uma coluna */
+    gap: 30px;
+  }
+
+  .card-ong {
+    flex-direction: column; /* empilha imagem + texto */
+    align-items: center;
+    text-align: center;
+    height: auto; /* deixa o card crescer naturalmente */
+    padding-bottom: 60px; /* espaço pro botão */
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* imagem centralizada e menor */
+  .card-image-wrapper {
+    position: static;
+    width: 110px;
+    height: 110px;
+    margin-bottom: 15px;
+  }
+
+  /* texto ocupa toda a largura */
+  .card-text-box {
+    position: static;
+    width: 100%;
+    height: auto;
+    left: initial;
+    top: initial;
+  }
+
+  /* título centralizado e sem absolute */
+  .card-title {
+    position: static;
+    transform: none;
+    margin-bottom: 10px;
+  }
+
+  .card-title h3 {
+    white-space: normal; /* permite quebrar linha no mobile */
+    font-size: 20px;
+  }
+
+  /* botão sempre no final do card */
+  .apoiar-btn {
+    position: static;
+    margin-top: 10px;
+    transform: none;
+  }
 }
