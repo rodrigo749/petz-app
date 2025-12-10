@@ -35,20 +35,23 @@ export default function Header() {
               onMouseEnter={() => subLinks && setDropdownOpen(id)}
               onMouseLeave={() => setDropdownOpen(null)}
             >
-              <button
-                className={styles.link}
-                aria-expanded={dropdownOpen === id}
-                aria-haspopup={subLinks ? "true" : "false"}
-              >
-                {label}
-                {subLinks && (
-                  dropdownOpen === id ? (
+              {subLinks ? (
+                <button
+                  className={styles.link}
+                  aria-expanded={dropdownOpen === id}
+                  aria-haspopup={"true"}
+                >
+                  {label}
+                  {dropdownOpen === id ? (
                     <FaChevronUp size={12} className="chevron-icon" />
                   ) : (
                     <FaChevronDown size={12} className="chevron-icon" />
-                  )
-                )}
-              </button>
+                  )}
+                </button>
+              ) : (
+                <Link href={href} className={styles.link}>{label}</Link>
+              )}
+
               {subLinks && dropdownOpen === id && (
                 <div className={styles.dropdownMenu}>
                   {subLinks.map((subLink, index) => (
