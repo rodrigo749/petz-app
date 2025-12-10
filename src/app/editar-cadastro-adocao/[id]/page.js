@@ -26,7 +26,7 @@ export default function EditarCadastroAdocao() {
       try {
         if (!petId) return;
 
-        const res = await fetch("/api/pets");
+        const res = await fetch("/api/pets-adocao");
         if (!res.ok) {
           console.error("Erro ao buscar pets:", res.status);
           return;
@@ -100,7 +100,7 @@ export default function EditarCadastroAdocao() {
 
       const petAtualizado = { ...formData, imagem: imagemURL };
 
-      await fetch(`/api/pets/${petId}`, {
+      await fetch(`/api/pets-adocao/${petId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(petAtualizado),
@@ -118,7 +118,7 @@ export default function EditarCadastroAdocao() {
     if (!confirm("Tem certeza que deseja excluir este pet?")) return;
 
     try {
-      await fetch(`/api/pets/${petId}`, { method: "DELETE" });
+      await fetch(`/api/pets-adocao/${petId}`, { method: "DELETE" });
       alert("Pet excluído com sucesso!");
       router.push("/seus-pets-para-adocao");
     } catch (error) {

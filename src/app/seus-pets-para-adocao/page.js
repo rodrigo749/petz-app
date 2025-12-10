@@ -20,7 +20,7 @@ export default function SeusPetsParaAdocao() {
       }
 
       // Buscar todos os pets na API
-      const res = await fetch("/api/pets");
+      const res = await fetch("/api/pets-adocao");
       const data = await res.json();
 
       // Filtrar somente pets:

@@ -38,35 +38,5 @@
     "descricao": "Filhote sociável e brincalhona. Perdeu-se na região do centro.",
     "imagem": "/uploads/ninapet.jpg",
     "status": "perdido"
-  },
-  {
-    "id": 10,
-    "nome": "Toby",
-    "raca": "Beagle",
-    "genero": "Macho",
-    "idade": "1 ano",
-    "descricao": "Muito educado,calmo e obediente. Ideal para famílias com crianças.",
-    "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWsXRpjbyHlOuBOFHcqx-QIE_qq8BuUN3CDA&s",
-    "status": "adocao"
-  },
-  {
-    "id": 13,
-    "nome": "Mingau",
-    "raca": "Duas Cores",
-    "genero": "Macho",
-    "idade": "1 ano",
-    "descricao": "",
-    "imagem": "/uploads/mingau.png",
-    "status": "adocao"
-  },
-  {
-    "id": 11,
-    "nome": "Spike",
-    "raca": "Vira - Lata",
-    "genero": "Macho",
-    "idade": "2 anos",
-    "descricao": "Com manchas",
-    "imagem": "/uploads/Spike.png",
-    "status": "adocao"
   }
 ]

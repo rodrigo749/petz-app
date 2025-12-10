@@ -8,7 +8,7 @@ export default function PetsParaAdocao() {
   const [pets, setPets] = useState([]);
 
   async function carregarPets() {
-    const res = await fetch("/api/pets");
+    const res = await fetch("/api/pets-adocao");
     const data = await res.json();
     
     // Filtrar apenas pets para adoção
