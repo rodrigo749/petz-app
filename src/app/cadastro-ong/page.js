@@ -69,6 +69,8 @@
       // salvar/validar...
       router.push('/login/ong')
     }
+    return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+  };
 
 return (
   <div className={styles.container}>
@@ -105,8 +107,9 @@ return (
                <input
                  className={styles.input}
                  type="tel"
+                 inputMode="numeric"
                  value={telefone}
-                 onChange={(e) => setTelefone(e.target.value)}
+                 onChange={(e) => setTelefone(formatTelefonePadrao(e.target.value))}
                  placeholder="(31) 0000-0000"
                  required
                />
@@ -116,8 +119,9 @@ return (
                <input
                  className={styles.input}
                  type="tel"
+                 inputMode="numeric"
                  value={celular}
-                 onChange={(e) => setCelular(e.target.value)}
+                 onChange={(e) => setCelular(formatCelular(e.target.value))}
                  placeholder="(31) 9 0000-0000"
                  required
                />
@@ -226,8 +230,9 @@ return (
                   <input
                     className={styles.input}
                     type="text"
+                    inputMode="numeric"
                     value={cep}
-                    onChange={(e) => setCep(e.target.value)}
+                    onChange={(e) => setCep(formatCEP(e.target.value))}
                     placeholder="00000-000"
                     required
                   />
