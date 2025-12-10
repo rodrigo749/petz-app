@@ -16,57 +16,71 @@ export default function CadastroPage() {
     confirmPassword: "",
     imagem: ""
   });
+  const [imageFile, setImageFile] = useState(null);
   const [error, setError] = useState("");
-
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  setError("");
+    e.preventDefault();
+    setError("");
 
-  if (!formData.nome || !formData.cpf || !formData.email || !formData.password) {
-    setError("Por favor, preencha todos os campos.");
-    return;
-  }
-
-  if (formData.password !== formData.confirmPassword) {
-    setError("As senhas não coincidem.");
-    return;
-  }
-
-  try {
-    const payload = {
-      nome: formData.nome,
-      cpf: formData.cpf,
-      email: formData.email,
-      telefone: formData.telefone,
-      password: formData.password,
-      imagem: formData.imagem,
-      tipo: "usuario"
-    };
-
-    const res = await fetch("/api/users", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      setError(data.message || "Erro ao cadastrar");
+    if (!formData.nome || !formData.cpf || !formData.email || !formData.password) {
+      setError("Por favor, preencha todos os campos.");
       return;
     }
 
-    // salva apenas o usuário logado (opcional)
-    localStorage.setItem("usuarioLogado", JSON.stringify(data));
+    if (formData.password !== formData.confirmPassword) {
+      setError("As senhas não coincidem.");
+      return;
+    }
 
-    // vai direto para o perfil
-    router.push("/perfil-usuario");
+    try {
+      // If user selected a file, upload it first and use returned URL
+      let imagemUrl = formData.imagem;
+      if (imageFile) {
+        const fd = new FormData();
+        fd.append('file', imageFile);
+        const upRes = await fetch('/api/upload', { method: 'POST', body: fd });
+        const upData = await upRes.json();
+        if (!upRes.ok) {
+          setError(upData.error || 'Erro ao enviar imagem');
+          return;
+        }
+        imagemUrl = upData.url || imagemUrl;
+      }
 
-  } catch (error) {
-    console.error(error);
-    setError("Erro de rede. Tente novamente.");
-  }
-};
+      const payload = {
+        nome: formData.nome,
+        cpf: formData.cpf,
+        email: formData.email,
+        telefone: formData.telefone,
+        password: formData.password,
+        imagem: imagemUrl,
+        tipo: "usuario"
+      };
+
+      const res = await fetch("/api/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.message || "Erro ao cadastrar");
+        return;
+      }
+
+      // salva apenas o usuário logado (opcional)
+      localStorage.setItem("usuarioLogado", JSON.stringify(data));
+
+      // vai direto para o perfil
+      router.push("/perfil-usuario");
+
+    } catch (error) {
+      console.error(error);
+      setError("Erro de rede. Tente novamente.");
+    }
+  };
 
 
   const formatCPF = (value) => {
@@ -111,10 +125,11 @@ export default function CadastroPage() {
   reader.onloadend = () => {
     setFormData(prev => ({
       ...prev,
-      imagem: reader.result // Base64
+      imagem: reader.result // Base64 for preview
     }));
   };
   reader.readAsDataURL(file);
+  setImageFile(file);
 };
 
   return (

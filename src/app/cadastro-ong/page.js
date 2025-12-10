@@ -38,6 +38,7 @@
     const [HorarioFunc1, setHorarioFunc1] = useState('')
     const [HorarioFunc2, setHorarioFunc2] = useState('')
     const [imagem,setImagem] = useState('')
+    const [imageFile, setImageFile] = useState(null)
     const [error, setError] = useState('')
 
     // adiciona função de upload que seta `imagem`
@@ -46,9 +47,10 @@
       if (!file) return
       const reader = new FileReader()
       reader.onloadend = () => {
-        setImagem(reader.result) // Base64
+        setImagem(reader.result) // Base64 for preview
       }
       reader.readAsDataURL(file)
+      setImageFile(file)
     }
 
     const handleSubmit = async (e) => {
@@ -61,6 +63,20 @@
   }
 
   try {
+    // Upload image first if file selected, then use returned URL
+    let imagemUrl = imagem
+    if (imageFile) {
+      const fd = new FormData()
+      fd.append('file', imageFile)
+      const upRes = await fetch('/api/upload', { method: 'POST', body: fd })
+      const upData = await upRes.json()
+      if (!upRes.ok) {
+        setError(upData.error || 'Erro ao enviar imagem')
+        return
+      }
+      imagemUrl = upData.url || imagemUrl
+    }
+
     const payload = {
       nome,
       email,
@@ -76,7 +92,7 @@
       estado,
       HorarioFunc1,
       HorarioFunc2,
-      imagem,
+      imagem: imagemUrl,
       tipo: 'ong'
     }
 
