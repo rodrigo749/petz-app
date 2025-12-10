@@ -51,46 +51,62 @@
       reader.readAsDataURL(file)
     }
 
-    const handleSubmit = (e) => {
-      e.preventDefault()
-      setError('')
-      
-      if (!nome || !email || !telefone || !celular || !senha || !cnpj || !rua || !numero || !cidade || !estado || !cep) {
-        setError('Por favor, preencha todos os campos obrigatórios.')
-        return
-      }
+    const handleSubmit = async (e) => {
+  e.preventDefault()
+  setError('')
 
-      const ongs = JSON.parse(localStorage.getItem('ongs') || '[]')
-      const ongExistente = ongs.find(o => o.cnpj === cnpj || o.email === email)
-      if (ongExistente) {
-        setError('ONG já cadastrada com este CNPJ ou email.')
-        return
-      }
+  if (!nome || !email || !telefone || !celular || !senha || !cnpj || !rua || !numero || !cidade || !estado || !cep) {
+    setError('Por favor, preencha todos os campos obrigatórios.')
+    return
+  }
 
-      const novaOng = {
-        nome,
-        email,
-        telefone,
-        celular,
-        senha,
-        cnpj,
-        cep,
-        rua,
-        numero,
-        complemento,
-        cidade,
-        estado,
-        HorarioFunc1,
-        HorarioFunc2,
-        imagem,
-        tipo: 'ong'
-      }
-
-      ongs.push(novaOng)
-      localStorage.setItem('ongs', JSON.stringify(ongs))
-      localStorage.setItem('usuarioLogado', JSON.stringify(novaOng))
-      router.push('/perfil-ong')
+  try {
+    const payload = {
+      nome,
+      email,
+      telefone,
+      celular,
+      senha,
+      cnpj,
+      cep,
+      rua,
+      numero,
+      complemento,
+      cidade,
+      estado,
+      HorarioFunc1,
+      HorarioFunc2,
+      imagem,
+      tipo: 'ong'
     }
+
+    const res = await fetch('/api/ongs', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    })
+
+    const data = await res.json()
+
+    if (!res.ok) {
+      setError(data.message || 'Erro ao cadastrar ONG')
+      return
+    }
+
+    // salva apenas a ONG logada
+    localStorage.setItem('usuarioLogado', JSON.stringify(data))
+
+    // vai direto para o perfil da ONG
+    router.push('/perfil-ong')
+
+  } catch (error) {
+    console.error(error)
+    setError('Erro de rede. Tente novamente.')
+  }
+}
+
     
   const formatCNPJ = (value) => {
     const digits = (value || "").replace(/\D/g, "").slice(0, 14);
