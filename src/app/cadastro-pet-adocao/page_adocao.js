@@ -36,7 +36,7 @@ export default function CadastroAdocao() {
   const salvarPet = async (e) => {
     e.preventDefault();
 
-    let imagemURL = "";
+    let imagemURL = "/images/semfoto.jpg";
 
     if (imagemFile) {
       const imgData = new FormData();
