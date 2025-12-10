@@ -25,7 +25,6 @@ export default function CadastroPage() {
     e.preventDefault();
     setError("");
     setCpfError("");
-    
 
     if (!formData.nome || !formData.cpf || !formData.email || !formData.telefone || !formData.password) {
       setError("Por favor, preencha todos os campos.");
@@ -44,55 +43,41 @@ export default function CadastroPage() {
       return;
     }
 
-    try {
-      // If user selected a file, upload it first and use returned URL
-      let imagemUrl = formData.imagem;
-      if (imageFile) {
-        const fd = new FormData();
-        fd.append('file', imageFile);
-        const upRes = await fetch('/api/upload', { method: 'POST', body: fd });
-        const upData = await upRes.json();
-        if (!upRes.ok) {
-          setError(upData.error || 'Erro ao enviar imagem');
-          return;
-        }
-        imagemUrl = upData.url || imagemUrl;
-      }
+  try {
+    const payload = {
+      nome: formData.nome,
+      cpf: formData.cpf,
+      email: formData.email,
+      telefone: formData.telefone,
+      password: formData.password,
+      imagem: formData.imagem,
+      tipo: "usuario"
+    };
 
-      const payload = {
-        nome: formData.nome,
-        cpf: formData.cpf,
-        email: formData.email,
-        telefone: formData.telefone,
-        password: formData.password,
-        imagem: imagemUrl,
-        tipo: "usuario"
-      };
+    const res = await fetch("/api/users", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
 
-      const res = await fetch("/api/users", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
+    const data = await res.json();
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.message || "Erro ao cadastrar");
-        return;
-      }
-
-      // salva apenas o usuário logado (opcional)
-      localStorage.setItem("usuarioLogado", JSON.stringify(data));
-
-      // vai direto para o perfil
-      router.push("/perfil-usuario");
-
-    } catch (error) {
-      console.error(error);
-      setError("Erro de rede. Tente novamente.");
+    if (!res.ok) {
+      setError(data.message || "Erro ao cadastrar");
+      return;
     }
-  };
+
+    // salva apenas o usuário logado (opcional)
+    localStorage.setItem("usuarioLogado", JSON.stringify(data));
+
+    // vai direto para o perfil
+    router.push("/perfil-usuario");
+
+  } catch (error) {
+    console.error(error);
+    setError("Erro de rede. Tente novamente.");
+  }
+};
 
 
   const formatCPF = (value) => {
@@ -283,5 +268,4 @@ export default function CadastroPage() {
       </form>
     </div>
   );
-  }
-
+}

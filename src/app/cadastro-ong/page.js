@@ -53,6 +53,7 @@
       setImageFile(file)
     }
 
+
     const handleSubmit = async (e) => {
   e.preventDefault()
   setError('')
@@ -63,20 +64,6 @@
   }
 
   try {
-    // Upload image first if file selected, then use returned URL
-    let imagemUrl = imagem
-    if (imageFile) {
-      const fd = new FormData()
-      fd.append('file', imageFile)
-      const upRes = await fetch('/api/upload', { method: 'POST', body: fd })
-      const upData = await upRes.json()
-      if (!upRes.ok) {
-        setError(upData.error || 'Erro ao enviar imagem')
-        return
-      }
-      imagemUrl = upData.url || imagemUrl
-    }
-
     const payload = {
       nome,
       email,
@@ -92,15 +79,13 @@
       estado,
       HorarioFunc1,
       HorarioFunc2,
-      imagem: imagemUrl,
+      imagem,
       tipo: 'ong'
     }
 
     const res = await fetch('/api/ongs', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     })
 
@@ -111,10 +96,7 @@
       return
     }
 
-    // salva apenas a ONG logada
     localStorage.setItem('usuarioLogado', JSON.stringify(data))
-
-    // vai direto para o perfil da ONG
     router.push('/perfil-ong')
 
   } catch (error) {
@@ -122,7 +104,6 @@
     setError('Erro de rede. Tente novamente.')
   }
 }
-
     
   const formatCNPJ = (value) => {
     const digits = (value || "").replace(/\D/g, "").slice(0, 14);
@@ -164,6 +145,7 @@ return (
   <div className={styles.container}>
     <form className={styles.form} onSubmit={handleSubmit} noValidate>
       <h1 className={styles.title}>Cadastro de ONG</h1>
+      {error && <div className={styles.error}>{error}</div>}
 
       <div className={styles.gridContainer}>
 
