@@ -1,0 +1,239 @@
+.apoiar-page {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #274b65;
+
+}
+
+.cards-wrapper-container {
+  width: 100%;
+  height: 100%;
+  max-width: 1700px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 40px;
+  padding: 40px 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
+}
+
+
+
+
+
+.titulo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #254d6b;
+  border: 5px solid #143750;
+  padding: 5px 20px;
+  border-radius: 50;
+  text-align: center;
+  display: block;
+  width: 1400px;
+  margin: 0 auto 30px auto;
+  width: 100%;
+  top: 70px;
+}
+
+.grid-ongs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 colunas iguais */
+  grid-row-gap: 70px;    /* espaço vertical entre as linhas */
+  grid-column-gap: 50px; /* espaço horizontal entre os cards da mesma linha */
+  justify-items: center;
+}
+
+
+
+
+.card-ong {
+  background: #7790a2;
+  border-radius: 16px;
+  border-color: #143750;
+  border-style: solid;
+  border-width: 2px;
+  padding: 15px;
+  gap: 12px;
+  position: relative;
+  color: white;
+  width: 100%;
+  max-width: 500px;   /* todos com a mesma largura */
+  height: 290px;      /* mais alto para descrição */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;   /* default: empilha horizontalmente */
+  justify-content: center; /* alinha horizontalmente: flex-start, center, flex-end, space-between */
+  align-items: flex-start;     /* alinha verticalmente: flex-start, center, flex-end */
+}
+
+.card-image-wrapper {
+  position: relative;
+  width: 135px;
+  height: 135px;
+  border-radius: 0px;
+  border-color: #0d66a6;
+  border-width: 1;
+  border-style: solid;
+  flex-shrink: 0; 
+  top: 17%;
+  left: 2%;
+}
+
+
+
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+
+.card-text-box {
+  background: none;
+  border-radius: 12px;
+  padding: 10px 12px;
+  color: white;
+  position: relative;
+  top: 27px;
+  left: 40px;
+ 
+
+  flex: 1;
+  height: 190px;   
+  width: 260px;
+  max-width: none;
+  flex: none;       /* mesma altura em todos */
+  box-sizing: border-box;
+  overflow: hidden;       /* impede o texto de estourar o card */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 18px;
+
+}
+
+
+.card-title {
+  position: absolute;
+  top: 7%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0 10px; /* um pouco de espaçamento nas laterais */
+  box-sizing: border-box;
+}
+
+.card-title h3 {
+  position: relative;
+  margin: 0;             /* remove margens */
+  font-size: 21px;
+  font-weight: bold;
+  color: #ffb74d;
+  text-align: center;  /* centraliza horizontalmente */
+  white-space: nowrap;   /* força o texto a ficar em uma linha */
+  overflow: hidden;      /* opcional: esconde o excesso se não couber */
+  text-overflow: ellipsis; /* opcional: coloca "..." se cortar */
+  max-width: 100%;
+  flex-shrink: 1;
+  padding: 0;
+}
+
+
+
+
+.apoiar-btn {
+  position: absolute;
+  top: 83%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(180deg,#0d66a6,#0a4f86);
+  color: white;
+  border: none;
+  border-radius: 999px;
+  padding: 5px 45px;
+  font-weight: 900;
+  cursor: pointer;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  border-color: #274b65;
+  border-style: solid;
+  border-width: 4px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.apoiar-btn:hover {
+  transform: translate(-50%, -50%) scale(1.10);
+}
+
+.apoiar-btn img {
+  filter: invert(1);
+}
+
+
+.descricao {
+  color: #ffb74d;
+  font-size: 17px;
+}
+
+@media (max-width: 600px) {
+
+  .cards-wrapper-container {
+    padding: 20px;
+  }
+
+
+  .grid-ongs {
+    grid-template-columns: 1fr; /* só uma coluna */
+    gap: 30px;
+  }
+
+  .card-ong {
+    flex-direction: column; /* empilha imagem + texto */
+    align-items: center;
+    text-align: center;
+    height: auto; /* deixa o card crescer naturalmente */
+    padding-bottom: 60px; /* espaço pro botão */
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* imagem centralizada e menor */
+  .card-image-wrapper {
+    position: static;
+    width: 110px;
+    height: 110px;
+    margin-bottom: 15px;
+  }
+
+  /* texto ocupa toda a largura */
+  .card-text-box {
+    position: static;
+    width: 100%;
+    height: auto;
+    left: initial;
+    top: initial;
+  }
+
+  /* título centralizado e sem absolute */
+  .card-title {
+    position: static;
+    transform: none;
+    margin-bottom: 10px;
+  }
+
+  .card-title h3 {
+    white-space: normal; /* permite quebrar linha no mobile */
+    font-size: 20px;
+  }
+
+  /* botão sempre no final do card */
+  .apoiar-btn {
+    position: static;
+    margin-top: 10px;
+    transform: none;
+  }
+}
