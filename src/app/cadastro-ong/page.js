@@ -3,9 +3,10 @@
   import { useState } from 'react'
   import { useRouter } from 'next/navigation'
   import { FaPaw } from 'react-icons/fa'
+  import { cnpj as cnpjValidator } from 'cpf-cnpj-validator'
   import styles from './cadastro-ong.module.css'
 
-  const Field = ({ label, required, children, className = '' }) => (
+  const Field = ({ label, required, children, className = '', error = '' }) => (
     <div className={`${styles.inputWrapper} ${className}`}>
       <label className={styles.fieldLabel}>
         <span className={styles.labelText}>{label}{required ? '*' : ''}</span>
@@ -18,6 +19,7 @@
           {children}
         </div>
       </label>
+      {error && <div style={{ backgroundColor: '#ffe6e6', color: '#cc0000', fontSize: '12px', padding: '8px 12px', borderRadius: '4px', marginTop: '8px' }}>{error}</div>}
     </div>
   )
 
@@ -39,6 +41,7 @@
     const [HorarioFunc2, setHorarioFunc2] = useState('')
     const [imagem,setImagem] = useState('')
     const [error, setError] = useState('')
+    const [cnpjError, setCnpjError] = useState('')
 
     // adiciona função de upload que seta `imagem`
     const handleImageUpload = (e) => {
@@ -54,6 +57,15 @@
     const handleSubmit = (e) => {
       e.preventDefault()
       setError('')
+      setCnpjError('')
+
+      // Validação de CNPJ
+      const cnpjLimpo = cnpj.replace(/\D/g, '')
+      if (!cnpjValidator.isValid(cnpjLimpo)) {
+        setCnpjError('CNPJ inválido. Por favor, verifique o número informado.')
+        return
+      }
+
       // salvar/validar...
       router.push('/login/ong')
     }
@@ -124,16 +136,18 @@ return (
 
           {/* coloca CNPJ e upload lado a lado */}
           <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
-            <Field label="CNPJ" required className={styles.half}>
-              <input
-                className={styles.input}
-                type="text"
-                value={cnpj}
-                onChange={(e) => setCnpj(e.target.value)}
-                placeholder="00.000.000/0000-00"
-                required
-              />
-            </Field>
+            <div className={styles.half}>
+              <Field label="CNPJ" required error={cnpjError}>
+                <input
+                  className={styles.input}
+                  type="text"
+                  value={cnpj}
+                  onChange={(e) => setCnpj(e.target.value)}
+                  placeholder="00.000.000/0000-00"
+                  required
+                />
+              </Field>
+            </div>
 
             <div className={styles.half}>
               <label className={styles.uploadBox}>
