@@ -45,7 +45,7 @@ export default function CadastrarPerdidos() {
       local,
       recompensa,
       descricao,
-      imagem: "",
+      imagem: "/images/semfoto.jpg",
     };
 
     try {
