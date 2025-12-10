@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { FaPaw } from "react-icons/fa";
+import { cpf } from "cpf-cnpj-validator";
 import styles from "./cadastro.module.css";
 
 export default function CadastroPage() {
@@ -17,15 +18,29 @@ export default function CadastroPage() {
     imagem: ""
   });
   const [error, setError] = useState("");
+  const [cpfError, setCpfError] = useState("");
 
-  const handleSubmit = async (e) => {
-  e.preventDefault();
-  setError("");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setError("");
+    setCpfError("");
+    
+    if (!formData.nome || !formData.cpf || !formData.email || !formData.password) {
+      setError("Por favor, preencha todos os campos.");
+      return;
+    }
 
-  if (!formData.nome || !formData.cpf || !formData.email || !formData.password) {
-    setError("Por favor, preencha todos os campos.");
-    return;
-  }
+    // Validação de CPF
+    const cpfLimpo = formData.cpf.replace(/\D/g, "");
+    if (!cpf.isValid(cpfLimpo)) {
+      setCpfError("CPF inválido. Por favor, verifique o número informado.");
+      return;
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      setError("As senhas não coincidem.");
+      return;
+    }
 
   if (formData.password !== formData.confirmPassword) {
     setError("As senhas não coincidem.");
@@ -156,6 +171,7 @@ export default function CadastroPage() {
               aria-label="CPF"
             />
           </label>
+          {cpfError && <div style={{ backgroundColor: '#ffe6e6', color: '#cc0000', fontSize: '12px', padding: '8px 12px', borderRadius: '4px', marginTop: '8px' }}>{cpfError}</div>}
         </div>
 
         <div className={styles.inputWrapper}>
