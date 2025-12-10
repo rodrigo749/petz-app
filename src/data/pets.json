@@ -6,7 +6,7 @@
     "genero": "feminino",
     "idade": "2 aninhos",
     "descricao": "pet peludo.",
-    "imagem": "",
+    "imagem": "/images/semfoto.jpg",
     "status": "adocao"
   },
   {
@@ -36,7 +36,7 @@
     "genero": "Macho",
     "idade": "3 anos",
     "descricao": "Muito energético e amigável. Precisa de espaço para correr.",
-    "imagem": "",
+    "imagem": "/images/semfoto.jpg",
     "status": "adocao"
   },
   {
@@ -46,7 +46,7 @@
     "genero": "Fêmea",
     "idade": "3 anos",
     "descricao": "Gatinha dócil, castrada e muito carinhosa. Ama colo.",
-    "imagem": "/uploads/luna01.jpg",
+    "imagem": "/images/semfoto.jpg",
     "status": "adocao"
   },
   {
@@ -56,7 +56,7 @@
     "genero": "Macho",
     "idade": "4 anos",
     "descricao": "Muito energético e amigável. Precisa de espaço para correr.",
-    "imagem": "/uploads/thorhusky.jpg",
+    "imagem": "/images/semfoto.jpg",
     "status": "adocao"
   },
   {
@@ -66,7 +66,7 @@
     "genero": "Fêmea",
     "idade": "1 ano e 6 meses",
     "descricao": "Desapareceu no bairro Jardim Paraíso. Atende pelo nome Bolota.",
-    "imagem": "/uploads/bolotapug.jpg",
+    "imagem": "/images/semfoto.jpg",
     "status": "perdido"
   },
   {
@@ -76,7 +76,7 @@
     "genero": "Macho",
     "idade": "5 anos",
     "descricao": "Cão de grande porte, muito dócil. Está disponível para adoção responsável.",
-    "imagem": "/uploads/rexpastor.jpg",
+    "imagem": "/images/semfoto.jpg",
     "status": "adocao"
   },
   {
@@ -86,7 +86,7 @@
     "genero": "Fêmea",
     "idade": "7 meses",
     "descricao": "Filhote sociável e brincalhona. Perdeu-se na região do centro.",
-    "imagem": "/uploads/ninapet.jpg",
+    "imagem": "/images/semfoto.jpg",
     "status": "perdido"
   },
   {
@@ -96,7 +96,17 @@
     "genero": "Macho",
     "idade": "3 anos",
     "descricao": "Muito educado e obediente. Ideal para famílias com crianças.",
-    "imagem": "/uploads/tobybeagle.jpg",
+    "imagem": "/images/semfoto.jpg",
     "status": "adocao"
+  },
+  {
+    "id": 11,
+    "nome": "romeu",
+    "raca": "putão",
+    "genero": "macho",
+    "idade": "5",
+    "descricao": "AUAUAUAUUA",
+    "imagem": "/images/semfoto.jpg",
+    "status":"adocao"
   }
 ]
