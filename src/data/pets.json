@@ -1,15 +1,5 @@
 [
   {
-    "id": 1,
-    "nome": "mingau",
-    "raca": "vira-lata",
-    "genero": "feminino",
-    "idade": "2 aninhos",
-    "descricao": "pet peludo.",
-    "imagem": "",
-    "status": "adocao"
-  },
-  {
     "id": 2,
     "nome": "Caramelo",
     "raca": "Vira - Lata",
@@ -30,36 +20,6 @@
     "status": "perdido"
   },
   {
-    "id": 4,
-    "nome": "Jonas",
-    "raca": "Marchador",
-    "genero": "Macho",
-    "idade": "3 anos",
-    "descricao": "Muito energético e amigável. Precisa de espaço para correr.",
-    "imagem": "",
-    "status": "adocao"
-  },
-  {
-    "id": 5,
-    "nome": "Luna",
-    "raca": "Siamês",
-    "genero": "Fêmea",
-    "idade": "3 anos",
-    "descricao": "Gatinha dócil, castrada e muito carinhosa. Ama colo.",
-    "imagem": "/uploads/luna01.jpg",
-    "status": "adocao"
-  },
-  {
-    "id": 6,
-    "nome": "Thor",
-    "raca": "Husky Siberiano",
-    "genero": "Macho",
-    "idade": "4 anos",
-    "descricao": "Muito energético e amigável. Precisa de espaço para correr.",
-    "imagem": "/uploads/thorhusky.jpg",
-    "status": "adocao"
-  },
-  {
     "id": 7,
     "nome": "Bolota",
     "raca": "Pug",
@@ -68,16 +28,6 @@
     "descricao": "Desapareceu no bairro Jardim Paraíso. Atende pelo nome Bolota.",
     "imagem": "/uploads/bolotapug.jpg",
     "status": "perdido"
-  },
-  {
-    "id": 8,
-    "nome": "Rex",
-    "raca": "Pastor Alemão",
-    "genero": "Macho",
-    "idade": "5 anos",
-    "descricao": "Cão de grande porte, muito dócil. Está disponível para adoção responsável.",
-    "imagem": "/uploads/rexpastor.jpg",
-    "status": "adocao"
   },
   {
     "id": 9,
@@ -94,9 +44,29 @@
     "nome": "Toby",
     "raca": "Beagle",
     "genero": "Macho",
-    "idade": "3 anos",
-    "descricao": "Muito educado e obediente. Ideal para famílias com crianças.",
-    "imagem": "/uploads/tobybeagle.jpg",
+    "idade": "1 ano",
+    "descricao": "Muito educado,calmo e obediente. Ideal para famílias com crianças.",
+    "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWsXRpjbyHlOuBOFHcqx-QIE_qq8BuUN3CDA&s",
+    "status": "adocao"
+  },
+  {
+    "id": 13,
+    "nome": "Mingau",
+    "raca": "Duas Cores",
+    "genero": "Macho",
+    "idade": "1 ano",
+    "descricao": "",
+    "imagem": "/uploads/mingau.png",
+    "status": "adocao"
+  },
+  {
+    "id": 11,
+    "nome": "Spike",
+    "raca": "Vira - Lata",
+    "genero": "Macho",
+    "idade": "2 anos",
+    "descricao": "Com manchas",
+    "imagem": "/uploads/Spike.png",
     "status": "adocao"
   }
 ]

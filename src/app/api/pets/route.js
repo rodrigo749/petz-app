@@ -27,8 +27,9 @@ export async function POST(req) {
     const pets = JSON.parse(data);
 
     pets.push({
-      id: pets.length + 1, // cria ID automaticamente
+      id: pets.length + 1,
       ...newPet,
+      status: "adocao" // GARANTE que todo pet cadastrado aparece na página
     });
 
     await writeFile(filePath, JSON.stringify(pets, null, 2));
