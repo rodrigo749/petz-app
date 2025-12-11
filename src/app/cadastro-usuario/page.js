@@ -200,7 +200,7 @@ export default function CadastroPage() {
               type="password"
               value={formData.password}
               onChange={(e) => handleChange("password", e.target.value)}
-              placeholder="Sua senha"
+              placeholder="Minimo de 8 caracteres"
               aria-label="Senha"
             />
           </label>
@@ -249,7 +249,7 @@ export default function CadastroPage() {
         <button className={styles.button} type="submit">Cadastrar</button>
 
         <div className={styles.bottomLink}>
-          Já tem conta? <a href="/login">Faça login aqui</a>.
+          Já tem conta? <a href="/login-usuario">Faça login aqui</a>.
         </div>
       </form>
     </div>

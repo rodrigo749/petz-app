@@ -7,7 +7,7 @@
     "idade": "2 aninhos",
     "descricao": "pet peludo.",
     "imagem": "/images/semfoto.jpg",
-    "status": "adocao"
+    "status": "encontrado"
   },
   {
     "id": 2,
@@ -16,7 +16,7 @@
     "genero": "Macho",
     "idade": "1 ano",
     "descricao": "Visto pela última vez próximo ao senac na avenida vicente simões.",
-    "imagem": "/uploads/caramelo02.jpg",
+    "imagem": "/images/semfoto.jpg",
     "status": "perdido"
   },
   {
@@ -26,7 +26,7 @@
     "genero": "Macho",
     "idade": "2 anos",
     "descricao": "Esta com uma coleira azul.",
-    "imagem": "/uploads/pet05.jpg",
+    "imagem": "/images/semfoto.jpg",
     "status": "perdido"
   },
   {
@@ -97,7 +97,7 @@
     "idade": "3 anos",
     "descricao": "Muito educado e obediente. Ideal para famílias com crianças.",
     "imagem": "/images/semfoto.jpg",
-    "status": "adocao"
+    "status": "encontrado"
   },
   {
     "id": 11,
@@ -107,6 +107,136 @@
     "idade": "5",
     "descricao": "AUAUAUAUUA",
     "imagem": "/images/semfoto.jpg",
-    "status":"adocao"
+    "status":"encontrado"
+  },
+  {
+    "id": 12,
+    "nome": "Frajola",
+    "raca": "Preto e branco",
+    "genero": "Macho",
+    "idade": "2 anos",
+    "descricao": "Gato curioso que adora brincar com bolinhas.",
+    "imagem": "/images/semfoto.jpg",
+    "status": "encontrado"
+  },
+  {
+    "id": 13,
+    "nome": "Mel",
+    "raca": "Golden Retriever",
+    "genero": "Fêmea",
+    "idade": "1 ano e 3 meses",
+    "descricao": "Muito dócil e bem treinada, ótima com crianças.",
+    "imagem": "/images/semfoto.jpg",
+    "status": "adocao"
+  },
+  {
+    "id": 14,
+    "nome": "Pingo",
+    "raca": "Sem raça definida",
+    "genero": "Macho",
+    "idade": "8 meses",
+    "descricao": "Muito brincalhão e cheio de energia.",
+    "imagem": "/images/semfoto.jpg",
+    "status": "perdido"
+  },
+  {
+    "id": 15,
+    "nome": "Sushi",
+    "raca": "Siamês",
+    "genero": "Fêmea",
+    "idade": "4 anos",
+    "descricao": "Gatinha calma, prefere lugares tranquilos.",
+    "imagem": "/images/semfoto.jpg",
+    "status": "encontrado"
+  },
+  {
+    "id": 16,
+    "nome": "Bolt",
+    "raca": "Border Collie",
+    "genero": "Macho",
+    "idade": "3 anos",
+    "descricao": "Muito inteligente e ativo, precisa de exercícios.",
+    "imagem": "/images/semfoto.jpg",
+    "status": "adotado"
+  },
+  {
+    "id": 17,
+    "nome": "Chiquinha",
+    "raca": "Poodle",
+    "genero": "Fêmea",
+    "idade": "6 anos",
+    "descricao": "Calma, carinhosa e ideal para companhia.",
+    "imagem": "/images/semfoto.jpg",
+    "status": "encontrado"
+  },
+  {
+    "id": 18,
+    "nome": "Max",
+    "raca": "Pastor Belga",
+    "genero": "Macho",
+    "idade": "2 anos",
+    "descricao": "Muito atento e esperto, gosta de correr.",
+    "imagem": "/images/semfoto.jpg",
+    "status": "perdido"
+  },
+  {
+    "id": 19,
+    "nome": "Lola",
+    "raca": "Shih-tzu",
+    "genero": "Fêmea",
+    "idade": "1 ano",
+    "descricao": "Muito fofa e adora ficar no colo.",
+    "imagem": "/images/semfoto.jpg",
+    "status": "adocao"
+  },
+  {
+    "id": 20,
+    "nome": "Tigrão",
+    "raca": "Tigrado",
+    "genero": "Macho",
+    "idade": "1 ano",
+    "descricao": "Gatinho esperto, gosta de subir em móveis.",
+    "imagem": "/images/semfoto.jpg",
+    "status": "adotado"
+  },
+  {
+    "id": 21,
+    "nome": "Bidu",
+    "raca": "Vira-lata",
+    "genero": "Macho",
+    "idade": "2 anos",
+    "descricao": "Cachorrinho alegre que adora brincar com crianças.",
+    "imagem": "/images/semfoto.jpg",
+    "status": "adotado"
+  },
+  {
+    "id": 22,
+    "nome": "Amora",
+    "raca": "Persa",
+    "genero": "Fêmea",
+    "idade": "3 anos",
+    "descricao": "Gata tranquila, prefere ambientes silenciosos.",
+    "imagem": "/images/semfoto.jpg",
+    "status": "adotado"
+  },
+  {
+    "id": 23,
+    "nome": "Zeca",
+    "raca": "Dálmata",
+    "genero": "Macho",
+    "idade": "4 anos",
+    "descricao": "Muito brincalhão e sociável com outros cães.",
+    "imagem": "/images/semfoto.jpg",
+    "status": "adotado"
+  },
+  {
+    "id": 24,
+    "nome": "Nala",
+    "raca": "SRD (Sem Raça Definida)",
+    "genero": "Fêmea",
+    "idade": "10 meses",
+    "descricao": "Filhotinha carinhosa e esperta, adora atenção.",
+    "imagem": "/images/semfoto.jpg",
+    "status": "adotado"
   }
 ]
