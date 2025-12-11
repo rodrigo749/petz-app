@@ -1,1 +1,21 @@
-[]
+[
+  {
+    "id": 1765454720848,
+    "nome": "kawa",
+    "email": "(kawa@",
+    "telefone": "(44) 4444-4444",
+    "celular": "(44) 44444-4444",
+    "senha": "vsDzCE29URRxmnd",
+    "cnpj": "44.444.444/4444-44",
+    "cep": "44444-444",
+    "rua": "444444",
+    "numero": "444444444444444",
+    "complemento": "44444",
+    "cidade": "4444",
+    "estado": "444444",
+    "HorarioFunc1": "04:44",
+    "HorarioFunc2": "04:44",
+    "imagem": "blob:http://localhost:3000/85cfbe57-18a5-4ccd-98b0-b233a540e011",
+    "tipo": "ong"
+  }
+]

@@ -37,22 +37,26 @@
     const [estado, setEstado] = useState('')
     const [HorarioFunc1, setHorarioFunc1] = useState('')
     const [HorarioFunc2, setHorarioFunc2] = useState('')
-    const [imagem,setImagem] = useState('')
+    const [imagem, setImagem] = useState(null) // nome usado no JSX
     const [imageFile, setImageFile] = useState(null)
     const [error, setError] = useState('')
 
-    // adiciona função de upload que seta `imagem`
     const handleImageUpload = (e) => {
       const file = e.target.files && e.target.files[0]
       if (!file) return
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        setImagem(reader.result) // Base64 for preview
-      }
-      reader.readAsDataURL(file)
-      setImageFile(file)
-    }
 
+      // revoga preview anterior para evitar memory leak
+      if (imagem && imagem.startsWith('blob:')) {
+        try { URL.revokeObjectURL(imagem) } catch {}
+      }
+
+      // cria preview rápido (URL temporária)
+      const previewUrl = URL.createObjectURL(file)
+      setImagem(previewUrl)
+      setImageFile(file)
+
+      
+    }
 
     const handleSubmit = async (e) => {
   e.preventDefault()
