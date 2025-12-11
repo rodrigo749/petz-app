@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { FaPaw } from "react-icons/fa";
+import { cpf } from "cpf-cnpj-validator";
 import styles from "./cadastro.module.css";
 
 export default function CadastroPage() {
@@ -17,13 +18,22 @@ export default function CadastroPage() {
     imagem: ""
   });
   const [error, setError] = useState("");
+  const [cpfError, setCpfError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setError("");
+    setCpfError("");
     
     if (!formData.nome || !formData.cpf || !formData.email || !formData.password) {
       setError("Por favor, preencha todos os campos.");
+      return;
+    }
+
+    // Validação de CPF
+    const cpfLimpo = formData.cpf.replace(/\D/g, "");
+    if (!cpf.isValid(cpfLimpo)) {
+      setCpfError("CPF inválido. Por favor, verifique o número informado.");
       return;
     }
 
@@ -40,17 +50,21 @@ export default function CadastroPage() {
       return;
     }
 
-    usuarios.push({
+    const novoUsuario = {
       nome: formData.nome,
       cpf: formData.cpf,
       email: formData.email,
       telefone: formData.telefone,
       password: formData.password,
-      imagem: formData.imagem
-    });
+      imagem: formData.imagem,
+      tipo: "usuario"
+    };
+
+    usuarios.push(novoUsuario);
 
     localStorage.setItem("usuarios", JSON.stringify(usuarios));
-    router.push("/login");
+    localStorage.setItem("usuarioLogado", JSON.stringify(novoUsuario));
+    router.push("/perfil-usuario");
   };
 
   const formatCPF = (value) => {
@@ -140,6 +154,7 @@ export default function CadastroPage() {
               aria-label="CPF"
             />
           </label>
+          {cpfError && <div style={{ backgroundColor: '#ffe6e6', color: '#cc0000', fontSize: '12px', padding: '8px 12px', borderRadius: '4px', marginTop: '8px' }}>{cpfError}</div>}
         </div>
 
         <div className={styles.inputWrapper}>
