@@ -3,10 +3,9 @@
   import { useState } from 'react'
   import { useRouter } from 'next/navigation'
   import { FaPaw } from 'react-icons/fa'
-  import { cnpj as cnpjValidator } from 'cpf-cnpj-validator'
   import styles from './cadastro-ong.module.css'
 
-  const Field = ({ label, required, children, className = '', error = '' }) => (
+  const Field = ({ label, required, children, className = '' }) => (
     <div className={`${styles.inputWrapper} ${className}`}>
       <label className={styles.fieldLabel}>
         <span className={styles.labelText}>{label}{required ? '*' : ''}</span>
@@ -19,7 +18,6 @@
           {children}
         </div>
       </label>
-      {error && <div style={{ backgroundColor: '#ffe6e6', color: '#cc0000', fontSize: '12px', padding: '8px 12px', borderRadius: '4px', marginTop: '8px' }}>{error}</div>}
     </div>
   )
 
@@ -40,8 +38,8 @@
     const [HorarioFunc1, setHorarioFunc1] = useState('')
     const [HorarioFunc2, setHorarioFunc2] = useState('')
     const [imagem,setImagem] = useState('')
+    const [imageFile, setImageFile] = useState(null)
     const [error, setError] = useState('')
-    const [cnpjError, setCnpjError] = useState('')
 
     // adiciona função de upload que seta `imagem`
     const handleImageUpload = (e) => {
@@ -49,25 +47,96 @@
       if (!file) return
       const reader = new FileReader()
       reader.onloadend = () => {
-        setImagem(reader.result) // Base64
+        setImagem(reader.result) // Base64 for preview
       }
       reader.readAsDataURL(file)
+      setImageFile(file)
     }
 
-    const handleSubmit = (e) => {
-      e.preventDefault()
-      setError('')
-      setCnpjError('')
 
-      // Validação de CNPJ
-      const cnpjLimpo = cnpj.replace(/\D/g, '')
-      if (!cnpjValidator.isValid(cnpjLimpo)) {
-        setCnpjError('CNPJ inválido. Por favor, verifique o número informado.')
-        return
-      }
+    const handleSubmit = async (e) => {
+  e.preventDefault()
+  setError('')
 
-      // salvar/validar...
-      router.push('/login/ong')
+  if (!nome || !email || !telefone || !celular || !senha || !cnpj || !rua || !numero || !cidade || !estado || !cep) {
+    setError('Por favor, preencha todos os campos obrigatórios.')
+    return
+  }
+
+  try {
+    const payload = {
+      nome,
+      email,
+      telefone,
+      celular,
+      senha,
+      cnpj,
+      cep,
+      rua,
+      numero,
+      complemento,
+      cidade,
+      estado,
+      HorarioFunc1,
+      HorarioFunc2,
+      imagem,
+      tipo: 'ong'
+    }
+
+    const res = await fetch('/api/ongs', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+
+    const data = await res.json()
+
+    if (!res.ok) {
+      setError(data.message || 'Erro ao cadastrar ONG')
+      return
+    }
+
+    localStorage.setItem('usuarioLogado', JSON.stringify(data))
+    router.push('/perfil-ong')
+
+  } catch (error) {
+    console.error(error)
+    setError('Erro de rede. Tente novamente.')
+  }
+}
+    
+  const formatCNPJ = (value) => {
+    const digits = (value || "").replace(/\D/g, "").slice(0, 14);
+    return digits
+      .replace(/^(\d{2})(\d)/, "$1.$2")
+      .replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3")
+      .replace(/^(\d{2})\.(\d{3})\.(\d{3})(\d)/, "$1.$2.$3/$4")
+      .replace(/^(\d{2})\.(\d{3})\.(\d{3})\/(\d{4})(\d)/, "$1.$2.$3/$4-$5");
+  };
+
+  const formatCEP = (value) => {
+    const digits = (value || "").replace(/\D/g, "").slice(0, 8);
+    return digits.replace(/^(\d{5})(\d)/, "$1-$2");
+  };
+
+  const formatTelefonePadrao = (value) => {
+    const digits = (value || "").replace(/\D/g, "").slice(0, 10);
+    if (digits.length <= 2) {
+      return `(${digits}`;
+    }
+    if (digits.length <= 6) {
+      return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+    }
+    return `(${digits.slice(0, 2)}) ${digits.slice(2, 6)}-${digits.slice(6)}`;
+  };
+
+  const formatCelular = (value) => {
+    const digits = (value || "").replace(/\D/g, "").slice(0, 11);
+    if (digits.length <= 2) {
+      return `(${digits}`;
+    }
+    if (digits.length <= 7) {
+      return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
     }
     return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
   };
@@ -76,6 +145,7 @@ return (
   <div className={styles.container}>
     <form className={styles.form} onSubmit={handleSubmit} noValidate>
       <h1 className={styles.title}>Cadastro de ONG</h1>
+      {error && <div className={styles.error}>{error}</div>}
 
       <div className={styles.gridContainer}>
 
@@ -140,18 +210,17 @@ return (
 
           {/* coloca CNPJ e upload lado a lado */}
           <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
-            <div className={styles.half}>
-              <Field label="CNPJ" required error={cnpjError}>
-                <input
-                  className={styles.input}
-                  type="text"
-                  value={cnpj}
-                  onChange={(e) => setCnpj(e.target.value)}
-                  placeholder="00.000.000/0000-00"
-                  required
-                />
-              </Field>
-            </div>
+            <Field label="CNPJ" required className={styles.half}>
+              <input
+                className={styles.input}
+                type="text"
+                inputMode="numeric"
+                value={cnpj}
+                onChange={(e) => setCnpj(formatCNPJ(e.target.value))}
+                placeholder="00.000.000/0000-00"
+                required
+              />
+            </Field>
 
             <div className={styles.half}>
               <label className={styles.uploadBox}>

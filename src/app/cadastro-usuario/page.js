@@ -17,15 +17,16 @@ export default function CadastroPage() {
     confirmPassword: "",
     imagem: ""
   });
+  const [imageFile, setImageFile] = useState(null);
   const [error, setError] = useState("");
   const [cpfError, setCpfError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setCpfError("");
-    
-    if (!formData.nome || !formData.cpf || !formData.email || !formData.password) {
+
+    if (!formData.nome || !formData.cpf || !formData.email || !formData.telefone || !formData.password) {
       setError("Por favor, preencha todos os campos.");
       return;
     }
@@ -42,15 +43,8 @@ export default function CadastroPage() {
       return;
     }
 
-    const usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
-    
-    const usuarioExistente = usuarios.find(u => u.cpf === formData.cpf || u.email === formData.email);
-    if (usuarioExistente) {
-      setError("Usuário já cadastrado com este CPF ou email.");
-      return;
-    }
-
-    const novoUsuario = {
+  try {
+    const payload = {
       nome: formData.nome,
       cpf: formData.cpf,
       email: formData.email,
@@ -60,12 +54,31 @@ export default function CadastroPage() {
       tipo: "usuario"
     };
 
-    usuarios.push(novoUsuario);
+    const res = await fetch("/api/users", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
 
-    localStorage.setItem("usuarios", JSON.stringify(usuarios));
-    localStorage.setItem("usuarioLogado", JSON.stringify(novoUsuario));
+    const data = await res.json();
+
+    if (!res.ok) {
+      setError(data.message || "Erro ao cadastrar");
+      return;
+    }
+
+    // salva apenas o usuário logado (opcional)
+    localStorage.setItem("usuarioLogado", JSON.stringify(data));
+
+    // vai direto para o perfil
     router.push("/perfil-usuario");
-  };
+
+  } catch (error) {
+    console.error(error);
+    setError("Erro de rede. Tente novamente.");
+  }
+};
+
 
   const formatCPF = (value) => {
     const digits = (value || "").replace(/\D/g, "").slice(0, 11);
@@ -109,10 +122,11 @@ export default function CadastroPage() {
   reader.onloadend = () => {
     setFormData(prev => ({
       ...prev,
-      imagem: reader.result // Base64
+      imagem: reader.result // Base64 for preview
     }));
   };
   reader.readAsDataURL(file);
+  setImageFile(file);
 };
 
   return (
