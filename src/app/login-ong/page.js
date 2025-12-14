@@ -77,7 +77,7 @@ const formatCNPJ = (value) => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder=""
+              placeholder="Minimo de 8 caracteres"
               aria-label="Senha"
             />
           </label>
