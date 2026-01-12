@@ -1,0 +1,179 @@
+.card-pet {
+  background: #254b6b;
+  border-radius: 16px;
+  padding: 15px;
+  display: flex;
+  flex-direction: row;
+  gap: 14px;
+  color: white;
+  width: 100%;
+  max-width: 500px;
+  min-height: 250px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Imagem */
+.card-image-wrapper {
+  width: 150px;
+  height: 180px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Coluna direita */
+.content-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  align-items: center;
+}
+
+/* Área de texto */
+.card-text-box {
+  width: 100%;
+  background: white;
+  border-radius: 12px;
+  padding: 12px;
+  color: #0f2a3d;
+  height: 180px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+.card-text-box h3 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.card-text-box p {
+  font-size: 13px;
+  margin-bottom: 4px;
+  line-height: 1.25;
+}
+
+
+
+.btn-adotar {
+  background-color: #024b91;
+  color: white;
+  border: 2px solid #3e8abf;
+  border-radius: 24px;
+
+  width: 130px;
+  height: 42px;
+  text-align: center;
+  line-height: 42px;
+
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  transition: 0.2s;
+}
+
+.btn-adotar:hover {
+  background-color: #d69846;
+  border-color: #ca6e04;
+}
+
+.actions-wrapper .btn-adotar {
+  position: relative;
+  bottom: 0;
+  left: 0;
+  transform: none;
+  line-height: 42px;
+}
+
+/* ================================
+   BOTÃO "ADOTADO" (VERDE)
+   ================================ */
+
+.btn-adotado {
+  background-color: #148951;
+  border: 2px solid #5cad3a;
+  color: white;
+
+  width: 130px;
+  height: 42px;
+  line-height: 42px;
+
+  border-radius: 24px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-adotado:hover {
+  background-color: #00bf63;
+  border-color: #88d269;
+}
+
+/* ================================
+   BOTÃO "EDITAR"
+   ================================ */
+
+.btn-editar {
+  background-color: #024a8d;
+  border: 2px solid #3e8abf;
+  color: white;
+
+  width: 130px;
+  height: 42px;
+  line-height: 42px;
+
+  border-radius: 24px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-editar:hover {
+  background-color: #1467b6;
+  border-color: #55a6db;
+}
+
+/* ================================
+   CONTAINER DOS BOTÕES
+   ================================ */
+
+.actions-wrapper {
+  display: flex;
+  gap: 42px;
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.actions-wrapper button {
+  pointer-events: auto;
+  min-width: 130px;
+  height: 35px;
+  padding: 0;               /* IMPORTANTE */
+  line-height: 35px;        /* centraliza o texto */
+  text-align: center;
+}
+

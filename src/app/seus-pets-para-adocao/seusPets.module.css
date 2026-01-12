@@ -5,6 +5,7 @@
   padding: 40px 0;
 }
 
+/* Container branco central */
 .cards-wrapper-container {
   width: 95%;
   max-width: 1400px;
@@ -20,7 +21,7 @@
   color: #FFFFFF;
   font-size: 20px;
   font-weight: 700;
-  padding: 7px 550px;
+  padding: 7px 52px;
   border-radius: 50px;
   text-align: center;
   width: fit-content;
@@ -29,44 +30,40 @@
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
+/* Grid de cards */
 .grid-pets {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
   gap: 10px;
-  justify-items: center; /* centraliza os cards em cada coluna */
+  justify-items: center;
 }
 
-
+/* Card horizontal */
 .card-pet {
   background: #254b6b;
   border-radius: 16px;
   padding: 15px;
+
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-  position: relative;
+  flex-direction: row;
+  gap: 14px;
+
   color: white;
 
   width: 100%;
-  max-width: 360px;
+  max-width: 500px;
+  min-height: 250px;
   box-sizing: border-box;
-  align-items: center;
+  position: relative; 
 }
 
-.card-content {
-  display: flex;
-  gap: 12px;
-  width: 100%;
-  align-items: flex-start;
-}
-
-
+/* Imagem */
 .card-image-wrapper {
-  width: 130px;
-  height: 160px;
+  width: 150px;
+  height: 180px;
   border-radius: 12px;
   overflow: hidden;
-  flex-shrink: 0;    
+  flex-shrink: 0;
 }
 
 .card-image {
@@ -75,23 +72,30 @@
   object-fit: cover;
 }
 
+/* Coluna direita */
+.content-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  align-items: center;
+}
+
+/* Caixa branca com texto */
 .card-text-box {
+  width: 100%;
   background: white;
   border-radius: 12px;
-  padding: 6px 10px;
+  padding: 12px;
   color: #0f2a3d;
 
-  flex: 1;
-  height: 160px;   
-  width: 170px;
-  max-width: none;
-  flex: none;       /* mesma altura em todos */
+  height: 180px;
   box-sizing: border-box;
-  overflow: hidden;       /* impede o texto de estourar o card */
 
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  overflow: hidden;
 }
 
 .card-text-box h3 {
@@ -106,46 +110,30 @@
   line-height: 1.25;
 }
 
-
-.icone-casa-circle {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-
-  width: 30px;
-  height: 30px;
-
-  background: white;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  z-index: 5;
-}
-
-.icone-casa {
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
-}
-
-.btn-ver {
-  background-color: #0053a4;
+/* Botão central inferior */
+.btn-adotar {
+  background-color: #024b91;
   color: white;
-  padding: 8px 24px;
-  border-radius: 20px;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 12px;
-  transition: 0.3s ease;
-  display: inline-block;
-  text-align: center;
-  width: 90%;
-  margin-top: 5px;
+  border: 2px solid #3e8abf;
+
+  padding: 8px 26px;
+  border-radius: 24px;
+
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  transition: background-color 0.2s;
 }
 
-.btn-ver:hover {
-  background-color: #003d7a;
-  transform: scale(1.02);
+.btn-adotar:hover {
+  background-color: #e4a34e;
+  border: 2px solid #ee9530;
 }
+
+
