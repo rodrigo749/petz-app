@@ -16,17 +16,17 @@
     "genero": "Macho",
     "idade": "1 ano",
     "descricao": "Visto pela última vez próximo ao senac na avenida vicente simões.",
-    "imagem": "/uploads/caramelo02.jpg",
+    "imagem": "/images/caramelo02.jpg",
     "status": "perdido"
   },
   {
-    "id": 3,
+    "id": 2,
     "nome": "Spike",
     "raca": "golden",
     "genero": "Macho",
     "idade": "2 anos",
     "descricao": "Esta com uma coleira azul.",
-    "imagem": "/uploads/pet05.jpg",
+    "imagem": "/images/pet05.jpg",
     "status": "perdido"
   },
  
@@ -61,7 +61,7 @@
     "status": "adocao"
   },
   {
-    "id": 7,
+    "id": 3,
     "nome": "Bolota",
     "raca": "Pug",
     "genero": "Fêmea",
@@ -82,7 +82,7 @@
     "status": "adocao"
   },
   {
-    "id": 9,
+    "id": 4,
     "nome": "Nina",
     "raca": "Sem raça definida",
     "genero": "Fêmea",

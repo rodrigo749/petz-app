@@ -53,11 +53,12 @@ export default function CadastroAdocao() {
 
     const novoPet = { ...formData, imagem: imagemURL };
 
-    const res = await fetch("/api/pets", {
+    const res = await fetch("/api/pets-adocao", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(novoPet),
     });
+
 
     if (res.ok) {
       alert("Pet cadastrado com sucesso!");
