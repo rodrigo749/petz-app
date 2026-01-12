@@ -8,11 +8,9 @@ export default function PetsPerdidos() {
   const [pets, setPets] = useState([]);
 
   async function carregarPets() {
-    const res = await fetch("/api/pets");
+    const res = await fetch("/api/pets-perdidos");
     const data = await res.json();
-    // Filtrar apenas pets perdidos
-    const petsPerdidos = data.filter((pet) => pet.status === "perdido");
-    setPets(petsPerdidos);
+    setPets(data);
   }
 
   useEffect(() => {
@@ -26,9 +24,7 @@ export default function PetsPerdidos() {
 
         <section className={styles["grid-pets"]}>
           {pets.length > 0 ? (
-            pets.map((pet) => (
-              <PetCard key={pet.id} pet={pet} />
-            ))
+            pets.map((pet) => <PetCard key={pet.id} pet={pet} />)
           ) : (
             <p>Nenhum pet perdido no momento.</p>
           )}

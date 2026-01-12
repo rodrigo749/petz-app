@@ -4,7 +4,7 @@
     "nome": "Toby",
     "raca": "Beagle",
     "genero": "Macho",
-    "idade": "1 ano",
+    "idade": "2 anos",
     "descricao": "Muito educado,calmo e obediente. Ideal para famílias com crianças.",
     "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWsXRpjbyHlOuBOFHcqx-QIE_qq8BuUN3CDA&s",
     "status": "adocao"
@@ -44,7 +44,7 @@
     "nome": "Belinha",
     "raca": "Golden",
     "genero": "Fêmea",
-    "idade": "6 meses",
+    "idade": "10 meses",
     "descricao": "Brincalhona",
     "imagem": "/uploads/pest2.jpg",
     "status": "adocao"
