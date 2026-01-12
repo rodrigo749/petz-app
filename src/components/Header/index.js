@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
@@ -11,6 +11,21 @@ import styles from "./header.module.css";
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(null);
+  const [usuarioLogado, setUsuarioLogado] = useState(null);
+
+  useEffect(() => {
+    const u = JSON.parse(localStorage.getItem("usuarioLogado") || "null");
+    setUsuarioLogado(u);
+
+    // Listen for changes in localStorage (from other tabs/windows)
+    const handleStorageChange = () => {
+      const updated = JSON.parse(localStorage.getItem("usuarioLogado") || "null");
+      setUsuarioLogado(updated);
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
 
   return (
     <header className={styles.header}>
@@ -35,20 +50,23 @@ export default function Header() {
               onMouseEnter={() => subLinks && setDropdownOpen(id)}
               onMouseLeave={() => setDropdownOpen(null)}
             >
-              <button
-                className={styles.link}
-                aria-expanded={dropdownOpen === id}
-                aria-haspopup={subLinks ? "true" : "false"}
-              >
-                {label}
-                {subLinks && (
-                  dropdownOpen === id ? (
+              {subLinks ? (
+                <button
+                  className={styles.link}
+                  aria-expanded={dropdownOpen === id}
+                  aria-haspopup={"true"}
+                >
+                  {label}
+                  {dropdownOpen === id ? (
                     <FaChevronUp size={12} className="chevron-icon" />
                   ) : (
                     <FaChevronDown size={12} className="chevron-icon" />
-                  )
-                )}
-              </button>
+                  )}
+                </button>
+              ) : (
+                <Link href={href} className={styles.link}>{label}</Link>
+              )}
+
               {subLinks && dropdownOpen === id && (
                 <div className={styles.dropdownMenu}>
                   {subLinks.map((subLink, index) => (
@@ -65,6 +83,32 @@ export default function Header() {
             </div>
           ))}
         </div>
+
+        {/* Profile avatar (desktop) */}
+        {usuarioLogado && (
+          <div className={styles.profileWrap}>
+            <Link
+              href={usuarioLogado.tipo === "ong" ? "/perfil-ong" : "/perfil-usuario"}
+              className={styles.avatarLink}
+            >
+              <span className={styles.avatarIcon} aria-hidden>
+                {usuarioLogado.imagem ? (
+                  <img
+                    src={usuarioLogado.imagem}
+                    alt="Perfil"
+                    className={styles.avatarImage}
+                  />
+                ) : (
+                  <img
+                    src="/images/Avatar.png"
+                    alt="Perfil padrão"
+                    className={styles.avatarImage}
+                  />
+                )}
+              </span>
+            </Link>
+          </div>
+        )}
 
         <button
           className={styles.toggle}

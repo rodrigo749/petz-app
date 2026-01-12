@@ -1,26 +1,49 @@
 "use client"
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styles from './home.module.css'
 import Carousel from '../../components/Carousel'
 
 export default function HomePage() {
-  const [dummy, setDummy] = useState(false) // placeholder to keep this as a client component
+  const [perdidos, setPerdidos] = useState([])
+  const [adotados, setAdotados] = useState([])
 
-  const perdidos = [
-    { id: 1, name: "Mingau", breed: "Abissínio", gender: "Fêmea", location: "Avenida Vicente Simões, 715 - Centro", img: "https://placekitten.com/300/200" },
-    { id: 2, name: "Lola", breed: "Leonberger", gender: "Fêmea", location: "Rua A, 212 - Fátima 1 - Pouso Alegre", img: "https://place-puppy.com/320/220" },
-    { id: 3, name: "Pom Pom", breed: "Persa", gender: "Macho", location: "Avenida Doutor Lisboa, 05 - Centro", img: "https://placekitten.com/320/220" },
-    { id: 4, name: "Buddy", breed: "SRD", gender: "Macho", location: "Bairro Jardim", img: "https://place-puppy.com/330/220" },
-    { id: 5, name: "Nina", breed: "Siamês", gender: "Fêmea", location: "Centro", img: "https://placekitten.com/310/210" }
-  ]
+  async function carregarPets() {
+    const res = await fetch("/api/pets");
+    const data = await res.json();
+    
+    // Filtrar pets perdidos
+    const petsPerdidos = data
+      .filter(pet => pet.status === 'perdido')
+      .map(pet => ({
+        id: pet.id,
+        name: pet.nome,
+        breed: pet.raca,
+        gender: pet.genero,
+        location: pet.descricao,
+        img: pet.imagem || "https://via.placeholder.com/300x200"
+      }))
+    
+    // Filtrar pets para adoção
+    const petsAdocao = data
+      .filter(pet => pet.status === 'adocao')
+      .map(pet => ({
+        id: pet.id,
+        name: pet.nome,
+        breed: pet.raca,
+        gender: pet.genero,
+        age: pet.idade,
+        location: pet.descricao,
+        img: pet.imagem || "https://via.placeholder.com/300x200"
+      }))
+    
+    setPerdidos(petsPerdidos)
+    setAdotados(petsAdocao)
+  }
 
-  const adotados = [
-    { id: 6, name: "Pulga", breed: "Vira-lata", gender: "Macho", age: "Adulto", location: "XXXXXX", ong: "XXXXXX", img: "https://place-puppy.com/300/200" },
-    { id: 7, name: "Lola", breed: "Vira-lata", gender: "Fêmea", age: "Filhote", location: "XXXXXX", ong: "XXXXXX", img: "https://placekitten.com/320/220" },
-    { id: 8, name: "Lolô", breed: "Vira-lata", gender: "Macho", age: "1 ano", location: "XXXXXX", ong: "XXXXXX", img: "https://place-puppy.com/320/220" },
-    { id: 9, name: "Max", breed: "SRD", gender: "Macho", age: "2 anos", location: "XXXXXX", ong: "XXXXXX", img: "https://place-puppy.com/330/220" }
-  ]
+  useEffect(() => {
+    carregarPets()
+  }, [])
 
   return (
     <div className={styles.pageWrap}>

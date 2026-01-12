@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { FaPaw } from "react-icons/fa";
+import { cpf } from "cpf-cnpj-validator";
 import styles from "./cadastro.module.css";
 
 export default function CadastroPage() {
@@ -13,16 +14,27 @@ export default function CadastroPage() {
     email: "",
     telefone:"",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
+    imagem: ""
   });
+  const [imageFile, setImageFile] = useState(null);
   const [error, setError] = useState("");
+  const [cpfError, setCpfError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    
-    if (!formData.nome || !formData.cpf || !formData.email || !formData.password) {
+    setCpfError("");
+
+    if (!formData.nome || !formData.cpf || !formData.email || !formData.telefone || !formData.password) {
       setError("Por favor, preencha todos os campos.");
+      return;
+    }
+
+    // Validação de CPF
+    const cpfLimpo = formData.cpf.replace(/\D/g, "");
+    if (!cpf.isValid(cpfLimpo)) {
+      setCpfError("CPF inválido. Por favor, verifique o número informado.");
       return;
     }
 
@@ -31,24 +43,42 @@ export default function CadastroPage() {
       return;
     }
 
-    const usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
-    
-    const usuarioExistente = usuarios.find(u => u.cpf === formData.cpf || u.email === formData.email);
-    if (usuarioExistente) {
-      setError("Usuário já cadastrado com este CPF ou email.");
-      return;
-    }
-
-    usuarios.push({
+  try {
+    const payload = {
       nome: formData.nome,
       cpf: formData.cpf,
       email: formData.email,
-      password: formData.password
+      telefone: formData.telefone,
+      password: formData.password,
+      imagem: formData.imagem,
+      tipo: "usuario"
+    };
+
+    const res = await fetch("/api/users", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
     });
 
-    localStorage.setItem("usuarios", JSON.stringify(usuarios));
-    router.push("/login");
-  };
+    const data = await res.json();
+
+    if (!res.ok) {
+      setError(data.message || "Erro ao cadastrar");
+      return;
+    }
+
+    // salva apenas o usuário logado (opcional)
+    localStorage.setItem("usuarioLogado", JSON.stringify(data));
+
+    // vai direto para o perfil
+    router.push("/perfil-usuario");
+
+  } catch (error) {
+    console.error(error);
+    setError("Erro de rede. Tente novamente.");
+  }
+};
+
 
   const formatCPF = (value) => {
     const digits = (value || "").replace(/\D/g, "").slice(0, 11);
@@ -83,6 +113,21 @@ export default function CadastroPage() {
     }
     setFormData(prev => ({ ...prev, [field]: value }));
   };
+
+  const handleImageUpload = (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onloadend = () => {
+    setFormData(prev => ({
+      ...prev,
+      imagem: reader.result // Base64 for preview
+    }));
+  };
+  reader.readAsDataURL(file);
+  setImageFile(file);
+};
 
   return (
     <div className={styles.container}>
@@ -123,6 +168,7 @@ export default function CadastroPage() {
               aria-label="CPF"
             />
           </label>
+          {cpfError && <div style={{ backgroundColor: '#ffe6e6', color: '#cc0000', fontSize: '12px', padding: '8px 12px', borderRadius: '4px', marginTop: '8px' }}>{cpfError}</div>}
         </div>
 
         <div className={styles.inputWrapper}>
@@ -187,6 +233,29 @@ export default function CadastroPage() {
               onChange={(e) => handleChange("confirmPassword", e.target.value)}
               placeholder="Confirme sua senha"
               aria-label="Confirmar senha"
+            />
+          </label>
+        </div>
+        <div className={styles.uploadWrapper}>
+          <label className={styles.uploadBox}>
+            {formData.imagem ? (
+              <img
+                src={formData.imagem}
+                alt="Preview"
+                className={styles.uploadPreview}
+              />
+            ) : (
+              <>
+                <span className={styles.uploadIcon}>＋</span>
+                <span className={styles.uploadText}>Adicionar foto de perfil</span>
+              </>
+            )}
+        
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+              hidden
             />
           </label>
         </div>
