@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "nome": "Toby",
+    "raca": "Beagle",
+    "genero": "Macho",
+    "idade": "1 ano",
+    "descricao": "Muito educado,calmo e obediente. Ideal para famílias com crianças.",
+    "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWsXRpjbyHlOuBOFHcqx-QIE_qq8BuUN3CDA&s",
+    "status": "adocao"
+  },
+  {
+    "id": 2,
+    "nome": "Mingau",
+    "raca": "Duas Cores",
+    "genero": "Macho",
+    "idade": "1 ano",
+    "descricao": "",
+    "imagem": "/uploads/mingau.png",
+    "status": "adocao"
+  },
+  {
+    "id": 3,
+    "nome": "Spike",
+    "raca": "Vira - Lata",
+    "genero": "Macho",
+    "idade": "2 anos",
+    "descricao": "Com manchas",
+    "imagem": "/uploads/Spike.png",
+    "status": "adocao"
+  },
+  {
+    "id": 4,
+    "nome": "Apolo",
+    "raca": "Vira - Lata",
+    "genero": "Macho",
+    "idade": "6 meses",
+    "descricao": "Muito tranquilo e carinhoso.",
+    "imagem": "/uploads/pets3.jpg",
+    "status": "adocao"
+  },
+  {
+    "id": 5,
+    "nome": "Belinha",
+    "raca": "Golden",
+    "genero": "Fêmea",
+    "idade": "6 meses",
+    "descricao": "Brincalhona",
+    "imagem": "/uploads/pest2.jpg",
+    "status": "adocao"
+  },
+  {
+    "id": 6,
+    "nome": "Simba",
+    "raca": "não definida",
+    "genero": "Macho",
+    "idade": "1 ano",
+    "descricao": "Muito tranquilo. dorme o dia todo.",
+    "imagem": "/uploads/pets1.jpg",
+    "status": "adocao"
+  },
+  {
+    "id": 7,
+    "nome": "Tom",
+    "raca": "Maine Coon",
+    "genero": "Macho",
+    "idade": "2 ano",
+    "descricao": "um gato grande, fofo e de temperamento dócil, sociável e tranquilo, que adora companhia humana e de outros animais, sendo brincalhão, inteligente e afetuoso.",
+    "imagem": "/uploads/maine-coon-cat-breed-1024x877.webp",
+    "status": "adocao"
+  }
+]
