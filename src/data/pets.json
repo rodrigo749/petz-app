@@ -107,6 +107,18 @@
     "idade": "5",
     "descricao": "AUAUAUAUUA",
     "imagem": "/images/semfoto.jpg",
-    "status":"adocao"
+    "status": "adocao"
+  },
+  {
+    "id": 12,
+    "nome": "pug ",
+    "raca": "vira-lata",
+    "genero": "macho",
+    "data": "22/12/2025",
+    "local": "pouso alegre",
+    "recompensa": "100",
+    "descricao": "muito docil",
+    "imagem": "/uploads/pug.jfif",
+    "status": "perdido"
   }
 ]
