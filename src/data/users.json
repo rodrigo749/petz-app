@@ -8,5 +8,15 @@
     "password": "kawan",
     "imagem": "/uploads/Frame 2.png",
     "tipo": "usuario"
+  },
+  {
+    "id": 1768314044093,
+    "nome": "kkkkk",
+    "cpf": "022.898.316-97",
+    "email": "kkk@kkkk.com",
+    "telefone": "(00) 00000-0000",
+    "password": "12345",
+    "imagem": "",
+    "tipo": "usuario"
   }
 ]
