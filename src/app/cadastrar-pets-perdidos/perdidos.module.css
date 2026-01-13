@@ -250,6 +250,18 @@
   color: #fff;
 }
 
+/* Encontrado: semelhante ao btnEditar, porém maior e centralizado */
+.btnEncontrado {
+  background: #28a745;
+  color: #fff;
+  padding: 12px 28px;
+  font-size: 18px;
+  font-weight: 800;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+}
+
 /* GENDER BUTTONS */
 .genderRow {
   display: flex;
