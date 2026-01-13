@@ -2,64 +2,55 @@
   width: 100%;
   min-height: 100vh;
   background-color: #274b65;
-
+  padding: 30px 0;   /* 👈 cria espaço em cima e embaixo */
 }
 
 .cards-wrapper-container {
-  width: 100%;
-  height: 100%;
-  max-width: 1700px;
-  margin: 0 auto;
+  width: 95%;
+  max-width: 1400px;
+  margin: 20px auto;
   background: #ffffff;
   border-radius: 40px;
-  padding: 40px 20px;
+  padding: 20px 20px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
 }
 
-
-
-
-
 .titulo {
-  font-size: 24px;
-  font-weight: bold;
-  color: #ffffff;
-  background-color: #254d6b;
-  border: 5px solid #143750;
-  padding: 5px 20px;
-  border-radius: 50;
+  background-color: #25455d;
+  color: #FFFFFF;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 7px 550px;
+  border-radius: 50px;
   text-align: center;
-  display: block;
-  width: 1400px;
-  margin: 0 auto 30px auto;
-  width: 100%;
-  top: 70px;
+  width: fit-content;
+  margin: 0 auto 50px auto;
+  border: 5px solid #0E2A45;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
 .grid-ongs {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 colunas iguais */
+  grid-template-columns: repeat(2, minmax(0, 1fr)); /* 👈 2 colunas */
   grid-row-gap: 70px;    /* espaço vertical entre as linhas */
   grid-column-gap: 50px; /* espaço horizontal entre os cards da mesma linha */
   justify-items: center;
 }
 
-
-
-
 .card-ong {
   background: #7790a2;
-  border-radius: 16px;
+  border-radius: 20px;
   border-color: #143750;
   border-style: solid;
-  border-width: 2px;
+  border-width: 4px;
   padding: 15px;
   gap: 12px;
   position: relative;
   color: white;
   width: 100%;
-  max-width: 500px;   /* todos com a mesma largura */
-  height: 290px;      /* mais alto para descrição */
+  max-width: 560px;   /* todos com a mesma largura */
+  height: 340px;      /* mais alto para descrição */
+  padding: 20px;
   box-sizing: border-box;
   display: flex;
   flex-direction: row;   /* default: empilha horizontalmente */
@@ -68,20 +59,19 @@
 }
 
 .card-image-wrapper {
-  position: relative;
+  position: absolute;
+  top: 16%;
+  left: 5%;
+
   width: 135px;
   height: 135px;
+
   border-radius: 0px;
   border-color: #0d66a6;
   border-width: 1;
   border-style: solid;
-  flex-shrink: 0; 
-  top: 17%;
-  left: 2%;
+  flex-shrink: 0;
 }
-
-
-
 
 .card-image {
   width: 100%;
@@ -89,32 +79,28 @@
   object-fit: cover;
 }
 
-
-
 .card-text-box {
   background: none;
   border-radius: 12px;
   padding: 10px 12px;
   color: white;
+
   position: relative;
-  top: 27px;
-  left: 40px;
- 
+  margin-top: 27px;      /* substitui o top */
+  margin-left: 170px;    /* reserva espaço da imagem à esquerda */
 
-  flex: 1;
-  height: 190px;   
-  width: 260px;
-  max-width: none;
-  flex: none;       /* mesma altura em todos */
-  box-sizing: border-box;
-  overflow: hidden;       /* impede o texto de estourar o card */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  font-size: 18px;
-
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
 }
 
+.card-text-box p {
+  margin: 0;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
 
 .card-title {
   position: absolute;
@@ -139,9 +125,6 @@
   flex-shrink: 1;
   padding: 0;
 }
-
-
-
 
 .apoiar-btn {
   position: absolute;
@@ -173,18 +156,26 @@
   filter: invert(1);
 }
 
-
 .descricao {
   color: #ffb74d;
-  font-size: 17px;
+  font-size: 20px;
 }
 
+/* ===== MOBILE ===== */
 @media (max-width: 600px) {
 
   .cards-wrapper-container {
     padding: 20px;
   }
 
+  
+  .titulo {
+    padding: 10px 20px;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 30px;
+    box-sizing: border-box;
+  }
 
   .grid-ongs {
     grid-template-columns: 1fr; /* só uma coluna */
@@ -192,7 +183,10 @@
   }
 
   .card-ong {
+    position: relative;
     flex-direction: column; /* empilha imagem + texto */
+    display: flex;
+    flex-direction: column;
     align-items: center;
     text-align: center;
     height: auto; /* deixa o card crescer naturalmente */
@@ -209,13 +203,14 @@
     margin-bottom: 15px;
   }
 
-  /* texto ocupa toda a largura */
+  /* MOBILE: texto ocupa toda a largura */
   .card-text-box {
     position: static;
     width: 100%;
     height: auto;
-    left: initial;
-    top: initial;
+    margin-left: 0;   /* zera o recuo do desktop */
+    margin-top: 0;
+    padding-left: 12px;
   }
 
   /* título centralizado e sem absolute */
@@ -233,7 +228,83 @@
   /* botão sempre no final do card */
   .apoiar-btn {
     position: static;
-    margin-top: 10px;
+    margin-top: auto; 
     transform: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-ongs {
+    grid-template-columns: 1fr;
+  }
+
+  .card-ong {
+    height: auto;        /* ✅ resolve o vazamento no iPad */
+  }
+}
+
+@media (max-width: 1024px) {
+  .grid-ongs {
+    grid-template-columns: 1fr; /* tablet 1 coluna (evita apertar texto) */
+    gap: 30px;
+  }
+
+  .titulo {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px 16px;     /* substitui 7px 550px */
+    box-sizing: border-box;
+    border-radius: 30px;
+    margin: 0 auto 30px auto;
+    text-align: center;
+  }
+
+
+  .card-ong {
+    height: auto;               /* deixa crescer */
+    flex-direction: column;     /* empilha */
+    align-items: center;
+    text-align: center;
+    padding-bottom: 24px;
+  }
+
+  .card-image-wrapper {
+    position: static;           /* desliga absolute */
+    width: 120px;
+    height: 120px;
+    margin: 12px 0;
+  }
+
+   .card-title {
+    width: 100%;            /* 🔒 limita o título ao card */
+    max-width: 100%;
+    padding: 0 12px;        /* respiro lateral */
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  .card-title h3 {
+    white-space: normal;    /* permite quebrar linha */
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    line-height: 1.2;
+    max-width: 100%;
+  }
+
+
+  .card-text-box {
+    position: static;           /* desliga o layout do desktop */
+    margin-left: 0;             /* remove recuo da imagem */
+    margin-top: 0;
+    width: 100%;
+    height: auto;
+    padding: 0 12px;
+    overflow: visible;
+  }
+
+  .apoiar-btn {
+    position: static;           /* desliga absolute */
+    transform: none;
+    margin-top: 14px;
   }
 }
