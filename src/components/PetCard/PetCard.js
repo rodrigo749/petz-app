@@ -76,7 +76,7 @@ export default function PetCard({ pet, tipoPagina }) {
                 Adotado
               </button>
 
-              <Link href={`/editar-pet/${pet.id}`}>
+              <Link href={`/editar-cadastro-adocao/${pet.id}`}>
                 <button className={styles["btn-editar"]}>Editar</button>
               </Link>
             </div>
