@@ -23,11 +23,9 @@ export default function PetsPerdidos() {
   const [loading, setLoading] = useState(false);
 
   async function carregarPets() {
-    const res = await fetch("/api/pets");
+    const res = await fetch("/api/pets-perdidos");
     const data = await res.json();
-    // Filtrar apenas pets perdidos
-    const petsPerdidos = data.filter((pet) => pet.status === "perdido");
-    setPets(petsPerdidos);
+    setPets(data);
   }
 
   useEffect(() => {
@@ -104,69 +102,13 @@ export default function PetsPerdidos() {
       <div className={styles["cards-wrapper-container"]}>
         <h1 className={styles.titulo}>Pets Perdidos</h1>
 
-        <div style={{ marginBottom: 16 }}>
-          <button onClick={() => setShowForm((s) => !s)} className={styles.btnCadastrar}>
-            {showForm ? "Voltar à lista" : "Cadastrar pet perdido"}
-          </button>
-        </div>
-
-        {showForm ? (
-          <section>
-            <form onSubmit={handleSubmit}>
-              <div>
-                <label>Nome</label>
-                <input value={nome} onChange={(e) => setNome(e.target.value)} />
-              </div>
-              <div>
-                <label>Raça</label>
-                <input value={raca} onChange={(e) => setRaca(e.target.value)} />
-              </div>
-              <div>
-                <label>Gênero</label>
-                <input value={genero} onChange={(e) => setGenero(e.target.value)} />
-              </div>
-              <div>
-                <label>Local</label>
-                <input value={local} onChange={(e) => setLocal(e.target.value)} />
-              </div>
-              <div>
-                <label>Data da perda</label>
-                <input type="date" value={dataPerda} onChange={(e) => setDataPerda(e.target.value)} />
-              </div>
-              <div>
-                <label>Descrição</label>
-                <textarea value={descricao} onChange={(e) => setDescricao(e.target.value)} />
-              </div>
-              <div>
-                <label>Recompensa</label>
-                <input type="number" value={recompensa} onChange={(e) => setRecompensa(Number(e.target.value))} />
-              </div>
-              <div>
-                <label>Imagem</label>
-                <input type="file" accept="image/*" onChange={handleFileChange} />
-                {preview && <img src={preview} alt="preview" style={{ maxWidth: 180, marginTop: 8 }} />}
-              </div>
-
-              <div style={{ marginTop: 12 }}>
-                <button type="submit" className={styles.btnCadastrar} disabled={loading}>{loading ? 'Salvando...' : 'Cadastrar'}</button>
-              </div>
-
-              {message && (
-                <div style={{ marginTop: 12, color: message.includes('sucesso') ? 'green' : 'red' }}>{message}</div>
-              )}
-            </form>
-          </section>
-        ) : (
-          <section className={styles["grid-pets"]}>
-            {pets.length > 0 ? (
-              pets.map((pet) => (
-                <PetCard key={pet.id} pet={pet} />
-              ))
-            ) : (
-              <p>Nenhum pet perdido no momento.</p>
-            )}
-          </section>
-        )}
+        <section className={styles["grid-pets"]}>
+          {pets.length > 0 ? (
+            pets.map((pet) => <PetCard key={pet.id} pet={pet} />)
+          ) : (
+            <p>Nenhum pet perdido no momento.</p>
+          )}
+        </section>
       </div>
     </main>
   );

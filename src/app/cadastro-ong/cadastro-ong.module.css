@@ -132,7 +132,8 @@
   width: 100%;
 }
 .half{
-  width: 48%;
+  width: 100%;
+  box-sizing: border-box;
 }
 .bottomLink {
   margin-top: 0.75rem;
@@ -177,5 +178,60 @@
 
   .button {
     width: 100%;
+  }
+}
+.uploadBox {
+  width: min(180px, 28vw);
+  max-width: 220px;
+  aspect-ratio: 1 / 1; /* mantém caixa quadrada */
+  background-color: #b7d3e6;
+  border-radius: 24px;
+  border: 3px solid #6d93ad;
+  display: grid;
+  place-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  text-align: center;
+  padding: 12px;
+}
+
+.uploadBox:hover {
+  background-color: #a8c7dc;
+}
+
+/* preview ocupa toda a caixa mantendo o cover */
+.uploadPreview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 18px;
+}
+
+/* pequenos ajustes de tipografia/ícone para largura menor */
+.uploadIcon {
+  font-size: 36px;
+  color: #ffffff;
+}
+
+.uploadText {
+  font-size: 14px;
+}
+
+/* Responsividade adicional */
+@media (max-width: 900px) {
+  /* gridContainer já vira 1 coluna; faz upload ocupar largura total */
+  .uploadBox {
+    width: 100%;
+    max-width: none;
+    aspect-ratio: 1 / 1;
+    padding: 14px;
+  }
+
+  /* se quiser a caixa menos alta em mobile, alternar aspect-ratio */
+  /* .uploadBox { aspect-ratio: 4 / 3; } */
+
+  .uploadText {
+    font-size: 15px;
   }
 }

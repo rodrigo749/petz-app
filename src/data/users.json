@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1765399762406,
+    "nome": "kawan",
+    "cpf": "444.444.444-44",
+    "email": "kawan@senac",
+    "telefone": "(44) 44444-4444",
+    "password": "kawan",
+    "imagem": "/uploads/Frame 2.png",
+    "tipo": "usuario"
+  }
+]

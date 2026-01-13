@@ -1,7 +1,7 @@
-"use client";
+'use client'
 
 import { useState } from "react";
-import styles from "../encontrados/encontrados.module.css";
+import styles from "./perdidos.module.css";
 import { uploadImage, savePet } from "@/lib/apiPets";
 
 export default function CadastrarPerdidos() {
@@ -45,7 +45,7 @@ export default function CadastrarPerdidos() {
       local,
       recompensa,
       descricao,
-      imagem: "",
+      imagem: "/images/semfoto.jpg",
     };
 
     try {

@@ -20,9 +20,9 @@ export const NAV_LINKS = [
   {
     id: "perdidos",
     label: "Pets-perdidos ",
-    href: "/perdidos/cadastrarperdidos",
+    href: "/pets-perdidos",
     subLinks: [
-  { label: "Pets Perdidos", href: "/perdidos/cadastrarperdidos" },
+  { label: "Pets Perdidos", href: "/pets-perdidos" },
   { label: "Pets Encontrados", href: "/perdidos/encontrados" },
     ],
   },
