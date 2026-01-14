@@ -39,12 +39,12 @@ export default function ModalPet({ pet, onClose }) {
         <div className={styles.infoGroup}>
           <p><strong>Raça:</strong> {pet.raca}</p>
           <p><strong>Gênero:</strong> {pet.genero}</p>
-          <p><strong>Idade:</strong> {pet.idade}</p>
+          <p><strong>Local:</strong> {pet.local}</p>
         </div>
 
         <div className={styles.respEndGroup}> 
-          <p><strong>Responsável:</strong> {pet.responsavel}</p>
-          <p><strong>Endereço:</strong> {pet.endereco}</p>
+          <p><strong>Data:</strong> {pet.data}</p>
+          <p><strong>Recompensa:</strong> {pet.recompensa}</p>
         </div>
       </div>  
 
@@ -55,7 +55,7 @@ export default function ModalPet({ pet, onClose }) {
         </div>
 
         {/* BOTÃO */}
-        <button className={styles.contactBtn}>Contatar ONG</button>
+        <button className={styles.contactBtn}>Contatar dono</button>
 
       </div>
     </div>

@@ -110,7 +110,7 @@ export default function CadastrarPerdidos() {
           {/* DESCRIÇÃO */}
           <div className={styles.descricaoBox}>
             <label className={styles.descLabel}>
-              <img src="/images/patinha01.png" className={styles.descIcon} />
+              <img src="/images/patinha.png" className={styles.descIcon} />
               Descrição:
             </label>
 
@@ -136,7 +136,7 @@ export default function CadastrarPerdidos() {
           <form className={styles.formCadastro} onSubmit={handleSubmit}>
 
             <div className={styles.campo}>
-              <img src="/images/patinha01.png" className={styles.iconeInput} />
+              <img src="/images/patinha.png" className={styles.iconeInput} />
               <input
                 type="text"
                 placeholder="Nome:"
@@ -148,7 +148,7 @@ export default function CadastrarPerdidos() {
             </div>
 
             <div className={styles.campo}>
-              <img src="/images/patinha01.png" className={styles.iconeInput} />
+              <img src="/images/patinha.png" className={styles.iconeInput} />
               <input
                 type="text"
                 placeholder="Raça:"
@@ -160,7 +160,7 @@ export default function CadastrarPerdidos() {
             </div>
 
             <div className={styles.campo}>
-              <img src="/images/patinha01.png" className={styles.iconeInput} />
+              <img src="/images/patinha.png" className={styles.iconeInput} />
               <input
                 type="text"
                 placeholder="Gênero:"
@@ -172,7 +172,7 @@ export default function CadastrarPerdidos() {
             </div>
 
             <div className={styles.campo}>
-              <img src="/images/patinha01.png" className={styles.iconeInput} />
+              <img src="/images/patinha.png" className={styles.iconeInput} />
               <input
                 type="text"
                 placeholder="Local:"
@@ -184,7 +184,7 @@ export default function CadastrarPerdidos() {
             </div>
 
             <div className={styles.campo}>
-              <img src="/images/patinha01.png" className={styles.iconeInput} />
+              <img src="/images/patinha.png" className={styles.iconeInput} />
               <input
                 type="text"
                 placeholder="Data:"
@@ -204,7 +204,7 @@ export default function CadastrarPerdidos() {
                   <label className={styles.recompensaLabel}>Recompensa</label>
                 </div>
                 <div className={styles.recompensaRow}>
-                  <img src="/images/patinha01.png" className={styles.iconeRecompensa} />
+                  <img src="/images/patinha.png" className={styles.iconeRecompensa} />
                   <input
                     type="range"
                     min="0"

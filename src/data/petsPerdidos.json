@@ -1,15 +1,5 @@
 [
   {
-    "id": 1,
-    "nome": "mingau",
-    "raca": "vira-lata",
-    "genero": "feminino",
-    "idade": "2 aninhos",
-    "descricao": "pet peludo.",
-    "imagem": "/images/semfoto.jpg",
-    "status": "adocao"
-  },
-  {
     "id": 2,
     "nome": "Caramelo",
     "raca": "Vira - Lata",
@@ -29,7 +19,6 @@
     "imagem": "/images/pet05.jpg",
     "status": "perdido"
   },
- 
   {
     "id": 4,
     "nome": "Jonas",
@@ -70,7 +59,6 @@
     "imagem": "/images/semfoto.jpg",
     "status": "perdido"
   },
-
   {
     "id": 8,
     "nome": "Rex",
@@ -91,7 +79,6 @@
     "imagem": "/images/semfoto.jpg",
     "status": "perdido"
   },
-  
   {
     "id": 10,
     "nome": "Toby",
@@ -102,14 +89,13 @@
     "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWsXRpjbyHlOuBOFHcqx-QIE_qq8BuUN3CDA&s",
     "status": "adocao"
   },
-    {
+  {
     "id": 11,
     "nome": "Spike",
     "raca": "Vira - Lata",
     "genero": "Macho",
     "idade": "2 anos",
     "descricao": "Com manchas",
-    "imagem": "/uploads/Spike.png",
     "imagem": "/images/semfoto.jpg",
     "status": "adocao"
   },

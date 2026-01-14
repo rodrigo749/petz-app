@@ -8,5 +8,15 @@
     "password": "kawan",
     "imagem": "/uploads/Frame 2.png",
     "tipo": "usuario"
+  },
+  {
+    "id": 1768392122957,
+    "nome": "Mônica Santos",
+    "cpf": "083.274.426-35",
+    "email": "moniksantos336@gmail.com.br",
+    "telefone": "(35) 99879-1961",
+    "password": "00000",
+    "imagem": "",
+    "tipo": "usuario"
   }
 ]

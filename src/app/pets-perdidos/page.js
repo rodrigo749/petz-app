@@ -105,7 +105,7 @@ export default function PetsPerdidos() {
         <section className={styles["grid-pets"]}>
           {pets.length > 0 ? (
             pets.map((pet) => (
-              <PetCard key={pet.id} pet={pet} tipoPagina="publica" />
+              <PetCard key={pet.id} pet={pet} tipoPagina="perdidos" />
             ))
           ) : (
             <p>Nenhum pet perdido no momento.</p>
