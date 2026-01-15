@@ -103,6 +103,53 @@
   position: relative;
 }
 
+.topMeta {
+  position: absolute;
+  top: 14px;
+  right: 84px; /* desloca para não colidir com a patinha */
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.updatedText {
+  color: #f1f5fb; /* tom claro próximo ao mockup */
+  opacity: 0.95;
+  margin-right: 8px;
+  font-size: 14px;
+}
+
+.rewardBadge {
+  background: linear-gradient(180deg, #dff8e0 0%, #b7f0b0 100%); /* gradiente verde semelhante à imagem */
+  border: 3px solid #2f8f3c; /* borda escura */
+  color: #063615;
+  padding: 6px 12px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  box-shadow: 0 3px 0 rgba(0,0,0,0.08);
+  min-width: 160px; /* garante largura mínima para texto */
+  justify-content: center;
+}
+
+.coinWrapper {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #ffffff; /* bolinha branca por trás do ícone */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.06) inset;
+  border: 2px solid rgba(0,0,0,0.06);
+}
+
+.coin { width: 18px; height: 18px; display: block; }
+
+.rewardText { color: #063615; font-size: 14px; font-style: italic; }
+
 /* COLUNAS LADO A LADO */
 .infoColumns {
   display: flex;
@@ -139,12 +186,13 @@
    =========================== */
 .descriptionBox {
   margin-top: 20px;
-  background: #f3f7fb;
-  border-radius: 14px;
+  background: #ffffff;
+  border-radius: 18px;
   width: 100%;
   padding: 18px;
   max-height: 260px;
-  border: 3px solid #143750;
+  border: 3px solid #6b3fa6; /* borda roxa */
+  box-shadow: inset 0 0 0 4px #f3f7fb; /* leve contorno interno */
   overflow-y: auto;
 }
 
@@ -160,6 +208,7 @@
   color: #143750;
   font-size: 16px;
   line-height: 1.4;
+  text-align: center; /* centraliza conforme layout */
 }
 
 /* ===========================
@@ -172,22 +221,44 @@
   transform: translateX(-50%);
   background: #024b91;
   color: white;
-  padding: 12px 64px;
-  border: 3px solid #3e8abf;
-  border-radius: 40px;
-  font-size: 16px;
-  font-weight: 600;
+  padding: 12px 48px;
+  border: 3px solid #2b7aa8;
+  border-radius: 28px;
+  font-size: 18px;
+  font-weight: 700;
   cursor: pointer;
+  box-shadow: 0 6px 0 rgba(0,0,0,0.08);
+}
+
+.rewardBadge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: linear-gradient(90deg,#dff8e0,#b7f0b0);
+  border-radius: 12px;
+  padding: 6px 10px;
+  border: 2px solid #2f8f3c;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rewardMoney {
+  color: #0a5b21;
+  font-weight: 700;
 }
 
 .pawIcon {
   position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 100px;
-  height: auto;
+  top: 8px;
+  right: 8px;
+  width: 56px;
+  height: 56px;
   object-fit: contain;
-  z-index: 10;
+  z-index: 30;
+  background: #ffffff33;
+  border-radius: 50%;
+  padding: 8px;
 }
 
 /* ================================
@@ -206,8 +277,11 @@
 
 @media (max-width: 800px) {
   .modal {
-    padding: 18px;
+  padding: 18px;
   }
+
+  .topMeta { right: 20px; }
+  .rewardBadge { min-width: 120px; padding: 6px 10px; }
 
   .modalContent {
     flex-direction: column;
@@ -226,9 +300,9 @@
   }
 
   .petName {
-    margin-top: 10px;
-    font-size: clamp(18px, 4vw, 30px);
-    padding: 8px 12px;
+  margin-top: 10px;
+  font-size: clamp(18px, 4vw, 30px);
+  padding: 8px 12px;
   }
 
   .infoColumns {
@@ -242,8 +316,8 @@
   }
 
   .descriptionBox {
-    margin-top: 12px;
-    max-height: 220px;
+  margin-top: 12px;
+  max-height: 220px;
   }
 
   /* Em telas pequenas o botão passa a fluir dentro do conteúdo para evitar overflow */

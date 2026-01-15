@@ -1,10 +1,16 @@
 'use client'
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./perdidos.module.css";
 import { uploadImage, savePet } from "@/lib/apiPets";
 
 export default function CadastrarPerdidos() {
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('usuarioLogado') || 'null');
+    if (!user) {
+      window.location.href = '/login-usuario';
+    }
+  }, []);
 
   const [nome, setNome] = useState("");
   const [raca, setRaca] = useState("");
@@ -47,13 +53,30 @@ export default function CadastrarPerdidos() {
       descricao,
       imagem: "/images/semfoto.jpg",
     };
+    // adicionar informação do usuário logado, se houver
+    try {
+      const u = JSON.parse(localStorage.getItem('usuarioLogado') || 'null');
+      if (u && u.id) {
+        // garante que o cadastro contenha o id do dono (pode ser usuário ou ONG)
+        body.usuarioId = u.id;
+        // tenta preencher nome tanto para usuário quanto para ONG
+        body.usuarioNome = u.nome || u.razaoSocial || '';
+        // armazena também o tipo (usuario ou ong) para possibilidades futuras
+        body.usuarioTipo = u.tipo || '';
+      }
+    } catch (err) { }
 
     try {
       setLoading(true);
       if (file) {
         body.imagem = await uploadImage(file);
       }
-      await savePet(body);
+      // enviar para endpoint de pets perdidos
+      await fetch('/api/pets-perdidos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
       setMessage("Pet cadastrado com sucesso!");
       // limpar formulário
       setNome("");
