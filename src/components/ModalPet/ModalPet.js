@@ -12,13 +12,16 @@ export default function ModalPet({ pet, onClose }) {
   return (
 <div className={styles.overlay} onClick={handleBackgroundClick}>
   <div className={styles.modal}>
+    
 
     <div className={styles.modalContent}>
       {/* BOTÃO DE FECHAR */}
         <button className={styles.closeBtn} onClick={onClose}>
           &times;
         </button>
+
       
+
       {/* LADO ESQUERDO - IMAGEM */}
       <div className={styles.imageBox}>
         <img src={pet.imagem || "/images/default.png"} alt={pet.nome} />

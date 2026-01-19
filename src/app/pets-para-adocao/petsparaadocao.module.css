@@ -35,3 +35,15 @@
   gap: 10px;
   justify-items: center;
 }
+
+/* Responsividade do titulo */
+
+@media (max-width:480px) {
+  .titulo {
+    padding: 7px 10px;
+    width: 90%;
+    font-size: 16px;
+    justify-content: center;
+    display: flex;
+  }
+}
