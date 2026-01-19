@@ -8,12 +8,7 @@ export default function EditarPetPerdidosId() {
   const router = useRouter();
   const { id } = useParams();
 
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('usuarioLogado') || 'null');
-    if (!user) {
-      window.location.href = '/login-usuario';
-    }
-  }, []);
+  // Nota: acesso público permitido — não exige login para editar (controle de permissão removido)
 
   const [formData, setFormData] = useState({
     nome: "",
@@ -43,24 +38,7 @@ export default function EditarPetPerdidosId() {
           return;
         }
         const pet = await res.json();
-        // bloqueio client-side: apenas o dono pode editar
-        try {
-          const u = JSON.parse(localStorage.getItem('usuarioLogado') || 'null');
-          // permite edição apenas se for o mesmo id que cadastrou o pet
-          // tanto para 'usuario' quanto para 'ong' (ambos gravam usuarioId ao criar)
-          if (!u || (pet.usuarioId && String(pet.usuarioId) !== String(u.id))) {
-            alert('Você não tem permissão para editar este pet.');
-            router.push('/perdidos');
-            setCarregando(false);
-            return;
-          }
-        } catch (err) {
-          // se falhar ao parsear, redireciona por segurança
-          alert('Você não tem permissão para editar este pet.');
-          router.push('/perdidos');
-          setCarregando(false);
-          return;
-        }
+  // Permitir edição por qualquer visitante; não há bloqueio client-side de dono
 
         setFormData({
           nome: pet.nome || "",
