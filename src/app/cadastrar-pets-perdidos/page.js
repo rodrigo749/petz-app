@@ -1,16 +1,10 @@
 'use client'
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styles from "./perdidos.module.css";
 import { uploadImage, savePet } from "@/lib/apiPets";
 
 export default function CadastrarPerdidos() {
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('usuarioLogado') || 'null');
-    if (!user) {
-      window.location.href = '/login-usuario';
-    }
-  }, []);
 
   const [nome, setNome] = useState("");
   const [raca, setRaca] = useState("");
