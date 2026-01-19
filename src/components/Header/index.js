@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
@@ -12,6 +13,8 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(null);
   const [usuarioLogado, setUsuarioLogado] = useState(null);
+  const [profileOpen, setProfileOpen] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const u = JSON.parse(localStorage.getItem("usuarioLogado") || "null");
@@ -86,10 +89,12 @@ export default function Header() {
 
         {/* Profile avatar (desktop) */}
         {usuarioLogado && (
-          <div className={styles.profileWrap}>
-            <Link
-              href={usuarioLogado.tipo === "ong" ? "/perfil-ong" : "/perfil-usuario"}
+          <div className={styles.profileWrap} onMouseLeave={() => setProfileOpen(false)}>
+            <button
               className={styles.avatarLink}
+              onClick={() => setProfileOpen(!profileOpen)}
+              aria-haspopup="true"
+              aria-expanded={profileOpen}
             >
               <span className={styles.avatarIcon} aria-hidden>
                 {usuarioLogado.imagem ? (
@@ -106,7 +111,40 @@ export default function Header() {
                   />
                 )}
               </span>
-            </Link>
+            </button>
+
+            {profileOpen && (
+              <div className={styles.profileDropdown} role="menu">
+                <Link
+                  href={usuarioLogado.tipo === "ong" ? "/perfil-ong" : "/perfil-usuario"}
+                  className={styles.dropdownItem}
+                  onClick={() => setProfileOpen(false)}
+                >
+                  Editar perfil
+                </Link>
+
+                <Link
+                  href="/meus-pets-perdidos"
+                  className={styles.dropdownItem}
+                  onClick={() => setProfileOpen(false)}
+                >
+                  Meus pets perdidos
+                </Link>
+
+                <button
+                  className={styles.dropdownItem}
+                  onClick={() => {
+                    // logout
+                    localStorage.removeItem("usuarioLogado");
+                    setUsuarioLogado(null);
+                    setProfileOpen(false);
+                    router.push("/");
+                  }}
+                >
+                  Sair
+                </button>
+              </div>
+            )}
           </div>
         )}
 
@@ -143,6 +181,53 @@ export default function Header() {
               </div>
 
               <nav className={styles.sheetLinks}>
+                {/* Mobile user links when logged in */}
+                {usuarioLogado && (
+                  <div className={styles.mobileUser}>
+                    <div className={styles.mobileUserHeader}>
+                      <span className={styles.mobileAvatar}>
+                        {usuarioLogado.imagem ? (
+                          <img src={usuarioLogado.imagem} alt="avatar" />
+                        ) : (
+                          <img src="/images/Avatar.png" alt="avatar" />
+                        )}
+                      </span>
+                      <div className={styles.mobileUserName}>
+                        {usuarioLogado.nome || usuarioLogado.razaoSocial || "Usuário"}
+                      </div>
+                    </div>
+
+                    <div className={styles.mobileUserLinks}>
+                      <Link
+                        href={usuarioLogado.tipo === "ong" ? "/perfil-ong" : "/perfil-usuario"}
+                        onClick={() => setMenuOpen(false)}
+                        className={styles.mobileSubLink}
+                      >
+                        Editar perfil
+                      </Link>
+
+                      <Link
+                        href="/meus-pets-perdidos"
+                        onClick={() => setMenuOpen(false)}
+                        className={styles.mobileSubLink}
+                      >
+                        Meus pets perdidos
+                      </Link>
+
+                      <button
+                        className={styles.mobileSubLink}
+                        onClick={() => {
+                          localStorage.removeItem("usuarioLogado");
+                          setUsuarioLogado(null);
+                          setMenuOpen(false);
+                          router.push("/");
+                        }}
+                      >
+                        Sair
+                      </button>
+                    </div>
+                  </div>
+                )}
                 {NAV_LINKS.map(({ id, label, href, subLinks }) => (
                   <div key={id}>
                     <Link
