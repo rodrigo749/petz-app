@@ -152,6 +152,31 @@
   transform: translate(-50%, -50%) scale(1.10);
 }
 
+/* Modal styles for Pix popup */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 24px;
+}
+
+.modal-content {
+  position: fixed;
+  top: 50%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  max-width: 920px;
+  width: 100%;
+  outline: none;
+  z-index: 10001;
+}
+
+
+
 .apoiar-btn img {
   filter: invert(1);
 }

@@ -17,5 +17,24 @@
     "HorarioFunc2": "12:34",
     "imagem": "/uploads/camera_13357918.png",
     "tipo": "ong"
+  },
+  {
+    "id": 1768910317483,
+    "nome": "",
+    "email": "",
+    "telefone": "",
+    "celular": "",
+    "senha": "",
+    "cnpj": "",
+    "cep": "",
+    "rua": "",
+    "numero": "",
+    "complemento": "",
+    "cidade": "",
+    "estado": "",
+    "HorarioFunc1": "",
+    "HorarioFunc2": "",
+    "imagem": "",
+    "tipo": "ong"
   }
 ]
