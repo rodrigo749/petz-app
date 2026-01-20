@@ -1,0 +1,55 @@
+/* CONTAINER PRINCIPAL */
+.contatoOngContainer {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 40px;
+  background: #f5f8fa;
+  border-radius: 16px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* TÍTULO (isolado, sem afetar h1 global) */
+.contatoOngTitulo {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #1f2d3d;
+  margin-bottom: 20px;
+}
+
+/* TEXTO */
+.contatoOngTexto {
+  font-size: 1rem;
+  color: #4a4a4a;
+  margin-bottom: 30px;
+}
+
+/* BOTÃO */
+.contatoOngBotao {
+  display: inline-block;
+  padding: 10px 18px;
+  background-color: #2c7be5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.contatoOngBotao:hover {
+  background-color: #1a5fc4;
+}
+
+/* ANIMAÇÃO */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
