@@ -35,9 +35,11 @@ export default function Page() {
   if (!ong.name && !ong.phone && !ong.desc && ong.chars.length === 0) {
     return (
       <div className={styles.container}>
-        <h1>Contato ONG</h1>
-        <p>Dados da ONG não foram fornecidos. Volte a página anterior e tente novamente.</p>
-        <button onClick={() => router.back()}>Voltar</button>
+        <div className= {styles.texto}>
+            <h1>Contato ONG</h1>
+            <p>Dados da ONG não foram fornecidos. Volte a página anterior e tente novamente.</p>
+        </div>    
+        <button className={styles.backBtn} onClick={() => router.back()}>Voltar</button>
       </div>
     )
   }
@@ -56,7 +58,7 @@ export default function Page() {
       {ong.chars.length > 0 && (
         <section className={styles.section}>
           <h2>Características</h2>
-          <ul>
+          <ul className={styles.featuresList}>
             {ong.chars.map((c, idx) => (
               <li key={idx}>{c}</li>
             ))}
