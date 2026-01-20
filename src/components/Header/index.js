@@ -89,7 +89,7 @@ export default function Header() {
 
         {/* Profile avatar (desktop) */}
         {usuarioLogado && (
-          <div className={styles.profileWrap} onMouseLeave={() => setProfileOpen(false)}>
+          <div className={styles.profileWrap} onMouseEnter={() => setProfileOpen(true)} onMouseLeave={() => setProfileOpen(false)}>
             <button
               className={styles.avatarLink}
               onClick={() => setProfileOpen(!profileOpen)}
@@ -114,7 +114,7 @@ export default function Header() {
             </button>
 
             {profileOpen && (
-              <div className={styles.profileDropdown} role="menu">
+              <div className={styles.dropdownMenu} role="menu">
                 <Link
                   href={usuarioLogado.tipo === "ong" ? "/perfil-ong" : "/perfil-usuario"}
                   className={styles.dropdownItem}

@@ -20,24 +20,26 @@
   color: #FFFFFF;
   font-size: 20px;
   font-weight: 700;
-  padding: 7px 550px;
+  padding: 7px 2rem;
   border-radius: 50px;
   text-align: center;
-  width: fit-content;
+  display: inline-block;
+  width: auto;
+  max-width: 90%;
   margin: 0 auto 50px auto;
   border: 5px solid #0E2A45;
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
-.grid-pets {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-  gap: 10px;
-  justify-items: center;
+/* Ajustes adicionais para telas muito grandes */
+@media (min-width:1200px) {
+  .titulo {
+    padding: 7px 6rem;
+    font-size: 22px;
+  }
 }
 
-/* Responsividade do titulo */
-
+/* Responsividade do titulo (telinhas) */
 @media (max-width:480px) {
   .titulo {
     padding: 7px 10px;
@@ -46,4 +48,11 @@
     justify-content: center;
     display: flex;
   }
+}
+
+.grid-pets {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 10px;
+  justify-items: center;
 }

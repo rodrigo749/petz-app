@@ -18,18 +18,36 @@
 
 
 .titulo {
-  font-size: 24px;
-  font-weight: bold;
-  color: #ffffff;
-  background-color: #254d6b;
-  border: 5px solid #143750;
-  padding: 5px 20px;
-  border-radius: 50;
+  background-color: #25455d;
+  color: #FFFFFF;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 7px 2rem;
+  border-radius: 50px;
   text-align: center;
-  display: block;
-  width: 1250px;
-  margin: 0 auto 30px auto;
+  display: inline-block;
+  width: auto;
+  max-width: 90%;
+  margin: 0 auto 50px auto;
+  border: 5px solid #0E2A45;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
 
+@media (min-width:1200px) {
+  .titulo {
+    padding: 7px 6rem;
+    font-size: 22px;
+  }
+}
+
+@media (max-width:480px) {
+  .titulo {
+    padding: 7px 10px;
+    width: 90%;
+    font-size: 16px;
+    justify-content: center;
+    display: flex;
+  }
 }
 
 
@@ -43,7 +61,8 @@
 
 .card-pet {
   background: #254b6b;
-  border-radius: 16px;
+  /* increased radius to match adoção page */
+  border-radius: 25px;
   padding: 15px;
   display: flex;
   gap: 12px;
@@ -61,7 +80,8 @@
 .card-image-wrapper {
   width: 130px;
   height: 160px;
-  border-radius: 12px;
+  /* match uploadBox radius from adocao page */
+  border-radius: 22px;
   overflow: hidden;
   flex-shrink: 0;    
 }
@@ -74,7 +94,8 @@
 
 .card-text-box {
   background: white;
-  border-radius: 12px;
+  /* larger inner box radius to match adocao styling */
+  border-radius: 22px;
   padding: 6px 10px;
   color: #0f2a3d;
 
