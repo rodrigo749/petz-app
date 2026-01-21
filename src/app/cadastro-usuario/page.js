@@ -23,6 +23,35 @@ export default function CadastroPage() {
   const [error, setError] = useState("");
   const [cpfError, setCpfError] = useState("");
 
+  const handleLogin = async (e) => {
+  e.preventDefault();
+  
+  try {
+    const res = await fetch('http://localhost:5000/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      // 1. GUARDA O TOKEN! Sem isto o middleware de segurança vai bloquear-te
+      localStorage.setItem('token', data.token);
+      
+      // 2. Guarda os dados do utilizador para usar no perfil
+      localStorage.setItem('usuarioLogado', JSON.stringify(data.user));
+      
+      showToast('Bem-vindo!', 'success');
+      router.push('/dashboard'); 
+    } else {
+      setError(data.message || 'Erro ao fazer login');
+    }
+  } catch (err) {
+    setError('Erro de conexão com o servidor');
+  }
+};
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");

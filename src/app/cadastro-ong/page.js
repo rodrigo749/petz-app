@@ -57,69 +57,73 @@ export default function CadastroOngPage() {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setError('')
+  e.preventDefault();
+  setError('');
 
-  // validações temporariamente removidas — permite submissão sem checagens
+  try {
+    let imagemUrl = imagem;
 
-    try {
-      let imagemUrl = imagem
-      // If the user selected a File, upload it to /api/upload and use returned URL
-      if (imageFile) {
-        try {
-          imagemUrl = await uploadImage(imageFile)
-        } catch (err) {
-          console.error('Erro ao fazer upload da imagem:', err)
-          showToast('Erro ao enviar imagem. Tente novamente.', 'error')
-          return
-        }
+    // 1. Upload da Imagem (Certifique-se que a função uploadImage aponte para a porta 5000)
+    if (imageFile) {
+      try {
+        imagemUrl = await uploadImage(imageFile);
+      } catch (err) {
+        console.error('Erro no upload:', err);
+        showToast('Erro ao enviar imagem. Verifique a pasta public/uploads no backend.', 'error');
+        return;
       }
-
-      const payload = {
-        nome,
-        email,
-        telefone,
-        celular,
-        senha,
-        cnpj,
-        cep,
-        rua,
-        numero,
-        complemento,
-        cidade,
-        estado,
-        HorarioFunc1,
-        HorarioFunc2,
-        imagem: imagemUrl,
-        tipo: 'ong'
-      }
-
-      const res = await fetch('/api/ongs', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      })
-
-      const data = await res.json().catch(() => ({}))
-
-      if (!res.ok) {
-        const msg = data?.message || 'Erro ao cadastrar ONG'
-        setError(msg)
-        showToast(msg, 'error')
-        return
-      }
-
-      showToast('Cadastro realizado com sucesso!', 'success')
-      localStorage.setItem('usuarioLogado', JSON.stringify(data))
-      // pequeno delay para ver o toast
-      setTimeout(() => router.push('/perfil-ong'), 900)
-    } catch (err) {
-      console.error(err)
-      const msg = 'Erro de rede. Tente novamente.'
-      setError(msg)
-      showToast(msg, 'error')
     }
+
+    // 2. Montagem do Payload
+    const payload = {
+      nome,
+      email,
+      telefone,
+      celular,
+      senha,
+      cnpj,
+      cep,
+      rua,
+      numero,
+      complemento,
+      cidade,
+      estado,
+      HorarioFunc1, // Verifique se o Model no Backend aceita este nome exato
+      HorarioFunc2,
+      imagem: imagemUrl,
+      role: 'ong' // No seu novo backend, o campo costuma ser 'role' e não 'tipo'
+    };
+
+    // 3. Chamada para o Backend na porta 5000
+    const res = await fetch('http://localhost:5000/api/ongs', {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json' 
+      },
+      body: JSON.stringify(payload)
+    });
+
+    // 4. Tratamento da Resposta
+    const data = await res.json().catch(() => ({}));
+
+    if (!res.ok) {
+      const msg = data?.message || 'Erro ao cadastrar ONG no servidor.';
+      setError(msg);
+      showToast(msg, 'error');
+      return;
+    }
+
+    showToast('Cadastro realizado com sucesso!', 'success');
+    localStorage.setItem('usuarioLogado', JSON.stringify(data));
+    
+    setTimeout(() => router.push('/perfil-ong'), 900);
+
+  } catch (err) {
+    console.error('Erro de rede:', err);
+    setError('Não foi possível conectar ao servidor (Porta 5000).');
+    showToast('Servidor offline ou erro de CORS.', 'error');
   }
+};
 
   const formatCNPJ = (value) => {
     const digits = (value || '').replace(/\D/g, '').slice(0, 14)
