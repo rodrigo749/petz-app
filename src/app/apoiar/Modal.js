@@ -20,6 +20,7 @@ export default function Modal({ ong, onClose }){
     <div className={styles['modal-overlay']} onClick={onClose}>
   <div className={styles['modal-content']}>
   <div className={stylesPix.container} style={{maxWidth: '720px', width: '90vw'}} onClick={(e)=>e.stopPropagation()}>
+          <button className={stylesPix.closeBtn} onClick={onClose} aria-label="Fechar janela">×</button>
           <div className={stylesPix.qr}>
             <img src="/images/Qrcode.jpg" alt="qr" style={{width:'90%',height:'90%'}} />
           </div>
@@ -43,7 +44,7 @@ export default function Modal({ ong, onClose }){
             </div>
             <div className={stylesPix.step}>
               <div className={stylesPix.stepNum}>2</div>
-              <div>Selecione a tela: leitura de QR Code.</div>
+              <div>Selecione a ONG que voce quer apoiar.</div>
             </div>
             <div className={stylesPix.step}>
               <div className={stylesPix.stepNum}>3</div>
