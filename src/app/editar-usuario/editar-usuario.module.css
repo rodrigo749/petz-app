@@ -1,0 +1,69 @@
+.container {
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  background-color: #eaf6f8;
+}
+
+.form {
+  width: 100%;
+  max-width: 760px;
+  background: #f8ffff;
+  padding: 3rem 2.5rem;
+  border-radius: 24px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  align-items: center;
+  border: 6px solid #d9d9d9;
+}
+
+.title {
+  margin: 0 0 .75rem 0;
+  font-weight: 700;
+  text-align: center;
+  color: #0b3b52;
+  font-size: 28px;
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 10px 18px;
+  border: 6px solid #143750;
+  border-radius: 999px;
+  background: transparent;
+  box-shadow: inset 0 -3px 0 rgba(255,255,255,0.02);
+  color: black;
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #ffd28b;
+  color: #0b3746;
+  font-size: 30px;
+}
+
+.fieldLabel { font-weight: 700; color: #0b3746; min-width: 90px; }
+.input { border: none; outline: none; background: transparent; width: 100%; font-size: 1rem; padding: 10px 6px; color: black; }
+.changePassword { margin-left: 12px; padding: 8px 12px; background:#0b66a6; color:#fff; border-radius: 999px; border: none; cursor:pointer }
+
+.uploadWrapper { display:flex; justify-content:center; margin: 20px 0; }
+.uploadBox { width: 140px; height: 140px; background-color: #b7d3e6; border-radius: 24px; border: 3px solid #6d93ad; display:flex; align-items:center; justify-content:center; cursor:pointer }
+.uploadPreview { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; }
+
+.actionsRow { display:flex; gap: 2rem; width:100%; justify-content: space-between; align-items:center; }
+.deleteBtn { padding: 14px 36px; background: #ff6b6b; color: white; border:none; border-radius: 999px; cursor:pointer; font-weight:700 }
+.button { padding: 14px 36px; background: #19a54a; color: white; border:none; border-radius: 999px; cursor:pointer; font-weight:700 }
+
+.error { background: #fee2e2; color: #b91c1c; padding: .5rem .75rem; border-radius: 6px; font-size: .9rem; }
