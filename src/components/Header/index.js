@@ -7,6 +7,7 @@ import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { NAV_LINKS } from "@/constants/navigation";
+import Avatar from '../Avatar'
 import styles from "./header.module.css";
 
 export default function Header() {
@@ -46,45 +47,52 @@ export default function Header() {
 
         {/* Desktop Menu */}
         <div className={styles.desktop}>
-          {NAV_LINKS.map(({ id, label, href, subLinks }) => (
-            <div 
-              key={id} 
-              className={styles.dropdown}
-              onMouseEnter={() => subLinks && setDropdownOpen(id)}
-              onMouseLeave={() => setDropdownOpen(null)}
-            >
-              {subLinks ? (
-                <button
-                  className={styles.link}
-                  aria-expanded={dropdownOpen === id}
-                  aria-haspopup={"true"}
-                >
-                  {label}
-                  {dropdownOpen === id ? (
-                    <FaChevronUp size={12} className="chevron-icon" />
-                  ) : (
-                    <FaChevronDown size={12} className="chevron-icon" />
-                  )}
-                </button>
-              ) : (
-                <Link href={href} className={styles.link}>{label}</Link>
-              )}
+          {NAV_LINKS.map(({ id, label, href, subLinks }) => {
+            // quando for o menu 'adocao' e o usuário for ONG, inserir o link "Anunciar Adoção" no topo
+            const isAdocao = id === 'adocao';
+            const extraForOng = isAdocao && usuarioLogado?.tipo === 'ong' ? [{ label: 'Anunciar Adoção', href: '/cadastro-pet-adocao' }, ...(subLinks || [])] : subLinks;
+            const displayedSubLinks = extraForOng;
 
-              {subLinks && dropdownOpen === id && (
-                <div className={styles.dropdownMenu}>
-                  {subLinks.map((subLink, index) => (
-                    <Link
-                      key={index}
-                      href={subLink.href}
-                      className={styles.dropdownItem}
-                    >
-                      {subLink.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
+            return (
+              <div 
+                key={id} 
+                className={styles.dropdown}
+                onMouseEnter={() => displayedSubLinks && setDropdownOpen(id)}
+                onMouseLeave={() => setDropdownOpen(null)}
+              >
+                {displayedSubLinks ? (
+                  <button
+                    className={styles.link}
+                    aria-expanded={dropdownOpen === id}
+                    aria-haspopup={"true"}
+                  >
+                    {label}
+                    {dropdownOpen === id ? (
+                      <FaChevronUp size={12} className="chevron-icon" />
+                    ) : (
+                      <FaChevronDown size={12} className="chevron-icon" />
+                    )}
+                  </button>
+                ) : (
+                  <Link href={href} className={styles.link}>{label}</Link>
+                )}
+
+                {displayedSubLinks && dropdownOpen === id && (
+                  <div className={styles.dropdownMenu}>
+                    {displayedSubLinks.map((subLink, index) => (
+                      <Link
+                        key={index}
+                        href={subLink.href}
+                        className={styles.dropdownItem}
+                      >
+                        {subLink.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
 
         {/* Profile avatar (desktop) */}
@@ -97,19 +105,7 @@ export default function Header() {
               aria-expanded={profileOpen}
             >
               <span className={styles.avatarIcon} aria-hidden>
-                {usuarioLogado.imagem ? (
-                  <img
-                    src={usuarioLogado.imagem}
-                    alt="Perfil"
-                    className={styles.avatarImage}
-                  />
-                ) : (
-                  <img
-                    src="/images/Avatar.png"
-                    alt="Perfil padrão"
-                    className={styles.avatarImage}
-                  />
-                )}
+                <Avatar src={usuarioLogado.imagem} alt="Perfil" />
               </span>
             </button>
 
@@ -228,32 +224,37 @@ export default function Header() {
                     </div>
                   </div>
                 )}
-                {NAV_LINKS.map(({ id, label, href, subLinks }) => (
-                  <div key={id}>
-                    <Link
-                      href={href}
-                      onClick={() => setMenuOpen(false)}
-                      className={styles.mobileLink}
-                    >
-                      {label}
-                      {subLinks && <FaChevronDown size={12} />}
-                    </Link>
-                    {subLinks && (
-                      <div className={styles.mobileSubLinks}>
-                        {subLinks.map((subLink, index) => (
-                          <Link
-                            key={index}
-                            href={subLink.href}
-                            onClick={() => setMenuOpen(false)}
-                            className={styles.mobileSubLink}
-                          >
-                            {subLink.label}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ))}
+                {NAV_LINKS.map(({ id, label, href, subLinks }) => {
+                  const isAdocao = id === 'adocao';
+                  const displayedSubLinks = isAdocao && usuarioLogado?.tipo === 'ong' ? [{ label: 'Anunciar Adoção', href: '/cadastro-pet-adocao' }, ...(subLinks || [])] : subLinks;
+
+                  return (
+                    <div key={id}>
+                      <Link
+                        href={href}
+                        onClick={() => setMenuOpen(false)}
+                        className={styles.mobileLink}
+                      >
+                        {label}
+                        {displayedSubLinks && <FaChevronDown size={12} />}
+                      </Link>
+                      {displayedSubLinks && (
+                        <div className={styles.mobileSubLinks}>
+                          {displayedSubLinks.map((subLink, index) => (
+                            <Link
+                              key={index}
+                              href={subLink.href}
+                              onClick={() => setMenuOpen(false)}
+                              className={styles.mobileSubLink}
+                            >
+                              {subLink.label}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </nav>
             </div>
           </div>

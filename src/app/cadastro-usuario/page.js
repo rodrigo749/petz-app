@@ -270,7 +270,7 @@ export default function CadastroPage() {
         <button className={styles.button} type="submit">Cadastrar</button>
 
         <div className={styles.bottomLink}>
-          Já tem conta? <a href="/login">Faça login aqui</a>.
+          Já tem conta? <a href="/login-usuario">Faça login aqui</a>.
         </div>
       </form>
     </div>

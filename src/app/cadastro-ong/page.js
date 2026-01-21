@@ -1,10 +1,11 @@
-'use client'
+"use client"
 
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { FaPaw } from 'react-icons/fa'
 import styles from './cadastro-ong.module.css'
 import useSafeToast from '@/components/Toast/useSafeToast'
+import { uploadImage } from '@/lib/apiPets'
 
 const Field = ({ label, required, children, className = '' }) => (
   <div className={`${styles.inputWrapper} ${className}`}>
@@ -59,14 +60,21 @@ export default function CadastroOngPage() {
     e.preventDefault()
     setError('')
 
-    if (!nome || !email || !telefone || !celular || !senha || !cnpj || !rua || !numero || !cidade || !estado || !cep) {
-      const msg = 'Por favor, preencha todos os campos obrigatórios.'
-      setError(msg)
-      showToast(msg, 'warning')
-      return
-    }
+  // validações temporariamente removidas — permite submissão sem checagens
 
     try {
+      let imagemUrl = imagem
+      // If the user selected a File, upload it to /api/upload and use returned URL
+      if (imageFile) {
+        try {
+          imagemUrl = await uploadImage(imageFile)
+        } catch (err) {
+          console.error('Erro ao fazer upload da imagem:', err)
+          showToast('Erro ao enviar imagem. Tente novamente.', 'error')
+          return
+        }
+      }
+
       const payload = {
         nome,
         email,
@@ -82,7 +90,7 @@ export default function CadastroOngPage() {
         estado,
         HorarioFunc1,
         HorarioFunc2,
-        imagem,
+        imagem: imagemUrl,
         tipo: 'ong'
       }
 
