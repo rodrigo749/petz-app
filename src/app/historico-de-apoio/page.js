@@ -34,7 +34,7 @@ export default function HistoricoDeApoioPage() {
   const [modalPixAberto, setModalPixAberto] = useState(false);
 
   useEffect(() => {
-    // ✅ Enquanto estamos no protótipo: usa MOCK
+    
     setUsuarioLogado(ONG_MOCK);
   }, []);
 
@@ -49,7 +49,7 @@ export default function HistoricoDeApoioPage() {
       try {
         setCarregando(true);
 
-        // futuramente vai buscar de verdade
+        
         const res = await fetch(`/api/doacoes?ongId=${usuarioLogado.id}`);
         const data = await res.json();
         setDoacoes(Array.isArray(data) ? data : []);
@@ -72,9 +72,8 @@ export default function HistoricoDeApoioPage() {
   const ongDescricao = usuarioLogado?.descricao || "";
   const ongCnpj = usuarioLogado?.cnpj || "";
 
-  // ✅ Fonte de dados da tela (por enquanto mock)
-  // Quando implementar de verdade, troque para: const doacoesDaTela = doacoes;
-  const doacoesDaTela = apoiosMock;
+ 
+  const doacoesDaTela = pix ? apoiosMock : [];
 
   // ===== handlers =====
   const handleCadastrarPix = () => setModalPixAberto(true);
@@ -207,7 +206,7 @@ export default function HistoricoDeApoioPage() {
           <h1 className={styles.titulo}>Histórico de Apoio</h1>
         </div>
 
-        {/* HISTÓRICO (mockado) */}
+        {/* HISTÓRICO */}
         {carregando ? (
           <p className={styles.loading}>Carregando...</p>
         ) : doacoesDaTela.length === 0 ? (
@@ -224,9 +223,7 @@ export default function HistoricoDeApoioPage() {
                 <p className={styles.apoioLinha}>
                   <span className={styles.apoioLabel}>Valor:</span>
                   <span className={styles.apoioValorTexto}>
-                    {Number(d.valor).toLocaleString("pt-BR", {
-                      minimumFractionDigits: 2,
-                    })}
+                    {Number(d.valor).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
                   </span>
                 </p>
 
