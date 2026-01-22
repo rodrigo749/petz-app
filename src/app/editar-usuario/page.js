@@ -97,11 +97,23 @@ export default function EditarUsuarioPage() {
 
         <div className={styles.inputWrapper}>
           <span className={styles.icon} aria-hidden>
-            <FaPaw />
+            <img src="/images/patinha.png" alt="" className={styles.pawIcon} />
           </span>
           <label className={styles.fieldLabel}>
-            Nome:
-            <input className={styles.input} type="text" value={formData.nome} onChange={(e) => handleChange('nome', e.target.value)} />
+            <div className={styles.inputInner}>
+              <input className={styles.input} type="text" value={formData.nome} onChange={(e) => handleChange('nome', e.target.value)} placeholder={`Nome: ${formData.nome || ''}`} />
+            </div>
+          </label>
+        </div>
+
+        <div className={styles.inputWrapper}>
+          <span className={styles.icon} aria-hidden>
+            <img src="/images/patinha.png" alt="" className={styles.pawIcon} />
+          </span>
+          <label className={styles.fieldLabel}>
+            <div className={styles.inputInner}>
+              <input className={styles.input} type="email" value={formData.email} onChange={(e) => handleChange('email', e.target.value)} placeholder={`Email: ${formData.email || ''}`} />
+            </div>
           </label>
         </div>
 
@@ -110,44 +122,45 @@ export default function EditarUsuarioPage() {
             <FaPaw />
           </span>
           <label className={styles.fieldLabel}>
-            Email:
-            <input className={styles.input} type="email" value={formData.email} onChange={(e) => handleChange('email', e.target.value)} />
+            <div className={styles.inputInner}>
+              <input className={styles.input} type="tel" value={formData.telefone} onChange={(e) => handleChange('telefone', e.target.value)} placeholder={`Telefone: ${formData.telefone || ''}`} />
+            </div>
           </label>
         </div>
 
-        <div className={styles.inputWrapper}>
-          <span className={styles.icon} aria-hidden>
-            <FaPaw />
-          </span>
-          <label className={styles.fieldLabel}>
-            Telefone:
-            <input className={styles.input} type="tel" value={formData.telefone} onChange={(e) => handleChange('telefone', e.target.value)} />
-          </label>
-        </div>
+        <div className={styles.inputRow}>
+          <div className={`${styles.inputWrapper} ${styles.halfInput}`}>
+            <span className={styles.icon} aria-hidden>
+              <img src="/images/patinha.png" alt="" className={styles.pawIcon} />
+            </span>
+            <label className={styles.fieldLabel}>
+              <div className={styles.inputInner}>
+                <input className={styles.input} type="password" value={formData.password} onChange={(e) => handleChange('password', e.target.value)} placeholder={`Senha: ${formData.password || ''}`} />
+              </div>
+            </label>
+          </div>
 
-        <div className={styles.inputWrapper}>
-          <span className={styles.icon} aria-hidden>
-            <FaPaw />
-          </span>
-          <label className={styles.fieldLabel}>
-            Senha:
-            <input className={styles.input} type="password" value={formData.password} onChange={(e) => handleChange('password', e.target.value)} />
-          </label>
-          <button type="button" className={styles.changePassword} onClick={() => router.push('/alterar-senha')}>Alterar Senha</button>
+          <div>
+            <button type="button" className={styles.changePassword} onClick={() => router.push('/alterar-senha')}>Alterar Senha</button>
+          </div>
         </div>
 
         <div className={styles.uploadWrapper}>
-          <label className={styles.uploadBox}>
-            {formData.imagem ? (
-              <img src={formData.imagem} alt="Preview" className={styles.uploadPreview} />
-            ) : (
-              <>
-                <span className={styles.uploadIcon}>＋</span>
-                <span className={styles.uploadText}>Adicionar foto de perfil</span>
-              </>
-            )}
-            <input type="file" accept="image/*" onChange={handleImageUpload} hidden />
-          </label>
+          <div className={styles.uploadImagem}>
+            <label htmlFor="usuario-imagem">
+              <div className={styles.uploadBox}>
+                {formData.imagem ? (
+                  <img src={formData.imagem} alt="Preview" className={styles.uploadPreview} />
+                ) : (
+                  <>
+                    <img src="/images/iconephoto.png" className={styles.iconeAddImg} alt="Adicionar" />
+                    <span className={styles.uploadText}>Adicionar imagem</span>
+                  </>
+                )}
+              </div>
+            </label>
+            <input id="usuario-imagem" type="file" accept="image/*" onChange={handleImageUpload} hidden />
+          </div>
         </div>
 
         <div className={styles.actionsRow}>
