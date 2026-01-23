@@ -13,12 +13,14 @@
   border-radius: 40px;
   padding: 20px 20px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
+  /* increase base font-size for melhor legibilidade na página Apoiar */
+  font-size: 18px;
 }
 
 .titulo {
   background-color: #25455d;
   color: #FFFFFF;
-  font-size: 20px;
+  font-size: 26px;
   font-weight: 700;
   padding: 7px 550px;
   border-radius: 50px;
@@ -114,7 +116,7 @@
 .card-title h3 {
   position: relative;
   margin: 0;             /* remove margens */
-  font-size: 21px;
+  font-size: 24px;
   font-weight: bold;
   color: #ffb74d;
   text-align: center;  /* centraliza horizontalmente */
@@ -128,7 +130,7 @@
 
 .apoiar-btn {
   position: absolute;
-  top: 83%;
+  top: 75%; /* lifted further to move the button up */
   left: 50%;
   transform: translate(-50%, -50%);
   background: linear-gradient(180deg,#0d66a6,#0a4f86);
@@ -148,8 +150,49 @@
   transition: transform 0.2s ease-in-out;
 }
 
-.apoiar-btn:hover {
-  transform: translate(-50%, -50%) scale(1.10);
+.apoiar-btn:hover,
+.apoiar-btn:active {
+  /* keep the same translate used in default state, no scaling or movement */
+  transform: translate(-50%, -50%);
+}
+
+/* For touch devices ensure there is no unexpected override */
+@media (hover: none) and (pointer: coarse) {
+  .apoiar-btn:hover,
+  .apoiar-btn:active {
+    transform: translate(-50%, -50%) !important;
+  }
+}
+
+/* Force no movement/scale on all devices: disable transitions and touch highlights */
+.apoiar-btn {
+  /* do not translate by default (prevents offsets when button is static) */
+  transform: none !important;
+  -webkit-transform: none !important;
+  transition: none !important;
+  -webkit-transition: none !important;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+.apoiar-btn:hover,
+.apoiar-btn:active,
+.apoiar-btn:focus {
+  transform: none !important;
+  -webkit-transform: none !important;
+}
+
+/* Re-enable translate centering only on wide screens where button is absolutely positioned */
+@media (min-width: 1025px) {
+  .apoiar-btn {
+    transform: translate(-50%, -50%) !important;
+    -webkit-transform: translate(-50%, -50%) !important;
+  }
 }
 
 /* Modal styles for Pix popup */
@@ -167,12 +210,108 @@
 .modal-content {
   position: fixed;
   top: 50%;
-  left: 55%;
+  left: 50%;
   transform: translate(-50%, -50%);
-  max-width: 920px;
-  width: 100%;
+  max-width: min(920px, 95vw);
+  width: auto;
   outline: none;
   z-index: 10001;
+}
+
+/* keep the popup centered and constrained on small screens */
+@media (max-width: 700px) {
+  .modal-overlay { padding: 12px; }
+  .modal-content { max-width: 96vw; }
+}
+
+/* ensure popup never exceeds viewport height and scrolls internally */
+.modal-content {
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+}
+
+/* On phones and small tablets, keep modal as a centered card (match iPhone 14 Pro Max layout) */
+@media (max-width: 768px) {
+  .modal-overlay {
+    padding: 12px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 96vw;
+    width: auto;
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+    z-index: 10001;
+    outline: none;
+    border-radius: 14px;
+    background: transparent; /* modal's inner container holds the card */
+  }
+
+  .modal-content .container {
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    max-height: none !important;
+    border-radius: 12px !important;
+    padding: 48px 16px 16px 16px !important; /* space for close button */
+    box-sizing: border-box;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    overflow: visible !important;
+    background-clip: padding-box;
+  }
+
+  .modal-content .closeBtn {
+    position: absolute !important;
+    top: 12px !important;
+    right: 12px !important;
+    z-index: 12002 !important;
+  }
+
+  /* ensure apoiar button is slightly lower on small tablets/phones */
+  .apoiar-btn {
+  margin-top: 8px;
+  transform: none !important;
+  -webkit-transform: none !important;
+  }
+}
+
+/* Aggressive compression for very small phones: try to fit all content without internal scrolling */
+@media (max-width: 420px) {
+  .modal-overlay { padding: 8px; }
+
+  .modal-content {
+    max-width: 98vw;
+    max-height: 100vh; /* prevent internal scrolling */
+    overflow: hidden;  /* hide internal scrollbars */
+    transform: translate(-50%, -50%);
+  }
+
+  .modal-content .container {
+    /* make container fit the viewport and avoid internal scroll */
+    width: 100% !important;
+    height: 100vh !important;
+    padding: 44px 10px 10px 10px !important; /* keep space for close */
+    box-sizing: border-box;
+    overflow: hidden !important;
+    gap: 8px !important;
+  }
+
+  .apoiar-btn {
+  margin-top: 0px; /* bring button slightly closer to title on very small phones */
+  transform: none !important;
+  -webkit-transform: none !important;
+  }
+
+  /* ensure the close button is inside the card */
+  .modal-content .closeBtn { top: 10px !important; right: 10px !important; }
 }
 
 
@@ -183,7 +322,7 @@
 
 .descricao {
   color: #ffb74d;
-  font-size: 20px;
+  font-size: 22px;
 }
 
 /* ===== MOBILE ===== */
@@ -235,6 +374,7 @@
     height: auto;
     margin-left: 0;   /* zera o recuo do desktop */
     margin-top: 0;
+    font-size: 16px;
     padding-left: 12px;
   }
 
@@ -242,7 +382,7 @@
   .card-title {
     position: static;
     transform: none;
-    margin-bottom: 10px;
+    margin-bottom: -25px;
   }
 
   .card-title h3 {
@@ -252,9 +392,10 @@
 
   /* botão sempre no final do card */
   .apoiar-btn {
-    position: static;
-    margin-top: auto; 
-    transform: none;
+  position: static;
+  margin-top: 99%; /* lift button on mobile */
+  margin-bottom: 8px;
+  transform: none !important;
   }
 }
 
@@ -315,6 +456,10 @@
     line-height: 1.2;
     max-width: 100%;
   }
+  /* push the apoiar button a bit lower on tablet layouts */
+  .apoiar-btn {
+  margin-top: 48px;
+  }
 
 
   .card-text-box {
@@ -329,7 +474,85 @@
 
   .apoiar-btn {
     position: static;           /* desliga absolute */
-    transform: none;
-    margin-top: 14px;
+  transform: none;
+  margin-top: 40px;
   }
+}
+
+/* iPad specific tweaks (portrait and landscape) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .modal-overlay { padding: 20px; }
+  .modal-content {
+    max-width: 760px;
+    max-height: calc(100vh - 64px);
+  }
+  .modal-content .container {
+    padding: 32px !important;
+    max-width: 840px !important;
+    border-radius: 18px !important;
+  }
+  .modal-content .qr { width: 340px; height: 340px; }
+  .modal-content .steps { grid-template-columns: repeat(2, 1fr); gap: 26px; }
+  /* Increased typography for iPad family */
+  .modal-content .step { font-size: 24px; line-height: 1.25; }
+  .modal-content .note { font-size: 22px; }
+  .modal-content .keyLabel { font-size: 24px; }
+  .modal-content .keyInput { font-size: 20px; }
+  .modal-content .stepNum { width: 64px; height: 64px; }
+  .modal-content .closeBtn { top: 16px !important; right: 16px !important; }
+}
+
+/* iPad Pro / larger tablets (e.g. 1024 - 1366 width) */
+@media (min-width: 1024px) and (max-width: 1366px) {
+  .modal-content { max-width: 900px; }
+  .modal-content .container { padding: 36px !important; max-width: 880px !important; }
+  .modal-content .qr { width: 380px; height: 380px; }
+  /* Increased typography for larger tablets / iPad Pro */
+  .modal-content .step { font-size: 26px; }
+  .modal-content .note { font-size: 22px; }
+  .modal-content .keyLabel { font-size: 26px; }
+  .modal-content .keyInput { font-size: 22px; }
+  .modal-content .stepNum { width: 72px; height: 72px; }
+  .modal-content .closeBtn { top: 18px !important; right: 18px !important; }
+}
+
+/* Modal-scoped (ensure popup uses these sizes) */
+@media (min-width: 800px) and (max-height: 720px) and (orientation: landscape) {
+  .modal-content .container { padding: 18px !important; max-width: 700px !important; }
+  .modal-content .qr { width: 240px !important; height: 240px !important; }
+  .modal-content .steps { gap: 12px !important; }
+}
+
+@media (max-width: 540px) and (min-height: 760px) and (orientation: portrait) {
+  .modal-content .container { padding: 28px 10px 10px 10px !important; }
+  .modal-content .qr { width: 100px !important; height: 100px !important; }
+  .modal-content .keyInput { min-width: 90px !important; }
+  .modal-content .steps { grid-template-columns: repeat(2, 1fr) !important; gap: 6px !important; }
+  .modal-content .step { font-size: 11px !important; }
+}
+
+/* Nest Hub - wide but shallow displays (e.g. 1024x600) */
+@media (min-width: 800px) and (max-height: 720px) and (orientation: landscape) {
+  .modal-overlay { padding: 12px; }
+  .modal-content { max-width: 720px; }
+  .modal-content .container { padding: 18px 18px; max-width: 700px !important; }
+  /* make QR slightly smaller so it fits on shallow displays */
+  .modal-content .qr { width: 240px; height: 240px; }
+  .modal-content .steps { gap: 12px; }
+  .modal-content .step { font-size: 20px; }
+  .modal-content .note { font-size: 18px; }
+  .modal-content .stepNum { width: 56px; height: 56px; }
+}
+
+/* Surface Duo / dual-screen narrow devices: tall and narrow — compact the modal */
+@media (max-width: 540px) and (min-height: 760px) and (orientation: portrait) {
+  .modal-overlay { padding: 8px; }
+  .modal-content { max-width: 92vw; }
+  .modal-content .container { padding: 28px 10px 10px 10px !important; }
+  .modal-content .qr { width: 120px; height: 120px; }
+  .modal-content .keyInput { min-width: 110px; }
+  .modal-content .steps { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  /* Surface Duo: increased, but compact typography */
+  .modal-content .step { font-size: 18px; }
+  .modal-content .stepNum { width: 56px; height: 56px; }
 }

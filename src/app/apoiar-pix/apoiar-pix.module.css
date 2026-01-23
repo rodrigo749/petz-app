@@ -118,24 +118,25 @@
 }
 
 .steps {
-  display: flex;
-  gap: 28px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px 24px; /* row-gap, column-gap */
   width: 100%;
-  margin-top: 9px;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  margin-top: 12px;
+  align-items: start;
 }
 
 .step {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 12px;
+  align-items: center; /* center the number above the text */
+  gap: 8px;
   color: #fff;
   font-size: 13px;
-  flex: 1 1 140px;
-  min-width: 120px;
+  padding: 6px 10px;
+  text-align: center;
 }
+
 
 .stepNum {
   width: 48px;
@@ -147,6 +148,9 @@
   justify-content:center;
   color: #08446b;
   font-weight: 700;
+  margin: 0;    /* reset offsets */
+  padding: 0;
+  flex: 0 0 auto;
 }
 
 .note {
@@ -155,4 +159,129 @@
   margin-top: 8px;
   text-align: center;
   padding: 0 6px;
+}
+
+/* Responsive tweaks for tablet and mobile */
+@media (max-width: 700px) {
+  .container { padding: 48px 14px 14px 14px; }
+  .qr { width: 220px; height: 220px; }
+  .keyInput { min-width: 140px; max-width: 70vw; }
+  .closeBtn { top: 12px; right: 12px; width: 36px; height: 36px; font-size: 16px; position: absolute; z-index: 12002; }
+  .steps { gap: 12px; grid-template-columns: repeat(2, 1fr); }
+}
+
+/* iPad tweaks (768 - 1024) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .container { padding: 32px; max-width: 840px; }
+  .qr { width: 320px; height: 320px; }
+  .steps { grid-template-columns: repeat(2,1fr); gap: 22px; }
+  .step { font-size: 21px; line-height: 1.25; }
+  .note { font-size: 24px; }
+  .keyLabel { font-size: 30px; }
+  .keyInput { font-size: 21px; }
+  .stepNum { width: 56px; height: 56px; }
+}
+
+@media (min-width: 1024px) and (max-width: 1366px) {
+  .container { padding: 36px; max-width: 880px; }
+  .qr { width: 360px; height: 360px; }
+  .step { font-size: 21px; }
+  .note { font-size: 24px; }
+  .keyLabel { font-size: 30px; }
+  .keyInput { font-size: 21px; }
+  .stepNum { width: 60px; height: 60px; }
+  .closeBtn { top: 18px; right: 18px; }
+}
+
+/* Nest Hub tweaks */
+@media (min-width: 1024px) and (max-height: 600px) and (orientation: landscape) {
+  .container { padding: 12px; max-width: 12px; }
+  .qr { width: 150px; height: 150px; }
+  .steps { gap: 12px; }
+  .step { font-size: 13px; }
+  .note { font-size: 13px; }
+  .keyLabel { font-size: 18px; }
+  .keyInput { font-size: 15px; }
+  .stepNum { width: 40px; height: 40px; }
+}
+
+@media (min-width: 1280px) and (max-height: 800px) and (orientation: landscape) {
+  .container { padding: 12px; max-width: 12px; }
+  .qr { width: 220px; height: 220px; }
+  .steps { gap: 12px; }
+  .step { font-size: 13px; }
+  .note { font-size: 13px; }
+  .keyLabel { font-size: 18px; }
+  .keyInput { font-size: 15px; }
+  .stepNum { width: 40px; height: 40px; }
+}
+
+/* Surface Duo tweaks */
+@media (max-width: 540px) and (min-height: 720px) and (orientation: portrait) {
+  .container { padding: 12px; max-width: 12px; }
+  .qr { width: 220px; height: 220px; }
+  .steps { gap: 12px; }
+  .step { font-size: 13px; }
+  .note { font-size: 13px; }
+  .keyLabel { font-size: 18px; }
+  .keyInput { font-size: 15px; }
+  .stepNum { width: 40px; height: 40px; }
+
+}
+
+@media (max-width: 420px) {
+  .container { padding: 36px 10px 10px 10px; }
+  .qr { width: 200px; height: 200px; }
+  .keyInput { min-width: 100px; max-width: 68vw; padding: 10px 10px; font-size: 13px; }
+  .copyBtn { padding: 10px 10px; }
+  .steps { gap: 8px; grid-template-columns: repeat(2, 1fr); }
+  .step { font-size: 13px; }
+  .stepNum { width: 40px; height: 40px; }
+  .closeBtn { top: 8px; right: 8px; width: 34px; height: 34px; position: absolute; z-index: 12002; }
+}
+
+@media (max-width: 375px) and (min-height: 667px) {
+  .container { padding: 20px 10px 20px 10px; }
+  .qr { width: 150px; height: 150px; }
+  .keyInput { min-width: 100px; max-width: 68vw; padding: 10px 10px; font-size: 13px; }
+  .copyBtn { padding: 10px 10px; }
+  .steps { gap: 8px; grid-template-columns: repeat(2, 1fr); }
+  .step { font-size: 13px; }
+  .stepNum { width: 40px; height: 40px; }
+  .closeBtn { top: 8px; right: 8px; width: 34px; height: 34px; position: absolute; z-index: 12002; }
+}
+
+/* iPhone 14 Pro Max specific media query (430x932) - placeholder
+   Keeping current popup styles unchanged; this block exists for future tweaks
+*/
+@media (width: 430px) and (height: 932px) and (orientation: portrait) {
+  /* iPhone 14 Pro Max specific tweaks (portrait) */
+  /* keep visual consistent but avoid overlaps with status/navigation areas */
+  .container {
+    padding: 44px 18px 18px 18px !important; /* extra top space for status bar */
+    max-width: 420px !important;
+    width: calc(100vw - 36px) !important;
+    border-radius: 14px !important;
+    box-sizing: border-box;
+  }
+
+  .qr {
+    width: 220px !important;
+    height: 220px !important;
+  }
+
+  .closeBtn {
+    top: 14px !important;
+    right: 14px !important;
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 18px !important;
+  }
+
+  .keyInput { font-size: 15px !important; min-width: 120px !important; }
+  .keyLabel { font-size: 18px !important; }
+  .note { font-size: 14px !important; }
+  .step { font-size: 14px !important; }
+  .stepNum { width: 44px !important; height: 44px !important; }
+  .steps { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
 }
