@@ -1,0 +1,637 @@
+/* =========================================================
+   BASE (V1 + V2)
+   ========================================================= */
+
+.page {
+  min-height: 100vh;
+  background: #274b65;
+  padding: 28px 0 40px;
+}
+
+.container {
+  width: 95%;
+  max-width: 1400px;
+  margin: 0 auto;
+  background: #f7ffff;
+  border-radius: 36px;
+  padding: 24px 22px 34px;
+  border: 4px solid #1d4870;
+}
+
+.headerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 26px;
+}
+
+.titulo {
+  background-color: #25455d;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 10px 18px;
+  border-radius: 999px;
+  text-align: center;
+  width: 100%;
+  max-width: 350px;
+  margin: 0 auto 26px auto;
+  border: 3px solid #0e2a45;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.loading {
+  text-align: center;
+  font-weight: 800;
+  color: #25455d;
+  padding: 40px 0;
+}
+
+.emptyState {
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: 900;
+  font-size: clamp(20px, 3vw, 44px);
+  color: #111;
+  padding: 20px;
+}
+
+/* cards do histórico (lista principal) */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  justify-items: center;
+}
+
+.card {
+  width: min(520px, 100%);
+  background: #6f8ea3;
+  border-radius: 28px;
+  border: 5px solid #0b2f49;
+  padding: 26px 28px;
+}
+
+.card p {
+  margin: 10px 0;
+  font-size: 20px;
+  line-height: 1.25;
+}
+
+.label {
+  color: #ffb74d;
+  font-weight: 900;
+  margin-right: 8px;
+}
+
+.value {
+  color: #fff;
+  font-weight: 800;
+}
+
+/* botões base (usados na V2 e no topo V2) */
+.btnExcluir {
+  border: 2px solid #ff7376;
+  background: #d82d2d;
+  color: #fff;
+  border-radius: 999px;
+  padding: 10px 25px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.btnExcluir:hover {
+  filter: brightness(0.95);
+  transform: scale(1.03);
+}
+
+.btnEditar {
+  border: 2px solid #88d269;
+  background: #00bf63;
+  color: #ffffff;
+  border-radius: 999px;
+  padding: 10px 25px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.btnEditar:hover {
+  filter: brightness(0.97);
+  transform: scale(1.03);
+}
+
+/* =========================================================
+   V1 - TOPBAR COM PATINHAS + BOTÃO "Cadastrar Pix para Apoio"
+   ========================================================= */
+
+.topBar {
+  width: 95%;
+  max-width: 1400px;
+  margin: 0 auto 22px auto;
+  background: #ffffff;
+  border-radius: 999px;
+
+  height: 86px;
+  overflow: hidden;
+  padding: 0 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* wrappers das patinhas */
+.patinhasLeft,
+.patinhasRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* tamanhos das imagens */
+.patinha {
+  width: 65px;
+  height: 65px;
+}
+
+.patinha2 {
+  width: 170px;
+  height: 85px;
+}
+
+.btnCadastrarPix {
+  border: 4px solid #88d269;
+  border-radius: 999px;
+  padding: 8px 30px;
+  background: #1bbf5a;
+  color: #fff;
+  font-weight: 800;
+  font-size: 18px;
+  cursor: pointer;
+  width: min(650px, 100%);
+  margin: 0 auto;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.btnCadastrarPix:hover {
+  filter: brightness(0.95);
+  transform: scale(1.02);
+}
+
+/* =========================================================
+   V1 - MODAL CADASTRAR PIX
+   ========================================================= */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.modalPix {
+  position: relative;
+  background: #7790a2;
+  border-radius: 26px;
+  padding: 28px;
+  width: min(520px, 92%);
+  border: 4px solid #0b2f49;
+  text-align: center;
+}
+
+.btnFechar {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+
+  border: none;
+  background: #25455d;
+  color: #fff;
+
+  font-size: 18px;
+  font-weight: 900;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btnFechar:hover {
+  background: #1d3a50;
+}
+
+.modalTitulo {
+  color: #ffb74d;
+  font-weight: 900;
+  margin-bottom: 12px;
+}
+
+/* descrição do modal — sem foto */
+.modalDescricao {
+  color: #fff;
+  font-size: 15px;
+  margin: 0 0 16px;
+  line-height: 1.35;
+  text-align: left;
+}
+
+.cnpjBox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.cnpjBox input {
+  border-radius: 12px;
+  border: 2px solid #0b2f49;
+  padding: 6px 10px;
+  font-weight: 700;
+}
+
+.modalCnpjLabel {
+  color: #25455d;
+  font-weight: 900;
+}
+
+.btnAdicionar {
+  background: #159a49;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 26px;
+  font-weight: 900;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.btnAdicionar:hover {
+  background: #13ac4e;
+  filter: brightness(0.98);
+  transform: scale(1.03);
+}
+
+/* =========================================================
+   V2 - TOPBAR (SEM PATINHAS)
+   - QR pequeno + "Pix"
+   - Descrição + CNPJ
+   - Botões Excluir / Editar
+   ========================================================= */
+
+.topBarV2 {
+  width: 95%;
+  max-width: 1400px;
+  margin: 0 auto 22px auto;
+  background: #ffffff;
+  border-radius: 999px;
+
+  min-height: 86px;
+  padding: 12px 18px;
+
+  display: grid;
+  grid-template-columns: 120px 1fr auto;
+  align-items: center;
+  gap: 14px;
+
+  border: 4px solid #1d4870;
+}
+
+.topBarV2Left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+.topBarV2Qr {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  border-radius: 14px;
+  border: 3px solid #0b2f49;
+  background: #f7ffff;
+  padding: 6px;
+}
+
+.topBarV2QrText {
+  font-weight: 900;
+  color: #25455d;
+  font-size: 18px;
+}
+
+.topBarV2Middle {
+  flex: 1;
+  min-width: 0;
+}
+
+
+.topBarV2DescricaoLabel {
+  color: #f6a623; 
+  font-weight: 1000;
+  white-space: nowrap;
+}
+
+.topBarV2DescricaoTexto {
+  color: #0b2f49;
+  font-weight: 1100;
+  line-height: 1.25;
+  margin: 0;
+
+  /* permite quebrar linha */
+  white-space: normal;
+
+  /* limita a 2 linhas com reticências */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+
+
+
+.topBarV2DescricaoBox {
+  background: #ffffff;
+  border: 3px solid #3e8abf;
+  border-radius: 24px;
+  padding: 12px 18px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 14px 20px;
+  align-items: flex-start; 
+
+  width: 100%;
+  max-width: 720px;
+
+  flex: 1;
+  min-width: 0;  
+}
+
+
+.topBarV2CnpjRow {
+  margin-top: 8px;
+}
+
+.topBarV2InfoRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+}
+
+
+.topBarV2CnpjBox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  background: #ffffff;
+  border: 3px solid #3e8abf;
+  border-radius: 24px;
+  padding: 10px 14px;
+
+  white-space: nowrap;
+}
+
+
+.topBarV2Cnpj {
+  font-weight: 900;
+  color: #0b2f49;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.topBarV2BtnCopiar {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.topBarV2IconCopiar {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.topBarV2BtnCopiar:hover .topBarV2IconCopiar {
+  transform: scale(1.12);
+  opacity: 0.85;
+}
+
+
+
+.topBarV2Right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+/* =========================================================
+   V2 - BLOCO PIX (dentro do container)
+   ========================================================= */
+
+.pixBox {
+  border: 3px solid #1d4870;
+  border-radius: 22px;
+  padding: 14px;
+  background: #ffffff;
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 14px;
+  align-items: center;
+  margin: 6px 0 22px;
+}
+
+.pixQrArea {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pixQr {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  display: block;
+}
+
+.pixInfoArea {
+  min-width: 0;
+}
+
+.pixDescricao {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.pixDescricaoLabel {
+  color: #25455d;
+  font-weight: 900;
+}
+
+.pixDescricaoTexto {
+  color: #0b2f49;
+  font-weight: 800;
+}
+
+.pixCnpjRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.pixCnpjBox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 3px solid #1d4870;
+  border-radius: 999px;
+  padding: 6px 12px;
+  background: #f7ffff;
+}
+
+.pixCnpj {
+  font-weight: 900;
+  color: #0b2f49;
+}
+
+.btnCopiar {
+  border: 3px solid #0b2f49;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 4px 10px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.pixBotoes {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* =========================================================
+   RESPONSIVIDADE (V1 + V2)
+   ========================================================= */
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .btnCadastrarPix {
+    width: min(560px, 100%);
+  }
+
+  /* TOPBAR V2: empilha melhor no tablet */
+  .topBarV2 {
+    grid-template-columns: 1fr;
+    text-align: center;
+    border-radius: 26px;
+  }
+
+  .topBarV2Left {
+    justify-content: center;
+  }
+
+  .topBarV2Right {
+    justify-content: center;
+  }
+
+  /* a descrição no tablet pode quebrar */
+  .topBarV2Descricao {
+    white-space: normal;
+  }
+
+  .topBarV2CnpjBox {
+    justify-content: center;
+  }
+
+  .pixBox {
+    grid-template-columns: 1fr;
+    text-align: center;
+    justify-items: center;
+  }
+
+  .pixCnpjRow {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  /* TOPBAR V1 */
+  .topBar {
+    padding: 12px 14px;
+    gap: 10px;
+  }
+
+  .patinha {
+    width: 22px;
+    height: 22px;
+  }
+
+  .patinha2 {
+    width: 18px;
+    height: 18px;
+  }
+
+  .btnCadastrarPix {
+    font-size: 16px;
+    padding: 10px 18px;
+    width: min(420px, 100%);
+  }
+
+  .container {
+    padding: 18px 14px 26px;
+    border-radius: 26px;
+  }
+
+  .card {
+    padding: 18px 18px;
+    border-radius: 22px;
+  }
+
+  .card p {
+    font-size: 18px;
+  }
+
+  .modalDescricao {
+    text-align: center;
+  }
+}

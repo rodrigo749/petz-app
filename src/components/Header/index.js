@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { NAV_LINKS } from "@/constants/navigation";
+import Avatar from '../Avatar'
 import styles from "./header.module.css";
 
 export default function Header() {
@@ -92,19 +93,7 @@ export default function Header() {
               className={styles.avatarLink}
             >
               <span className={styles.avatarIcon} aria-hidden>
-                {usuarioLogado.imagem ? (
-                  <img
-                    src={usuarioLogado.imagem}
-                    alt="Perfil"
-                    className={styles.avatarImage}
-                  />
-                ) : (
-                  <img
-                    src="/images/Avatar.png"
-                    alt="Perfil padrão"
-                    className={styles.avatarImage}
-                  />
-                )}
+                <Avatar src={usuarioLogado.imagem} alt="Perfil" />
               </span>
             </Link>
           </div>
