@@ -36,12 +36,12 @@
 
 /* UPLOAD DE IMAGEM */
 .uploadBox {
-  width: 240px;
-  height: 240px;
-  background-color: #a7c7dd;
+  width: 140px;
+  height: 140px;
+  background-color: #b7d3e6;
   margin: 0 auto;
-  border-radius: 22px;
-  border: 4px solid #6088a4;
+  border-radius: 24px;
+  border: 3px solid #6d93ad;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -51,18 +51,18 @@
 }
 
 .uploadBox:hover {
-  background-color: #98b9d0;
+  background-color: #a8c7dc;
 }
 
 .iconeAddImg {
-  width: 90px;
-  height: 90px;
+  width: 60px;
+  height: 60px;
   opacity: 0.9;
 }
 
 .uploadBox span {
-  margin-top: 10px;
-  font-size: 18px;
+  margin-top: 8px;
+  font-size: 14px;
   font-weight: 600;
   color: #ffffff;
 }
@@ -71,7 +71,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 18px;
+  border-radius: 12px;
 }
 
 /* DESCRIÇÃO */

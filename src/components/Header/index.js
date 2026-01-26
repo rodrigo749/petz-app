@@ -105,7 +105,7 @@ export default function Header() {
             {profileOpen && (
               <div className={styles.dropdownMenu} role="menu">
                 <Link
-                  href={usuarioLogado.tipo === "ong" ? "/perfil-ong" : "/perfil-usuario"}
+                  href="/editar-usuario"
                   className={styles.dropdownItem}
                   onClick={() => setProfileOpen(false)}
                 >
@@ -188,7 +188,7 @@ export default function Header() {
 
                     <div className={styles.mobileUserLinks}>
                       <Link
-                        href={usuarioLogado.tipo === "ong" ? "/perfil-ong" : "/perfil-usuario"}
+                        href="/editar-usuario"
                         onClick={() => setMenuOpen(false)}
                         className={styles.mobileSubLink}
                       >

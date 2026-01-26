@@ -180,11 +180,11 @@ export default function EditarPetPerdidosId() {
             <label htmlFor="pet-imagem">
               <div className={styles.uploadBox}>
                 {preview ? (
-                  <img src={preview} alt="preview" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 12 }} />
+                  <img src={preview} alt="preview" className={styles.uploadPreview} />
                 ) : (
                   <>
                     <img src="/images/iconephoto.png" className={styles.iconeAddImg} />
-                    <span>Adicionar imagem</span>
+                    <span className={styles.uploadText}>Adicionar imagem</span>
                   </>
                 )}
               </div>
