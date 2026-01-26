@@ -203,14 +203,19 @@
   
 }
 
-@media (max-width: 800px) {
+/* Responsividade para tablets */
+
+@media (max-width: 890px) {
   .modal {
-    padding: 18px;
+    padding: 20px;
+    border-radius: 18px;
+    width: min(1100px, 70%);
+
   }
 
   .modalContent {
     flex-direction: column;
-    gap: 14px;
+    gap: 16px;
   }
 
   .imageBox {
@@ -218,21 +223,33 @@
     order: 1;
   }
 
+  .imageBox img {
+    max-height: 320px;
+    border-radius: 16px;
+  }
+
   .infoBox {
     order: 2;
     width: 100%;
-    padding: 16px;
+    padding: 20px;
+    border-radius: 14px;
+    max-height: 60vh;
   }
  
   .petName {
-    margin-top: 10px;
-    font-size: clamp(18px, 4vw, 30px);
-    padding: 8px 12px;
+    margin-top: 12px;
+    font-size: clamp(20px, 5vw, 28px);
+    padding: 10px 16px;
+    border-radius: 12px;
   }
 
   .infoColumns {
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
+  }
+
+  .infoColumns p {
+    font-size: 18px;
   }
 
   .infoGroup,
@@ -241,26 +258,55 @@
   }
 
   .descriptionBox {
-    margin-top: 12px;
-    max-height: 220px;
+    margin-top: 16px;
+    max-height: 280px;
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .descLabel {
+    font-size: 18px;
+  }
+
+  .descText {
+    font-size: 15px;
   }
 
   /* Em telas pequenas o botão passa a fluir dentro do conteúdo para evitar overflow */
   .contactBtn {
     position: static;
     transform: none;
-    margin: 12px auto 0 auto;
-    display: inline-block;
-    padding: 10px 20px;
+    margin: 16px auto 0 auto;
+    display: flex;
+    padding: 12px 40px;
+    font-size: 16px;
+    border-radius: 35px;
+  }
+
+  .closeBtn {
+    width: 32px;
+    height: 32px;
+    font-size: 20px;
+    order:0;
+  }
+
+  .pawIcon {
+    width: 50px;
   }
 }
 
-@media (max-width: 420px) {
+/* responsividade  de celulares */
+
+@media (max-width: 490px) and (min-width: 390px) {
   .modal {
     padding: 12px;
     max-height: 100vh;
     overflow-y: auto;
     overflow-x: hidden;
+  }
+  .modal {
+    padding: 10px;
+    width: 100%;
   }
 
   /* scroll para card no celular */
