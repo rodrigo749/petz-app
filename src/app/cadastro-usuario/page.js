@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { FaPaw } from "react-icons/fa";
-import { cpf } from "cpf-cnpj-validator";
+
 import styles from "./cadastro.module.css";
 import useSafeToast from "@/components/Toast/useSafeToast";
 

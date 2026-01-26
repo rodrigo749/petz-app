@@ -3,6 +3,13 @@
 import { useEffect, useState } from "react";
 import styles from "./historicoapoio.module.css";
 
+const apoiosMock = [
+  { id: 1, nome: "Remy Oliveira", valor: 35.0, data: "01/11/2025" },
+  { id: 2, nome: "Mônica Santos", valor: 20.0, data: "26/10/2025" },
+  { id: 3, nome: "Jennifer", valor: 25.0, data: "01/11/2025" },
+  { id: 4, nome: "Mateus de Paula", valor: 150.0, data: "25/10/2025" },
+];
+
 // ===== MOCK ONG (simula backend) =====
 const ONG_MOCK = {
   id: 1,
@@ -18,19 +25,6 @@ const ONG_MOCK = {
   },
 };
 
-function formatarDataBR(iso) {
-  const [y, m, d] = String(iso || "").split("-");
-  if (!y || !m || !d) return String(iso || "");
-  return `${d}/${m}/${y}`;
-}
-
-function formatarBRL(valor) {
-  return Number(valor || 0).toLocaleString("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-  });
-}
-
 export default function HistoricoDeApoioPage() {
   const [usuarioLogado, setUsuarioLogado] = useState(null);
   const [doacoes, setDoacoes] = useState([]);
@@ -40,8 +34,7 @@ export default function HistoricoDeApoioPage() {
   const [modalPixAberto, setModalPixAberto] = useState(false);
 
   useEffect(() => {
-    // ✅ Enquanto estamos no protótipo: usa MOCK
-    // Depois, você troca para o localStorage / API.
+    
     setUsuarioLogado(ONG_MOCK);
   }, []);
 
@@ -56,6 +49,7 @@ export default function HistoricoDeApoioPage() {
       try {
         setCarregando(true);
 
+        
         const res = await fetch(`/api/doacoes?ongId=${usuarioLogado.id}`);
         const data = await res.json();
         setDoacoes(Array.isArray(data) ? data : []);
@@ -77,6 +71,9 @@ export default function HistoricoDeApoioPage() {
   const ongNome = usuarioLogado?.nome || usuarioLogado?.razaoSocial || "ONG";
   const ongDescricao = usuarioLogado?.descricao || "";
   const ongCnpj = usuarioLogado?.cnpj || "";
+
+ 
+  const doacoesDaTela = pix ? apoiosMock : [];
 
   // ===== handlers =====
   const handleCadastrarPix = () => setModalPixAberto(true);
@@ -104,12 +101,6 @@ export default function HistoricoDeApoioPage() {
 
   return (
     <main className={styles.page}>
-      {/* =========================================================
-          TOP BAR (V1 ou V2)
-          V1: sem pix -> patinhas + botão cadastrar
-          V2: com pix -> barra do protótipo (descrição + cnpj + botões)
-      ========================================================= */}
-
       {/* ===================== TOP BAR V1 ===================== */}
       {!pix && (
         <section className={styles.topBar}>
@@ -138,36 +129,34 @@ export default function HistoricoDeApoioPage() {
               alt="QR Code Pix"
               className={styles.topBarV2Qr}
             />
-            <span className={styles.topBarV2QrText}>Pix</span>
           </div>
 
           <div className={styles.topBarV2Middle}>
-          <div className={styles.topBarV2InfoRow}>
-            <div className={styles.topBarV2DescricaoBox}>
-              <span className={styles.topBarV2DescricaoLabel}>Descrição:</span>
-              <span className={styles.topBarV2DescricaoTexto}>
-                {pix.descricao || ongDescricao}
-              </span>
-            </div>
+            <div className={styles.topBarV2InfoRow}>
+              <div className={styles.topBarV2DescricaoBox}>
+                <span className={styles.topBarV2DescricaoLabel}>Descrição:</span>
+                <span className={styles.topBarV2DescricaoTexto}>
+                  {pix.descricao || ongDescricao}
+                </span>
+              </div>
 
-            <div className={styles.topBarV2CnpjBox}>
-              <span className={styles.topBarV2Cnpj}>{pix.cnpj || ongCnpj}</span>
-              <button
-                className={styles.topBarV2BtnCopiar}
-                onClick={handleCopiarCnpj}
-                aria-label="Copiar CNPJ"
-                title="Copiar"
-              >
-                <img
-                  src="/images/copiarpix.png"
-                  alt="Copiar CNPJ"
-                  className={styles.topBarV2IconCopiar}
+              <div className={styles.topBarV2CnpjBox}>
+                <span className={styles.topBarV2Cnpj}>{pix.cnpj || ongCnpj}</span>
+                <button
+                  className={styles.topBarV2BtnCopiar}
+                  onClick={handleCopiarCnpj}
+                  aria-label="Copiar CNPJ"
+                  title="Copiar"
+                >
+                  <img
+                    src="/images/copiarpix.png"
+                    alt="Copiar CNPJ"
+                    className={styles.topBarV2IconCopiar}
                   />
-              </button>
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-
 
           <div className={styles.topBarV2Right}>
             <button className={styles.btnExcluir} onClick={handleExcluirPix}>
@@ -220,23 +209,27 @@ export default function HistoricoDeApoioPage() {
         {/* HISTÓRICO */}
         {carregando ? (
           <p className={styles.loading}>Carregando...</p>
-        ) : doacoes.length === 0 ? (
+        ) : doacoesDaTela.length === 0 ? (
           <div className={styles.emptyState}>Você não tem nenhum histórico de apoio</div>
         ) : (
-          <div className={styles.grid}>
-            {doacoes.map((d) => (
-              <article key={d.id} className={styles.card}>
-                <p>
-                  <span className={styles.label}>Nome:</span>{" "}
-                  <span className={styles.value}>{d.nome}</span>
+          <div className={styles.apoiosGrid}>
+            {doacoesDaTela.map((d) => (
+              <article key={d.id} className={styles.apoioCard}>
+                <p className={styles.apoioLinha}>
+                  <span className={styles.apoioLabel}>Nome:</span>
+                  <span className={styles.apoioValorTexto}>{d.nome}</span>
                 </p>
-                <p>
-                  <span className={styles.label}>Valor:</span>{" "}
-                  <span className={styles.value}>{formatarBRL(d.valor)}</span>
+
+                <p className={styles.apoioLinha}>
+                  <span className={styles.apoioLabel}>Valor:</span>
+                  <span className={styles.apoioValorTexto}>
+                    {Number(d.valor).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
+                  </span>
                 </p>
-                <p>
-                  <span className={styles.label}>Data:</span>{" "}
-                  <span className={styles.value}>{formatarDataBR(d.data)}</span>
+
+                <p className={styles.apoioLinha}>
+                  <span className={styles.apoioLabel}>Data:</span>
+                  <span className={styles.apoioValorTexto}>{d.data}</span>
                 </p>
               </article>
             ))}
