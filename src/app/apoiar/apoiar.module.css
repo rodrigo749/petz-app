@@ -2,57 +2,64 @@
   width: 100%;
   min-height: 100vh;
   background-color: #274b65;
-  padding: 30px 0;   /* 👈 cria espaço em cima e embaixo */
+
 }
 
 .cards-wrapper-container {
-  width: 95%;
-  max-width: 1400px;
-  margin: 20px auto;
+  width: 100%;
+  height: 100%;
+  max-width: 1700px;
+  margin: 0 auto;
   background: #ffffff;
   border-radius: 40px;
-  padding: 20px 20px;
+  padding: 40px 20px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
-  /* increase base font-size for melhor legibilidade na página Apoiar */
-  font-size: 18px;
 }
 
+
+
+
+
 .titulo {
-  background-color: #25455d;
-  color: #FFFFFF;
-  font-size: 26px;
-  font-weight: 700;
-  padding: 7px 550px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #254d6b;
+  border: 5px solid #143750;
+  padding: 5px 20px;
   border-radius: 50px;
   text-align: center;
-  width: fit-content;
-  margin: 0 auto 50px auto;
-  border: 5px solid #0E2A45;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  display: block;
+  width: 1400px;
+  margin: 0 auto 30px auto;
+  width: 100%;
+  top: 70px;
 }
 
 .grid-ongs {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr)); /* 👈 2 colunas */
+  grid-template-columns: repeat(3, 1fr); /* 3 colunas iguais */
   grid-row-gap: 70px;    /* espaço vertical entre as linhas */
   grid-column-gap: 50px; /* espaço horizontal entre os cards da mesma linha */
   justify-items: center;
 }
 
+
+
+
 .card-ong {
   background: #7790a2;
-  border-radius: 20px;
+  border-radius: 16px;
   border-color: #143750;
   border-style: solid;
-  border-width: 4px;
+  border-width: 2px;
   padding: 15px;
   gap: 12px;
   position: relative;
   color: white;
   width: 100%;
-  max-width: 560px;   /* todos com a mesma largura */
-  height: 340px;      /* mais alto para descrição */
-  padding: 20px;
+  max-width: 500px;   /* todos com a mesma largura */
+  height: 290px;      /* mais alto para descrição */
   box-sizing: border-box;
   display: flex;
   flex-direction: row;   /* default: empilha horizontalmente */
@@ -62,19 +69,25 @@
 }
 
 .card-image-wrapper {
-  position: absolute;
-  top: 16%;
-  left: 5%;
-
+  position: relative;
+  position: relative;
+  position: relative;
+  display: flex;
   width: 135px;
   height: 135px;
-
   border-radius: 0px;
   border-color: #0d66a6;
   border-width: 1;
   border-style: solid;
-  flex-shrink: 0;
+  flex-shrink: 0; 
+  top: 17%;
+  left: 2%; 
+  top: 17%;
+  left: 2%;
 }
+
+
+
 
 .card-image {
   width: 100%;
@@ -82,28 +95,30 @@
   object-fit: cover;
 }
 
+
+
 .card-text-box {
   background: none;
   border-radius: 12px;
   padding: 10px 12px;
   color: white;
-
   position: relative;
-  margin-top: 27px;      /* substitui o top */
-  margin-left: 170px;    /* reserva espaço da imagem à esquerda */
+  top: 27px;
+  left: 40px;
+  flex: 1;
+  height: 190px;   
+  width: 260px;
+  max-width: none;
+  flex: none;       /* mesma altura em todos */
+  box-sizing: border-box;
+  overflow: hidden;       /* impede o texto de estourar o card */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 18px;
 
-  max-width: 100%;
-  min-width: 0;
-  overflow: hidden;
 }
 
-.card-text-box p {
-  margin: 0;
-  max-width: 100%;
-  white-space: normal;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-}
 
 .card-title {
   position: absolute;
@@ -117,7 +132,7 @@
 .card-title h3 {
   position: relative;
   margin: 0;             /* remove margens */
-  font-size: 24px;
+  font-size: 21px;
   font-weight: bold;
   color: #ffb74d;
   text-align: center;  /* centraliza horizontalmente */
@@ -129,12 +144,11 @@
   padding: 0;
 }
 
+
+
+/* alteracao no botao para ser o mesmo modelo das paginas anteriores */
 .apoiar-btn {
-  position: absolute;
-  top: 75%; /* lifted further to move the button up */
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: linear-gradient(180deg,#0d66a6,#0a4f86);
+  background-color: #024b91;
   color: white;
   border: 2px solid #3e8abf;
   border-radius: 24px;
@@ -155,183 +169,91 @@
   display: flex;
 }
 
-.apoiar-btn:hover,
-.apoiar-btn:active {
-  /* keep the same translate used in default state, no scaling or movement */
-  transform: translate(-50%, -50%);
-}
-
-/* For touch devices ensure there is no unexpected override */
-@media (hover: none) and (pointer: coarse) {
-  .apoiar-btn:hover,
-  .apoiar-btn:active {
-    transform: translate(-50%, -50%) !important;
-  }
-}
-
-/* Force no movement/scale on all devices: disable transitions and touch highlights */
-.apoiar-btn {
-  /* do not translate by default (prevents offsets when button is static) */
-  transform: none !important;
-  -webkit-transform: none !important;
-  transition: none !important;
-  -webkit-transition: none !important;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
-  user-select: none;
-  -webkit-touch-callout: none;
-  backface-visibility: hidden;
-  will-change: transform;
-}
-
-.apoiar-btn:hover,
-.apoiar-btn:active,
-.apoiar-btn:focus {
-  transform: none !important;
-  -webkit-transform: none !important;
-}
-
-/* Re-enable translate centering only on wide screens where button is absolutely positioned */
-@media (min-width: 1025px) {
-  .apoiar-btn {
-    transform: translate(-50%, -50%) !important;
-    -webkit-transform: translate(-50%, -50%) !important;
-  }
-}
-
-/* Modal styles for Pix popup */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.55);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10000;
-  padding: 24px;
-}
-
-.modal-content {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: min(920px, 95vw);
-  width: auto;
-  outline: none;
-  z-index: 10001;
-}
-
-/* keep the popup centered and constrained on small screens */
-@media (max-width: 700px) {
-  .modal-overlay { padding: 12px; }
-  .modal-content { max-width: 96vw; }
-}
-
-/* ensure popup never exceeds viewport height and scrolls internally */
-.modal-content {
-  max-height: calc(100vh - 48px);
-  overflow-y: auto;
-}
-
-/* On phones and small tablets, keep modal as a centered card (match iPhone 14 Pro Max layout) */
-@media (max-width: 768px) {
-  .modal-overlay {
-    padding: 12px;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .modal-content {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 96vw;
-    width: auto;
-    max-height: calc(100vh - 48px);
-    overflow-y: auto;
-    z-index: 10001;
-    outline: none;
-    border-radius: 14px;
-    background: transparent; /* modal's inner container holds the card */
-  }
-
-  .modal-content .container {
-    width: 100% !important;
-    max-width: none !important;
-    height: auto !important;
-    max-height: none !important;
-    border-radius: 12px !important;
-    padding: 48px 16px 16px 16px !important; /* space for close button */
-    box-sizing: border-box;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-start !important;
-    overflow: visible !important;
-    background-clip: padding-box;
-  }
-
-  .modal-content .closeBtn {
-    position: absolute !important;
-    top: 12px !important;
-    right: 12px !important;
-    z-index: 12002 !important;
-  }
-
-  /* ensure apoiar button is slightly lower on small tablets/phones */
-  .apoiar-btn {
-  margin-top: 8px;
-  transform: none !important;
-  -webkit-transform: none !important;
-  }
-}
-
-/* Aggressive compression for very small phones: try to fit all content without internal scrolling */
-@media (max-width: 420px) {
-  .modal-overlay { padding: 8px; }
-
-  .modal-content {
-    max-width: 98vw;
-    max-height: 100vh; /* prevent internal scrolling */
-    overflow: hidden;  /* hide internal scrollbars */
-    transform: translate(-50%, -50%);
-  }
-
-  .modal-content .container {
-    /* make container fit the viewport and avoid internal scroll */
-    width: 100% !important;
-    height: 100vh !important;
-    padding: 44px 10px 10px 10px !important; /* keep space for close */
-    box-sizing: border-box;
-    overflow: hidden !important;
-    gap: 8px !important;
-  }
-
-  .apoiar-btn {
-  margin-top: 0px; /* bring button slightly closer to title on very small phones */
-  transform: none !important;
-  -webkit-transform: none !important;
-  }
-
-  /* ensure the close button is inside the card */
-  .modal-content .closeBtn { top: 10px !important; right: 10px !important; }
-}
-
-
 
 .apoiar-btn img {
   filter: invert(1);
 }
 
+
 .descricao {
   color: #ffb74d;
-  font-size: 22px;
+  font-size: 17px;
 }
 
-/* ===== MOBILE ===== */
-@media (max-width: 600px) {
+/* ===========================
+    RESPONSIVIDADE do DESKTOP
+  ===========================*/
+
+@media (max-width: 1024px) {
+  .grid-ongs {
+    grid-template-columns: 2fr 2fr; /* tablet 1 coluna (evita apertar texto) */
+    gap: 30px;
+  }
+ 
+  .titulo {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px 16px;     /* substitui 7px 550px */
+    box-sizing: border-box;
+    border-radius: 30px;
+    margin: 0 auto 30px auto;
+    text-align: center;
+  }
+ 
+ 
+  .card-ong {
+    height: auto;               /* deixa crescer */
+    flex-direction: column;     /* empilha */
+    align-items: center;
+    text-align: center;
+    padding-bottom: 24px;
+  }
+ 
+  .card-image-wrapper {
+    position: static;           /* desliga absolute */
+    width: 120px;
+    height: 120px;
+    margin: 12px 0;
+  }
+ 
+   .card-title {
+    width: 100%;            /* 🔒 limita o título ao card */
+    max-width: 100%;
+    padding: 0 12px;        /* respiro lateral */
+    box-sizing: border-box;
+    text-align: center;
+  }
+ 
+  .card-title h3 {
+    white-space: normal;    /* permite quebrar linha */
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    line-height: 1.2;
+    max-width: 100%;
+  }
+ 
+ 
+  .card-text-box {
+    position: static;           /* desliga o layout do desktop */
+    margin-left: 0;             /* remove recuo da imagem */
+    margin-top: 0;
+    width: 100%;
+    height: auto;
+    padding: 0 12px;
+    overflow: visible;
+  }
+ 
+  .apoiar-btn {
+    margin-top: 14px;
+    display: flex;
+  
+  }
+  .descricao {
+    display: flex;
+    
+  }
+
+}
 
 /* responsividade computador */
 @media (max-width: 1280px) and (min-width: 991px) {
@@ -361,14 +283,6 @@
     padding: 20px;
   }
 
-  
-  .titulo {
-    padding: 10px 20px;
-    width: 100%;
-    max-width: 100%;
-    border-radius: 30px;
-    box-sizing: border-box;
-  }
 
   .grid-ongs {
     grid-template-columns: 2fr 2fr; /* só uma coluna */
@@ -376,10 +290,7 @@
   }
 
   .card-ong {
-    position: relative;
     flex-direction: column; /* empilha imagem + texto */
-    display: flex;
-    flex-direction: column;
     align-items: center;
     text-align: center;
     height: auto; /* deixa o card crescer naturalmente */
@@ -397,22 +308,20 @@
     margin-bottom: 15px;
   }
 
-  /* MOBILE: texto ocupa toda a largura */
+  /* texto ocupa toda a largura */
   .card-text-box {
     position: static;
     width: 100%;
     height: auto;
-    margin-left: 0;   /* zera o recuo do desktop */
-    margin-top: 0;
-    font-size: 16px;
-    padding-left: 12px;
+    left: initial;
+    top: initial;
   }
 
   /* título centralizado e sem absolute */
   .card-title {
     position: static;
     transform: none;
-    margin-bottom: -25px;
+    margin-bottom: 10px;
   }
 
   .card-title h3 {
@@ -420,169 +329,88 @@
     font-size: 20px;
   }
 
-  /* botão sempre no final do card */
-  .apoiar-btn {
-  position: static;
-  margin-top: 99%; /* lift button on mobile */
-  margin-bottom: 8px;
-  transform: none !important;
-  }
-}
 
-@media (max-width: 768px) {
+
+}
+ 
+  
+/* responsividade celular */
+ @media (max-width: 499px) {
+
+  .cards-wrapper-container {
+    padding: 20px;
+  }
+
+
   .grid-ongs {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* só uma coluna */
+    gap: 20px;
   }
 
   .card-ong {
-    height: auto;        /* ✅ resolve o vazamento no iPad */
-  }
-}
-
-@media (max-width: 1024px) {
-  .grid-ongs {
-    grid-template-columns: 1fr; /* tablet 1 coluna (evita apertar texto) */
-    gap: 30px;
-  }
-
-  .titulo {
-    width: 100%;
-    max-width: 100%;
-    padding: 10px 16px;     /* substitui 7px 550px */
-    box-sizing: border-box;
-    border-radius: 30px;
-    margin: 0 auto 30px auto;
-    text-align: center;
-  }
-
-
-  .card-ong {
-    height: auto;               /* deixa crescer */
-    flex-direction: column;     /* empilha */
+    flex-direction: column; /* empilha imagem + texto */
     align-items: center;
     text-align: center;
-    padding-bottom: 24px;
-  }
-
-  .card-image-wrapper {
-    position: static;           /* desliga absolute */
-    width: 120px;
-    height: 120px;
-    margin: 12px 0;
-  }
-
-   .card-title {
-    width: 100%;            /* 🔒 limita o título ao card */
+    height: auto; /* deixa o card crescer naturalmente */
+    padding-bottom: 60px; /* espaço pro botão */
+    width: 100%;
     max-width: 100%;
-    padding: 0 12px;        /* respiro lateral */
-    box-sizing: border-box;
-    text-align: center;
+  }
+
+  /* imagem centralizada e menor */
+  .card-image-wrapper {
+    position: static;
+    width: 110px;
+    height: 110px;
+    margin-bottom: 15px;
+  }
+
+  /* texto ocupa toda a largura */
+  .card-text-box {
+    position: static;
+    width: 100%;
+    height: auto;
+    left: initial;
+    top: initial;
+  }
+
+  /* título centralizado e sem absolute */
+  .card-title {
+    position: static;
+    transform: none;
+    margin-bottom: 10px;
   }
 
   .card-title h3 {
-    white-space: normal;    /* permite quebrar linha */
-    word-break: break-word;
-    overflow-wrap: anywhere;
-    line-height: 1.2;
-    max-width: 100%;
+    white-space: normal; /* permite quebrar linha no mobile */
+    font-size: 20px;
   }
-  /* push the apoiar button a bit lower on tablet layouts */
   .apoiar-btn {
-  margin-top: 48px;
+    margin-top: 14px;
+    display: flex;
+  
   }
 
-
-  .card-text-box {
-    position: static;           /* desliga o layout do desktop */
-    margin-left: 0;             /* remove recuo da imagem */
-    margin-top: 0;
-    width: 100%;
-    height: auto;
-    padding: 0 12px;
-    overflow: visible;
+  /* Modal overlay and content (used by Modal.js) */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
   }
 
-  .apoiar-btn {
-    position: static;           /* desliga absolute */
-  transform: none;
-  margin-top: 40px;
-  }
-}
-
-/* iPad specific tweaks (portrait and landscape) */
-@media (min-width: 768px) and (max-width: 1024px) {
-  .modal-overlay { padding: 20px; }
   .modal-content {
-    max-width: 760px;
-    max-height: calc(100vh - 64px);
+    background: transparent; /* inner container uses styles from apoiar-pix */
+    border-radius: 10px;
+    padding: 8px;
+    box-sizing: border-box;
+    max-height: 95vh;
+    overflow: auto;
   }
-  .modal-content .container {
-    padding: 32px !important;
-    max-width: 840px !important;
-    border-radius: 18px !important;
-  }
-  .modal-content .qr { width: 340px; height: 340px; }
-  .modal-content .steps { grid-template-columns: repeat(2, 1fr); gap: 26px; }
-  /* Increased typography for iPad family */
-  .modal-content .step { font-size: 24px; line-height: 1.25; }
-  .modal-content .note { font-size: 22px; }
-  .modal-content .keyLabel { font-size: 24px; }
-  .modal-content .keyInput { font-size: 20px; }
-  .modal-content .stepNum { width: 64px; height: 64px; }
-  .modal-content .closeBtn { top: 16px !important; right: 16px !important; }
+
+
 }
 
-/* iPad Pro / larger tablets (e.g. 1024 - 1366 width) */
-@media (min-width: 1024px) and (max-width: 1366px) {
-  .modal-content { max-width: 900px; }
-  .modal-content .container { padding: 36px !important; max-width: 880px !important; }
-  .modal-content .qr { width: 380px; height: 380px; }
-  /* Increased typography for larger tablets / iPad Pro */
-  .modal-content .step { font-size: 26px; }
-  .modal-content .note { font-size: 22px; }
-  .modal-content .keyLabel { font-size: 26px; }
-  .modal-content .keyInput { font-size: 22px; }
-  .modal-content .stepNum { width: 72px; height: 72px; }
-  .modal-content .closeBtn { top: 18px !important; right: 18px !important; }
-}
-
-/* Modal-scoped (ensure popup uses these sizes) */
-@media (min-width: 800px) and (max-height: 720px) and (orientation: landscape) {
-  .modal-content .container { padding: 18px !important; max-width: 700px !important; }
-  .modal-content .qr { width: 240px !important; height: 240px !important; }
-  .modal-content .steps { gap: 12px !important; }
-}
-
-@media (max-width: 540px) and (min-height: 760px) and (orientation: portrait) {
-  .modal-content .container { padding: 28px 10px 10px 10px !important; }
-  .modal-content .qr { width: 100px !important; height: 100px !important; }
-  .modal-content .keyInput { min-width: 90px !important; }
-  .modal-content .steps { grid-template-columns: repeat(2, 1fr) !important; gap: 6px !important; }
-  .modal-content .step { font-size: 11px !important; }
-}
-
-/* Nest Hub - wide but shallow displays (e.g. 1024x600) */
-@media (min-width: 800px) and (max-height: 720px) and (orientation: landscape) {
-  .modal-overlay { padding: 12px; }
-  .modal-content { max-width: 720px; }
-  .modal-content .container { padding: 18px 18px; max-width: 700px !important; }
-  /* make QR slightly smaller so it fits on shallow displays */
-  .modal-content .qr { width: 240px; height: 240px; }
-  .modal-content .steps { gap: 12px; }
-  .modal-content .step { font-size: 20px; }
-  .modal-content .note { font-size: 18px; }
-  .modal-content .stepNum { width: 56px; height: 56px; }
-}
-
-/* Surface Duo / dual-screen narrow devices: tall and narrow — compact the modal */
-@media (max-width: 540px) and (min-height: 760px) and (orientation: portrait) {
-  .modal-overlay { padding: 8px; }
-  .modal-content { max-width: 92vw; }
-  .modal-content .container { padding: 28px 10px 10px 10px !important; }
-  .modal-content .qr { width: 120px; height: 120px; }
-  .modal-content .keyInput { min-width: 110px; }
-  .modal-content .steps { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-  /* Surface Duo: increased, but compact typography */
-  .modal-content .step { font-size: 18px; }
-  .modal-content .stepNum { width: 56px; height: 56px; }
-}

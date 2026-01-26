@@ -28,6 +28,15 @@ export default function ApoiarPage() {
 
   const openModal = (ong) => setActiveOng(ong);
   const closeModal = () => setActiveOng(null);
+  // debug helpers
+  const openModalDebug = (ong) => {
+    console.debug('openModal called for:', ong)
+    openModal(ong)
+  }
+  const closeModalDebug = () => {
+    console.debug('closeModal called')
+    closeModal()
+  }
 
   return (
     <main className={styles['apoiar-page']}>
@@ -40,7 +49,7 @@ export default function ApoiarPage() {
             <div className={styles['card-ong']} key={ong.id}>
                 <div className={styles['card-title']}><h3>{ong.nome}</h3></div>
                 <div>
-                  <button className={styles['apoiar-btn']} onClick={() => openModal(ong.nome)}>
+                  <button className={styles['apoiar-btn']} onClick={() => openModalDebug(ong.nome)}>
                     Apoiar <img src="/images/icone-moedas.png" alt="moeda" style={{ width: '24px', height: '24px'}} />
                   </button>
                 </div>
@@ -58,7 +67,7 @@ export default function ApoiarPage() {
           ))}
         </section>
       </div>
-  {activeOng && <Modal ong={activeOng} onClose={closeModal} />}
+  {activeOng && <Modal ong={activeOng} onClose={closeModalDebug} />}
     </main>
   );
 }
