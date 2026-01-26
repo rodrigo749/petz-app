@@ -3,6 +3,7 @@
   min-height: 100vh;
   background-color: #274b65;
   padding: 40px 0;
+  display: flex;
 }
 
 .cards-wrapper-container {
@@ -23,7 +24,6 @@
   padding: 7px 550px;
   border-radius: 50px;
   text-align: center;
-  width: fit-content;
   margin: 0 auto 50px auto;
   border: 5px solid #0E2A45;
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
@@ -37,8 +37,19 @@
 }
 
 /* Responsividade do titulo */
-
-@media (max-width:480px) {
+@media screen and (min-width: 901px) and (max-width: 1200px) {
+  .titulo {
+    padding: 7px 400px;
+    font-size: 20px;
+  }
+}
+@media screen and (min-width: 700px) and (max-width: 900px) {
+  .titulo {
+    padding: 7px 200px;
+    font-size: 18px;
+  }
+}
+@media (min-width:300px) and (max-width:699px) {
   .titulo {
     padding: 7px 10px;
     width: 90%;
