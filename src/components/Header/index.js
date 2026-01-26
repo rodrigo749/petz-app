@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
@@ -14,8 +13,6 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(null);
   const [usuarioLogado, setUsuarioLogado] = useState(null);
-  const [profileOpen, setProfileOpen] = useState(false);
-  const router = useRouter();
 
   // 🔐 sincroniza estado de autenticação
   useEffect(() => {
@@ -112,9 +109,6 @@ export default function Header() {
             <Link
               href="/perfil"
               className={styles.avatarLink}
-              onClick={() => setProfileOpen(!profileOpen)}
-              aria-haspopup="true"
-              aria-expanded={profileOpen}
             >
               <span className={styles.avatarIcon}>
                 <img
@@ -123,40 +117,7 @@ export default function Header() {
                   className={styles.avatarImage}
                 />
               </span>
-            </button>
-
-            {profileOpen && (
-              <div className={styles.dropdownMenu} role="menu">
-                <Link
-                  href="/editar-usuario"
-                  className={styles.dropdownItem}
-                  onClick={() => setProfileOpen(false)}
-                >
-                  Editar perfil
-                </Link>
-
-                <Link
-                  href="/meus-pets-perdidos"
-                  className={styles.dropdownItem}
-                  onClick={() => setProfileOpen(false)}
-                >
-                  Meus pets perdidos
-                </Link>
-
-                <button
-                  className={styles.dropdownItem}
-                  onClick={() => {
-                    // logout
-                    localStorage.removeItem("usuarioLogado");
-                    setUsuarioLogado(null);
-                    setProfileOpen(false);
-                    router.push("/");
-                  }}
-                >
-                  Sair
-                </button>
-              </div>
-            )}
+            </Link>
           </div>
         )}
 
