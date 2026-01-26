@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { FaPaw } from "react-icons/fa";
-import { cpf } from "cpf-cnpj-validator";
+
 import styles from "./cadastro.module.css";
+import useSafeToast from "@/components/Toast/useSafeToast";
 
 export default function CadastroPage() {
+  const { showToast } = useSafeToast();
   const router = useRouter();
   const [formData, setFormData] = useState({
     nome: "",
@@ -26,20 +28,19 @@ export default function CadastroPage() {
     setError("");
     setCpfError("");
 
-    if (!formData.nome || !formData.cpf || !formData.email || !formData.telefone || !formData.password) {
-      setError("Por favor, preencha todos os campos.");
+    if (!formData.nome || !formData.cpf || !formData.email || !formData.telefone || !formData.password || !formData.confirmPassword) {
+      showToast("Por favor, preencha todos os campos obrigatórios.", "warning");
       return;
     }
 
-    // Validação de CPF
-    const cpfLimpo = formData.cpf.replace(/\D/g, "");
+    const cpfLimpo = (formData.cpf || "").replace(/\D/g, "");
     if (!cpf.isValid(cpfLimpo)) {
-      setCpfError("CPF inválido. Por favor, verifique o número informado.");
+      setCpfError("CPF inválido. Por favor, verifique e tente novamente.");
       return;
     }
 
     if (formData.password !== formData.confirmPassword) {
-      setError("As senhas não coincidem.");
+      setError("As senhas não coincidem. Por favor, tente novamente.");
       return;
     }
 
@@ -63,9 +64,15 @@ export default function CadastroPage() {
     const data = await res.json();
 
     if (!res.ok) {
-      setError(data.message || "Erro ao cadastrar");
+      setError(data.message || "Erro ao cadastrar usuário.");
       return;
     }
+
+    showToast("Cadastro realizado com sucesso!", "success");
+    localStorage.setItem("usuarioLogado", JSON.stringify(data));
+    setTimeout(() => {
+       router.push("/perfil-usuario");
+    }, 2000);
 
     // salva apenas o usuário logado (opcional)
     localStorage.setItem("usuarioLogado", JSON.stringify(data));
@@ -263,7 +270,7 @@ export default function CadastroPage() {
         <button className={styles.button} type="submit">Cadastrar</button>
 
         <div className={styles.bottomLink}>
-          Já tem conta? <a href="/login">Faça login aqui</a>.
+          Já tem conta? <a href="/login-usuario">Faça login aqui</a>.
         </div>
       </form>
     </div>

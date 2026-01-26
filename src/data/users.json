@@ -8,5 +8,25 @@
     "password": "kawan",
     "imagem": "/uploads/Frame 2.png",
     "tipo": "usuario"
+  },
+  {
+    "id": 1768314044093,
+    "nome": "kkkkk",
+    "cpf": "022.898.316-97",
+    "email": "kkk@kkkk.com",
+    "telefone": "(00) 00000-0000",
+    "password": "12345",
+    "imagem": "",
+    "tipo": "usuario"
+  },
+  {
+    "id": 1768821906909,
+    "nome": "kawan",
+    "cpf": "173.781.126-07",
+    "email": "kawan@gaml",
+    "telefone": "(44) 4444-4444",
+    "password": "rip indra",
+    "imagem": "",
+    "tipo": "usuario"
   }
 ]

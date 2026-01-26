@@ -37,7 +37,7 @@ export default function Encontrados() {
           {/* DESCRIÇÃO */}
           <div className={styles.descricaoBox}>
             <label className={styles.descLabel}>
-              <img src="/images/patinha.png" className={styles.descIcon} />
+              <img src="/images/patinha01.png" className={styles.descIcon} />
               Descrição:
             </label>
 
@@ -63,7 +63,7 @@ export default function Encontrados() {
             {/* Campo padrão */}
             {["Nome", "Raça", "Gênero", "Local", "Data"].map((campo) => (
               <div className={styles.campo} key={campo}>
-                <img src="/images/patinha.png" className={styles.iconeInput} />
+                <img src="/images/patinha01.png" className={styles.iconeInput} />
                 <input
                   type="text"
                   placeholder={campo + ":"}
@@ -80,7 +80,7 @@ export default function Encontrados() {
                   <label className={styles.recompensaLabel}>Recompensa</label>
                 </div>
                 <div className={styles.recompensaRow}>
-                  <img src="/images/patinha.png" className={styles.iconeRecompensa} />
+                  <img src="/images/patinha01.png" className={styles.iconeRecompensa} />
                   <input
                     type="range"
                     min="0"
