@@ -6,6 +6,7 @@ import styles from './apoiar.module.css';
 
 export default function Modal({ ong, onClose }){
   const chave = '25.313.327/0001-53';
+  console.debug('Modal render for ong:', ong)
 
   const copy = async () => {
     try{
