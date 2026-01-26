@@ -1,7 +1,8 @@
 "use client";
 
-
 import styles from './apoiar.module.css';
+import { useState } from 'react';
+import Modal from './Modal';
 
 const ongs = [
   { id: 1, nome: 'Desabandone Focinhos', descricao: 'Nosso trabalho é atender quem mais precisa em Pouso Alegre e região. Em cada ação está impressa a compaixão e o cuidado com os animais abandonados.', imagem: '/images/icone-perfil.jpg' },
@@ -17,14 +18,24 @@ const ongs = [
   { id: 11, nome: 'SOS Peludos', descricao: 'Atuação em resgates e ações de conscientização sobre abandono.', imagem: '/images/icone-perfil.jpg' },
   { id: 12, nome: 'Brigada Animal', descricao: 'Equipe de voluntários para resgate em áreas urbanas e rurais.', imagem: '/images/icone-perfil.jpg' },
   { id: 13, nome: 'Mãos que Ajudam', descricao: 'Rede de apoio para transporte e cuidados emergenciais.', imagem: '/images/icone-perfil.jpg' },
-  { id: 14, nome: 'Adoção Já', descricao: 'Plataforma local que conecta adotantes e ONGs.', imagem: '/images/icone-perfil.jpg' },
+  { id: 14, nome: 'Adoção Já', descricao: 'Plataforma local que conectddda adotantes e ONGs.', imagem: '/images/icone-perfil.jpg' },
   { id: 15, nome: 'Cuidar e Amar', descricao: 'Projeto educacional sobre bem-estar animal em escolas.', imagem: '/images/icone-perfil.jpg' },
   { id: 16, nome: 'Ampara Bichos', descricao: 'Campanhas de arrecadação e apoio a abrigos pequenos.', imagem: '/images/icone-perfil.jpg' }
 ];
 
 export default function ApoiarPage() {
-  const handleApoiar = (ong) => {
-    alert('Obrigado por apoiar: ' + ong.nome);
+  const [activeOng, setActiveOng] = useState(null);
+
+  const openModal = (ong) => setActiveOng(ong);
+  const closeModal = () => setActiveOng(null);
+  // debug helpers
+  const openModalDebug = (ong) => {
+    console.debug('openModal called for:', ong)
+    openModal(ong)
+  }
+  const closeModalDebug = () => {
+    console.debug('closeModal called')
+    closeModal()
   }
 
   return (
@@ -37,7 +48,10 @@ export default function ApoiarPage() {
           {ongs.map(ong => (
             <div className={styles['card-ong']} key={ong.id}>
                 <div className={styles['card-title']}><h3>{ong.nome}</h3></div>
-                <div><button className={styles['apoiar-btn']} onClick={() => handleApoiar(ong)}>Apoiar <img src="/images/icone-moedas.png" alt="moeda" style={{ width: '24px', height: '24px'}} /></button>
+                <div>
+                  <button className={styles['apoiar-btn']} onClick={() => openModalDebug(ong.nome)}>
+                    Apoiar <img src="/images/icone-moedas.png" alt="moeda" style={{ width: '24px', height: '24px'}} />
+                  </button>
                 </div>
         
               <div className={styles['card-image-wrapper']}>
@@ -53,6 +67,7 @@ export default function ApoiarPage() {
           ))}
         </section>
       </div>
+  {activeOng && <Modal ong={activeOng} onClose={closeModalDebug} />}
     </main>
   );
 }

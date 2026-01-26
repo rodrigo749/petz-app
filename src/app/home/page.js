@@ -7,38 +7,72 @@ import Carousel from '../../components/Carousel'
 export default function HomePage() {
   const [perdidos, setPerdidos] = useState([])
   const [adotados, setAdotados] = useState([])
+  const [resgatados, setResgatados] = useState([])
 
   async function carregarPets() {
-    const res = await fetch("/api/pets");
-    const data = await res.json();
-    
-    // Filtrar pets perdidos
-    const petsPerdidos = data
-      .filter(pet => pet.status === 'perdido')
-      .map(pet => ({
+    // Buscar pets perdidos diretamente do endpoint específico
+    try {
+      const resPerdidos = await fetch("/api/pets-perdidos");
+      const dataPerdidos = await resPerdidos.json();
+
+      const petsPerdidos = dataPerdidos.map(pet => ({
         id: pet.id,
         name: pet.nome,
         breed: pet.raca,
         gender: pet.genero,
-        location: pet.descricao,
+        location: pet.local || pet.descricao || "",
         img: pet.imagem || "https://via.placeholder.com/300x200"
-      }))
-    
-    // Filtrar pets para adoção
-    const petsAdocao = data
-      .filter(pet => pet.status === 'adocao')
-      .map(pet => ({
-        id: pet.id,
-        name: pet.nome,
-        breed: pet.raca,
-        gender: pet.genero,
-        age: pet.idade,
-        location: pet.descricao,
-        img: pet.imagem || "https://via.placeholder.com/300x200"
-      }))
-    
-    setPerdidos(petsPerdidos)
-    setAdotados(petsAdocao)
+      }));
+
+      setPerdidos(petsPerdidos);
+    } catch (err) {
+      console.error("Erro carregando pets perdidos:", err);
+      setPerdidos([]);
+    }
+
+  // Buscar pets para adoção (mantém comportamento anterior)
+    try {
+      const res = await fetch("/api/pets");
+      const data = await res.json();
+
+      const petsAdocao = data
+        .filter(pet => pet.status === 'adocao')
+        .map(pet => ({
+          id: pet.id,
+          name: pet.nome,
+          breed: pet.raca,
+          gender: pet.genero,
+          age: pet.idade,
+          location: pet.descricao,
+          img: pet.imagem || "https://via.placeholder.com/300x200"
+        }));
+
+      setAdotados(petsAdocao);
+    } catch (err) {
+      console.error("Erro carregando pets para adoção:", err);
+      setAdotados([]);
+    }
+
+    // Buscar pets resgatados (encontrados/achados) a partir do mesmo endpoint de pets-perdidos
+    try {
+      const resResgatados = await fetch("/api/pets-perdidos");
+      const dataResgatados = await resResgatados.json();
+      const encontrados = dataResgatados
+        .filter(p => p.status === 'encontrado' || p.status === 'achado')
+        .map(pet => ({
+          id: pet.id,
+          name: pet.nome,
+          breed: pet.raca,
+          gender: pet.genero,
+          location: pet.local || pet.descricao || "",
+          img: pet.imagem || "https://via.placeholder.com/300x200"
+        }));
+
+      setResgatados(encontrados);
+    } catch (err) {
+      console.error("Erro carregando pets resgatados:", err);
+      setResgatados([]);
+    }
   }
 
   useEffect(() => {
@@ -62,6 +96,11 @@ export default function HomePage() {
       <section className={styles.block}>
         <h3 className={styles.title}>Perdidos recentemente</h3>
         <Carousel items={perdidos} />
+      </section>
+
+      <section className={styles.block}>
+        <h3 className={styles.title}>Resgatados recentemente</h3>
+        <Carousel items={resgatados} />
       </section>
 
       <section className={styles.block}>

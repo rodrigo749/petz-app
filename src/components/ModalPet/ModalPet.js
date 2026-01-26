@@ -45,8 +45,34 @@ export default function ModalPet({ pet, onClose }) {
       {/* LADO DIREITO - CAIXA AZUL */}
       <div className={styles.infoBox}>
 
+      {/* área superior com texto de atualização e badge de recompensa */}
+      <div className={styles.topMeta}>
+        <div className={styles.updatedText}>{pet.atualizado || pet.atualizadoEm || 'Atualizado há 2 semanas'}</div>
+
+        {pet.recompensa && Number(pet.recompensa) > 0 && (
+          <div className={styles.rewardBadge} role="status" aria-label={`Recompensa ${pet.recompensa} reais`}>
+            {/* ícone moeda (esquerda) com wrapper para bolinha */}
+            <span className={styles.coinWrapper} aria-hidden>
+              <svg className={styles.coin} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <text x="12" y="16" textAnchor="middle" fontSize="12" fill="#1f7a2c" fontFamily="Arial">$</text>
+              </svg>
+            </span>
+
+            <span className={styles.rewardText}>Recompensa R$ {pet.recompensa}</span>
+
+            {/* ícone moeda (direita) com wrapper para bolinha */}
+            <span className={styles.coinWrapper} aria-hidden>
+              <svg className={styles.coin} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <text x="12" y="16" textAnchor="middle" fontSize="12" fill="#1f7a2c" fontFamily="Arial">$</text>
+              </svg>
+            </span>
+          </div>
+        )}
+      </div>
+
+      {/* ícone de patinha no canto (ajustado) */}
       <img
-        src="/images/patinhabranca.png"
+        src="/images/patinha.png"
         alt="patinha"
         className={styles.pawIcon}
       />
@@ -56,12 +82,12 @@ export default function ModalPet({ pet, onClose }) {
         <div className={styles.infoGroup}>
           <p><strong>Raça:</strong> {pet.raca}</p>
           <p><strong>Gênero:</strong> {pet.genero}</p>
-          <p><strong>Idade:</strong> {pet.idade}</p>
+          <p><strong>Local:</strong> {pet.local}</p>
+          <p><strong>Data:</strong> {pet.data || '-'}</p>
         </div>
 
         <div className={styles.respEndGroup}> 
-          <p><strong>Responsável:</strong> {pet.responsavel}</p>
-          <p><strong>Endereço:</strong> {pet.endereco}</p>
+          <p><strong>Recompensa:</strong> {pet.recompensa}</p>
         </div>
       </div>  
 
@@ -72,7 +98,7 @@ export default function ModalPet({ pet, onClose }) {
         </div>
 
         {/* BOTÃO */}
-        <button className={styles.contactBtn} onClick={handleContact}>Contatar ONG</button>
+        <button className={styles.contactBtn} onClick={handleContact}>Contatar dono</button>
 
       </div>
     </div>

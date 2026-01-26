@@ -3,6 +3,7 @@
   min-height: 100vh;
   background-color: #274b65;
   padding: 40px 0;
+  display: flex;
 }
 
 .cards-wrapper-container {
@@ -20,25 +21,36 @@
   color: #FFFFFF;
   font-size: 20px;
   font-weight: 700;
-  padding: 7px 550px;
+  padding: 7px 2rem;
   border-radius: 50px;
   text-align: center;
-  width: fit-content;
   margin: 0 auto 50px auto;
   border: 5px solid #0E2A45;
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
-.grid-pets {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-  gap: 10px;
-  justify-items: center;
+/* Ajustes adicionais para telas muito grandes */
+@media (min-width:1200px) {
+  .titulo {
+    padding: 7px 6rem;
+    font-size: 22px;
+  }
 }
 
 /* Responsividade do titulo */
-
-@media (max-width:480px) {
+@media screen and (min-width: 901px) and (max-width: 1200px) {
+  .titulo {
+    padding: 7px 400px;
+    font-size: 20px;
+  }
+}
+@media screen and (min-width: 700px) and (max-width: 900px) {
+  .titulo {
+    padding: 7px 200px;
+    font-size: 18px;
+  }
+}
+@media (min-width:300px) and (max-width:699px) {
   .titulo {
     padding: 7px 10px;
     width: 90%;
@@ -46,4 +58,11 @@
     justify-content: center;
     display: flex;
   }
+}
+
+.grid-pets {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 10px;
+  justify-items: center;
 }
