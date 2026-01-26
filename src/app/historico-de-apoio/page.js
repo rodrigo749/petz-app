@@ -17,12 +17,7 @@ const ONG_MOCK = {
   descricao:
     "Nosso trabalho é atender quem mais precisa em Pouso Alegre e região. Quando ouvir falar em Desabandone Focinhos, saiba que em cada ação está impressa a compaixão e o cuidado com os animais abandonados.",
   cnpj: "25.313.327/0001-53",
-  pix: {
-    cnpj: "25.313.327/0001-53",
-    descricao:
-      "Nosso trabalho é atender quem mais precisa em Pouso Alegre e região. Quando ouvir falar em Desabandone Focinhos, saiba que em cada ação está impressa a compaixão e o cuidado com os animais abandonados.",
-    qrImage: "/images/qrcode.png",
-  },
+  pix: null, // <- V1 (sem Pix). Para testar V2, coloque o objeto pix aqui.
 };
 
 export default function HistoricoDeApoioPage() {
