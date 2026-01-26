@@ -1,15 +1,5 @@
 [
   {
-    "id": 1,
-    "nome": "mingau",
-    "raca": "vira-lata",
-    "genero": "feminino",
-    "idade": "2 aninhos",
-    "descricao": "pet peludo.",
-    "imagem": "/images/semfoto.jpg",
-    "status": "adocao"
-  },
-  {
     "id": 2,
     "nome": "Caramelo",
     "raca": "Vira - Lata",
@@ -29,7 +19,6 @@
     "imagem": "/images/pet05.jpg",
     "status": "perdido"
   },
- 
   {
     "id": 4,
     "nome": "Jonas",
@@ -70,7 +59,6 @@
     "imagem": "/images/semfoto.jpg",
     "status": "perdido"
   },
-
   {
     "id": 8,
     "nome": "Rex",
@@ -91,7 +79,6 @@
     "imagem": "/images/semfoto.jpg",
     "status": "perdido"
   },
-  
   {
     "id": 10,
     "nome": "Toby",
@@ -102,14 +89,13 @@
     "imagem": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWsXRpjbyHlOuBOFHcqx-QIE_qq8BuUN3CDA&s",
     "status": "adocao"
   },
-    {
+  {
     "id": 11,
     "nome": "Spike",
     "raca": "Vira - Lata",
     "genero": "Macho",
     "idade": "2 anos",
     "descricao": "Com manchas",
-    "imagem": "/uploads/Spike.png",
     "imagem": "/images/semfoto.jpg",
     "status": "adocao"
   },
@@ -122,5 +108,73 @@
     "descricao": "",
     "imagem": "/uploads/mingau.png",
     "status": "adocao"
+  },
+  {
+    "id": 11,
+    "nome": "teste",
+    "raca": "teste",
+    "genero": "macho",
+    "data": "10/12/2025",
+    "local": "pouso alegre",
+    "recompensa": 0,
+    "descricao": "teste",
+    "imagem": ""
+  },
+  {
+    "id": 12,
+    "nome": "teste 2",
+    "raca": "teste 2 ",
+    "genero": "teste 2",
+    "data": "10/12/2025",
+    "local": "teste 2",
+    "recompensa": 0,
+    "descricao": "teste",
+    "imagem": ""
+  },
+  {
+    "id": 13,
+    "nome": "teste 3",
+    "raca": "teste 3",
+    "genero": "teste 3",
+    "data": "10/12/2025",
+    "local": "teste 3",
+    "recompensa": 0,
+    "descricao": "teste 3",
+    "imagem": "",
+    "status": "perdido"
+  },
+  {
+    "id": 14,
+    "nome": "teste 4",
+    "raca": "teste 4",
+    "genero": "teste 4",
+    "data": "10/12/2025",
+    "local": "teste 4",
+    "recompensa": "68",
+    "descricao": "teste 4",
+    "imagem": "",
+    "status": "perdido"
+  },
+  {
+    "id": 15,
+    "nome": "tets ",
+    "raca": "tets",
+    "genero": "tets",
+    "data": "10/12/2025",
+    "local": "test",
+    "recompensa": 0,
+    "descricao": "tets",
+    "imagem": ""
+  },
+  {
+    "id": 16,
+    "nome": "t",
+    "raca": "t",
+    "genero": "t",
+    "data": "10/12/2025",
+    "local": "t",
+    "recompensa": 0,
+    "descricao": "t",
+    "imagem": ""
   }
 ]

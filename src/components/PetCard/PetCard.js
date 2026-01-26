@@ -52,6 +52,8 @@ export default function PetCard({ pet, tipoPagina }) {
             <p>Gênero: {pet.genero}</p>
             <p>Idade: {pet.idade}</p>
             <p>Descrição: {pet.descricao}</p>
+
+            {/* Campos específicos removidos do cartão — aparecem apenas no modal */}
           </div>
 
           {/* BOTÕES */}
@@ -63,6 +65,16 @@ export default function PetCard({ pet, tipoPagina }) {
               onClick={() => setOpen(true)}
             >
               Adotar
+            </button>
+          )}
+
+          {/* PÁGINA DE PETS PERDIDOS → apenas VER */}
+          {tipoPagina === "perdidos" && (
+            <button
+              className={styles["btn-adotar"]}
+              onClick={() => setOpen(true)}
+            >
+              Ver
             </button>
           )}
 
@@ -84,8 +96,8 @@ export default function PetCard({ pet, tipoPagina }) {
         </div>
       </div>
 
-      {/* MODAL – só existe na página pública */}
-      {open && tipoPagina === "publica" && (
+      {/* MODAL – existe na página pública e também para pets perdidos (ver) */}
+      {open && (tipoPagina === "publica" || tipoPagina === "perdidos") && (
         <ModalPet pet={pet} onClose={() => setOpen(false)} />
       )}
     </>
