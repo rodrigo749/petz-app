@@ -14,19 +14,35 @@ export default function Header() {
   const [dropdownOpen, setDropdownOpen] = useState(null);
   const [usuarioLogado, setUsuarioLogado] = useState(null);
 
+  // 🔐 sincroniza estado de autenticação
   useEffect(() => {
-    const u = JSON.parse(localStorage.getItem("usuarioLogado") || "null");
-    setUsuarioLogado(u);
-
-    // Listen for changes in localStorage (from other tabs/windows)
-    const handleStorageChange = () => {
-      const updated = JSON.parse(localStorage.getItem("usuarioLogado") || "null");
-      setUsuarioLogado(updated);
+    const syncAuth = () => {
+      const u = JSON.parse(localStorage.getItem("usuarioLogado") || "null");
+      setUsuarioLogado(u);
     };
 
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
+    syncAuth();
+
+    // outras abas
+    window.addEventListener("storage", syncAuth);
+    // mesma aba (login/logout)
+    window.addEventListener("auth-changed", syncAuth);
+
+    return () => {
+      window.removeEventListener("storage", syncAuth);
+      window.removeEventListener("auth-changed", syncAuth);
+    };
   }, []);
+
+  // 🏢 regra: apenas ONG (CNPJ) vê opções de perfil ONG
+  const isOng = !!usuarioLogado?.cnpj || usuarioLogado?.tipo === "ong";
+
+  // 🔍 filtra links conforme login
+  const navLinksFiltrados = NAV_LINKS.filter((link) => {
+    if (link.id === "perfil" && !isOng) return false;
+    if (link.id === "login" && usuarioLogado) return false;
+    return true;
+  });
 
   return (
     <header className={styles.header}>
@@ -42,11 +58,11 @@ export default function Header() {
           />
         </Link>
 
-        {/* Desktop Menu */}
+        {/* ================= DESKTOP MENU ================= */}
         <div className={styles.desktop}>
-          {NAV_LINKS.map(({ id, label, href, subLinks }) => (
-            <div 
-              key={id} 
+          {navLinksFiltrados.map(({ id, label, href, subLinks }) => (
+            <div
+              key={id}
               className={styles.dropdown}
               onMouseEnter={() => subLinks && setDropdownOpen(id)}
               onMouseLeave={() => setDropdownOpen(null)}
@@ -55,17 +71,19 @@ export default function Header() {
                 <button
                   className={styles.link}
                   aria-expanded={dropdownOpen === id}
-                  aria-haspopup={"true"}
+                  aria-haspopup="true"
                 >
                   {label}
                   {dropdownOpen === id ? (
-                    <FaChevronUp size={12} className="chevron-icon" />
+                    <FaChevronUp size={12} />
                   ) : (
-                    <FaChevronDown size={12} className="chevron-icon" />
+                    <FaChevronDown size={12} />
                   )}
                 </button>
               ) : (
-                <Link href={href} className={styles.link}>{label}</Link>
+                <Link href={href} className={styles.link}>
+                  {label}
+                </Link>
               )}
 
               {subLinks && dropdownOpen === id && (
@@ -85,20 +103,25 @@ export default function Header() {
           ))}
         </div>
 
-        {/* Profile avatar (desktop) */}
+        {/* ================= AVATAR DESKTOP ================= */}
         {usuarioLogado && (
           <div className={styles.profileWrap}>
             <Link
-              href={usuarioLogado.tipo === "ong" ? "/perfil-ong" : "/perfil-usuario"}
+              href="/perfil"
               className={styles.avatarLink}
             >
-              <span className={styles.avatarIcon} aria-hidden>
-                <Avatar src={usuarioLogado.imagem} alt="Perfil" />
+              <span className={styles.avatarIcon}>
+                <img
+                  src={usuarioLogado.imagem || "/images/Avatar.png"}
+                  alt="Perfil"
+                  className={styles.avatarImage}
+                />
               </span>
             </Link>
           </div>
         )}
 
+        {/* ================= BOTÃO MOBILE ================= */}
         <button
           className={styles.toggle}
           onClick={() => setMenuOpen(!menuOpen)}
@@ -107,7 +130,7 @@ export default function Header() {
           {menuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
 
-        {/* Mobile Menu */}
+        {/* ================= MOBILE MENU ================= */}
         {menuOpen && (
           <div className={styles.mobile}>
             <div
@@ -132,7 +155,7 @@ export default function Header() {
               </div>
 
               <nav className={styles.sheetLinks}>
-                {NAV_LINKS.map(({ id, label, href, subLinks }) => (
+                {navLinksFiltrados.map(({ id, label, href, subLinks }) => (
                   <div key={id}>
                     <Link
                       href={href}
@@ -142,6 +165,7 @@ export default function Header() {
                       {label}
                       {subLinks && <FaChevronDown size={12} />}
                     </Link>
+
                     {subLinks && (
                       <div className={styles.mobileSubLinks}>
                         {subLinks.map((subLink, index) => (
