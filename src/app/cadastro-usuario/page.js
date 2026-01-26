@@ -139,7 +139,7 @@ export default function CadastroPage() {
   return (
     <div className={styles.container}>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <h1 className={styles.title}>Criar nova conta</h1>
+  <h1 className={styles.title}>Cadastro de Usuário</h1>
         {error && <div className={styles.error}>{error}</div>}
 
         <div className={styles.inputWrapper}>
@@ -253,8 +253,8 @@ export default function CadastroPage() {
               />
             ) : (
               <>
-                <span className={styles.uploadIcon}>＋</span>
-                <span className={styles.uploadText}>Adicionar foto de perfil</span>
+                <img src="/images/iconephoto.png" className={styles.iconeAddImg} alt="Adicionar" />
+                <span className={styles.uploadText}>Adicionar imagem</span>
               </>
             )}
         

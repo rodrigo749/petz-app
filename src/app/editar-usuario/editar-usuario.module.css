@@ -1,0 +1,136 @@
+.container {
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  background-color: #274b65;
+}
+
+.form {
+  width: 100%;
+  max-width: 760px;
+  background: #f8ffff;
+  padding: 3rem 2.5rem;
+  border-radius: 24px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  align-items: center;
+  border: 6px solid #d9d9d9;
+}
+
+.title {
+  margin: 0 0 .75rem 0;
+  font-weight: 700;
+  text-align: center;
+  color: #46799e;
+  font-size: 28px;
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 10px 18px;
+  border: 6px solid #143750;
+  border-radius: 999px;
+  background: transparent;
+  box-shadow: inset 0 -3px 0 rgba(255,255,255,0.02);
+  color: black;
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  background: transparent;
+  color: #0b3746;
+  font-size: 16px;
+}
+
+.fieldLabel { font-weight: 700; color: #0b3746; min-width: 90px; }
+.input { border: none; outline: none; background: transparent; width: 100%; font-size: 1rem; padding: 10px 6px; color: black; padding-left: 50px; }
+.inlineLabel { position: absolute; left: 70px; color: #0b3b52; font-weight: 700; opacity: 0.75; pointer-events: none; }
+.changePassword { padding: 8px 12px; background:#0b66a6; color:#fff; border-radius: 999px; border: none; cursor:pointer }
+
+.inputRow { display:flex; align-items:center; gap:12px; width:100%; }
+
+@media (max-width: 600px) {
+  .inputRow { flex-direction: column; align-items: stretch; }
+  .changePassword { width: 100%; }
+}
+
+/* metade da largura para campos específicos */
+.halfInput { flex: 0 0 48%; }
+
+/* aumentar botão Alterar senha no desktop */
+.changePassword { padding: 12px 18px; font-weight: 700; font-size: 1rem; }
+
+.uploadWrapper {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.uploadBox {
+  width: 220px;
+  height: 220px;
+  background: #5a7c99;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  font-weight: 880;
+  text-align: center;
+}
+
+.uploadBox:hover {
+  background-color: #a8c7dc;
+}
+
+.uploadIcon {
+  font-size: 40px;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.uploadText {
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 830;
+  color: #ffffff;
+}
+
+.uploadPreview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.iconeAddImg { width: 190px; margin-bottom: 0px; }
+
+.uploadImagem { display: flex; justify-content: center; align-items: center; }
+.pawIcon { width: 24px; height: 24px; }
+
+/* centered action buttons: larger and visually centered */
+.actionsRow { display:flex; gap: 2.5rem; width:100%; justify-content: center; align-items:center; padding-top: 8px; }
+/* fixed-width buttons; delete button slightly left via margin */
+.deleteBtn { width: 240px; padding: 22px 0; margin-right: 2rem; background: #ff6b6b; color: white; border:none; border-radius: 999px; cursor:pointer; font-weight:700; min-height:64px; box-sizing: border-box }
+.button { width: 240px; padding: 22px 0; background: #19a54a; color: white; border:none; border-radius: 999px; cursor:pointer; font-weight:700; min-height:64px; box-sizing: border-box }
+
+@media (max-width: 600px) {
+  .actionsRow { flex-direction: column; gap: 12px; }
+  .deleteBtn, .button { width: 100%; padding: 16px 0; }
+  .deleteBtn { margin-right: 0; }
+}
+
+.error { background: #fee2e2; color: #b91c1c; padding: .5rem .75rem; border-radius: 6px; font-size: .9rem; }

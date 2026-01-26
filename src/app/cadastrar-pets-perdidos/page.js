@@ -47,13 +47,30 @@ export default function CadastrarPerdidos() {
       descricao,
       imagem: "/images/semfoto.jpg",
     };
+    // adicionar informação do usuário logado, se houver
+    try {
+      const u = JSON.parse(localStorage.getItem('usuarioLogado') || 'null');
+      if (u && u.id) {
+        // garante que o cadastro contenha o id do dono (pode ser usuário ou ONG)
+        body.usuarioId = u.id;
+        // tenta preencher nome tanto para usuário quanto para ONG
+        body.usuarioNome = u.nome || u.razaoSocial || '';
+        // armazena também o tipo (usuario ou ong) para possibilidades futuras
+        body.usuarioTipo = u.tipo || '';
+      }
+    } catch (err) { }
 
     try {
       setLoading(true);
       if (file) {
         body.imagem = await uploadImage(file);
       }
-      await savePet(body);
+      // enviar para endpoint de pets perdidos
+      await fetch('/api/pets-perdidos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
       setMessage("Pet cadastrado com sucesso!");
       // limpar formulário
       setNome("");
@@ -130,7 +147,7 @@ export default function CadastrarPerdidos() {
         <section className={styles.colDireita}>
           <div className={styles.tituloArea}>
             <h2 className={styles.tituloCadastro}>Cadastrar Pet Perdido</h2>
-            <img src="/images/homepet.png" className={styles.iconHome} />
+           
           </div>
 
           <form className={styles.formCadastro} onSubmit={handleSubmit}>

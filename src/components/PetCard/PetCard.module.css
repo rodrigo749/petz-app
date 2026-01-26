@@ -17,15 +17,21 @@
 .card-image-wrapper {
   width: 150px;
   height: 180px;
-  border-radius: 12px;
+  /* match adoption uploadBox radius and border */
+  border-radius: 22px;
   overflow: hidden;
   flex-shrink: 0;
+  border: 4px solid #6088a4;
+  box-shadow: inset 0 0 8px rgba(0,0,0,0.06);
 }
 
-.card-image {
+.card-image-wrapper img {
+  display: block; /* remove gaps abaixo da imagem */
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* preenche o container mantendo proporção */
+  /* herda o border-radius do wrapper para garantir cantos idênticos */
+  border-radius: inherit;
 }
 
 /* Coluna direita */
@@ -41,7 +47,8 @@
 .card-text-box {
   width: 100%;
   background: white;
-  border-radius: 12px;
+  /* larger inner box radius to match adoption styling */
+  border-radius: 22px;
   padding: 12px;
   color: #0f2a3d;
   height: 180px;
