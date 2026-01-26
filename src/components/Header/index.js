@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { NAV_LINKS } from "@/constants/navigation";
+import Avatar from '../Avatar'
 import styles from "./header.module.css";
 
 export default function Header() {

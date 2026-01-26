@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { FaPaw } from "react-icons/fa";
 import styles from "./login.module.css";
+import useSafeToast from "@/components/Toast/useSafeToast";
 
 export default function LoginPage() {
   const router = useRouter();
+  const { showToast } = useSafeToast();
   const [cpf, setCpf] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -14,24 +16,37 @@ export default function LoginPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setError("");
+
     if (!cpf || !password) {
-      setError("Por favor, preencha CPF e senha.");
+      const msg = "Por favor, preencha CPF e senha.";
+      setError(msg);
+      showToast(msg, "warning");
       return;
     }
 
-    const usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
-    
-    const usuarioEncontrado = usuarios.find(
-      u => u.cpf === cpf && u.password === password
-    );
+    try {
+      const usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
 
-    if (!usuarioEncontrado) {
-      setError("CPF ou senha incorretos, caso vc não tenha um cadastro clique em se cadastrar.");
-      return;
+      const usuarioEncontrado = usuarios.find(
+        (u) => (u.cpf || "").replace(/\D/g, "") === cpf.replace(/\D/g, "") && u.password === password
+      );
+
+      if (!usuarioEncontrado) {
+        const msg = "CPF ou senha incorretos. Caso não tenha cadastro, clique em cadastrar.";
+        setError(msg);
+        showToast(msg, "error");
+        return;
+      }
+
+      localStorage.setItem("usuarioLogado", JSON.stringify(usuarioEncontrado));
+      showToast("Login realizado com sucesso!", "success");
+      setTimeout(() => router.push("/"), 700);
+    } catch (err) {
+      console.error(err);
+      const msg = "Erro ao processar o login. Tente novamente.";
+      setError(msg);
+      showToast(msg, "error");
     }
-
-    localStorage.setItem("usuarioLogado", JSON.stringify(usuarioEncontrado));
-    router.push("/");
   };
 
   const formatCPF = (value) => {
@@ -41,6 +56,7 @@ export default function LoginPage() {
       .replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3")
       .replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d)/, "$1.$2.$3-$4");
   };
+
   return (
     <div className={styles.container}>
       <form className={styles.form} onSubmit={handleSubmit}>
@@ -58,7 +74,10 @@ export default function LoginPage() {
               type="text"
               inputMode="numeric"
               value={cpf}
-              onChange={(e) => setCpf(formatCPF(e.target.value))}
+              onChange={(e) => {
+                setCpf(formatCPF(e.target.value));
+                if (error) setError("");
+              }}
               placeholder="000.000.000-00"
               aria-label="CPF"
             />
@@ -75,7 +94,10 @@ export default function LoginPage() {
               className={styles.input}
               type="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                if (error) setError("");
+              }}
               placeholder=""
               aria-label="Senha"
             />
