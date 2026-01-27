@@ -93,6 +93,15 @@
   border-radius: 6px;
   font-size: .9rem;
 }
+.errorText {
+  color: #cc0000;
+  font-size: 0.85rem;
+  margin-top: -0.8rem; /* Puxa para perto do input */
+  margin-bottom: 0.5rem;
+  padding-left: 1rem;
+  align-self: flex-start;
+  width: 100%;
+}
 
 .bottomLink {
   margin-top: 0.75rem;
