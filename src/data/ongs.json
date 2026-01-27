@@ -36,5 +36,24 @@
     "HorarioFunc2": "",
     "imagem": "",
     "tipo": "ong"
+  },
+  {
+    "id": 1769432877488,
+    "nome": "fake",
+    "email": "fake@gmail.com",
+    "telefone": "(00) 0000-0000",
+    "celular": "(00) 00000-0000",
+    "senha": "12345678",
+    "cnpj": "00.000.000/0000-00",
+    "cep": "00000-000",
+    "rua": "fake",
+    "numero": "0",
+    "complemento": "",
+    "cidade": "fake",
+    "estado": "mg",
+    "HorarioFunc1": "10:00",
+    "HorarioFunc2": "00:00",
+    "imagem": "",
+    "tipo": "ong"
   }
 ]
