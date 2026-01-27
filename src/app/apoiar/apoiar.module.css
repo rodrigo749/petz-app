@@ -334,6 +334,26 @@
 }
  
   
+/* Modal overlay and content (used by Modal.js) */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background: transparent; /* inner container uses styles from apoiar-pix */
+  border-radius: 10px;
+  padding: 8px;
+  box-sizing: border-box;
+  max-height: 95vh;
+  overflow: auto;
+}
+
 /* responsividade celular */
  @media (max-width: 499px) {
 
@@ -388,27 +408,7 @@
   .apoiar-btn {
     margin-top: 14px;
     display: flex;
-  
-  }
 
-  /* Modal overlay and content (used by Modal.js) */
-  .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.45);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-  }
-
-  .modal-content {
-    background: transparent; /* inner container uses styles from apoiar-pix */
-    border-radius: 10px;
-    padding: 8px;
-    box-sizing: border-box;
-    max-height: 95vh;
-    overflow: auto;
   }
 
 

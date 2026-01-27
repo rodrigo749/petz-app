@@ -30,29 +30,6 @@ export default function HomePage() {
       setPerdidos([]);
     }
 
-  // Buscar pets para adoção (mantém comportamento anterior)
-    try {
-      const res = await fetch("/api/pets");
-      const data = await res.json();
-
-      const petsAdocao = data
-        .filter(pet => pet.status === 'adocao')
-        .map(pet => ({
-          id: pet.id,
-          name: pet.nome,
-          breed: pet.raca,
-          gender: pet.genero,
-          age: pet.idade,
-          location: pet.descricao,
-          img: pet.imagem || "https://via.placeholder.com/300x200"
-        }));
-
-      setAdotados(petsAdocao);
-    } catch (err) {
-      console.error("Erro carregando pets para adoção:", err);
-      setAdotados([]);
-    }
-
     // Buscar pets resgatados (encontrados/achados) a partir do mesmo endpoint de pets-perdidos
     try {
       const resResgatados = await fetch("/api/pets-perdidos");

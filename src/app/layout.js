@@ -21,8 +21,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="pt-BR" className={inter.variable}>
-      <body style={{display: "flex", flexDirection: "column", minHeight: "100vh"}}>
+    <html lang="pt-BR" className={inter.variable} suppressHydrationWarning>
+      <body style={{display: "flex", flexDirection: "column", minHeight: "100vh"}} suppressHydrationWarning>
         <ToastProvider>
           <Header />
           <main style={{ flexGrow: 1 }}>
