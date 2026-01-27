@@ -152,32 +152,20 @@ export default function CadastroPage() {
         body: JSON.stringify(payload)
       });
 
-      const data = await res.json().catch(() => ({}));
+      // Sucesso: armazena token/usuário e vai para o perfil do usuário
+      const respData = await res.json().catch(() => ({}))
 
-      if (!res.ok) {
-        // Tratamento de erros do Backend (Sequelize)
-        const msg = data.message || "Erro desconhecido";
-        
-        if (msg.toLowerCase().includes("email")) {
-          setFieldErrors(prev => ({ ...prev, email: "Este email já está em uso." }));
-        } else if (msg.toLowerCase().includes("cpf")) {
-          setFieldErrors(prev => ({ ...prev, cpf: "Este CPF já está cadastrado." }));
-        } else {
-          showToast(msg, "error");
-        }
-        
-        setLoading(false);
-        return;
+      // Se o backend retornou token, armazena
+      if (respData.token) {
+        localStorage.setItem('token', respData.token)
       }
+      // Armazena objeto de usuário (ajuste chave conforme seu backend)
+      localStorage.setItem('usuarioLogado', JSON.stringify(respData.user || respData))
 
-      // 4. Sucesso
-      showToast("Cadastro realizado com sucesso!", "success");
-      
-      // Limpeza de segurança
-      localStorage.removeItem("usuarioLogado");
-      localStorage.removeItem("token");
-      
-      setTimeout(() => router.push("/login-usuario"), 1500);
+      showToast('Cadastro realizado com sucesso!', 'success')
+
+      // Redireciona para o perfil do usuário
+      setTimeout(() => router.push('/perfil-usuario'), 900)
 
     } catch (err) {
       console.error("Erro geral:", err);

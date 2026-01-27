@@ -57,73 +57,75 @@ export default function CadastroOngPage() {
   }
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  setError('');
+    e.preventDefault();
+    setError('');
 
-  try {
-    let imagemUrl = imagem;
+    try {
+      let imagemUrl = imagem;
 
-    // 1. Upload da Imagem (Certifique-se que a função uploadImage aponte para a porta 5000)
-    if (imageFile) {
-      try {
-        imagemUrl = await uploadImage(imageFile);
-      } catch (err) {
-        console.error('Erro no upload:', err);
-        showToast('Erro ao enviar imagem. Verifique a pasta public/uploads no backend.', 'error');
+      // 1. Upload da Imagem
+      if (imageFile) {
+        try {
+          imagemUrl = await uploadImage(imageFile);
+        } catch (err) {
+          console.error('Erro no upload:', err);
+          showToast('Erro ao enviar imagem. Verifique a pasta public/uploads no backend.', 'error');
+          return;
+        }
+      }
+
+      // 2. Montagem do Payload
+      const payload = {
+        nome,
+        email,
+        telefone,
+        celular,
+        senha,
+        cnpj,
+        cep,
+        rua,
+        numero,
+        complemento,
+        cidade,
+        estado,
+        HorarioFunc1,
+        HorarioFunc2,
+        imagem: imagemUrl,
+        role: 'ong'
+      };
+
+      // 3. Chamada para o Backend usando NEXT_PUBLIC_PETZ_API_URL se disponível
+      const baseUrl = (process.env.NEXT_PUBLIC_PETZ_API_URL || 'http://localhost:5000').trim().replace(/\/$/, '');
+      const res = await fetch(`${baseUrl}/api/ongs`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      // 4. Tratamento da Resposta
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        const msg = data?.message || 'Erro ao cadastrar ONG no servidor.';
+        setError(msg);
+        showToast(msg, 'error');
         return;
       }
+
+      // SALVAR TOKEN e DADOS da ONG (se retornados) e redirecionar para painel
+      if (data.token) {
+        localStorage.setItem('petz_token', data.token);
+      }
+      localStorage.setItem('ong_data', JSON.stringify(data.ong || data));
+
+      showToast('Bem-vindo!', 'success');
+      return router.push('/painel-ong');
+    } catch (err) {
+      console.error('Erro de rede:', err);
+      setError('Não foi possível conectar ao servidor (Porta 5000).');
+      showToast('Servidor offline ou erro de CORS.', 'error');
     }
-
-    // 2. Montagem do Payload
-    const payload = {
-      nome,
-      email,
-      telefone,
-      celular,
-      senha,
-      cnpj,
-      cep,
-      rua,
-      numero,
-      complemento,
-      cidade,
-      estado,
-      HorarioFunc1, // Verifique se o Model no Backend aceita este nome exato
-      HorarioFunc2,
-      imagem: imagemUrl,
-      role: 'ong' // No seu novo backend, o campo costuma ser 'role' e não 'tipo'
-    };
-
-    // 3. Chamada para o Backend na porta 5000
-    const res = await fetch('http://localhost:5000/api/ongs', {
-      method: 'POST',
-      headers: { 
-        'Content-Type': 'application/json' 
-      },
-      body: JSON.stringify(payload)
-    });
-
-    // 4. Tratamento da Resposta
-    const data = await res.json().catch(() => ({}));
-
-    if (!res.ok) {
-      const msg = data?.message || 'Erro ao cadastrar ONG no servidor.';
-      setError(msg);
-      showToast(msg, 'error');
-      return;
-    }
-
-    showToast('Cadastro realizado com sucesso!', 'success');
-    localStorage.setItem('usuarioLogado', JSON.stringify(data));
-    
-    setTimeout(() => router.push('/perfil-ong'), 900);
-
-  } catch (err) {
-    console.error('Erro de rede:', err);
-    setError('Não foi possível conectar ao servidor (Porta 5000).');
-    showToast('Servidor offline ou erro de CORS.', 'error');
-  }
-};
+  };
 
   const formatCNPJ = (value) => {
     const digits = (value || '').replace(/\D/g, '').slice(0, 14)
