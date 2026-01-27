@@ -2,76 +2,92 @@
   width: 100%;
   min-height: 100vh;
   background-color: #274b65;
-  padding: 30px 0;   /* 👈 cria espaço em cima e embaixo */
+
 }
 
 .cards-wrapper-container {
-  width: 95%;
-  max-width: 1400px;
-  margin: 20px auto;
+  width: 100%;
+  height: 100%;
+  max-width: 1700px;
+  margin: 0 auto;
   background: #ffffff;
   border-radius: 40px;
-  padding: 20px 20px;
+  padding: 40px 20px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
 }
 
+
+
+
+
 .titulo {
-  background-color: #25455d;
-  color: #FFFFFF;
-  font-size: 20px;
-  font-weight: 700;
-  padding: 7px 550px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #254d6b;
+  border: 5px solid #143750;
+  padding: 5px 20px;
   border-radius: 50px;
   text-align: center;
-  width: fit-content;
-  margin: 0 auto 50px auto;
-  border: 5px solid #0E2A45;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  display: block;
+  width: 1400px;
+  margin: 0 auto 30px auto;
+  width: 100%;
+  top: 70px;
 }
 
 .grid-ongs {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr)); /* 👈 2 colunas */
+  grid-template-columns: repeat(3, 1fr); /* 3 colunas iguais */
   grid-row-gap: 70px;    /* espaço vertical entre as linhas */
   grid-column-gap: 50px; /* espaço horizontal entre os cards da mesma linha */
   justify-items: center;
 }
 
+
+
+
 .card-ong {
   background: #7790a2;
-  border-radius: 20px;
+  border-radius: 16px;
   border-color: #143750;
   border-style: solid;
-  border-width: 4px;
+  border-width: 2px;
   padding: 15px;
   gap: 12px;
   position: relative;
   color: white;
   width: 100%;
-  max-width: 560px;   /* todos com a mesma largura */
-  height: 340px;      /* mais alto para descrição */
-  padding: 20px;
+  max-width: 500px;   /* todos com a mesma largura */
+  height: 290px;      /* mais alto para descrição */
   box-sizing: border-box;
   display: flex;
   flex-direction: row;   /* default: empilha horizontalmente */
   justify-content: center; /* alinha horizontalmente: flex-start, center, flex-end, space-between */
   align-items: flex-start;     /* alinha verticalmente: flex-start, center, flex-end */
+  
 }
 
 .card-image-wrapper {
-  position: absolute;
-  top: 16%;
-  left: 5%;
-
+  position: relative;
+  position: relative;
+  position: relative;
+  display: flex;
   width: 135px;
   height: 135px;
-
   border-radius: 0px;
   border-color: #0d66a6;
   border-width: 1;
   border-style: solid;
-  flex-shrink: 0;
+  flex-shrink: 0; 
+  top: 17%;
+  left: 2%; 
+  top: 17%;
+  left: 2%;
 }
+
+
+
 
 .card-image {
   width: 100%;
@@ -79,28 +95,30 @@
   object-fit: cover;
 }
 
+
+
 .card-text-box {
   background: none;
   border-radius: 12px;
   padding: 10px 12px;
   color: white;
-
   position: relative;
-  margin-top: 27px;      /* substitui o top */
-  margin-left: 170px;    /* reserva espaço da imagem à esquerda */
+  top: 27px;
+  left: 40px;
+  flex: 1;
+  height: 190px;   
+  width: 260px;
+  max-width: none;
+  flex: none;       /* mesma altura em todos */
+  box-sizing: border-box;
+  overflow: hidden;       /* impede o texto de estourar o card */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 18px;
 
-  max-width: 100%;
-  min-width: 0;
-  overflow: hidden;
 }
 
-.card-text-box p {
-  margin: 0;
-  max-width: 100%;
-  white-space: normal;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-}
 
 .card-title {
   position: absolute;
@@ -126,67 +144,231 @@
   padding: 0;
 }
 
+
+
+/* alteracao no botao para ser o mesmo modelo das paginas anteriores */
 .apoiar-btn {
-  position: absolute;
-  top: 83%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: linear-gradient(180deg,#0d66a6,#0a4f86);
+  background-color: #024b91;
   color: white;
-  border: none;
-  border-radius: 999px;
-  padding: 5px 45px;
-  font-weight: 900;
-  cursor: pointer;
-  display: flex;
-  gap: 12px;
+  border: 2px solid #3e8abf;
+  border-radius: 24px;
+  padding: 5px 25px;
+  width: 140px;
+  gap: 7px;
+  height: 42px;
+  text-align: center;
+  line-height: 42px;
   align-items: center;
-  justify-content: center;
-  border-color: #274b65;
-  border-style: solid;
-  border-width: 4px;
-  transition: transform 0.2s ease-in-out;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
 }
 
-.apoiar-btn:hover {
-  transform: translate(-50%, -50%) scale(1.10);
-}
 
 .apoiar-btn img {
   filter: invert(1);
 }
 
+
 .descricao {
   color: #ffb74d;
-  font-size: 20px;
+  font-size: 17px;
 }
 
-/* ===== MOBILE ===== */
-@media (max-width: 600px) {
+/* ===========================
+    RESPONSIVIDADE do DESKTOP
+  ===========================*/
+
+@media (max-width: 1024px) {
+  .grid-ongs {
+    grid-template-columns: 2fr 2fr; /* tablet 1 coluna (evita apertar texto) */
+    gap: 30px;
+  }
+ 
+  .titulo {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px 16px;     /* substitui 7px 550px */
+    box-sizing: border-box;
+    border-radius: 30px;
+    margin: 0 auto 30px auto;
+    text-align: center;
+  }
+ 
+ 
+  .card-ong {
+    height: auto;               /* deixa crescer */
+    flex-direction: column;     /* empilha */
+    align-items: center;
+    text-align: center;
+    padding-bottom: 24px;
+  }
+ 
+  .card-image-wrapper {
+    position: static;           /* desliga absolute */
+    width: 120px;
+    height: 120px;
+    margin: 12px 0;
+  }
+ 
+   .card-title {
+    width: 100%;            /* 🔒 limita o título ao card */
+    max-width: 100%;
+    padding: 0 12px;        /* respiro lateral */
+    box-sizing: border-box;
+    text-align: center;
+  }
+ 
+  .card-title h3 {
+    white-space: normal;    /* permite quebrar linha */
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    line-height: 1.2;
+    max-width: 100%;
+  }
+ 
+ 
+  .card-text-box {
+    position: static;           /* desliga o layout do desktop */
+    margin-left: 0;             /* remove recuo da imagem */
+    margin-top: 0;
+    width: 100%;
+    height: auto;
+    padding: 0 12px;
+    overflow: visible;
+  }
+ 
+  .apoiar-btn {
+    margin-top: 14px;
+    display: flex;
+  
+  }
+  .descricao {
+    display: flex;
+    
+  }
+
+}
+
+/* responsividade computador */
+@media (max-width: 1280px) and (min-width: 991px) {
+  .cards-wrapper-container {
+    padding: 20px;
+  }
+
+  .grid-ongs {
+    grid-template-columns: 2fr 2fr; /* só uma coluna */
+    gap: 30px;
+  }
+
+  .card-ong {
+    flex-direction: column; /* empilha imagem + texto */
+    align-items: center;
+    text-align: center;
+    height: auto; /* deixa o card crescer naturalmente */
+    padding-bottom: 60px; /* espaço pro botão */
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+  }
+}
+/* responsividade tablet */
+@media (max-width: 990px) and (min-width: 600px) {
+  .cards-wrapper-container {
+    padding: 20px;
+  }
+
+
+  .grid-ongs {
+    grid-template-columns: 2fr 2fr; /* só uma coluna */
+    gap: 30px;
+  }
+
+  .card-ong {
+    flex-direction: column; /* empilha imagem + texto */
+    align-items: center;
+    text-align: center;
+    height: auto; /* deixa o card crescer naturalmente */
+    padding-bottom: 60px; /* espaço pro botão */
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+  }
+
+  /* imagem centralizada e menor */
+  .card-image-wrapper {
+    position: static;
+    width: 110px;
+    height: 110px;
+    margin-bottom: 15px;
+  }
+
+  /* texto ocupa toda a largura */
+  .card-text-box {
+    position: static;
+    width: 100%;
+    height: auto;
+    left: initial;
+    top: initial;
+  }
+
+  /* título centralizado e sem absolute */
+  .card-title {
+    position: static;
+    transform: none;
+    margin-bottom: 10px;
+  }
+
+  .card-title h3 {
+    white-space: normal; /* permite quebrar linha no mobile */
+    font-size: 20px;
+  }
+
+
+
+}
+ 
+  
+/* Modal overlay and content (used by Modal.js) */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background: transparent; /* inner container uses styles from apoiar-pix */
+  border-radius: 10px;
+  padding: 8px;
+  box-sizing: border-box;
+  max-height: 95vh;
+  overflow: auto;
+}
+
+/* responsividade celular */
+ @media (max-width: 499px) {
 
   .cards-wrapper-container {
     padding: 20px;
   }
 
-  
-  .titulo {
-    padding: 10px 20px;
-    width: 100%;
-    max-width: 100%;
-    border-radius: 30px;
-    box-sizing: border-box;
-  }
 
   .grid-ongs {
     grid-template-columns: 1fr; /* só uma coluna */
-    gap: 30px;
+    gap: 20px;
   }
 
   .card-ong {
-    position: relative;
     flex-direction: column; /* empilha imagem + texto */
-    display: flex;
-    flex-direction: column;
     align-items: center;
     text-align: center;
     height: auto; /* deixa o card crescer naturalmente */
@@ -203,14 +385,13 @@
     margin-bottom: 15px;
   }
 
-  /* MOBILE: texto ocupa toda a largura */
+  /* texto ocupa toda a largura */
   .card-text-box {
     position: static;
     width: 100%;
     height: auto;
-    margin-left: 0;   /* zera o recuo do desktop */
-    margin-top: 0;
-    padding-left: 12px;
+    left: initial;
+    top: initial;
   }
 
   /* título centralizado e sem absolute */
@@ -224,87 +405,12 @@
     white-space: normal; /* permite quebrar linha no mobile */
     font-size: 20px;
   }
-
-  /* botão sempre no final do card */
   .apoiar-btn {
-    position: static;
-    margin-top: auto; 
-    transform: none;
-  }
-}
-
-@media (max-width: 768px) {
-  .grid-ongs {
-    grid-template-columns: 1fr;
-  }
-
-  .card-ong {
-    height: auto;        /* ✅ resolve o vazamento no iPad */
-  }
-}
-
-@media (max-width: 1024px) {
-  .grid-ongs {
-    grid-template-columns: 1fr; /* tablet 1 coluna (evita apertar texto) */
-    gap: 30px;
-  }
-
-  .titulo {
-    width: 100%;
-    max-width: 100%;
-    padding: 10px 16px;     /* substitui 7px 550px */
-    box-sizing: border-box;
-    border-radius: 30px;
-    margin: 0 auto 30px auto;
-    text-align: center;
-  }
-
-
-  .card-ong {
-    height: auto;               /* deixa crescer */
-    flex-direction: column;     /* empilha */
-    align-items: center;
-    text-align: center;
-    padding-bottom: 24px;
-  }
-
-  .card-image-wrapper {
-    position: static;           /* desliga absolute */
-    width: 120px;
-    height: 120px;
-    margin: 12px 0;
-  }
-
-   .card-title {
-    width: 100%;            /* 🔒 limita o título ao card */
-    max-width: 100%;
-    padding: 0 12px;        /* respiro lateral */
-    box-sizing: border-box;
-    text-align: center;
-  }
-
-  .card-title h3 {
-    white-space: normal;    /* permite quebrar linha */
-    word-break: break-word;
-    overflow-wrap: anywhere;
-    line-height: 1.2;
-    max-width: 100%;
-  }
-
-
-  .card-text-box {
-    position: static;           /* desliga o layout do desktop */
-    margin-left: 0;             /* remove recuo da imagem */
-    margin-top: 0;
-    width: 100%;
-    height: auto;
-    padding: 0 12px;
-    overflow: visible;
-  }
-
-  .apoiar-btn {
-    position: static;           /* desliga absolute */
-    transform: none;
     margin-top: 14px;
+    display: flex;
+
   }
+
+
 }
+

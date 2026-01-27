@@ -27,4 +27,18 @@ export const NAV_LINKS = [
     ],
   },
   { id: "apoiar", label: "Apoiar", href: "/apoiar" },
+
+
+  // 🔽 NOVO MENU PERFIL
+  {
+    id: "perfil",
+    label: "Perfil",
+    href: "#",
+    subLinks: [
+      { label: "Editar perfil", href: "/editar-perfil-usuario" },
+      { label: "Meus pets para adoção", href: "/seus-pets-para-adocao" },
+      { label: "Histórico de apoio", href: "/historico-de-apoio" },
+      { label: "Sair", href: "/logout" },
+    ],
+  },
 ];

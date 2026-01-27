@@ -75,12 +75,11 @@
   left: 0;
   background-color: #eeeeee;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
   min-width: 180px;
   z-index: 1000;
   animation: fadeInDown 0.4s;
-  border-radius: 6px;
-  border-color: #696969;
+  /* no external border to match desired flat look */
 }
 
 .dropdownItem {
@@ -90,10 +89,48 @@
   padding: 0.75rem 1rem;
   font-weight: 500;
   transition: background-color 0.2s;
+  border: none; /* ensure link/button has no visible border */
+  background: transparent;
+  font-size: 0.95rem;
+}
+
+/* Ensure any anchor or button inside dropdown uses the same font-weight */
+.dropdownItem,
+.dropdownItem a,
+button.dropdownItem,
+.profileDropdown .dropdownItem,
+.dropdownMenu .dropdownItem {
+  font-weight: 500 !important;
 }
 
 .dropdownItem:hover {
   background-color: #bdbdbd;
+}
+
+/* Match image: first item lighter, second item darker */
+.dropdownMenu .dropdownItem:first-child {
+  background: #f5f5f5;
+  color: #666666;
+}
+.dropdownMenu .dropdownItem:nth-child(2) {
+  background: #d6d6d6;
+}
+
+/* Make sure button elements using .dropdownItem don't show default button borders */
+.dropdownItem[role="button"], .dropdownItem button {
+  border: none;
+  background: transparent;
+  padding: 0.75rem 1rem;
+  width: 100%;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+/* explicit selectors to catch buttons that themselves carry the .dropdownItem class */
+button.dropdownItem,
+.profileDropdown button.dropdownItem {
+  font-size: 0.95rem;
+  line-height: 1.2;
 }
 
 .dropdownItem:first-child {
@@ -131,6 +168,19 @@
   margin-left: 0.75rem;
 }
 
+/* position relative so absolute dropdown positions to the avatar */
+.profileWrap {
+  position: relative;
+}
+
+/* Position the profile dropdown slightly to the left of the avatar */
+.profileWrap .dropdownMenu {
+  left: auto;
+  right: 0;
+  transform: none; /* prevent movement when interacting */
+  transition: none; /* ensure no animated shift */
+}
+
 .avatarLink {
   display: inline-flex;
   align-items: center;
@@ -158,6 +208,46 @@
   align-items: center;
   justify-content: center;
   color: #143750;
+}
+
+/* Profile dropdown (desktop) — box with rounded border and centered items */
+.profileDropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: #ffffff;
+  border: 2px solid #e6e6e6;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 150px;
+  z-index: 1100;
+}
+
+.profileDropdown .dropdownItem {
+  color: #666666;
+  text-decoration: none;
+  padding: 8px 12px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-align: center;
+  background: transparent;
+  border-radius: 8px;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.profileDropdown .dropdownItem:hover,
+.profileDropdown .dropdownItem:focus {
+  background-color: #f3f3f3;
 }
 
 /* Mobile Menu */

@@ -11,7 +11,7 @@ export default function CadastroPage() {
   const { showToast } = useSafeToast();
   const router = useRouter();
 
-  // Estados
+  // estados
   const [formData, setFormData] = useState({
     nome: "",
     cpf: "",
@@ -19,100 +19,136 @@ export default function CadastroPage() {
     telefone: "",
     password: "",
     confirmPassword: "",
-    imagemPreview: "" // Separamos o preview da URL final
+    imagemPreview: "" // preview local (blob URL)
   });
-
   const [imageFile, setImageFile] = useState(null);
-  const [loading, setLoading] = useState(false); // Novo estado de Loading
-  const [fieldErrors, setFieldErrors] = useState({}); // Erros específicos por campo
+  const [loading, setLoading] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState({});
 
-  // Helper para URL da API
+  // util
   const getBaseUrl = () =>
     (process.env.NEXT_PUBLIC_PETZ_API_URL || "http://localhost:5000").trim().replace(/\/$/, "");
 
-  // --- Função de Upload Simplificada e Robusta ---
+  // upload robusto (FormData) -> retorna URL absoluta
   const uploadImage = async (file) => {
+    if (!file) throw new Error("Nenhum arquivo fornecido");
+    if (!file.type || !file.type.startsWith("image/")) throw new Error("Arquivo não é imagem");
+    const maxMB = 5;
+    if (file.size > maxMB * 1024 * 1024) throw new Error(`Imagem maior que ${maxMB}MB`);
+
     const baseUrl = getBaseUrl();
-    const fd = new FormData();
-    
-    // ATENÇÃO: Verifique no seu Backend (Multer) se o campo esperado é 'file'
-    fd.append("file", file);
+    const configs = [
+      { url: `${baseUrl}/api/upload`, field: "file" },
+      { url: `${baseUrl}/api/upload`, field: "imagem" },
+      { url: `${baseUrl}/upload`, field: "file" },
+      { url: `${baseUrl}/upload`, field: "imagem" }
+    ];
 
-    
-    const data = await res.json().catch(() => ({}));
+    let lastErr = null;
+    for (const cfg of configs) {
+      try {
+        const fd = new FormData();
+        fd.append(cfg.field, file);
+        const res = await fetch(cfg.url, { method: "POST", body: fd });
+        const text = await res.text().catch(() => "");
+        let data = {};
+        try { data = text ? JSON.parse(text) : {}; } catch { data = { raw: text }; }
 
-    if (!res.ok) {
-      throw new Error(data.message || `Erro no upload (${res.status})`);
+        if (!res.ok) {
+          lastErr = new Error(data?.message || data?.raw || `Upload falhou (${res.status})`);
+          continue;
+        }
+
+        const returned = data?.url || data?.path || data?.fileUrl || data?.filename || data?.file || data?.file_path || data?.filepath || null;
+        if (returned && typeof returned === "string") {
+          return returned.startsWith("/") ? `${baseUrl}${returned}` : returned;
+        }
+
+        if (typeof data === "string" && data) {
+          return data.startsWith("/") ? `${baseUrl}${data}` : data;
+        }
+
+        lastErr = new Error("Upload OK mas resposta não contém URL");
+      } catch (err) {
+        lastErr = err;
+        // tenta próximo endpoint
+      }
     }
 
-    // Retorna a URL segura
-    return data.url || data.path || data.fileUrl || "";
+    throw lastErr || new Error("Falha no upload da imagem");
   };
 
-  // --- Handlers ---
+  // form handlers
   const handleChange = (field, value) => {
-    // Formatação em tempo real
     if (field === "cpf") {
-      value = value.replace(/\D/g, "").replace(/^(\d{3})(\d)/, "$1.$2")
+      value = value.replace(/\D/g, "").slice(0, 11)
+        .replace(/^(\d{3})(\d)/, "$1.$2")
         .replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3")
-        .replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d)/, "$1.$2.$3-$4").slice(0, 14);
+        .replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d)/, "$1.$2.$3-$4");
     }
     if (field === "telefone") {
-      value = value.replace(/\D/g, "").slice(0, 11);
-      if (value.length > 2) value = `(${value.slice(0,2)}) ${value.slice(2)}`;
-      if (value.length > 7) value = `${value.slice(0,9)}-${value.slice(9)}`;
+      const digits = value.replace(/\D/g, "").slice(0, 11);
+      if (digits.length <= 2) value = `(${digits}`;
+      else if (digits.length <= 6) value = `(${digits.slice(0,2)}) ${digits.slice(2)}`;
+      else if (digits.length <= 10) value = `(${digits.slice(0,2)}) ${digits.slice(2,6)}-${digits.slice(6)}`;
+      else value = `(${digits.slice(0,2)}) ${digits.slice(2,7)}-${digits.slice(7,11)}`;
     }
 
     setFormData(prev => ({ ...prev, [field]: value }));
-    // Limpa o erro do campo quando o usuário digita
-    if (fieldErrors[field]) {
-      setFieldErrors(prev => ({ ...prev, [field]: null }));
-    }
+    if (fieldErrors[field]) setFieldErrors(prev => ({ ...prev, [field]: null }));
   };
 
   const handleImageChange = (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // Validação de tamanho (ex: 5MB)
-    if (file.size > 5 * 1024 * 1024) {
-      showToast("A imagem deve ter no máximo 5MB.", "warning");
+    const maxMB = 5;
+    if (file.size > maxMB * 1024 * 1024) {
+      showToast(`Imagem maior que ${maxMB}MB. Escolha outra.`, "warning");
+      return;
+    }
+    if (!file.type || !file.type.startsWith("image/")) {
+      showToast("Formato inválido. Escolha uma imagem.", "warning");
       return;
     }
 
+    // revoga preview anterior se blob
+    if (formData.imagemPreview && formData.imagemPreview.startsWith("blob:")) {
+      try { URL.revokeObjectURL(formData.imagemPreview); } catch {}
+    }
+
     setImageFile(file);
-    // Cria URL temporária (muito mais leve que Base64)
-    const objectUrl = URL.createObjectURL(file);
-    setFormData(prev => ({ ...prev, imagemPreview: objectUrl }));
+    setFormData(prev => ({ ...prev, imagemPreview: URL.createObjectURL(file) }));
   };
 
-  // Limpa a URL do objeto para evitar vazamento de memória
+  // cleanup preview blob
   useEffect(() => {
     return () => {
-      if (formData.imagemPreview) URL.revokeObjectURL(formData.imagemPreview);
+      if (formData.imagemPreview && formData.imagemPreview.startsWith("blob:")) {
+        try { URL.revokeObjectURL(formData.imagemPreview); } catch {}
+      }
     };
-  }, [formData.imagemPreview]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  // --- Submit Principal ---
+  // submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setFieldErrors({}); // Limpa erros anteriores
+    setFieldErrors({});
 
-    // 1. Validação Local
-    const cpfLimpo = formData.cpf.replace(/\D/g, "");
+    // validações
+    const cpfLimpo = (formData.cpf || "").replace(/\D/g, "");
     if (!cpfValidator.isValid(cpfLimpo)) {
       setFieldErrors(prev => ({ ...prev, cpf: "CPF inválido." }));
       setLoading(false);
       return;
     }
-
-    if (formData.password.length < 6) {
+    if ((formData.password || "").length < 6) {
       setFieldErrors(prev => ({ ...prev, password: "Mínimo 6 caracteres." }));
       setLoading(false);
       return;
     }
-
     if (formData.password !== formData.confirmPassword) {
       setFieldErrors(prev => ({ ...prev, confirmPassword: "As senhas não coincidem." }));
       setLoading(false);
@@ -122,23 +158,20 @@ export default function CadastroPage() {
     try {
       let finalImageUrl = "";
 
-      // 2. Upload da Imagem (se existir)
       if (imageFile) {
         try {
           finalImageUrl = await uploadImage(imageFile);
         } catch (uploadErr) {
-          console.error(uploadErr);
           showToast("Erro ao enviar imagem. Verifique o servidor.", "error");
           setLoading(false);
-          return; // Para aqui se a imagem for obrigatória ou o upload falhar
+          return;
         }
       }
 
-      // 3. Cadastro do Usuário
       const baseUrl = getBaseUrl();
       const payload = {
         nome: formData.nome,
-        cpf: formData.cpf, // ou cpfLimpo, dependendo de como o banco espera
+        cpf: cpfLimpo,
         email: formData.email,
         telefone: formData.telefone,
         password: formData.password,
@@ -152,34 +185,51 @@ export default function CadastroPage() {
         body: JSON.stringify(payload)
       });
 
-      // Sucesso: armazena token/usuário e vai para o perfil do usuário
-      const respData = await res.json().catch(() => ({}))
+      const respData = await res.json().catch(() => ({}));
 
-      // Se o backend retornou token, armazena
-      if (respData.token) {
-        localStorage.setItem('token', respData.token)
+      if (!res.ok) {
+        const msg = respData?.message || respData?.raw || `Erro ao cadastrar (status ${res.status})`;
+        // mapear erros para campos quando possível
+        if (msg.toLowerCase().includes("email")) setFieldErrors(prev => ({ ...prev, email: "Este email já está em uso." }));
+        else if (msg.toLowerCase().includes("cpf")) setFieldErrors(prev => ({ ...prev, cpf: "Este CPF já está cadastrado." }));
+        else showToast(msg, "error");
+        setLoading(false);
+        return;
       }
-      // Armazena objeto de usuário (ajuste chave conforme seu backend)
-      localStorage.setItem('usuarioLogado', JSON.stringify(respData.user || respData))
 
-      showToast('Cadastro realizado com sucesso!', 'success')
+      // sucesso: salvar token/usuário e redirecionar para perfil
+      const saved = respData || {};
+      console.log('[CadastroUsuario] resposta backend:', saved);
 
-      // Redireciona para o perfil do usuário
-      setTimeout(() => router.push('/perfil-usuario'), 900)
+      // tenta extrair usuário nas chaves comuns
+      const userObj = saved.user || saved.usuario || saved.data || saved;
 
+      // salva token em chaves usadas no projeto
+      if (saved.token) {
+        localStorage.setItem('token', saved.token);
+        localStorage.setItem('petz_token', saved.token);
+      }
+
+      // salva usuário com chave padrão que o perfil provavelmente lê
+      localStorage.setItem('usuarioLogado', JSON.stringify(userObj));
+
+      console.log('[CadastroUsuario] salvo usuarioLogado:', userObj, 'token:', saved.token);
+      showToast('Cadastro realizado com sucesso!', 'success');
+      setTimeout(() => router.push('/perfil-usuario'), 900);
     } catch (err) {
       console.error("Erro geral:", err);
       showToast("Erro de conexão com o servidor. O backend está ligado?", "error");
+      setLoading(false);
+    } finally {
       setLoading(false);
     }
   };
 
   return (
     <div className={styles.container}>
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <form className={styles.form} onSubmit={handleSubmit} noValidate>
         <h1 className={styles.title}>Criar nova conta</h1>
-        
-        {/* Campo NOME */}
+
         <div className={styles.inputWrapper}>
           <span className={styles.icon}><FaPaw /></span>
           <label className={styles.fieldLabel}>Nome:
@@ -187,7 +237,6 @@ export default function CadastroPage() {
           </label>
         </div>
 
-        {/* Campo CPF */}
         <div className={styles.inputWrapper} style={fieldErrors.cpf ? {borderColor: 'red'} : {}}>
           <span className={styles.icon}><FaPaw /></span>
           <label className={styles.fieldLabel}>CPF:
@@ -196,7 +245,6 @@ export default function CadastroPage() {
         </div>
         {fieldErrors.cpf && <span className={styles.errorText}>{fieldErrors.cpf}</span>}
 
-        {/* Campo EMAIL */}
         <div className={styles.inputWrapper} style={fieldErrors.email ? {borderColor: 'red'} : {}}>
           <span className={styles.icon}><FaPaw /></span>
           <label className={styles.fieldLabel}>Email:
@@ -205,7 +253,6 @@ export default function CadastroPage() {
         </div>
         {fieldErrors.email && <span className={styles.errorText}>{fieldErrors.email}</span>}
 
-        {/* Campo TELEFONE */}
         <div className={styles.inputWrapper}>
           <span className={styles.icon}><FaPaw /></span>
           <label className={styles.fieldLabel}>Telefone:
@@ -213,7 +260,6 @@ export default function CadastroPage() {
           </label>
         </div>
 
-        {/* Campo SENHA */}
         <div className={styles.inputWrapper} style={fieldErrors.password ? {borderColor: 'red'} : {}}>
           <span className={styles.icon}><FaPaw /></span>
           <label className={styles.fieldLabel}>Senha:
@@ -222,7 +268,6 @@ export default function CadastroPage() {
         </div>
         {fieldErrors.password && <span className={styles.errorText}>{fieldErrors.password}</span>}
 
-        {/* Campo CONFIRMAR SENHA */}
         <div className={styles.inputWrapper} style={fieldErrors.confirmPassword ? {borderColor: 'red'} : {}}>
           <span className={styles.icon}><FaPaw /></span>
           <label className={styles.fieldLabel}>Confirmar:
@@ -231,7 +276,6 @@ export default function CadastroPage() {
         </div>
         {fieldErrors.confirmPassword && <span className={styles.errorText}>{fieldErrors.confirmPassword}</span>}
 
-        {/* UPLOAD IMAGEM */}
         <div className={styles.uploadWrapper}>
           <label className={styles.uploadBox}>
             {formData.imagemPreview ? (
@@ -246,7 +290,6 @@ export default function CadastroPage() {
           </label>
         </div>
 
-        {/* BOTÃO COM LOADING */}
         <button 
           className={styles.button} 
           type="submit" 

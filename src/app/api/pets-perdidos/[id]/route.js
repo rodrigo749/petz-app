@@ -29,26 +29,48 @@ export async function PUT(req, { params }) {
   try {
     const { id } = params;
     const body = await req.json();
+    // obtenha um identificador de usuário confiável da requisição
+    // aceita header 'x-usuario-id' ou 'authorization: Bearer <id>' ou, como fallback, body.usuarioId
+    const authHeader = req.headers.get('x-usuario-id') || req.headers.get('authorization');
+    let userId = null;
+    if (authHeader) {
+      if (authHeader.startsWith && authHeader.startsWith('Bearer ')) {
+        userId = authHeader.split(' ')[1];
+      } else {
+        userId = authHeader;
+      }
+    }
+    if (!userId && body && body.usuarioId) userId = body.usuarioId;
 
-    const data = await readFile(filePath, "utf-8");
+    if (!userId) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const data = await readFile(filePath, 'utf-8');
     const pets = JSON.parse(data);
 
     const index = pets.findIndex((p) => String(p.id) === String(id));
     if (index === -1) {
-      return NextResponse.json({ error: "Pet não encontrado" }, { status: 404 });
+      return NextResponse.json({ error: 'Pet não encontrado' }, { status: 404 });
+    }
+
+    // validação: somente o dono (pet.usuarioId) pode atualizar
+    const pet = pets[index];
+    if (!pet.usuarioId || String(pet.usuarioId) !== String(userId)) {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 
     // Mantém id e garante status "perdido"
     const atualizado = {
-      ...pets[index],
+      ...pet,
       ...body,
-      id: pets[index].id,
-      status: "perdido",
+      id: pet.id,
+      status: 'perdido',
     };
 
     pets[index] = atualizado;
 
-    await writeFile(filePath, JSON.stringify(pets, null, 2), "utf-8");
+    await writeFile(filePath, JSON.stringify(pets, null, 2), 'utf-8');
 
     return NextResponse.json(atualizado, { status: 200 });
   } catch (error) {
@@ -62,20 +84,40 @@ export async function DELETE(_req, { params }) {
   try {
     const { id } = params;
 
-    const data = await readFile(filePath, "utf-8");
+    // obtenha usuário da requisição
+    const authHeader = _req.headers.get('x-usuario-id') || _req.headers.get('authorization');
+    let userId = null;
+    if (authHeader) {
+      if (authHeader.startsWith && authHeader.startsWith('Bearer ')) {
+        userId = authHeader.split(' ')[1];
+      } else {
+        userId = authHeader;
+      }
+    }
+
+    if (!userId) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const data = await readFile(filePath, 'utf-8');
     const pets = JSON.parse(data);
 
     const index = pets.findIndex((p) => String(p.id) === String(id));
     if (index === -1) {
-      return NextResponse.json({ error: "Pet não encontrado" }, { status: 404 });
+      return NextResponse.json({ error: 'Pet não encontrado' }, { status: 404 });
+    }
+
+    const pet = pets[index];
+    if (!pet.usuarioId || String(pet.usuarioId) !== String(userId)) {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 
     const removido = pets.splice(index, 1)[0];
 
-    await writeFile(filePath, JSON.stringify(pets, null, 2), "utf-8");
+    await writeFile(filePath, JSON.stringify(pets, null, 2), 'utf-8');
 
     return NextResponse.json(
-      { message: "Pet removido com sucesso", removido },
+      { message: 'Pet removido com sucesso', removido },
       { status: 200 }
     );
   } catch (error) {
