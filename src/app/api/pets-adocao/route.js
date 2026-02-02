@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { readFile, writeFile } from "fs/promises";
+import { readFile } from "fs/promises";
 
 const filePath = "src/data/petsAdocao.json";
 
@@ -15,28 +15,10 @@ export async function GET() {
   }
 }
 
-// POST - cadastra pet para adoção
+// POST - removido - não salva mais em JSON
 export async function POST(req) {
-  try {
-    const newPet = await req.json();
-
-    const data = await readFile(filePath, "utf-8");
-    const pets = JSON.parse(data);
-
-    const maiorId = pets.length > 0 ? Math.max(...pets.map((p) => p.id)) : 0;
-    const novoId = maiorId + 1;
-
-    pets.push({
-      id: novoId,
-      ...newPet,
-      status: "adocao",
-    });
-
-    await writeFile(filePath, JSON.stringify(pets, null, 2));
-
-    return NextResponse.json({ message: "Pet salvo com sucesso!" }, { status: 201 });
-  } catch (error) {
-    console.error("Erro ao salvar JSON:", error);
-    return NextResponse.json({ error: "Erro ao salvar dados" }, { status: 500 });
-  }
+  return NextResponse.json(
+    { error: "Operação de cadastro desabilitada. Use a API externa configurada." },
+    { status: 501 }
+  );
 }
