@@ -27,7 +27,7 @@ export default function CadastroPage() {
 
   // util
   const getBaseUrl = () =>
-    (process.env.NEXT_PUBLIC_PETZ_API_URL || "http://localhost:5000").trim().replace(/\/$/, "");
+    (process.env.NEXT_PUBLIC_PETZ_API_URL || "http://localhost:3000").trim().replace(/\/$/, "");
 
   // upload robusto (FormData) -> retorna URL absoluta
   const uploadImage = async (file) => {

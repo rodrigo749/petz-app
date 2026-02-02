@@ -95,7 +95,7 @@ export default function CadastroOngPage() {
       };
 
       // 3. Chamada para o Backend usando NEXT_PUBLIC_PETZ_API_URL se disponível
-      const baseUrl = (process.env.NEXT_PUBLIC_PETZ_API_URL || 'http://localhost:5000').trim().replace(/\/$/, '');
+      const baseUrl = (process.env.NEXT_PUBLIC_PETZ_API_URL || 'http://localhost:3000').trim().replace(/\/$/, '');
       const res = await fetch(`${baseUrl}/api/ongs`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -122,7 +122,7 @@ export default function CadastroOngPage() {
       return router.push('/painel-ong');
     } catch (err) {
       console.error('Erro de rede:', err);
-      setError('Não foi possível conectar ao servidor (Porta 5000).');
+      setError('Não foi possível conectar ao servidor (Porta 3000).');
       showToast('Servidor offline ou erro de CORS.', 'error');
     }
   };
