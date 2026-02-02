@@ -19,7 +19,7 @@
     "imagem": "/uploads/pet05.jpg",
     "status": "perdido"
   },
-    {
+  {
     "id": 3,
     "nome": "Bolota",
     "raca": "Pug",
@@ -59,7 +59,6 @@
     "imagem": "/images/semfoto.jpg",
     "status": "adocao"
   },
-
   {
     "id": 7,
     "nome": "Rex",
@@ -99,5 +98,17 @@
     "descricao": "",
     "imagem": "/uploads/mingau.png",
     "status": "adocao"
+  },
+  {
+    "id": 11,
+    "nome": "doguinho",
+    "raca": "vira-lata",
+    "genero": "macho",
+    "data": "02/02/2026",
+    "local": "colina santa barbara",
+    "recompensa": "30",
+    "descricao": "Cachorrinho de pequeno porte, adulto, muito docil",
+    "imagem": "/uploads/doguinho.jfif",
+    "status": "perdido"
   }
 ]
