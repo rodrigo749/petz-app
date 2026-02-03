@@ -1,12 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { NAV_LINKS } from "@/constants/navigation";
-import Avatar from '../Avatar'
 import styles from "./header.module.css";
 
 export default function Header() {
@@ -34,8 +33,17 @@ export default function Header() {
     };
   }, []);
 
+  // ✅ normaliza o usuário (suporta {user:{...}} ou {...})
+  const user = useMemo(() => {
+    return usuarioLogado?.user ? usuarioLogado.user : usuarioLogado;
+  }, [usuarioLogado]);
+
   // 🏢 regra: apenas ONG (CNPJ) vê opções de perfil ONG
-  const isOng = !!usuarioLogado?.cnpj || usuarioLogado?.tipo === "ong";
+  // suporta: user.role === "ong" e/ou user.tipo === "ong" e/ou cnpj em qualquer nível
+  const isOng =
+    !!user?.cnpj ||
+    user?.tipo === "ong" ||
+    user?.role === "ong";
 
   // 🔍 filtra links conforme login
   const navLinksFiltrados = NAV_LINKS.filter((link) => {
@@ -43,6 +51,13 @@ export default function Header() {
     if (link.id === "login" && usuarioLogado) return false;
     return true;
   });
+
+  // ✅ pega a imagem do usuário/ong (tenta campos comuns)
+  const avatarSrc =
+    user?.imagem ||
+    user?.avatar ||
+    user?.photo ||
+    "/images/Avatar.png";
 
   return (
     <header className={styles.header}>
@@ -69,6 +84,7 @@ export default function Header() {
             >
               {subLinks ? (
                 <button
+                  type="button"
                   className={styles.link}
                   aria-expanded={dropdownOpen === id}
                   aria-haspopup="true"
@@ -104,15 +120,12 @@ export default function Header() {
         </div>
 
         {/* ================= AVATAR DESKTOP ================= */}
-        {usuarioLogado && (
+        {user && (
           <div className={styles.profileWrap}>
-            <Link
-              href="/perfil"
-              className={styles.avatarLink}
-            >
+            <Link href="/perfil" className={styles.avatarLink}>
               <span className={styles.avatarIcon}>
                 <img
-                  src={usuarioLogado.imagem || "/images/Avatar.png"}
+                  src={avatarSrc}
                   alt="Perfil"
                   className={styles.avatarImage}
                 />
@@ -147,6 +160,7 @@ export default function Header() {
                   height={50}
                 />
                 <button
+                  type="button"
                   onClick={() => setMenuOpen(false)}
                   aria-label="Fechar menu"
                 >
@@ -157,14 +171,19 @@ export default function Header() {
               <nav className={styles.sheetLinks}>
                 {navLinksFiltrados.map(({ id, label, href, subLinks }) => (
                   <div key={id}>
-                    <Link
-                      href={href}
-                      onClick={() => setMenuOpen(false)}
-                      className={styles.mobileLink}
-                    >
-                      {label}
-                      {subLinks && <FaChevronDown size={12} />}
-                    </Link>
+                    {subLinks ? (
+                      <div className={styles.mobileLink}>
+                        {label} <FaChevronDown size={12} />
+                      </div>
+                    ) : (
+                      <Link
+                        href={href}
+                        onClick={() => setMenuOpen(false)}
+                        className={styles.mobileLink}
+                      >
+                        {label}
+                      </Link>
+                    )}
 
                     {subLinks && (
                       <div className={styles.mobileSubLinks}>

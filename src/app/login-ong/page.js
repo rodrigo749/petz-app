@@ -9,15 +9,16 @@ import useSafeToast from "@/components/Toast/useSafeToast";
 export default function LoginPage() {
   const router = useRouter();
   const { showToast } = useSafeToast();
+
   const [cnpj, setCnpj] = useState("");
-  const [password, setPassword] = useState("");
+  const [senha, setSenha] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
-    if (!cnpj || !password) {
+    if (!cnpj || !senha) {
       const msg = "Por favor, preencha CNPJ e senha.";
       setError(msg);
       showToast(msg, "warning");
@@ -25,28 +26,44 @@ export default function LoginPage() {
     }
 
     try {
-      const usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
+      const res = await fetch("/api/ongs/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          cnpj: cnpj.replace(/\D/g, ""), // ✅ normaliza antes de enviar
+          senha,
+        }),
+      });
 
-      const usuarioEncontrado = usuarios.find(
-        (u) =>
-          (u.cnpj || "").replace(/\D/g, "") === cnpj.replace(/\D/g, "") &&
-          u.password === password
-      );
+      const data = await res.json().catch(() => ({}));
 
-      if (!usuarioEncontrado) {
+      if (!res.ok) {
         const msg =
+          data?.message ||
           "CNPJ ou senha incorretos, caso você não tenha um cadastro clique em se cadastrar.";
         setError(msg);
         showToast(msg, "error");
         return;
       }
 
-      localStorage.setItem("usuarioLogado", JSON.stringify(usuarioEncontrado));
+      // ✅ PADRÃO ÚNICO DE SESSÃO
+      const usuarioLogado = {
+        user: data.user,
+        token: data.token || null,
+        role: "ong",
+      };
+
+      localStorage.setItem(
+        "usuarioLogado",
+        JSON.stringify(usuarioLogado)
+      );
+
       showToast("Login realizado com sucesso!", "success");
-      setTimeout(() => router.push("/"), 700);
+      setTimeout(() => router.push("/perfil-ong"), 700);
+
     } catch (err) {
       console.error(err);
-      const msg = "Erro ao processar o login. Tente novamente.";
+      const msg = "Erro ao conectar com a API. Tente novamente.";
       setError(msg);
       showToast(msg, "error");
     }
@@ -65,12 +82,14 @@ export default function LoginPage() {
     <div className={styles.container}>
       <form className={styles.form} onSubmit={handleSubmit}>
         <h1 className={styles.title}>Faça o login ou crie uma conta</h1>
+
         {error && <div className={styles.error}>{error}</div>}
 
         <div className={styles.inputWrapper}>
           <span className={styles.icon} aria-hidden>
             <FaPaw />
           </span>
+
           <label className={styles.fieldLabel}>
             CNPJ:
             <input
@@ -92,17 +111,17 @@ export default function LoginPage() {
           <span className={styles.icon} aria-hidden>
             <FaPaw />
           </span>
+
           <label className={styles.fieldLabel}>
             Senha:
             <input
               className={styles.input}
               type="password"
-              value={password}
+              value={senha}
               onChange={(e) => {
-                setPassword(e.target.value);
+                setSenha(e.target.value);
                 if (error) setError("");
               }}
-              placeholder=""
               aria-label="Senha"
             />
           </label>

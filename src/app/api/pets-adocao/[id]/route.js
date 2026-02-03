@@ -1,48 +1,37 @@
 import { NextResponse } from "next/server";
-import { readFile, writeFile } from "fs/promises";
 
-const filePath = "src/data/petsAdocao.json";
+const API_BASE = "http://localhost:3000";
 
-// PUT - atualizar pet de adoção
+// PUT - atualizar pet
 export async function PUT(req, { params }) {
   try {
-    const id = parseInt(params.id);
-    const updates = await req.json();
+    const body = await req.json();
 
-    const data = await readFile(filePath, "utf-8");
-    const pets = JSON.parse(data);
+    const res = await fetch(`${API_BASE}/api/pets/${params.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
 
-    const index = pets.findIndex((p) => p.id === id);
-    if (index === -1) {
-      return NextResponse.json({ error: "Pet não encontrado" }, { status: 404 });
-    }
-
-    pets[index] = { ...pets[index], ...updates };
-
-    await writeFile(filePath, JSON.stringify(pets, null, 2));
-
-    return NextResponse.json({ message: "Pet atualizado com sucesso" }, { status: 200 });
+    const data = await res.json();
+    return NextResponse.json(data, { status: res.status });
   } catch (error) {
-    console.error("Erro no PUT:", error);
+    console.error("Erro no PUT (proxy):", error);
     return NextResponse.json({ error: "Erro ao atualizar dados" }, { status: 500 });
   }
 }
 
-// DELETE - remover pet de adoção
+// DELETE - remover pet
 export async function DELETE(req, { params }) {
   try {
-    const id = parseInt(params.id);
+    const res = await fetch(`${API_BASE}/api/pets/${params.id}`, {
+      method: "DELETE",
+    });
 
-    const data = await readFile(filePath, "utf-8");
-    let pets = JSON.parse(data);
-
-    pets = pets.filter((p) => p.id !== id);
-
-    await writeFile(filePath, JSON.stringify(pets, null, 2));
-
-    return NextResponse.json({ message: "Pet removido" }, { status: 200 });
+    const data = await res.json();
+    return NextResponse.json(data, { status: res.status });
   } catch (error) {
-    console.error("Erro no DELETE:", error);
+    console.error("Erro no DELETE (proxy):", error);
     return NextResponse.json({ error: "Erro ao excluir" }, { status: 500 });
   }
 }

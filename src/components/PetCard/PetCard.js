@@ -14,14 +14,20 @@ export default function PetCard({ pet, tipoPagina }) {
     setUsuarioLogado(user);
   }, []);
 
-  // verifica se o pet pertence ao usuário logado
-  const ehDoUsuario = usuarioLogado && pet.usuarioId === usuarioLogado.id;
+  // verifica se o pet pertence à ONG logada
+  // (ajuste aqui se no backend vier como ong_id ao invés de ongId)
+  const ehDaOng = usuarioLogado && pet.ongId === usuarioLogado.id;
 
   async function marcarComoAdotado() {
     try {
-      await fetch(`/api/pets/${pet.id}`, {
+      const token = localStorage.getItem("token");
+
+      await fetch(`http://localhost:3000/api/pets/${pet.id}`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
         body: JSON.stringify({ status: "adotado" }),
       });
 
@@ -52,8 +58,6 @@ export default function PetCard({ pet, tipoPagina }) {
             <p>Gênero: {pet.genero}</p>
             <p>Idade: {pet.idade}</p>
             <p>Descrição: {pet.descricao}</p>
-
-            {/* Campos específicos removidos do cartão — aparecem apenas no modal */}
           </div>
 
           {/* BOTÕES */}
@@ -78,8 +82,8 @@ export default function PetCard({ pet, tipoPagina }) {
             </button>
           )}
 
-          {/* PÁGINA DO USUÁRIO → ADOTADO + EDITAR (somente se for dono) */}
-          {tipoPagina === "usuario" && ehDoUsuario && (
+          {/* PÁGINA DA ONG/ÁREA LOGADA → ADOTADO + EDITAR (somente se for dono) */}
+          {tipoPagina === "usuario" && ehDaOng && (
             <div className={styles["actions-wrapper"]}>
               <button
                 className={styles["btn-adotado"]}

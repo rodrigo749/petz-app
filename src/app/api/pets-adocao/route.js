@@ -1,42 +1,34 @@
 import { NextResponse } from "next/server";
-import { readFile, writeFile } from "fs/promises";
 
-const filePath = "src/data/petsAdocao.json";
+const API_BASE = "http://localhost:3000";
 
-// GET - lista pets para adoção
+// GET - lista pets (vem do backend)
 export async function GET() {
   try {
-    const data = await readFile(filePath, "utf-8");
-    const pets = JSON.parse(data);
-    return NextResponse.json(pets, { status: 200 });
+    const res = await fetch(`${API_BASE}/api/pets`, { cache: "no-store" });
+    const data = await res.json();
+    return NextResponse.json(data, { status: res.status });
   } catch (error) {
-    console.error("Erro ao ler petsAdocao.json:", error);
+    console.error("Erro no GET /pets-adocao (proxy):", error);
     return NextResponse.json({ error: "Erro ao carregar dados" }, { status: 500 });
   }
 }
 
-// POST - cadastra pet para adoção
+// POST - cadastra pet (vai pro backend)
 export async function POST(req) {
   try {
-    const newPet = await req.json();
+    const body = await req.json();
 
-    const data = await readFile(filePath, "utf-8");
-    const pets = JSON.parse(data);
-
-    const maiorId = pets.length > 0 ? Math.max(...pets.map((p) => p.id)) : 0;
-    const novoId = maiorId + 1;
-
-    pets.push({
-      id: novoId,
-      ...newPet,
-      status: "adocao",
+    const res = await fetch(`${API_BASE}/api/pets`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
     });
 
-    await writeFile(filePath, JSON.stringify(pets, null, 2));
-
-    return NextResponse.json({ message: "Pet salvo com sucesso!" }, { status: 201 });
+    const data = await res.json();
+    return NextResponse.json(data, { status: res.status });
   } catch (error) {
-    console.error("Erro ao salvar JSON:", error);
+    console.error("Erro no POST /pets-adocao (proxy):", error);
     return NextResponse.json({ error: "Erro ao salvar dados" }, { status: 500 });
   }
 }

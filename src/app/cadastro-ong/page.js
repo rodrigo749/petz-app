@@ -1,3 +1,4 @@
+
 "use client"
 
 import React, { useState } from 'react'
@@ -10,7 +11,9 @@ import { uploadImage } from '@/lib/apiPets'
 const Field = ({ label, required, children, className = '' }) => (
   <div className={`${styles.inputWrapper} ${className}`}>
     <label className={styles.fieldLabel}>
-      <span className={styles.labelText}>{label}{required ? '*' : ''}</span>
+      <span className={styles.labelText}>
+        {label}{required ? '*' : ''}
+      </span>
 
       <div className={styles.inputInner}>
         <div className={styles.iconInside} aria-hidden>
@@ -26,6 +29,7 @@ const Field = ({ label, required, children, className = '' }) => (
 export default function CadastroOngPage() {
   const router = useRouter()
   const { showToast } = useSafeToast()
+
   const [nome, setNome] = useState('')
   const [email, setEmail] = useState('')
   const [telefone, setTelefone] = useState('')
@@ -38,21 +42,21 @@ export default function CadastroOngPage() {
   const [complemento, setComplemento] = useState('')
   const [cidade, setCidade] = useState('')
   const [estado, setEstado] = useState('')
-  const [HorarioFunc1, setHorarioFunc1] = useState('')
-  const [HorarioFunc2, setHorarioFunc2] = useState('')
+  const [horarioFunc1, setHorarioFunc1] = useState('')
+  const [horarioFunc2, setHorarioFunc2] = useState('')
   const [imagem, setImagem] = useState('')
   const [imageFile, setImageFile] = useState(null)
   const [error, setError] = useState('')
 
-  // upload que seta `imagem`
+  // upload que seta `imagem` (preview)
   const handleImageUpload = (e) => {
     const file = e.target.files && e.target.files[0]
     if (!file) return
+
     const reader = new FileReader()
-    reader.onloadend = () => {
-      setImagem(reader.result) // Base64 preview
-    }
+    reader.onloadend = () => setImagem(reader.result) // Base64 preview
     reader.readAsDataURL(file)
+
     setImageFile(file)
   }
 
@@ -60,11 +64,10 @@ export default function CadastroOngPage() {
     e.preventDefault()
     setError('')
 
-  // validações temporariamente removidas — permite submissão sem checagens
-
     try {
       let imagemUrl = imagem
-      // If the user selected a File, upload it to /api/upload and use returned URL
+
+      // Se o usuário escolheu arquivo, faz upload e usa a URL retornada
       if (imageFile) {
         try {
           imagemUrl = await uploadImage(imageFile)
@@ -88,10 +91,9 @@ export default function CadastroOngPage() {
         complemento,
         cidade,
         estado,
-        HorarioFunc1,
-        HorarioFunc2,
+        horarioFunc1,
+        horarioFunc2,
         imagem: imagemUrl,
-        tipo: 'ong'
       }
 
       const res = await fetch('/api/ongs', {
@@ -103,14 +105,28 @@ export default function CadastroOngPage() {
       const data = await res.json().catch(() => ({}))
 
       if (!res.ok) {
-        const msg = data?.message || 'Erro ao cadastrar ONG'
+        const msg = data?.message || data?.error || 'Erro ao cadastrar ONG'
         setError(msg)
         showToast(msg, 'error')
         return
       }
 
+      // ✅ PADRONIZAÇÃO DO localStorage:
+      // A API pode retornar { user } ou { token, user } (ou às vezes o objeto direto).
+      // Aqui normalizamos para sempre salvar um objeto "raiz" consistente.
+      const user = data?.user ?? data
+      const token = data?.token ?? null
+
+      const usuarioLogado = {
+        ...user,
+        tipo: 'ong',        // padroniza a identificação no header
+        role: 'ong',        // ajuda compatibilidade com lógicas antigas
+        token,              // opcional (se existir)
+      }
+
       showToast('Cadastro realizado com sucesso!', 'success')
-      localStorage.setItem('usuarioLogado', JSON.stringify(data))
+      localStorage.setItem('usuarioLogado', JSON.stringify(usuarioLogado))
+
       // pequeno delay para ver o toast
       setTimeout(() => router.push('/perfil-ong'), 900)
     } catch (err) {
@@ -357,7 +373,7 @@ export default function CadastroOngPage() {
               <input
                 className={styles.input}
                 type="time"
-                value={HorarioFunc1}
+                value={horarioFunc1}
                 onChange={(e) => {
                   setHorarioFunc1(e.target.value)
                   if (error) setError('')
@@ -372,7 +388,7 @@ export default function CadastroOngPage() {
               <input
                 className={styles.input}
                 type="time"
-                value={HorarioFunc2}
+                value={horarioFunc2}
                 onChange={(e) => {
                   setHorarioFunc2(e.target.value)
                   if (error) setError('')
