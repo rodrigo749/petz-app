@@ -33,6 +33,21 @@
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
+.apoiar-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/paww.svg');
+  background-repeat: repeat;
+  background-size: 600px;
+  opacity: 0.50;              /* 👈 deixa suave */
+  z-index: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  filter: brightness(0) saturate(100%) invert(77%) sepia(97%) saturate(686%) hue-rotate(319deg) brightness(101%) contrast(101%);
+}
+
 @media (min-width:1200px) {
   .titulo {
     padding: 7px 6rem;

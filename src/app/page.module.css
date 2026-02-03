@@ -6,6 +6,8 @@
   display: block;
   background-color: var(--background);
   font-family: var(--font-geist-sans);
+  position: relative;
+  z-index: 1;
 }
 
 /* Conteúdo central da home */

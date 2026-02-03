@@ -17,7 +17,7 @@
   top: 0;
   left: 0;
   bottom: 0;
-  filter: invert(79%) sepia(19%) saturate(808%) hue-rotate(348deg) brightness(104%) contrast(101%);
+  filter: brightness(0) saturate(100%) invert(77%) sepia(97%) saturate(686%) hue-rotate(319deg) brightness(101%) contrast(101%);
 }
 
 .cards-wrapper-container {
