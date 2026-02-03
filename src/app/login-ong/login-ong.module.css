@@ -1,3 +1,6 @@
+/* ===============================
+   CONTAINER PRINCIPAL
+================================ */
 .container {
   min-height: 92vh;
   display: flex;
@@ -5,10 +8,33 @@
   justify-content: center;
   padding: 3rem 2rem;
   background-color: #274b65;
-  
 }
 
+/* ===============================
+   BACKGROUND DECORATIVO (PATAS)
+================================ */
+.container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/paww.svg');
+  background-repeat: repeat;
+  background-size: 756px;
+  background-position: center;
+  opacity: 0.5;
+  filter: brightness(0) saturate(100%) invert(77%) sepia(97%)
+          saturate(686%) hue-rotate(319deg)
+          brightness(101%) contrast(101%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ===============================
+   FORMULÁRIO (CONTEÚDO)
+================================ */
 .form {
+  position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 760px;
   background: #f8ffff;
@@ -20,10 +46,11 @@
   gap: 1.4rem;
   align-items: center;
   border: 6px solid #d9d9d9;
-  
 }
-  
 
+/* ===============================
+   TÍTULOS
+================================ */
 .form h1 {
   color: #46799e;
 }
@@ -35,12 +62,14 @@
   color: #0b3b52;
 }
 
-.title a{
-    text-decoration: underline;
-    color: blue;
+.title a {
+  text-decoration: underline;
+  color: blue;
 }
 
-
+/* ===============================
+   INPUTS
+================================ */
 .inputWrapper {
   display: flex;
   align-items: center;
@@ -82,6 +111,9 @@
   color: black;
 }
 
+/* ===============================
+   BOTÃO
+================================ */
 .button {
   margin-top: 0.5rem;
   padding: 14px 56px;
@@ -92,9 +124,13 @@
   cursor: pointer;
   font-weight: 700;
   font-size: 1.15rem;
-  box-shadow: 0 6px 0 rgba(0,0,0,0.08), inset 0 -6px 0 rgba(255,255,255,0.03);
+  box-shadow: 0 6px 0 rgba(0,0,0,0.08),
+              inset 0 -6px 0 rgba(255,255,255,0.03);
 }
 
+/* ===============================
+   ERRO
+================================ */
 .error {
   background: #fee2e2;
   color: #b91c1c;
@@ -103,6 +139,9 @@
   font-size: .9rem;
 }
 
+/* ===============================
+   LINK INFERIOR
+================================ */
 .bottomLink {
   margin-top: 0.75rem;
   color: #0b3b52;

@@ -5,6 +5,7 @@
   justify-content: center;
   padding: 3rem 2rem;
   background-color: #274b65;
+  overflow: hidden;
   
 }
 
@@ -17,12 +18,29 @@
   box-shadow: 0 6px 18px rgba(0,0,0,0.08);
   display: flex;
   flex-direction: column;
+  inset: 1;
+  z-index: 1;
   gap: 1.4rem;
   align-items: center;
   border: 6px solid #d9d9d9;
   
 }
-  
+
+.container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/paww.svg');
+  background-repeat: repeat;
+  background-size: 756px;
+  background-position: center;
+  opacity: 0.5;
+  filter: brightness(0) saturate(100%) invert(77%) sepia(97%)
+          saturate(686%) hue-rotate(319deg)
+          brightness(101%) contrast(101%);
+  z-index: 0;
+  pointer-events: none;
+}
 
 .form h1 {
   color: #46799e;
