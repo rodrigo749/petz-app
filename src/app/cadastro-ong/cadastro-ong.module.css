@@ -248,3 +248,35 @@
     font-size: 15px;
   }
 }
+
+.passwordInputWrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+.passwordInputWrapper .input {
+  padding-right: 40px;
+}
+
+.togglePassword {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #0b3746;
+  font-size: 1.2rem;
+  padding: 0 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.togglePassword:hover {
+  color: #0b66a6;
+}

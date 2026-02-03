@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { FaPaw } from "react-icons/fa";
+import { FaPaw, FaEye, FaEyeSlash } from "react-icons/fa";
 import { cpf as cpfValidator } from "cpf-cnpj-validator";
 import styles from "./cadastro.module.css";
 import useSafeToast from "@/components/Toast/useSafeToast";
@@ -24,6 +24,8 @@ export default function CadastroPage() {
   const [imageFile, setImageFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [fieldErrors, setFieldErrors] = useState({});
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   // util
   const getBaseUrl = () =>
@@ -263,16 +265,32 @@ export default function CadastroPage() {
         <div className={styles.inputWrapper} style={fieldErrors.password ? {borderColor: 'red'} : {}}>
           <span className={styles.icon}><FaPaw /></span>
           <label className={styles.fieldLabel}>Senha:
-            <input className={styles.input} type="password" required value={formData.password} onChange={(e) => handleChange("password", e.target.value)} placeholder="Mínimo 6 dígitos" />
+            <input className={styles.input} type={showPassword ? "text" : "password"} required value={formData.password} onChange={(e) => handleChange("password", e.target.value)} placeholder="Mínimo 6 dígitos" />
           </label>
+          <button
+            type="button"
+            className={styles.togglePassword}
+            onClick={() => setShowPassword(!showPassword)}
+            aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
+          >
+            {showPassword ? <FaEyeSlash /> : <FaEye />}
+          </button>
         </div>
         {fieldErrors.password && <span className={styles.errorText}>{fieldErrors.password}</span>}
 
         <div className={styles.inputWrapper} style={fieldErrors.confirmPassword ? {borderColor: 'red'} : {}}>
           <span className={styles.icon}><FaPaw /></span>
           <label className={styles.fieldLabel}>Confirmar:
-            <input className={styles.input} type="password" required value={formData.confirmPassword} onChange={(e) => handleChange("confirmPassword", e.target.value)} placeholder="Repita a senha" />
+            <input className={styles.input} type={showConfirmPassword ? "text" : "password"} required value={formData.confirmPassword} onChange={(e) => handleChange("confirmPassword", e.target.value)} placeholder="Repita a senha" />
           </label>
+          <button
+            type="button"
+            className={styles.togglePassword}
+            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            aria-label={showConfirmPassword ? "Ocultar senha" : "Mostrar senha"}
+          >
+            {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+          </button>
         </div>
         {fieldErrors.confirmPassword && <span className={styles.errorText}>{fieldErrors.confirmPassword}</span>}
 

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { FaPaw } from 'react-icons/fa'
+import { FaPaw, FaEye, FaEyeSlash } from 'react-icons/fa'
 import styles from './cadastro-ong.module.css'
 import useSafeToast from '@/components/Toast/useSafeToast'
 import { uploadImage } from '@/lib/apiPets'
@@ -43,6 +43,7 @@ export default function CadastroOngPage() {
   const [imagem, setImagem] = useState('')
   const [imageFile, setImageFile] = useState(null)
   const [error, setError] = useState('')
+  const [showSenha, setShowSenha] = useState(false)
 
   // upload que seta `imagem`
   const handleImageUpload = (e) => {
@@ -224,17 +225,27 @@ export default function CadastroOngPage() {
             </div>
 
             <Field label="Senha" required className={styles.half}>
-              <input
-                className={styles.input}
-                type="password"
-                value={senha}
-                onChange={(e) => {
-                  setSenha(e.target.value)
-                  if (error) setError('')
-                }}
-                placeholder="Mínimo 8 caracteres"
-                required
-              />
+              <div className={styles.passwordInputWrapper}>
+                <input
+                  className={styles.input}
+                  type={showSenha ? "text" : "password"}
+                  value={senha}
+                  onChange={(e) => {
+                    setSenha(e.target.value)
+                    if (error) setError('')
+                  }}
+                  placeholder="Mínimo 8 caracteres"
+                  required
+                />
+                <button
+                  type="button"
+                  className={styles.togglePassword}
+                  onClick={() => setShowSenha(!showSenha)}
+                  aria-label={showSenha ? "Ocultar senha" : "Mostrar senha"}
+                >
+                  {showSenha ? <FaEyeSlash /> : <FaEye />}
+                </button>
+              </div>
             </Field>
 
             <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
