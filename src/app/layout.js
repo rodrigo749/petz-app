@@ -1,6 +1,7 @@
 import "./globals.css";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import CookieBanner from "@/components/CookieBanner";
 import { Inter } from "next/font/google";
 import { ToastProvider } from "@/components/Toast/toast.context";
 
@@ -29,6 +30,7 @@ export default function RootLayout({ children }) {
             {children}
           </main>
           <Footer /> {/* ✅ Footer global */}
+          <CookieBanner />
         </ToastProvider>
       </body>
     </html>
