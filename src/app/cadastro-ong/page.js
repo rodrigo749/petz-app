@@ -61,23 +61,24 @@ export default function CadastroOngPage() {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setError('')
+    e.preventDefault();
+    setError('');
 
     try {
-      let imagemUrl = imagem
+      let imagemUrl = imagem;
 
-      // Se o usuário escolheu arquivo, faz upload e usa a URL retornada
+      // 1. Upload da Imagem
       if (imageFile) {
         try {
-          imagemUrl = await uploadImage(imageFile)
+          imagemUrl = await uploadImage(imageFile);
         } catch (err) {
-          console.error('Erro ao fazer upload da imagem:', err)
-          showToast('Erro ao enviar imagem. Tente novamente.', 'error')
-          return
+          console.error('Erro no upload:', err);
+          showToast('Erro ao enviar imagem. Verifique a pasta public/uploads no backend.', 'error');
+          return;
         }
       }
 
+      // 2. Montagem do Payload
       const payload = {
         nome,
         email,
@@ -94,48 +95,41 @@ export default function CadastroOngPage() {
         horarioFunc1,
         horarioFunc2,
         imagem: imagemUrl,
-      }
+        role: 'ong'
+      };
 
-      const res = await fetch('/api/ongs', {
+      // 3. Chamada para o Backend usando NEXT_PUBLIC_PETZ_API_URL se disponível
+      const baseUrl = (process.env.NEXT_PUBLIC_PETZ_API_URL || `http://localhost:${process.env.PORT || 3000}`).trim().replace(/\/$/, '');
+      const res = await fetch(`${baseUrl}/api/ongs`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
-      })
+      });
 
-      const data = await res.json().catch(() => ({}))
+      // 4. Tratamento da Resposta
+      const data = await res.json().catch(() => ({}));
 
       if (!res.ok) {
-        const msg = data?.message || data?.error || 'Erro ao cadastrar ONG'
-        setError(msg)
-        showToast(msg, 'error')
-        return
+        const msg = data?.message || 'Erro ao cadastrar ONG no servidor.';
+        setError(msg);
+        showToast(msg, 'error');
+        return;
       }
 
-      // ✅ PADRONIZAÇÃO DO localStorage:
-      // A API pode retornar { user } ou { token, user } (ou às vezes o objeto direto).
-      // Aqui normalizamos para sempre salvar um objeto "raiz" consistente.
-      const user = data?.user ?? data
-      const token = data?.token ?? null
-
-      const usuarioLogado = {
-        ...user,
-        tipo: 'ong',        // padroniza a identificação no header
-        role: 'ong',        // ajuda compatibilidade com lógicas antigas
-        token,              // opcional (se existir)
+      // SALVAR TOKEN e DADOS da ONG (se retornados) e redirecionar para painel
+      if (data.token) {
+        localStorage.setItem('petz_token', data.token);
       }
+      localStorage.setItem('ong_data', JSON.stringify(data.ong || data));
 
-      showToast('Cadastro realizado com sucesso!', 'success')
-      localStorage.setItem('usuarioLogado', JSON.stringify(usuarioLogado))
-
-      // pequeno delay para ver o toast
-      setTimeout(() => router.push('/perfil-ong'), 900)
+      showToast('Bem-vindo!', 'success');
+      return router.push('/perfil-ong');
     } catch (err) {
-      console.error(err)
-      const msg = 'Erro de rede. Tente novamente.'
-      setError(msg)
-      showToast(msg, 'error')
+      console.error('Erro de rede:', err);
+      setError('Não foi possível conectar ao servidor.');
+      showToast('Servidor offline ou erro de CORS.', 'error');
     }
-  }
+  };
 
   const formatCNPJ = (value) => {
     const digits = (value || '').replace(/\D/g, '').slice(0, 14)

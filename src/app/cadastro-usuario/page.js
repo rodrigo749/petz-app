@@ -1,273 +1,303 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { FaPaw } from "react-icons/fa";
-
+import { cpf as cpfValidator } from "cpf-cnpj-validator";
 import styles from "./cadastro.module.css";
 import useSafeToast from "@/components/Toast/useSafeToast";
 
 export default function CadastroPage() {
   const { showToast } = useSafeToast();
   const router = useRouter();
+
+  // estados
   const [formData, setFormData] = useState({
     nome: "",
     cpf: "",
     email: "",
-    telefone:"",
+    telefone: "",
     password: "",
     confirmPassword: "",
-    imagem: ""
+    imagemPreview: "" // preview local (blob URL)
   });
   const [imageFile, setImageFile] = useState(null);
-  const [error, setError] = useState("");
-  const [cpfError, setCpfError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState({});
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    setCpfError("");
+  // util
+  const getBaseUrl = () =>
+    (process.env.NEXT_PUBLIC_PETZ_API_URL || `http://localhost:${process.env.PORT || 3000}`).trim().replace(/\/$/, "");
 
-    if (!formData.nome || !formData.cpf || !formData.email || !formData.telefone || !formData.password || !formData.confirmPassword) {
-      showToast("Por favor, preencha todos os campos obrigatórios.", "warning");
-      return;
+  // upload robusto (FormData) -> retorna URL absoluta
+  const uploadImage = async (file) => {
+    if (!file) throw new Error("Nenhum arquivo fornecido");
+    if (!file.type || !file.type.startsWith("image/")) throw new Error("Arquivo não é imagem");
+    const maxMB = 5;
+    if (file.size > maxMB * 1024 * 1024) throw new Error(`Imagem maior que ${maxMB}MB`);
+
+    const baseUrl = getBaseUrl();
+    const configs = [
+      { url: `${baseUrl}/api/upload`, field: "file" },
+      { url: `${baseUrl}/api/upload`, field: "imagem" },
+      { url: `${baseUrl}/upload`, field: "file" },
+      { url: `${baseUrl}/upload`, field: "imagem" }
+    ];
+
+    let lastErr = null;
+    for (const cfg of configs) {
+      try {
+        const fd = new FormData();
+        fd.append(cfg.field, file);
+        const res = await fetch(cfg.url, { method: "POST", body: fd });
+        const text = await res.text().catch(() => "");
+        let data = {};
+        try { data = text ? JSON.parse(text) : {}; } catch { data = { raw: text }; }
+
+        if (!res.ok) {
+          lastErr = new Error(data?.message || data?.raw || `Upload falhou (${res.status})`);
+          continue;
+        }
+
+        const returned = data?.url || data?.path || data?.fileUrl || data?.filename || data?.file || data?.file_path || data?.filepath || null;
+        if (returned && typeof returned === "string") {
+          return returned.startsWith("/") ? `${baseUrl}${returned}` : returned;
+        }
+
+        if (typeof data === "string" && data) {
+          return data.startsWith("/") ? `${baseUrl}${data}` : data;
+        }
+
+        lastErr = new Error("Upload OK mas resposta não contém URL");
+      } catch (err) {
+        lastErr = err;
+        // tenta próximo endpoint
+      }
     }
 
-    const cpfLimpo = (formData.cpf || "").replace(/\D/g, "");
-    if (!cpf.isValid(cpfLimpo)) {
-      setCpfError("CPF inválido. Por favor, verifique e tente novamente.");
-      return;
-    }
-
-    if (formData.password !== formData.confirmPassword) {
-      setError("As senhas não coincidem. Por favor, tente novamente.");
-      return;
-    }
-
-  try {
-    const payload = {
-      nome: formData.nome,
-      cpf: formData.cpf,
-      email: formData.email,
-      telefone: formData.telefone,
-      password: formData.password,
-      imagem: formData.imagem,
-      tipo: "usuario"
-    };
-
-    const res = await fetch("/api/users", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      setError(data.message || "Erro ao cadastrar usuário.");
-      return;
-    }
-
-    showToast("Cadastro realizado com sucesso!", "success");
-    localStorage.setItem("usuarioLogado", JSON.stringify(data));
-    setTimeout(() => {
-       router.push("/perfil-usuario");
-    }, 2000);
-
-    // salva apenas o usuário logado (opcional)
-    localStorage.setItem("usuarioLogado", JSON.stringify(data));
-
-    // vai direto para o perfil
-    router.push("/perfil-usuario");
-
-  } catch (error) {
-    console.error(error);
-    setError("Erro de rede. Tente novamente.");
-  }
-};
-
-
-  const formatCPF = (value) => {
-    const digits = (value || "").replace(/\D/g, "").slice(0, 11);
-    return digits
-      .replace(/^(\d{3})(\d)/, "$1.$2")
-      .replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3")
-      .replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d)/, "$1.$2.$3-$4");
+    throw lastErr || new Error("Falha no upload da imagem");
   };
-  const formatTelefone = (value) => {
-    const digits = value.replace(/\D/g, "").slice(0, 11); // Máx 11 dígitos (ex: 31999999999)
 
-    if (digits.length <= 2) {
-      return `(${digits}`;
-    }
-    if (digits.length <= 6) {
-      return `(${digits.slice(0,2)}) ${digits.slice(2)}`;
-    }
-    if (digits.length <= 10) {
-      return `(${digits.slice(0,2)}) ${digits.slice(2,6)}-${digits.slice(6)}`;
-    }
-
-    // Para números com 11 dígitos (celular)
-    return `(${digits.slice(0,2)}) ${digits.slice(2,7)}-${digits.slice(7,11)}`;
-};
-
+  // form handlers
   const handleChange = (field, value) => {
     if (field === "cpf") {
-      value = formatCPF(value);
+      value = value.replace(/\D/g, "").slice(0, 11)
+        .replace(/^(\d{3})(\d)/, "$1.$2")
+        .replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3")
+        .replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d)/, "$1.$2.$3-$4");
     }
-    if (field === "telefone"){
-      value = formatTelefone(value);
+    if (field === "telefone") {
+      const digits = value.replace(/\D/g, "").slice(0, 11);
+      if (digits.length <= 2) value = `(${digits}`;
+      else if (digits.length <= 6) value = `(${digits.slice(0,2)}) ${digits.slice(2)}`;
+      else if (digits.length <= 10) value = `(${digits.slice(0,2)}) ${digits.slice(2,6)}-${digits.slice(6)}`;
+      else value = `(${digits.slice(0,2)}) ${digits.slice(2,7)}-${digits.slice(7,11)}`;
     }
+
     setFormData(prev => ({ ...prev, [field]: value }));
+    if (fieldErrors[field]) setFieldErrors(prev => ({ ...prev, [field]: null }));
   };
 
-  const handleImageUpload = (e) => {
-  const file = e.target.files[0];
-  if (!file) return;
+  const handleImageChange = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
 
-  const reader = new FileReader();
-  reader.onloadend = () => {
-    setFormData(prev => ({
-      ...prev,
-      imagem: reader.result // Base64 for preview
-    }));
+    const maxMB = 5;
+    if (file.size > maxMB * 1024 * 1024) {
+      showToast(`Imagem maior que ${maxMB}MB. Escolha outra.`, "warning");
+      return;
+    }
+    if (!file.type || !file.type.startsWith("image/")) {
+      showToast("Formato inválido. Escolha uma imagem.", "warning");
+      return;
+    }
+
+    // revoga preview anterior se blob
+    if (formData.imagemPreview && formData.imagemPreview.startsWith("blob:")) {
+      try { URL.revokeObjectURL(formData.imagemPreview); } catch {}
+    }
+
+    setImageFile(file);
+    setFormData(prev => ({ ...prev, imagemPreview: URL.createObjectURL(file) }));
   };
-  reader.readAsDataURL(file);
-  setImageFile(file);
-};
+
+  // cleanup preview blob
+  useEffect(() => {
+    return () => {
+      if (formData.imagemPreview && formData.imagemPreview.startsWith("blob:")) {
+        try { URL.revokeObjectURL(formData.imagemPreview); } catch {}
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // submit
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setFieldErrors({});
+
+    // validações
+    const cpfLimpo = (formData.cpf || "").replace(/\D/g, "");
+    if (!cpfValidator.isValid(cpfLimpo)) {
+      setFieldErrors(prev => ({ ...prev, cpf: "CPF inválido." }));
+      setLoading(false);
+      return;
+    }
+    if ((formData.password || "").length < 6) {
+      setFieldErrors(prev => ({ ...prev, password: "Mínimo 6 caracteres." }));
+      setLoading(false);
+      return;
+    }
+    if (formData.password !== formData.confirmPassword) {
+      setFieldErrors(prev => ({ ...prev, confirmPassword: "As senhas não coincidem." }));
+      setLoading(false);
+      return;
+    }
+
+    try {
+      let finalImageUrl = "";
+
+      if (imageFile) {
+        try {
+          finalImageUrl = await uploadImage(imageFile);
+        } catch (uploadErr) {
+          showToast("Erro ao enviar imagem. Verifique o servidor.", "error");
+          setLoading(false);
+          return;
+        }
+      }
+
+      const baseUrl = getBaseUrl();
+      const payload = {
+        nome: formData.nome,
+        cpf: cpfLimpo,
+        email: formData.email,
+        telefone: formData.telefone,
+        password: formData.password,
+        imagem: finalImageUrl,
+        tipo: "usuario"
+      };
+
+      const res = await fetch(`${baseUrl}/api/users`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      const respData = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        const msg = respData?.message || respData?.raw || `Erro ao cadastrar (status ${res.status})`;
+        // mapear erros para campos quando possível
+        if (msg.toLowerCase().includes("email")) setFieldErrors(prev => ({ ...prev, email: "Este email já está em uso." }));
+        else if (msg.toLowerCase().includes("cpf")) setFieldErrors(prev => ({ ...prev, cpf: "Este CPF já está cadastrado." }));
+        else showToast(msg, "error");
+        setLoading(false);
+        return;
+      }
+
+      // sucesso: salvar token/usuário e redirecionar para perfil
+      const saved = respData || {};
+      console.log('[CadastroUsuario] resposta backend:', saved);
+
+      // tenta extrair usuário nas chaves comuns
+      const userObj = saved.user || saved.usuario || saved.data || saved;
+
+      // salva token em chaves usadas no projeto
+      if (saved.token) {
+        localStorage.setItem('token', saved.token);
+        localStorage.setItem('petz_token', saved.token);
+      }
+
+      // salva usuário com chave padrão que o perfil provavelmente lê
+      localStorage.setItem('usuarioLogado', JSON.stringify(userObj));
+
+      console.log('[CadastroUsuario] salvo usuarioLogado:', userObj, 'token:', saved.token);
+      showToast('Cadastro realizado com sucesso!', 'success');
+      setTimeout(() => router.push('/perfil-usuario'), 900);
+    } catch (err) {
+      console.error("Erro geral:", err);
+      showToast("Erro de conexão com o servidor. O backend está ligado?", "error");
+      setLoading(false);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className={styles.container}>
-      <form className={styles.form} onSubmit={handleSubmit}>
-  <h1 className={styles.title}>Cadastro de Usuário</h1>
-        {error && <div className={styles.error}>{error}</div>}
+      <form className={styles.form} onSubmit={handleSubmit} noValidate>
+        <h1 className={styles.title}>Criar nova conta</h1>
 
         <div className={styles.inputWrapper}>
-          <span className={styles.icon} aria-hidden>
-            <FaPaw />
-          </span>
-          <label className={styles.fieldLabel}>
-            Nome:
-            <input
-              className={styles.input}
-              type="text"
-              value={formData.nome}
-              onChange={(e) => handleChange("nome", e.target.value)}
-              placeholder="Seu nome completo"
-              aria-label="Nome"
-            />
+          <span className={styles.icon}><FaPaw /></span>
+          <label className={styles.fieldLabel}>Nome:
+            <input className={styles.input} type="text" required value={formData.nome} onChange={(e) => handleChange("nome", e.target.value)} placeholder="Nome completo" />
           </label>
         </div>
 
-        <div className={styles.inputWrapper}>
-          <span className={styles.icon} aria-hidden>
-            <FaPaw />
-          </span>
-          <label className={styles.fieldLabel}>
-            CPF:
-            <input
-              className={styles.input}
-              type="text"
-              inputMode="numeric"
-              value={formData.cpf}
-              onChange={(e) => handleChange("cpf", e.target.value)}
-              placeholder="000.000.000-00"
-              aria-label="CPF"
-            />
+        <div className={styles.inputWrapper} style={fieldErrors.cpf ? {borderColor: 'red'} : {}}>
+          <span className={styles.icon}><FaPaw /></span>
+          <label className={styles.fieldLabel}>CPF:
+            <input className={styles.input} type="text" inputMode="numeric" required value={formData.cpf} onChange={(e) => handleChange("cpf", e.target.value)} placeholder="000.000.000-00" />
           </label>
-          {cpfError && <div style={{ backgroundColor: '#ffe6e6', color: '#cc0000', fontSize: '12px', padding: '8px 12px', borderRadius: '4px', marginTop: '8px' }}>{cpfError}</div>}
         </div>
+        {fieldErrors.cpf && <span className={styles.errorText}>{fieldErrors.cpf}</span>}
+
+        <div className={styles.inputWrapper} style={fieldErrors.email ? {borderColor: 'red'} : {}}>
+          <span className={styles.icon}><FaPaw /></span>
+          <label className={styles.fieldLabel}>Email:
+            <input className={styles.input} type="email" required value={formData.email} onChange={(e) => handleChange("email", e.target.value)} placeholder="seu@email.com" />
+          </label>
+        </div>
+        {fieldErrors.email && <span className={styles.errorText}>{fieldErrors.email}</span>}
 
         <div className={styles.inputWrapper}>
-          <span className={styles.icon} aria-hidden>
-            <FaPaw />
-          </span>
-          <label className={styles.fieldLabel}>
-            Email:
-            <input
-              className={styles.input}
-              type="email"
-              value={formData.email}
-              onChange={(e) => handleChange("email", e.target.value)}
-              placeholder="seu@email.com"
-              aria-label="Email"
-            />
-          </label>
-        </div>
-         <div className={styles.inputWrapper}>
-          <span className={styles.icon} aria-hidden>
-            <FaPaw />
-          </span>
-          <label className={styles.fieldLabel}>
-            telefone:
-            <input
-             className={styles.input}
-             type="tel"
-             value={formData.telefone}
-             onChange={(e) => handleChange("telefone",e.target.value)}
-             placeholder="(35) 0000-0000"
-             required
-            />
-          </label>
-        </div>
-        <div className={styles.inputWrapper}>
-          <span className={styles.icon} aria-hidden>
-            <FaPaw />
-          </span>
-          <label className={styles.fieldLabel}>
-            Senha:
-            <input
-              className={styles.input}
-              type="password"
-              value={formData.password}
-              onChange={(e) => handleChange("password", e.target.value)}
-              placeholder="Sua senha"
-              aria-label="Senha"
-            />
+          <span className={styles.icon}><FaPaw /></span>
+          <label className={styles.fieldLabel}>Telefone:
+            <input className={styles.input} type="tel" required value={formData.telefone} onChange={(e) => handleChange("telefone", e.target.value)} placeholder="(XX) 00000-0000" />
           </label>
         </div>
 
-        <div className={styles.inputWrapper}>
-          <span className={styles.icon} aria-hidden>
-            <FaPaw />
-          </span>
-          <label className={styles.fieldLabel}>
-            Confirmar Senha:
-            <input
-              className={styles.input}
-              type="password"
-              value={formData.confirmPassword}
-              onChange={(e) => handleChange("confirmPassword", e.target.value)}
-              placeholder="Confirme sua senha"
-              aria-label="Confirmar senha"
-            />
+        <div className={styles.inputWrapper} style={fieldErrors.password ? {borderColor: 'red'} : {}}>
+          <span className={styles.icon}><FaPaw /></span>
+          <label className={styles.fieldLabel}>Senha:
+            <input className={styles.input} type="password" required value={formData.password} onChange={(e) => handleChange("password", e.target.value)} placeholder="Mínimo 6 dígitos" />
           </label>
         </div>
+        {fieldErrors.password && <span className={styles.errorText}>{fieldErrors.password}</span>}
+
+        <div className={styles.inputWrapper} style={fieldErrors.confirmPassword ? {borderColor: 'red'} : {}}>
+          <span className={styles.icon}><FaPaw /></span>
+          <label className={styles.fieldLabel}>Confirmar:
+            <input className={styles.input} type="password" required value={formData.confirmPassword} onChange={(e) => handleChange("confirmPassword", e.target.value)} placeholder="Repita a senha" />
+          </label>
+        </div>
+        {fieldErrors.confirmPassword && <span className={styles.errorText}>{fieldErrors.confirmPassword}</span>}
+
         <div className={styles.uploadWrapper}>
           <label className={styles.uploadBox}>
-            {formData.imagem ? (
-              <img
-                src={formData.imagem}
-                alt="Preview"
-                className={styles.uploadPreview}
-              />
+            {formData.imagemPreview ? (
+              <img src={formData.imagemPreview} alt="Preview" className={styles.uploadPreview} />
             ) : (
               <>
-                <img src="/images/iconephoto.png" className={styles.iconeAddImg} alt="Adicionar" />
-                <span className={styles.uploadText}>Adicionar imagem</span>
+                <span className={styles.uploadIcon}>＋</span>
+                <span className={styles.uploadText}>Foto de perfil</span>
               </>
             )}
-        
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageUpload}
-              hidden
-            />
+            <input type="file" accept="image/*" onChange={handleImageChange} hidden disabled={loading} />
           </label>
         </div>
 
-        <button className={styles.button} type="submit">Cadastrar</button>
+        <button 
+          className={styles.button} 
+          type="submit" 
+          disabled={loading}
+          style={{ opacity: loading ? 0.7 : 1, cursor: loading ? 'not-allowed' : 'pointer' }}
+        >
+          {loading ? "Cadastrando..." : "Cadastrar"}
+        </button>
 
         <div className={styles.bottomLink}>
           Já tem conta? <a href="/login-usuario">Faça login aqui</a>.

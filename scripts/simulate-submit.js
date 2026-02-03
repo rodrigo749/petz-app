@@ -1,10 +1,10 @@
 // Simulate form submit to /api/ongs
 // Usage: node scripts/simulate-submit.js
 // Optional env vars:
-//   TARGET - URL to POST to (default http://localhost:3000/api/ongs)
+//   TARGET - URL to POST to (default http://localhost:PORT/api/ongs)
 //   TOKEN  - optional Authorization Bearer token to include
 
-const TARGET = process.env.TARGET || 'http://localhost:3000/api/ongs'
+const TARGET = process.env.TARGET || `http://localhost:${process.env.PORT || 3000}/api/ongs`
 const TOKEN = process.env.TOKEN || ''
 
 const payload = {

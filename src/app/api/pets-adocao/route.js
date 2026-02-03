@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { readFile } from "fs/promises";
 
 const API_BASE = "http://localhost:3000";
 
@@ -14,21 +15,10 @@ export async function GET() {
   }
 }
 
-// POST - cadastra pet (vai pro backend)
+// POST - removido - não salva mais em JSON
 export async function POST(req) {
-  try {
-    const body = await req.json();
-
-    const res = await fetch(`${API_BASE}/api/pets`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    });
-
-    const data = await res.json();
-    return NextResponse.json(data, { status: res.status });
-  } catch (error) {
-    console.error("Erro no POST /pets-adocao (proxy):", error);
-    return NextResponse.json({ error: "Erro ao salvar dados" }, { status: 500 });
-  }
+  return NextResponse.json(
+    { error: "Operação de cadastro desabilitada. Use a API externa configurada." },
+    { status: 501 }
+  );
 }
