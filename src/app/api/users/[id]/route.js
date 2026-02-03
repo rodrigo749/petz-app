@@ -17,30 +17,15 @@ export async function GET(req, { params }) {
 }
 
 export async function PUT(req, { params }) {
-  try {
-    const { id } = params
-    const body = await req.json()
-    const users = await readUsers()
-    const idx = users.findIndex(x => String(x.id) === String(id))
-    if (idx === -1) return new Response(JSON.stringify({ message: 'Not found' }), { status: 404 })
-    users[idx] = { ...users[idx], ...body }
-    await fs.writeFile(filePath, JSON.stringify(users, null, 2), 'utf8')
-    return new Response(JSON.stringify(users[idx]), { status: 200 })
-  } catch (err) {
-    return new Response(JSON.stringify({ message: 'Erro interno', error: String(err) }), { status: 500 })
-  }
+  return new Response(
+    JSON.stringify({ error: 'Operação de atualização desabilitada. Use a API externa configurada.' }),
+    { status: 501 }
+  )
 }
 
 export async function DELETE(req, { params }) {
-  try {
-    const { id } = params
-    const users = await readUsers()
-    const idx = users.findIndex(x => String(x.id) === String(id))
-    if (idx === -1) return new Response(JSON.stringify({ message: 'Not found' }), { status: 404 })
-    users.splice(idx, 1)
-    await fs.writeFile(filePath, JSON.stringify(users, null, 2), 'utf8')
-    return new Response(JSON.stringify({ message: 'Deleted' }), { status: 200 })
-  } catch (err) {
-    return new Response(JSON.stringify({ message: 'Erro interno', error: String(err) }), { status: 500 })
-  }
+  return new Response(
+    JSON.stringify({ error: 'Operação de exclusão desabilitada. Use a API externa configurada.' }),
+    { status: 501 }
+  )
 }
