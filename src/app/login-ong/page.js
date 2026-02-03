@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { FaPaw } from "react-icons/fa";
+import { FaPaw, FaEye, FaEyeSlash } from "react-icons/fa";
 import styles from "./login-ong.module.css";
 import useSafeToast from "@/components/Toast/useSafeToast";
 
@@ -12,6 +12,7 @@ export default function LoginPage() {
   const [cnpj, setCnpj] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -96,16 +97,24 @@ export default function LoginPage() {
             Senha:
             <input
               className={styles.input}
-              type="password"
+              type={showPassword ? "text" : "password"}
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
                 if (error) setError("");
               }}
-              placeholder=""
+              placeholder="Digite sua senha"
               aria-label="Senha"
             />
           </label>
+          <button
+            type="button"
+            className={styles.togglePassword}
+            onClick={() => setShowPassword(!showPassword)}
+            aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
+          >
+            {showPassword ? <FaEyeSlash /> : <FaEye />}
+          </button>
         </div>
 
         <button className={styles.button} type="submit">
