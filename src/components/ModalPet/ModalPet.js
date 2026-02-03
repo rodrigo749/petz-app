@@ -23,19 +23,6 @@ export default function ModalPet({ pet, onClose }) {
     router.push(href);
   }
 
-  // obtém telefone (vários possíveis nomes de campo)
-  const phone = pet?.usuarioTelefone || pet?.telefone || pet?.phone || pet?.contato || pet?.whatsapp || "";
-
-  function handleWhatsappClick() {
-    if (!phone) {
-      alert("Telefone do Dono não disponível");
-      return;
-    }
-    const phoneDigits = String(phone).replace(/\D/g, "");
-    const msg = encodeURIComponent(`Olá, vi o anúncio do ${pet?.nome || "pet"} e gostaria de ajudar.`);
-    window.open(`https://wa.me/${phoneDigits}?text=${msg}`, "_blank", "noopener,noreferrer");
-  }
-
   return (
 <div className={styles.overlay} onClick={handleBackgroundClick}>
   <div className={styles.modal}>
@@ -110,24 +97,8 @@ export default function ModalPet({ pet, onClose }) {
           <p className={styles.descText}>{pet.descricao}</p>
         </div>
 
-        {/* CONTATO */}
-        <div className={styles.contact}>
-          {phone ? (
-            <p>
-              <strong>Telefone:</strong>{" "}
-              <a href={`tel:${String(phone).replace(/\D/g, "")}`}>{phone}</a>
-            </p>
-          ) : (
-            <p className={styles.noPhone}>Telefone do Dono não disponível</p>
-          )}
-
-          <button
-            className={styles.contatar_whatsappBtn}
-            onClick={handleWhatsappClick}
-          >
-            WhatsApp
-          </button>
-        </div>
+        {/* BOTÃO */}
+        <button className={styles.contactBtn} onClick={handleContact}>Contatar dono</button>
 
       </div>
     </div>
