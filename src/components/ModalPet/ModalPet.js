@@ -19,7 +19,13 @@ export default function ModalPet({ pet, onClose }) {
     const charsArray = pet.caracteristicas || pet.characteristics || [];
     const chars = Array.isArray(charsArray) ? charsArray.join(",") : String(charsArray || "");
 
-    const href = `/contatar-ong?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&desc=${encodeURIComponent(desc)}&chars=${encodeURIComponent(chars)}`;
+    const status = String(pet.status || "").toLowerCase();
+    const userId = pet.usuarioId ?? pet.userId ?? "";
+    const base = status === "perdido" || userId ? "/contatar-usuario" : "/contatar-ong";
+
+    const href = `${base}?userId=${encodeURIComponent(userId)}&name=${encodeURIComponent(
+      name
+    )}&phone=${encodeURIComponent(phone)}&desc=${encodeURIComponent(desc)}&chars=${encodeURIComponent(chars)}`;
     router.push(href);
   }
 

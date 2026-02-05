@@ -7,6 +7,9 @@
     "idade": "1 ano",
     "descricao": "Visto pela última vez próximo ao senac na avenida vicente simões.",
     "imagem": "/uploads/caramelo02.jpg",
+    "usuarioId": 1,
+    "responsavel": "Usuário 1",
+    "telefone": "(11) 99999-9999",
     "status": "perdido"
   },
   {
@@ -17,6 +20,9 @@
     "idade": "2 anos",
     "descricao": "Esta com uma coleira azul.",
     "imagem": "/uploads/pet05.jpg",
+    "usuarioId": 2,
+    "responsavel": "Usuário 2",
+    "telefone": "(11) 98888-8888",
     "status": "perdido"
   },
     {
@@ -27,6 +33,9 @@
     "idade": "1 ano e 6 meses",
     "descricao": "Desapareceu no bairro Jardim Paraíso. Atende pelo nome Bolota.",
     "imagem": "/images/semfoto.jpg",
+    "usuarioId": 3,
+    "responsavel": "Usuário 3",
+    "telefone": "(11) 97777-7777",
     "status": "perdido"
   },
   {
