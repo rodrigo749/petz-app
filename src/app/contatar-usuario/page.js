@@ -8,7 +8,7 @@ export default function Page() {
   const searchParams = useSearchParams()
   const router = useRouter()
 
-  const initial = useMemo(() => {
+  const contato = useMemo(() => {
     const userId = searchParams.get('userId') || ''
     const name = searchParams.get('name') || ''
     const phone = searchParams.get('phone') || ''
@@ -21,14 +21,15 @@ export default function Page() {
     return { userId, name, phone, desc, chars }
   }, [searchParams])
 
-  const [nome, setNome] = useState(initial.name)
-  const [telefone, setTelefone] = useState(initial.phone)
+  const [nome, setNome] = useState(contato.name)
+  const [telefone, setTelefone] = useState(contato.phone)
 
+  // tenta resolver nome/telefone do usuário a partir do localStorage (sem mexer no fluxo de adoção)
   useEffect(() => {
-    if (!initial.userId) return
+    if (!contato.userId) return
 
     try {
-      const idStr = String(initial.userId)
+      const idStr = String(contato.userId)
 
       const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]')
       const byList = Array.isArray(usuarios)
@@ -47,7 +48,7 @@ export default function Page() {
     } catch {
       // ignore
     }
-  }, [initial.userId])
+  }, [contato.userId])
 
   const phoneDigits = (telefone || '').replace(/\D/g, '')
 
@@ -61,7 +62,7 @@ export default function Page() {
     window.open(url, '_blank')
   }
 
-  if (!initial.userId && !nome && !telefone && !initial.desc && initial.chars.length === 0) {
+  if (!nome && !telefone && !contato.desc && contato.chars.length === 0) {
     return (
       <div className={styles.container}>
         <div className={styles.texto}>
@@ -79,18 +80,18 @@ export default function Page() {
     <div className={styles.container}>
       <h1>Contato: {nome || 'Usuário'}</h1>
 
-      {initial.desc && (
+      {contato.desc && (
         <section className={styles.section}>
           <h2>Descrição</h2>
-          <p>{initial.desc}</p>
+          <p>{contato.desc}</p>
         </section>
       )}
 
-      {initial.chars.length > 0 && (
+      {contato.chars.length > 0 && (
         <section className={styles.section}>
           <h2>Características</h2>
           <ul className={styles.featuresList}>
-            {initial.chars.map((c, idx) => (
+            {contato.chars.map((c, idx) => (
               <li key={idx}>{c}</li>
             ))}
           </ul>
