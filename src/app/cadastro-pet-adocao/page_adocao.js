@@ -311,7 +311,7 @@ export default function CadastroAdocao() {
               <select
                 value={formData.especie}
                 onChange={(e) => handleChange("especie", e.target.value)}
-                className={styles.selectInput}
+                className={!formData.especie ? styles.selectPlaceholder : ""}
               >
                 <option value="">Selecione a espécie</option>
                 <option value="dog">Cachorro</option>
