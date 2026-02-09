@@ -142,7 +142,8 @@
   width: 100%;
 }
 
-.campo input {
+.campo input,
+.campo select {
   width: 100%;
   padding: 12px 20px 12px 55px;
   border-radius: 40px;
@@ -150,10 +151,30 @@
   font-size: 16px;
   outline: none;
   background-color: #ffffff;
+  font-family: inherit;
+  color: #333;
+  box-sizing: border-box;
+  height: 50px;
 }
 
-.campo input:focus {
+.campo input:focus,
+.campo select:focus {
   border-color: #1b5b8f;
+}
+
+.campo select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+}
+
+.campo select.selectPlaceholder {
+  color: #757575;
+}
+
+.campo select option {
+  color: #333;
 }
 
 /* ÍCONE PATINHA NOS INPUTS */
@@ -195,6 +216,16 @@
   height: 100%;
   object-fit: cover;
   border-radius: 18px;
+}
+
+/* TEXTO DE ERRO */
+.errorText {
+  color: red;
+  font-size: 13px;
+  margin-top: -10px;
+  margin-bottom: 4px;
+  padding-left: 15px;
+  display: block;
 }
 
 /* ===========================
@@ -270,7 +301,8 @@
     gap: 15px;
   }
 
-  .campo input {
+  .campo input,
+  .campo select {
     padding: 10px 15px 10px 45px;
     font-size: 14px;
     border-radius: 30px;
@@ -347,7 +379,8 @@
     gap: 12px;
   }
 
-  .campo input {
+  .campo input,
+  .campo select {
     padding: 8px 12px 8px 40px;
     font-size: 13px;
     border-radius: 25px;
@@ -442,7 +475,8 @@
     font-size: 11px;
   }
 
-  .campo input {
+  .campo input,
+  .campo select {
     padding: 6px 10px 6px 35px;
     font-size: 12px;
   }
