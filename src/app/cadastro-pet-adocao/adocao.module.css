@@ -197,6 +197,37 @@
   border-radius: 18px;
 }
 
+/* SELECT DE ESPÉCIE */
+.selectInput {
+  width: 100%;
+  padding: 12px 20px 12px 55px;
+  border-radius: 40px;
+  border: 4px solid #0f3b61;
+  font-size: 16px;
+  outline: none;
+  background-color: #ffffff;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  font-family: inherit;
+  color: #333;
+}
+
+.selectInput:focus {
+  border-color: #1b5b8f;
+}
+
+/* TEXTO DE ERRO */
+.errorText {
+  color: red;
+  font-size: 13px;
+  margin-top: -10px;
+  margin-bottom: 4px;
+  padding-left: 15px;
+  display: block;
+}
+
 /* ===========================
    MEDIA QUERIES - RESPONSIVO
 =========================== */
@@ -270,7 +301,8 @@
     gap: 15px;
   }
 
-  .campo input {
+  .campo input,
+  .selectInput {
     padding: 10px 15px 10px 45px;
     font-size: 14px;
     border-radius: 30px;
@@ -347,7 +379,8 @@
     gap: 12px;
   }
 
-  .campo input {
+  .campo input,
+  .selectInput {
     padding: 8px 12px 8px 40px;
     font-size: 13px;
     border-radius: 25px;
@@ -442,7 +475,8 @@
     font-size: 11px;
   }
 
-  .campo input {
+  .campo input,
+  .selectInput {
     padding: 6px 10px 6px 35px;
     font-size: 12px;
   }
