@@ -37,6 +37,13 @@ export default function Header() {
   // 🏢 regra: apenas ONG (CNPJ) vê opções de perfil ONG
   const isOng = !!usuarioLogado?.cnpj || usuarioLogado?.tipo === "ong";
 
+  // sublinks a mostrar para usuário logado (não-ONG)
+  const userProfileSubLinks = [
+    { label: "Editar perfil", href: "/editar-perfil-usuario" },
+    { label: "Meus pets Perdidos", href: "/meus-pets-perdidos" },
+    { label: "Sair", href: "/logout" },
+  ];
+
   // 🔍 filtra links conforme login
   const navLinksFiltrados = NAV_LINKS.filter((link) => {
     if (link.id === "perfil" && !isOng) return false;
@@ -88,28 +95,31 @@ export default function Header() {
 
               {subLinks && dropdownOpen === id && (
                 <div className={styles.dropdownMenu}>
-                  {subLinks.map((subLink, index) => (
-                    <Link
-                      key={index}
-                      href={subLink.href}
-                      className={styles.dropdownItem}
-                    >
-                      {subLink.label}
-                    </Link>
-                  ))}
+                  {subLinks
+                    .filter((s) => !(s.auth && !usuarioLogado))
+                    .map((subLink, index) => (
+                      <Link
+                        key={index}
+                        href={subLink.href}
+                        className={styles.dropdownItem}
+                      >
+                        {subLink.label}
+                      </Link>
+                    ))}
                 </div>
               )}
             </div>
           ))}
         </div>
 
-        {/* ================= AVATAR DESKTOP ================= */}
+        {/* ================= AVATAR DESKTOP (dropdown igual ao da ONG) ================= */}
         {usuarioLogado && (
-          <div className={styles.profileWrap}>
-            <Link
-              href="/perfil"
-              className={styles.avatarLink}
-            >
+          <div
+            className={styles.profileWrap}
+            onMouseEnter={() => setDropdownOpen('profileAvatar')}
+            onMouseLeave={() => setDropdownOpen(null)}
+          >
+            <div className={styles.avatarLink}>
               <span className={styles.avatarIcon}>
                 <img
                   src={usuarioLogado.imagem || "/images/Avatar.png"}
@@ -117,7 +127,18 @@ export default function Header() {
                   className={styles.avatarImage}
                 />
               </span>
-            </Link>
+            </div>
+
+            {dropdownOpen === 'profileAvatar' && (
+              <div className={styles.profileDropdown}>
+                {(isOng ? NAV_LINKS.find(l => l.id === 'perfil').subLinks : userProfileSubLinks)
+                  .map((s, i) => (
+                    <Link key={i} href={s.href} className={styles.dropdownItem}>
+                      {s.label}
+                    </Link>
+                  ))}
+              </div>
+            )}
           </div>
         )}
 
@@ -168,20 +189,43 @@ export default function Header() {
 
                     {subLinks && (
                       <div className={styles.mobileSubLinks}>
-                        {subLinks.map((subLink, index) => (
-                          <Link
-                            key={index}
-                            href={subLink.href}
-                            onClick={() => setMenuOpen(false)}
-                            className={styles.mobileSubLink}
-                          >
-                            {subLink.label}
-                          </Link>
-                        ))}
+                        {subLinks
+                          .filter((s) => !(s.auth && !usuarioLogado))
+                          .map((subLink, index) => (
+                            <Link
+                              key={index}
+                              href={subLink.href}
+                              onClick={() => setMenuOpen(false)}
+                              className={styles.mobileSubLink}
+                            >
+                              {subLink.label}
+                            </Link>
+                          ))}
                       </div>
                     )}
                   </div>
                 ))}
+
+                  {/* Perfil do USUÁRIO (não-ONG) — mesmo layout de sublinks da ONG */}
+                  {usuarioLogado && !isOng && (
+                    <div style={{ marginTop: 12 }}>
+                      <div className={styles.mobileLink} aria-hidden>
+                        Perfil
+                      </div>
+                      <div className={styles.mobileSubLinks}>
+                        {userProfileSubLinks.map((s, i) => (
+                          <Link
+                            key={i}
+                            href={s.href}
+                            onClick={() => setMenuOpen(false)}
+                            className={styles.mobileSubLink}
+                          >
+                            {s.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
               </nav>
             </div>
           </div>

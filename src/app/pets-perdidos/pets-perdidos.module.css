@@ -7,16 +7,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  display: flex;
 }
 
 
 .cards-wrapper-container {
   width: 95%;
-  max-width: 1300px;
+  max-width: 1400px;
   margin: 0 auto;
   background: #ffffff;
   border-radius: 40px;
-  padding: 40px 20px;
+  padding: 20px 20px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
   inset: 1;
   z-index: 1;
@@ -39,18 +40,16 @@
 }
 
 .titulo {
-  font-size: 24px;
-  font-weight: bold;
-  color: #ffffff;
-  background-color: #254d6b;
-  border: 5px solid #143750;
-  padding: 5px 20px;
-  border-radius: 50;
+  background-color: #25455d;
+  color: #FFFFFF;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 7px 2rem;
+  border-radius: 50px;
   text-align: center;
-  display: block;
-  width: 1250px;
-  margin: 0 auto 30px auto;
-
+  margin: 0 auto 50px auto;
+  border: 5px solid #0E2A45;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
 
@@ -146,4 +145,35 @@
   width: 20px;
   height: 20px;
   object-fit: contain;
+}
+
+/* Responsividade do titulo (copiado de pets-para-adocao) */
+@media (min-width:1200px) {
+  .titulo {
+    padding: 7px 6rem;
+    font-size: 22px;
+  }
+}
+
+@media screen and (min-width: 901px) and (max-width: 1200px) {
+  .titulo {
+    padding: 7px 400px;
+    font-size: 20px;
+  }
+}
+@media screen and (min-width: 700px) and (max-width: 900px) {
+  .titulo {
+    padding: 7px 200px;
+    font-size: 18px;
+  }
+}
+@media (min-width:300px) and (max-width:699px) {
+  .titulo {
+    padding: 7px 10px;
+    width: 90%;
+    font-size: 16px;
+    justify-content: center;
+    display: flex;
+    margin: 0 auto 1.2rem auto;
+  }
 }
