@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import styles from "./perdidos.module.css";
-import { uploadImage, savePet } from "@/lib/apiPets";
 
 export default function CadastrarPerdidos() {
 
@@ -17,6 +16,60 @@ export default function CadastrarPerdidos() {
   const [message, setMessage] = useState("");
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
+
+  // ── helpers (mesmo padrão do cadastro de adoção) ──
+  const getBaseUrl = () =>
+    (process.env.NEXT_PUBLIC_PETZ_API_URL || `http://localhost:${process.env.PORT || 3000}`)
+      .trim()
+      .replace(/\/$/, "");
+
+  // upload robusto (mesmo padrão do cadastro de adoção)
+  const uploadImage = async (file) => {
+    if (!file) throw new Error("Nenhum arquivo fornecido");
+    if (!file.type || !file.type.startsWith("image/")) throw new Error("Arquivo não é imagem");
+    const maxMB = 5;
+    if (file.size > maxMB * 1024 * 1024) throw new Error(`Imagem maior que ${maxMB}MB`);
+
+    const baseUrl = getBaseUrl();
+    const configs = [
+      { url: `${baseUrl}/api/upload`, field: "file" },
+      { url: `${baseUrl}/api/upload`, field: "imagem" },
+      { url: `${baseUrl}/upload`, field: "file" },
+      { url: `${baseUrl}/upload`, field: "imagem" },
+    ];
+
+    let lastErr = null;
+    for (const cfg of configs) {
+      try {
+        const fd = new FormData();
+        fd.append(cfg.field, file);
+        const res = await fetch(cfg.url, { method: "POST", body: fd });
+        const text = await res.text().catch(() => "");
+        let data = {};
+        try { data = text ? JSON.parse(text) : {}; } catch { data = { raw: text }; }
+
+        if (!res.ok) {
+          lastErr = new Error(data?.message || data?.raw || `Upload falhou (${res.status})`);
+          continue;
+        }
+
+        const returned =
+          data?.url || data?.path || data?.fileUrl || data?.filename ||
+          data?.file || data?.file_path || data?.filepath || null;
+        if (returned && typeof returned === "string") {
+          return returned.startsWith("/") ? `${baseUrl}${returned}` : returned;
+        }
+        if (typeof data === "string" && data) {
+          return data.startsWith("/") ? `${baseUrl}${data}` : data;
+        }
+
+        lastErr = new Error("Upload OK mas resposta não contém URL");
+      } catch (err) {
+        lastErr = err;
+      }
+    }
+    throw lastErr || new Error("Falha no upload da imagem");
+  };
 
   const handleFocus = (e) => {
     e.target.dataset.placeholder = e.target.placeholder;
@@ -37,41 +90,67 @@ export default function CadastrarPerdidos() {
       return;
     }
 
-    const body = {
-      nome,
-      raca,
-      genero,
-      data: dataPerda,
-      local,
-      recompensa,
-      descricao,
-      imagem: "/images/semfoto.jpg",
-    };
-    // adicionar informação do usuário logado, se houver
-    try {
-      const u = JSON.parse(localStorage.getItem('usuarioLogado') || 'null');
-      if (u && u.id) {
-        // garante que o cadastro contenha o id do dono (pode ser usuário ou ONG)
-        body.usuarioId = u.id;
-        // tenta preencher nome tanto para usuário quanto para ONG
-        body.usuarioNome = u.nome || u.razaoSocial || '';
-        // armazena também o tipo (usuario ou ong) para possibilidades futuras
-        body.usuarioTipo = u.tipo || '';
-      }
-    } catch (err) { }
+    setLoading(true);
 
     try {
-      setLoading(true);
+      // 1. upload da imagem (se houver)
+      let finalImageUrl = "/images/semfoto.jpg";
       if (file) {
-        body.imagem = await uploadImage(file);
+        try {
+          finalImageUrl = await uploadImage(file);
+        } catch (uploadErr) {
+          console.error("Erro upload:", uploadErr);
+          setMessage("Erro ao enviar imagem. Verifique o servidor.");
+          setLoading(false);
+          return;
+        }
       }
-      // enviar para endpoint de pets perdidos
-      await fetch('/api/pets-perdidos', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
+
+      // 2. montar payload conforme model Pet do backend (campos em inglês)
+      const baseUrl = getBaseUrl();
+
+      // usuário logado (desabilitado para testes)
+      let usuario = { id: 1 };
+      // try {
+      //   const u = JSON.parse(localStorage.getItem('usuarioLogado') || 'null');
+      //   if (u && u.id) usuario = u;
+      // } catch {}
+
+      const payload = {
+        name: nome.trim(),
+        breed: raca.trim() || null,
+        gender: genero.trim() || null,
+        dateLost: dataPerda || null,
+        location: local.trim() || null,
+        reward: recompensa ? Number(recompensa) : 0,
+        description: descricao.trim() || null,
+        image: finalImageUrl,
+        status: "lost",
+        userId: usuario.id,
+      };
+
+      // 3. enviar para /api/pets (mesma tabela, status = 'lost')
+      const res = await fetch(`${baseUrl}/api/pets`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
       });
+
+      const respData = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        const msg =
+          respData?.message || respData?.error || respData?.raw ||
+          `Erro ao cadastrar pet perdido (status ${res.status})`;
+        setMessage(msg);
+        setLoading(false);
+        return;
+      }
+
+      // 4. sucesso
+      console.log("[CadastroPetPerdido] resposta backend:", respData);
       setMessage("Pet cadastrado com sucesso!");
+
       // limpar formulário
       setNome("");
       setRaca("");
@@ -83,8 +162,8 @@ export default function CadastrarPerdidos() {
       setFile(null);
       setPreview(null);
     } catch (err) {
-      console.error(err);
-      setMessage(err.message || "Erro ao salvar");
+      console.error("Erro geral:", err);
+      setMessage("Erro de conexão com o servidor. O backend está ligado?");
     } finally {
       setLoading(false);
     }
