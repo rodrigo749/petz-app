@@ -1,13 +1,26 @@
 /* CONTAINER GERAL DA PÁGINA */
 .cadastroPetContainer {
   width: 100%;
-  background-color: #244c66;
+  background-color: #274b65;
   display: flex;
   justify-content: center;
   padding: 50px 0;
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
 
-  /* AQUI ESTÁ A CORREÇÃO */
-  min-height: calc(100vh - 120px); 
+/* Background de patinhas */
+.cadastroPetContainer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/paww.svg');
+  background-repeat: repeat;
+  background-size: 600px;
+  opacity: 0.50;
+  z-index: 0;
+  filter: brightness(0) saturate(100%) invert(77%) sepia(97%) saturate(686%) hue-rotate(319deg) brightness(101%) contrast(101%);
 }
 
 
@@ -35,6 +48,7 @@
   border-radius: 25px;
   border: 5px solid #c9e4ee;
   box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.08);
+  z-index: 1;
 }
 
 /* UPLOAD DE IMAGEM */
@@ -80,8 +94,8 @@
 
 .iconeDescricao {
   position: absolute;
-  left: 15px;
-  top: 18px;
+  left: 18px;
+  top: 21px;
   width: 28px;
   height: 28px;
   opacity: 0.9;
@@ -98,6 +112,7 @@
   resize: none;
   background-color: white;
   font-family: inherit;
+  color: #333333;
 }
 
 .descricaoTextarea:focus {
@@ -118,6 +133,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: 1;
 }
 
 /* TÍTULO */

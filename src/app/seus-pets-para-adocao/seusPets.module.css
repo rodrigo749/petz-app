@@ -3,6 +3,21 @@
   min-height: 100vh;
   background-color: #274b65;
   padding: 40px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background de patinhas */
+.pets-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/paww.svg');
+  background-repeat: repeat;
+  background-size: 600px;
+  opacity: 0.50;
+  z-index: 0;
+  filter: brightness(0) saturate(100%) invert(77%) sepia(97%) saturate(686%) hue-rotate(319deg) brightness(101%) contrast(101%);
 }
 
 /* Container branco central */
@@ -14,6 +29,8 @@
   border-radius: 40px;
   padding: 20px 20px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
+  position: relative;
+  z-index: 1;
 }
 
 .titulo {

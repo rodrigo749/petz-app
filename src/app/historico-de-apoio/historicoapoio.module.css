@@ -6,6 +6,21 @@
   min-height: 100vh;
   background: #274b65;
   padding: 28px 0 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background de patinhas */
+.page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/paww.svg');
+  background-repeat: repeat;
+  background-size: 600px;
+  opacity: 0.50;
+  z-index: 0;
+  filter: brightness(0) saturate(100%) invert(77%) sepia(97%) saturate(686%) hue-rotate(319deg) brightness(101%) contrast(101%);
 }
 
 .container {
@@ -16,6 +31,7 @@
   border-radius: 36px;
   padding: 24px 22px 200px;
   border: 4px solid #1d4870;
+  z-index: 1;
 }
 
 .headerContainer {
