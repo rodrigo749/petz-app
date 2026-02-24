@@ -10,8 +10,8 @@ const apoiosMock = [
   { id: 4, nome: "Mateus de Paula", valor: 150.0, data: "25/10/2025" },
 ];
 
-// ===== MOCK ONG (simula backend) =====
-const ONG_MOCK = {
+// ===== Dados da ONG única do sistema =====
+const ONG_INFO = {
   id: 1,
   nome: "Desabandone Focinhos",
   descricao:
@@ -35,7 +35,7 @@ export default function HistoricoDeApoioPage() {
 
   useEffect(() => {
     
-    setUsuarioLogado(ONG_MOCK);
+    setUsuarioLogado(ONG_INFO);
   }, []);
 
   useEffect(() => {
@@ -50,7 +50,7 @@ export default function HistoricoDeApoioPage() {
         setCarregando(true);
 
         
-        const res = await fetch(`/api/doacoes?ongId=${usuarioLogado.id}`);
+        const res = await fetch(`/api/doacoes`);
         const data = await res.json();
         setDoacoes(Array.isArray(data) ? data : []);
       } catch (e) {

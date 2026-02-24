@@ -27,10 +27,10 @@ export default function HomePage() {
 
   // Dados mockados - Pets para adoção
   const adotados = [
-    { id: 6, name: "Pulga", breed: "Vira-lata", gender: "Macho", age: "Adulto", location: "XXXXXX", ong: "XXXXXX", img: "https://place-puppy.com/300/200" },
-    { id: 7, name: "Lola", breed: "Vira-lata", gender: "Fêmea", age: "Filhote", location: "XXXXXX", ong: "XXXXXX", img: "https://placekitten.com/320/220" },
-    { id: 8, name: "Lolô", breed: "Vira-lata", gender: "Macho", age: "1 ano", location: "XXXXXX", ong: "XXXXXX", img: "https://place-puppy.com/320/220" },
-    { id: 9, name: "Max", breed: "SRD", gender: "Macho", age: "2 anos", location: "XXXXXX", ong: "XXXXXX", img: "https://place-puppy.com/330/220" }
+    { id: 6, name: "Pulga", breed: "Vira-lata", gender: "Macho", age: "Adulto", location: "XXXXXX", img: "https://place-puppy.com/300/200" },
+    { id: 7, name: "Lola", breed: "Vira-lata", gender: "Fêmea", age: "Filhote", location: "XXXXXX", img: "https://placekitten.com/320/220" },
+    { id: 8, name: "Lolô", breed: "Vira-lata", gender: "Macho", age: "1 ano", location: "XXXXXX", img: "https://place-puppy.com/320/220" },
+    { id: 9, name: "Max", breed: "SRD", gender: "Macho", age: "2 anos", location: "XXXXXX", img: "https://place-puppy.com/330/220" }
   ]
 
   /**
@@ -156,7 +156,6 @@ export default function HomePage() {
                       Raça: {pet.breed}<br/>
                       Gênero: {pet.gender}<br/>
                       {pet.age && <>Idade: {pet.age}<br/></>}
-                      {pet.ong && <>ONG: {pet.ong}</>}
                     </div>
                   </div>
                 </article>

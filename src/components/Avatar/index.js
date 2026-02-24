@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { useState } from 'react'
 
 export default function Avatar({ src, alt = 'avatar', width = 80, height = 80, className }) {
-  const defaultSrc = '/images/semfoto.jpg'
+  const defaultSrc = '/images/icone-perfil.jpg'
   const [imgSrc, setImgSrc] = useState(src || defaultSrc)
 
   return (
