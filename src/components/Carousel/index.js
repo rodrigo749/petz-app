@@ -51,7 +51,6 @@ export default function Carousel({ items = [] }) {
           Gênero: {pet.gender}<br />
           {pet.location && <>Local: {pet.location}<br/></>}
           {pet.age && <>Idade: {pet.age}<br/></>}
-          {pet.ong && <>ONG: {pet.ong}</>}
         </div>
       </div>
     </>

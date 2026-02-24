@@ -34,10 +34,7 @@ export default function Header() {
     };
   }, []);
 
-  // 🏢 regra: apenas ONG (CNPJ) vê opções de perfil ONG
-  const isOng = !!usuarioLogado?.cnpj || usuarioLogado?.tipo === "ong";
-
-  // sublinks a mostrar para usuário logado (não-ONG)
+  // sublinks do dropdown de perfil do usuário logado
   const userProfileSubLinks = [
     { label: "Editar perfil", href: "/editar-perfil-usuario" },
     { label: "Meus pets Perdidos", href: "/meus-pets-perdidos" },
@@ -46,7 +43,6 @@ export default function Header() {
 
   // 🔍 filtra links conforme login
   const navLinksFiltrados = NAV_LINKS.filter((link) => {
-    if (link.id === "perfil" && !isOng) return false;
     if (link.id === "login" && usuarioLogado) return false;
     return true;
   });
@@ -112,7 +108,7 @@ export default function Header() {
           ))}
         </div>
 
-        {/* ================= AVATAR DESKTOP (dropdown igual ao da ONG) ================= */}
+        {/* ================= AVATAR DESKTOP ================= */}
         {usuarioLogado && (
           <div
             className={styles.profileWrap}
@@ -135,8 +131,7 @@ export default function Header() {
 
             {dropdownOpen === 'profileAvatar' && (
               <div className={styles.dropdownMenu} style={{ left: 'auto', right: 0 }}>
-                {(isOng ? NAV_LINKS.find(l => l.id === 'perfil').subLinks : userProfileSubLinks)
-                  .map((s, i) => (
+                {userProfileSubLinks.map((s, i) => (
                     <Link key={i} href={s.href} className={styles.dropdownItem}>
                       {s.label}
                     </Link>
@@ -210,8 +205,8 @@ export default function Header() {
                   </div>
                 ))}
 
-                  {/* Perfil do USUÁRIO (não-ONG) — mesmo layout de sublinks da ONG */}
-                  {usuarioLogado && !isOng && (
+                  {/* Perfil do usuário logado no menu mobile */}
+                  {usuarioLogado && (
                     <div style={{ marginTop: 12 }}>
                       <div className={styles.mobileLink} aria-hidden>
                         Perfil
