@@ -119,18 +119,22 @@ export default function Header() {
             onMouseEnter={() => setDropdownOpen('profileAvatar')}
             onMouseLeave={() => setDropdownOpen(null)}
           >
-            <div className={styles.avatarLink}>
+            <button
+              className={styles.avatarLink}
+              aria-expanded={dropdownOpen === 'profileAvatar'}
+              aria-haspopup="true"
+            >
               <span className={styles.avatarIcon}>
                 <img
-                  src={usuarioLogado.imagem || "/images/Avatar.png"}
+                  src={usuarioLogado.imagem || "/images/icone-perfil.jpg"}
                   alt="Perfil"
                   className={styles.avatarImage}
                 />
               </span>
-            </div>
+            </button>
 
             {dropdownOpen === 'profileAvatar' && (
-              <div className={styles.profileDropdown}>
+              <div className={styles.dropdownMenu} style={{ left: 'auto', right: 0 }}>
                 {(isOng ? NAV_LINKS.find(l => l.id === 'perfil').subLinks : userProfileSubLinks)
                   .map((s, i) => (
                     <Link key={i} href={s.href} className={styles.dropdownItem}>
