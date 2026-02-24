@@ -316,6 +316,15 @@ export default function CadastroAdocao() {
                 <option value="" disabled>Selecione a espécie</option>
                 <option value="dog">Cachorro</option>
                 <option value="cat">Gato</option>
+                <option value="rabbit">Coelho</option>
+                <option value="guinea-pig">Porquinho-da-índia</option>
+                <option value="hamster">Hamster</option>
+                <option value="chinchila">Chinchila</option>
+                <option value="ferret">Furão</option>
+                <option value="cockatiel">Calopsita</option>
+                <option value="parakeet">Periquito</option>
+                <option value="parrot">Papagaio</option>
+                <option value="turtle">Tartaruga</option>
               </select>
             </div>
             {fieldErrors.especie && <span className={styles.errorText}>{fieldErrors.especie}</span>}
@@ -332,7 +341,7 @@ export default function CadastroAdocao() {
               />
             </div>
 
-            <div className={styles.campo}>
+            <div className={`${styles.campo} ${styles.campoIdade}`}>
               <img src="/images/patinha.png" className={styles.iconeInput} />
               <input
                 type="number"
@@ -342,7 +351,30 @@ export default function CadastroAdocao() {
                 onFocus={handleFocus}
                 onBlur={handleBlur}
                 min="0"
+                className={styles.inputIdade}
               />
+              <div className={styles.botoesIdade}>
+                <button 
+                  type="button" 
+                  className={styles.btnIdade}
+                  onClick={() => {
+                    const current = parseInt(formData.idade) || 0;
+                    handleChange("idade", String(current + 1));
+                  }}
+                >
+                  ▲
+                </button>
+                <button 
+                  type="button" 
+                  className={styles.btnIdade}
+                  onClick={() => {
+                    const current = parseInt(formData.idade) || 0;
+                    if (current > 0) handleChange("idade", String(current - 1));
+                  }}
+                >
+                  ▼
+                </button>
+              </div>
             </div>
 
             <button

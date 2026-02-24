@@ -324,6 +324,15 @@ export default function CadastrarPerdidos() {
                 <option value="" disabled>Selecione a espécie</option>
                 <option value="dog">Cachorro</option>
                 <option value="cat">Gato</option>
+                <option value="rabbit">Coelho</option>
+                <option value="guinea-pig">Porquinho-da-índia</option>
+                <option value="hamster">Hamster</option>
+                <option value="chinchila">Chinchila</option>
+                <option value="ferret">Furão</option>
+                <option value="cockatiel">Calopsita</option>
+                <option value="parakeet">Periquito</option>
+                <option value="parrot">Papagaio</option>
+                <option value="turtle">Tartaruga</option>
               </select>
             </div>
             {fieldErrors.especie && <span className={styles.errorText}>{fieldErrors.especie}</span>}
@@ -376,54 +385,28 @@ export default function CadastrarPerdidos() {
               />
             </div>
 
-            {/* RECOMPENSA - Same styling as input fields */}
+            {/* RECOMPENSA - Slider with visual indicator */}
             <div className={styles.campoRecompensa}>
               <img src="/images/patinha.png" className={styles.iconeInput} />
               <div className={styles.sliderContainer}>
+                <div className={styles.sliderHeader}>
+                  <span className={styles.sliderLabel}>Recompensa</span>
+                  <span className={styles.valorRecompensa}>
+                    {formData.recompensa > 0 ? `R$ ${parseInt(formData.recompensa).toLocaleString('pt-BR')}` : 'Sem recompensa'}
+                  </span>
+                </div>
                 <input
                   type="range"
                   min="0"
-                  max="1000"
+                  max="100000"
                   value={formData.recompensa}
                   onChange={(e) => handleChange("recompensa", e.target.value)}
                   className={styles.slider}
                 />
-                <input
-                  type="number"
-                  min="0"
-                  max="1000"
-                  value={formData.recompensa}
-                  onChange={(e) => {
-                    let value = e.target.value;
-                    // Allow empty input while typing
-                    if (value === "") {
-                      handleChange("recompensa", "0");
-                      return;
-                    }
-                    // Parse the value
-                    const numValue = parseInt(value, 10);
-                    // Validate: no negative, only numeric values
-                    if (isNaN(numValue) || numValue < 0) {
-                      handleChange("recompensa", "0");
-                    } else if (numValue > 1000) {
-                      handleChange("recompensa", "1000");
-                    } else {
-                      handleChange("recompensa", String(numValue));
-                    }
-                  }}
-                  onBlur={(e) => {
-                    // Ensure valid value on blur
-                    let value = e.target.value;
-                    if (value === "" || isNaN(parseInt(value, 10)) || parseInt(value, 10) < 0) {
-                      handleChange("recompensa", "0");
-                    } else if (parseInt(value, 10) > 1000) {
-                      handleChange("recompensa", "1000");
-                    }
-                  }}
-                  className={styles.inputRecompensa}
-                  placeholder="0"
-                />
-                <span className={styles.valorRecompensa}>R$ {formData.recompensa}</span>
+                <div className={styles.sliderMinMax}>
+                  <span>R$ 0</span>
+                  <span>R$ 100.000</span>
+                </div>
               </div>
             </div>
 
