@@ -34,12 +34,21 @@ export default function Header() {
     };
   }, []);
 
+  const isAdmin = usuarioLogado?.tipo === "admin";
+
   // sublinks do dropdown de perfil do usuário logado
-  const userProfileSubLinks = [
-    { label: "Editar perfil", href: "/editar-perfil-usuario" },
-    { label: "Meus pets Perdidos", href: "/meus-pets-perdidos" },
-    { label: "Sair", href: "/logout" },
-  ];
+  const userProfileSubLinks = isAdmin
+    ? [
+        { label: "Painel Admin", href: "/admin" },
+        { label: "Pets para Adoção", href: "/admin/pets-adocao" },
+        { label: "Pets Perdidos", href: "/admin/pets-perdidos" },
+        { label: "Sair", href: "/logout" },
+      ]
+    : [
+        { label: "Editar perfil", href: "/editar-perfil-usuario" },
+        { label: "Meus pets Perdidos", href: "/meus-pets-perdidos" },
+        { label: "Sair", href: "/logout" },
+      ];
 
   // 🔍 filtra links conforme login
   const navLinksFiltrados = NAV_LINKS.filter((link) => {
