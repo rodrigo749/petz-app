@@ -3,8 +3,24 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  background: #284c65;
+  background: #274b65;
   padding: 50px 20px;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background de patinhas */
+.cadastroPetContainer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/paww.svg');
+  background-repeat: repeat;
+  background-size: 600px;
+  opacity: 0.50;
+  z-index: 0;
+  filter: brightness(0) saturate(100%) invert(77%) sepia(97%) saturate(686%) hue-rotate(319deg) brightness(101%) contrast(101%);
 }
 
 /* CARD CENTRAL COM 2 CONTAINERS */

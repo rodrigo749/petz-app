@@ -1,7 +1,22 @@
 .page {
-  min-height: 90vh;
+  min-height: 100vh;
   background: #274b65; /* fundo azul consistente */
   padding: 2.5rem 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background de patinhas */
+.page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/paww.svg');
+  background-repeat: repeat;
+  background-size: 600px;
+  opacity: 0.50;
+  z-index: 0;
+  filter: brightness(0) saturate(100%) invert(77%) sepia(97%) saturate(686%) hue-rotate(319deg) brightness(101%) contrast(101%);
 }
 
 .container {
@@ -11,6 +26,7 @@
   border-radius: 20px;
   padding: 2.5rem;
   border: 6px solid #d9d9d9; /* mesma borda das outras páginas */
+  z-index: 1;
 }
 
 .title {
