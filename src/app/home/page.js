@@ -8,6 +8,17 @@ export default function HomePage() {
   const [perdidos, setPerdidos] = useState([])
   const [adotados, setAdotados] = useState([])
   const [resgatados, setResgatados] = useState([])
+  const [nomeUsuario, setNomeUsuario] = useState("")
+
+  useEffect(() => {
+    try {
+      const usuario = JSON.parse(localStorage.getItem("usuarioLogado") || "null");
+      if (usuario) {
+        const nome = usuario.nome || usuario.name || usuario.razaoSocial || "";
+        if (nome) setNomeUsuario(nome);
+      }
+    } catch {}
+  }, [])
 
   async function carregarPets() {
     // Buscar pets perdidos diretamente do endpoint específico
@@ -62,7 +73,7 @@ export default function HomePage() {
         <img className={styles.leftImg} src="/images/cachorro-pagina-principal%202.png" alt="" />
         <img className={styles.rightImg} src="/images/cachorro-pagina-principal.png" alt="" />
         <div className={styles.inner}>
-          <h1>Bem Vindo!</h1>
+          <h1>Bem Vindo{nomeUsuario ? `, ${nomeUsuario}` : ""}!</h1>
           <p>
             Cada clique transforma vidas: aqui você pode reencontrar seu pet, adotar com amor ou doar para quem precisa. 
             Juntos, criamos lindas histórias de afeto, esperança e recomeços.
