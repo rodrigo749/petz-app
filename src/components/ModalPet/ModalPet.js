@@ -1,10 +1,8 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import styles from "./ModalPet.module.css";
 
 export default function ModalPet({ pet, onClose }) {
-  const router = useRouter();
 
   function handleBackgroundClick(e) {
     if (e.target === e.currentTarget) {
@@ -13,14 +11,18 @@ export default function ModalPet({ pet, onClose }) {
   }
 
   function handleContact() {
-    const name = pet.responsavel || pet.ong || pet.ongName || "";
+    const name = pet.responsavel || pet.nomeUsuario || "";
     const phone = pet.telefone || pet.phone || pet.contato || pet.whatsapp || "";
-    const desc = pet.descricao || pet.desc || "";
-    const charsArray = pet.caracteristicas || pet.characteristics || [];
-    const chars = Array.isArray(charsArray) ? charsArray.join(",") : String(charsArray || "");
+    const phoneDigits = phone.replace(/\D/g, "");
 
-    const href = `/contatar-ong?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&desc=${encodeURIComponent(desc)}&chars=${encodeURIComponent(chars)}`;
-    router.push(href);
+    if (!phoneDigits) {
+      alert("Telefone do responsável não disponível.");
+      return;
+    }
+
+    const text = `Olá ${name || "responsável"}, estou entrando em contato pelo app sobre o pet ${pet.nome || ""}.`;
+    const url = `https://wa.me/${phoneDigits}?text=${encodeURIComponent(text)}`;
+    window.open(url, "_blank");
   }
 
   return (
