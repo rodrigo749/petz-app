@@ -55,7 +55,7 @@
 }
 
 .block {
-  padding: 60px 20px 0px;
+  padding: 60px 20px 40px;
   background: #46799e;
   color: white;
   position: relative;
@@ -181,6 +181,82 @@
   cursor: not-allowed;
 }
 
+/* ===== Cards de Estatísticas ===== */
+.statsSection {
+  background: #46799e;
+  padding: 40px 20px 20px;
+}
+
+.statsContainer {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.statCard {
+  flex: 1;
+  min-width: 260px;
+  max-width: 480px;
+  border-radius: 16px;
+  padding: 32px 28px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.statCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+}
+
+.statCardEncontrados {
+  background: #274b65;
+  color: #fff;
+}
+.statCardEncontrados:hover {
+  background: #f5b25c;
+  color: #fff;
+}
+
+.statCardAdotados {
+  background: #274b65;
+  color: #fff;
+}
+.statCardAdotados:hover {
+  background: #f5b25c;
+  color: #fff;
+}
+
+.statIcon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.statNumber {
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.statLabel {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.statDescription {
+  font-size: 15px;
+  line-height: 1.5;
+  opacity: 0.9;
+  margin: 0;
+}
+
 @media screen and (max-width: 900px) {
   .hero h1 {
     font-size: 28px;
@@ -226,6 +302,22 @@
   .highlight {
     min-width: 260px;
   }
+  .statsContainer {
+    gap: 20px;
+  }
+  .statCard {
+    min-width: 220px;
+    padding: 24px 20px;
+  }
+  .statNumber {
+    font-size: 44px;
+  }
+  .statLabel {
+    font-size: 18px;
+  }
+  .statDescription {
+    font-size: 13px;
+  }
 }
 
 @media screen and (max-width: 600px) {
@@ -253,6 +345,24 @@
   .info {
     font-size: 13px;
     min-width: 40px
+  }
+  .statsContainer {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .statCard {
+    min-width: 100%;
+    max-width: 100%;
+  }
+  .statNumber {
+    font-size: 40px;
+  }
+  .statLabel {
+    font-size: 16px;
+  }
+  .statIcon {
+    font-size: 36px;
   }
 }
 

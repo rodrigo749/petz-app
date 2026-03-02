@@ -1,6 +1,7 @@
 "use client"
 
 import { useRef, useState, useEffect } from 'react'
+import Link from 'next/link'
 import styles from './carousel.module.css'
 
 export default function Carousel({ items = [] }) {
@@ -52,6 +53,11 @@ export default function Carousel({ items = [] }) {
           {pet.location && <>Local: {pet.location}<br/></>}
           {pet.age && <>Idade: {pet.age}<br/></>}
         </div>
+        {pet.link && (
+          <Link href={pet.link} className={styles.detailsBtn}>
+            Saiba mais
+          </Link>
+        )}
       </div>
     </>
   )
