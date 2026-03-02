@@ -55,7 +55,7 @@ export default function Carousel({ items = [] }) {
         </div>
         {pet.link && (
           <Link href={pet.link} className={styles.detailsBtn}>
-            Saiba mais
+            Ver mais
           </Link>
         )}
       </div>
