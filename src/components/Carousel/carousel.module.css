@@ -89,6 +89,25 @@
   line-height: 1.6;
 }
 
+.detailsBtn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 18px;
+  background: #fff;
+  color: #274b65;
+  font-weight: 700;
+  font-size: 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  text-align: center;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.detailsBtn:hover {
+  background: #e0e0e0;
+  transform: scale(1.05);
+}
+
 .arrow {
   background: rgba(255, 255, 255, 0.15);
   border: none;
