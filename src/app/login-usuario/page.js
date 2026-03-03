@@ -72,8 +72,11 @@ export default function LoginPage() {
       localStorage.setItem("token", data.token);
       localStorage.setItem("usuarioLogado", JSON.stringify(data.user || {}));
 
+      // Dispara evento para o Header atualizar imediatamente
+      window.dispatchEvent(new Event("auth-changed"));
+
       showToast("Login realizado com sucesso!", "success");
-      setTimeout(() => router.push("/"), 700);
+      router.push("/home");
     } catch (err) {
       console.error(err);
       const msg = "Erro ao processar o login. Tente novamente.";

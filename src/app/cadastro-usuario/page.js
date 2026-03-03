@@ -215,9 +215,12 @@ export default function CadastroPage() {
       // salva usuário com chave padrão que o perfil provavelmente lê
       localStorage.setItem('usuarioLogado', JSON.stringify(userObj));
 
+      // Dispara evento para o Header atualizar imediatamente
+      window.dispatchEvent(new Event("auth-changed"));
+
       console.log('[CadastroUsuario] salvo usuarioLogado:', userObj, 'token:', saved.token);
       showToast('Cadastro realizado com sucesso!', 'success');
-      setTimeout(() => router.push('/perfil-usuario'), 900);
+      router.push('/home');
     } catch (err) {
       console.error("Erro geral:", err);
       showToast("Erro de conexão com o servidor. O backend está ligado?", "error");
