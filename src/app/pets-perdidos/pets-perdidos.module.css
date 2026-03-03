@@ -27,7 +27,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url('/images/paww.svg');
+  background-image: none;
   background-repeat: repeat;
   background-size: 756px;
   background-position: center;

@@ -22,6 +22,7 @@ body {
   padding: 0;
 }
 
+/* Global body settings */
 body {
   flex-grow: 1;
   position: relative;
@@ -37,6 +38,42 @@ body {
   -ms-overflow-style: none; /* IE and Edge */
 }
 
+/* Global background placed in a pseudo-element behind everything.
+   Using a very low z-index (-9999) ensures it stays below all stacking contexts.
+*/
+/* Global background applied directly on html for reliability */
+html {
+  background-image: url('/images/Patas.png');
+  background-repeat: repeat;
+  background-position: center center;
+  background-size: auto; /* não distorce */
+  background-attachment: fixed;
+}
+
+/* disable previous pseudo-element approach (kept for reference) */
+html::before {
+  display: none;
+}
+
+/* Fallback/background element (inserted into layout) */
+.site-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 1; /* bem atrás de todo o conteúdo */
+  pointer-events: none;
+  background-image: url('/images/Patas.png');
+  background-repeat: repeat;
+  background-position: center center;
+  background-size: 760px;
+  opacity: 0.65;
+}
+
+/* If body has this class, hide the global background (used by home page) */
+body.no-site-bg .site-bg,
+body.no-site-bg {
+  background-image: none !important;
+}
+
 body::-webkit-scrollbar {
   width: 0px;
 }
@@ -49,18 +86,23 @@ body.scrolling {
   scrollbar-width: thin;
 }
 
+/* remove previous solid overlay pseudo-element and keep layering safe */
+/* If an overlay color is desired, you can uncomment and adjust the block below. */
+/*
 body::after {
   content: "";
   position: absolute;
   inset: 0;
-  background-color: #274b65;
-  z-index: -2;
+  background-color: rgba(39, 75, 101, 0.18);
+  z-index: -1;
+  pointer-events: none;
 }
+*/
 
 /* Paw parallax elements */
 .paw {
   position: fixed;
-  z-index: -1;
+  z-index: 0; /* garantindo que, se existirem, fiquem acima do background */
   opacity: 0.3;
   pointer-events: none;
 }
