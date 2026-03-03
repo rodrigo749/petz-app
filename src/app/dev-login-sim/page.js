@@ -10,8 +10,12 @@ export default function DevLoginSim() {
     const payload = { id: 1, tipo: "usuario", nome: "Teste", imagem: "" };
 
     localStorage.setItem("usuarioLogado", JSON.stringify(payload));
+
+    // Dispara evento para o Header atualizar imediatamente
+    window.dispatchEvent(new Event("auth-changed"));
+
     // redireciona para home após definir o usuário
-    setTimeout(() => router.push("/"), 150);
+    router.push("/home");
   }, [router]);
 
   return (
