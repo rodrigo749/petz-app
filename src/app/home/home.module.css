@@ -2,11 +2,11 @@
   max-height: fit-content;
   --maxw: 1100px;
   margin: 0 auto;
-  background-color: #e9fbfb;
+  background-color: var(--bg);
 }
 
 .hero {
-  background: #e9fbfb;
+  background: var(--card);
   padding: 36px 20px;
   position: relative;
   text-align: center;
@@ -20,13 +20,13 @@
 .hero h1 {
   margin: 0 0 10px;
   font-size: 42px;
-  color: #475b5f;
+  color: var(--heading);
   font-weight: 700;
 }
 
 .hero p {
   margin: 20px;
-  color: #475b5f;
+  color: var(--text);
   font-size: 30px;
   line-height: 2;
   position: relative;
@@ -38,7 +38,7 @@
   position: absolute;
   top: 18px;
   object-fit: contain;
-  background-color: #e9fbfb;
+  background-color: var(--card);
 }
 
 .leftImg {
@@ -56,8 +56,8 @@
 
 .block {
   padding: 60px 20px 40px;
-  background: #46799e;
-  color: white;
+  background: var(--bg-soft);
+  color: var(--text);
   position: relative;
 }
 
@@ -66,6 +66,7 @@
   margin: 0 auto 50px;
   text-align: center;
   font-weight: 700;
+  color: var(--heading);
 }
 
 .carouselWrap {
@@ -103,7 +104,7 @@
 .card {
   min-width: 528px;
   max-width: 528px;
-  background: #274b65;
+  background: var(--bg-soft);
   border-radius: 12px;
   padding: 18px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
@@ -116,7 +117,7 @@
 }
 
 .highlight {
-  background-color: #f5b25c !important;
+  background-color: var(--accent-orange) !important;
   transform: scale(1.08);
   box-shadow: 0 12px 24px rgba(245, 178, 92, 0.4);
   z-index: 10;
@@ -181,9 +182,9 @@
   cursor: not-allowed;
 }
 
-/* ===== Cards de Estatísticas ===== */
+/* ===== Cards de EstatÃ­sticas ===== */
 .statsSection {
-  background: #46799e;
+  background: var(--bg-soft);
   padding: 40px 20px 20px;
 }
 
@@ -213,21 +214,23 @@
 }
 
 .statCardEncontrados {
-  background: #274b65;
-  color: #fff;
+  background: var(--card);
+  color: var(--text);
+  border: 2px solid var(--border);
 }
 .statCardEncontrados:hover {
-  background: #f5b25c;
-  color: #fff;
+  background: #f3f7f7;
+  color: var(--text);
 }
 
 .statCardAdotados {
-  background: #274b65;
-  color: #fff;
+  background: var(--card);
+  color: var(--text);
+  border: 2px solid var(--border);
 }
 .statCardAdotados:hover {
-  background: #f5b25c;
-  color: #fff;
+  background: #f3f7f7;
+  color: var(--text);
 }
 
 .statIcon {
@@ -255,7 +258,7 @@
 .statDescription {
   font-size: 15px;
   line-height: 1.5;
-  opacity: 0.9;
+  color: var(--muted);
   margin: 0;
 }
 

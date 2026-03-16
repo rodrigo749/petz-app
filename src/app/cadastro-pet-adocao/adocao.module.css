@@ -1,7 +1,7 @@
-/* CONTAINER GERAL DA PÁGINA */
+/* CONTAINER GERAL DA PÃGINA */
 .cadastroPetContainer {
   width: 100%;
-  background-color: #274b65;
+  background-color: var(--bg-soft);
   display: flex;
   justify-content: center;
   padding: 50px 0;
@@ -28,13 +28,13 @@
 .adocaoContainer {
   width: 90%;
   max-width: 1300px;
-  background: #244c66;
+  background: var(--bg-soft);
   padding: 40px;
   display: flex;
   justify-content: space-between;
   gap: 40px;
   border-radius: 28px;
-  border: 6px solid #244c66;
+  border: 6px solid var(--bg-soft);
 }
 
 /* ===========================
@@ -44,10 +44,10 @@
 .leftSide {
   width: 48%;
   height: 80%;
-  background: #f6feff;
+  background: var(--card);
   padding: 30px;
   border-radius: 25px;
-  border: 5px solid #c9e4ee;
+  border: 5px solid var(--card);
   box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.08);
   z-index: 1;
 }
@@ -56,10 +56,10 @@
 .uploadBox {
   width: 240px;
   height: 240px;
-  background-color: #a7c7dd;
+  background-color: var(--card);
   margin: 0 auto;
   border-radius: 22px;
-  border: 4px solid #6088a4;
+  border: 4px solid var(--border);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -69,7 +69,7 @@
 }
 
 .uploadBox:hover {
-  background-color: #98b9d0;
+  background-color: var(--card);
 }
 
 .iconeAddImg {
@@ -85,7 +85,7 @@
   color: #ffffff;
 }
 
-/* DESCRIÇÃO */
+/* DESCRIÃ‡ÃƒO */
 .campoDescricao {
   position: relative;
   width: 100%;
@@ -105,9 +105,9 @@
 .descricaoTextarea {
   width: 100%;
   min-height: 250px;
-  padding: 20px 20px 20px 60px; /* deixa espaço para a patinha */
+  padding: 20px 20px 20px 60px; /* deixa espaÃ§o para a patinha */
   border-radius: 25px;
-  border: 4px solid #0f3b61;
+  border: 4px solid var(--heading);
   font-size: 16px;
   outline: none;
   resize: none;
@@ -117,7 +117,7 @@
 }
 
 .descricaoTextarea:focus {
-  border-color: #1b5b8f;
+  border-color: var(--heading);
 }
 
 /* ===========================
@@ -127,10 +127,10 @@
 .rightSide {
   width: 48%;
   height: 80%;
-  background: #f6feff;
+  background: var(--card);
   padding: 30px;
   border-radius: 25px;
-  border: 5px solid #c9e4ee;
+  border: 5px solid var(--card);
   box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
@@ -138,11 +138,11 @@
   z-index: 1;
 }
 
-/* TÍTULO */
+/* TÃTULO */
 .tituloCadastro {
   font-size: 32px;
   font-weight: 700;
-  color: #285a78;
+  color: var(--heading);
   margin-bottom: 20px;
 }
 
@@ -166,7 +166,7 @@
   width: 100%;
   padding: 12px 20px 12px 55px;
   border-radius: 40px;
-  border: 4px solid #0f3b61;
+  border: 4px solid var(--heading);
   font-size: 16px;
   outline: none;
   background-color: #ffffff;
@@ -178,7 +178,7 @@
 
 .campo input:focus,
 .campo select:focus {
-  border-color: #1b5b8f;
+  border-color: var(--heading);
 }
 
 
@@ -200,7 +200,7 @@
   width: 100%;
   padding: 12px 70px 12px 55px !important;
   border-radius: 40px !important;
-  border: 4px solid #0f3b61 !important;
+  border: 4px solid var(--heading) !important;
   font-size: 16px;
   outline: none;
   background-color: #ffffff;
@@ -217,7 +217,7 @@
 }
 
 .inputIdade:focus {
-  border-color: #1b5b8f;
+  border-color: var(--heading);
 }
 
 .botoesIdade {
@@ -233,7 +233,7 @@
 .btnIdade {
   width: 20px;
   height: 17px;
-  background-color: #0f3b61;
+  background-color: var(--heading);
   border: none;
   border-radius: 8px;
   color: white;
@@ -246,11 +246,11 @@
 }
 
 .btnIdade:hover {
-  background-color: #1b5b8f;
+  background-color: var(--heading);
 }
 
 .btnIdade:active {
-  background-color: #0a2a47;
+  background-color: var(--heading);
 }
 
 .campo select {
@@ -268,7 +268,7 @@
   color: #333;
 }
 
-/* ÍCONE PATINHA NOS INPUTS */
+/* ÃCONE PATINHA NOS INPUTS */
 .iconeInput {
   position: absolute;
   left: 15px;
@@ -279,7 +279,7 @@
   opacity: 0.9;
 }
 
-/* BOTÃO */
+/* BOTÃƒO */
 .btnCadastrar {
   margin-top: 15px;
   width: 80%;
@@ -288,8 +288,8 @@
   font-size: 22px;
   font-weight: 700;
   color: white;
-  background-color: #024b91;
-  border: 4px solid #3e8abf;
+  background-color: var(--nav);
+  border: 4px solid var(--border);
   cursor: pointer;
   transition: 0.25s ease-in-out;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.25);
@@ -297,7 +297,7 @@
 }
 
 .btnCadastrar:hover {
-  background-color: #004a91;
+  background-color: var(--nav-hover);
   transform: translateY(-2px);
 }
 
@@ -323,7 +323,7 @@
    MEDIA QUERIES - RESPONSIVO
 =========================== */
 
-/* TABLETS (até 1024px) */
+/* TABLETS (atÃ© 1024px) */
 @media (max-width: 1024px) {
   .adocaoContainer {
     width: 95%;
@@ -361,7 +361,7 @@
   }
 }
 
-/* TABLETS PEQUENOS (até 768px) */
+/* TABLETS PEQUENOS (atÃ© 768px) */
 @media (max-width: 768px) {
   .cadastroPetContainer {
     padding: 30px 0;
@@ -379,7 +379,7 @@
   .rightSide {
     padding: 20px;
     border-radius: 20px;
-    border: 4px solid #c9e4ee;
+    border: 4px solid var(--card);
   }
 
   .tituloCadastro {
@@ -409,7 +409,7 @@
     width: 180px;
     height: 180px;
     border-radius: 18px;
-    border: 3px solid #6088a4;
+    border: 3px solid var(--border);
   }
 
   .iconeAddImg {
@@ -427,7 +427,7 @@
     padding: 15px 15px 15px 50px;
     font-size: 14px;
     border-radius: 20px;
-    border: 3px solid #0f3b61;
+    border: 3px solid var(--heading);
   }
 
   .btnCadastrar {
@@ -439,7 +439,7 @@
   }
 }
 
-/* MOBILE (até 480px) */
+/* MOBILE (atÃ© 480px) */
 @media (max-width: 480px) {
   .cadastroPetContainer {
     padding: 20px 0;
@@ -450,14 +450,14 @@
     padding: 15px;
     gap: 15px;
     border-radius: 15px;
-    border: 4px solid #244c66;
+    border: 4px solid var(--bg-soft);
   }
 
   .leftSide,
   .rightSide {
     padding: 15px;
     border-radius: 15px;
-    border: 3px solid #c9e4ee;
+    border: 3px solid var(--card);
   }
 
   .tituloCadastro {
@@ -475,7 +475,7 @@
     padding: 8px 12px 8px 40px;
     font-size: 13px;
     border-radius: 25px;
-    border: 3px solid #0f3b61;
+    border: 3px solid var(--heading);
   }
 
   .iconeInput {
@@ -488,7 +488,7 @@
     width: 150px;
     height: 150px;
     border-radius: 15px;
-    border: 3px solid #6088a4;
+    border: 3px solid var(--border);
   }
 
   .iconeAddImg {
@@ -517,7 +517,7 @@
     padding: 12px 12px 12px 45px;
     font-size: 13px;
     border-radius: 15px;
-    border: 3px solid #0f3b61;
+    border: 3px solid var(--heading);
   }
 
   .btnCadastrar {
@@ -525,7 +525,7 @@
     padding: 8px;
     font-size: 16px;
     border-radius: 12px;
-    border: 3px solid #3e8abf;
+    border: 3px solid var(--border);
     margin-left: 0;
     margin-top: 10px;
   }
@@ -535,7 +535,7 @@
   }
 }
 
-/* MOBILE MUITO PEQUENO (até 360px) */
+/* MOBILE MUITO PEQUENO (atÃ© 360px) */
 @media (max-width: 360px) {
   .adocaoContainer {
     width: 100%;
@@ -584,4 +584,7 @@
     font-size: 14px;
   }
 }
+
+
+
 

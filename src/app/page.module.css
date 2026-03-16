@@ -1,5 +1,5 @@
 .page {
-  --background-color: #eeffff;
+  --background-color: var(--card);
   --text-primary: #000;
   min-height: 100vh;
   width: 100%;
@@ -10,17 +10,17 @@
   z-index: 1;
 }
 
-/* Conteúdo central da home */
+/* ConteÃºdo central da home */
 .pageWrap {
   max-height: fit-content;
   --maxw: 1100px;
   margin: 0 auto;
-  background-color: #e9fbfb;
+  background-color: var(--card);
 }
 
 /* HERO (faixa superior) */
 .hero {
-  background: #e9fbfb;
+  background: var(--card);
   padding: 36px 20px 140px; /* substitui bottom negativo */
   text-align: center;
   position: relative;
@@ -34,13 +34,13 @@
 .hero h1 {
   margin: 0 0 10px;
   font-size: 42px;
-  color: #00748b;
+  color: var(--heading);
   font-weight: 700;
 }
 
 .hero p {
   margin: 20px; /* corrigido */
-  color: #475b5f;
+  color: var(--muted);
   font-size: 30px;
   line-height: 2;
   font-weight: bold;
@@ -52,7 +52,7 @@
   position: absolute;
   top: 18px;
   object-fit: contain;
-  background-color: #e9fbfb;
+  background-color: var(--card);
 }
 
 .leftImg {
@@ -71,13 +71,13 @@
 /* BLOCO AZUL DA HOME (Perdidos recentemente) */
 .block {
   padding: 100px 20px 40px; /* substitui margin-top gigante */
-  background: #46799e;
+  background: var(--bg-soft);
   color: white;
   position: relative;
   margin-top: 0;
 }
 
-/* Título da seção azul */
+/* TÃ­tulo da seÃ§Ã£o azul */
 .title {
   max-width: var(--maxw);
   margin: 0 auto 50px;
@@ -121,7 +121,7 @@
 .card {
   min-width: 528px;
   max-width: 528px;
-  background: #274b65;
+  background: var(--bg-soft);
   border-radius: 12px;
   padding: 18px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
@@ -134,7 +134,7 @@
 }
 
 .highlight {
-  background-color: #f5b25c !important;
+  background-color: var(--accent-orange) !important;
   transform: scale(1.08);
   box-shadow: 0 12px 24px rgba(245, 178, 92, 0.4);
   z-index: 10;
@@ -225,6 +225,9 @@
   }
 
   .page {
-    background-color: #e9fbfb;
+    background-color: var(--card);
   }
 }
+
+
+

@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   padding: 3rem 2rem;
-  background-color: #274b65;
+  background-color: var(--bg-soft);
   overflow: hidden;
   
 }
@@ -12,7 +12,7 @@
 .form {
   width: 100%;
   max-width: 760px;
-  background: #f8ffff;
+  background: var(--card);
   padding: 3rem 2.5rem;
   border-radius: 24px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.08);
@@ -43,14 +43,14 @@
 }
 
 .form h1 {
-  color: #46799e;
+  color: var(--bg-soft);
 }
 
 .title {
   margin: 0 0 .75rem 0;
   font-weight: 700;
   text-align: center;
-  color: #0b3b52;
+  color: var(--heading);
 }
 
 .title a{
@@ -65,7 +65,7 @@
   gap: 1rem;
   width: 100%;
   padding: 10px 18px;
-  border: 6px solid #143750;
+  border: 6px solid var(--heading);
   border-radius: 999px;
   background: transparent;
   box-shadow: inset 0 -3px 0 rgba(255,255,255,0.02);
@@ -80,13 +80,13 @@
   height: 50px;
   border-radius: 50%;
   background: #ffd28b;
-  color: #0b3746;
+  color: var(--heading);
   font-size: 30px;
 }
 
 .fieldLabel {
   font-weight: 700;
-  color: #0b3746;
+  color: var(--heading);
   min-width: 90px;
 }
 
@@ -103,7 +103,7 @@
 .button {
   margin-top: 0.5rem;
   padding: 14px 56px;
-  background: linear-gradient(180deg,#0d66a6,#0a4f86);
+  background: linear-gradient(180deg,var(--nav),var(--nav-hover));
   color: white;
   border: none;
   border-radius: 999px;
@@ -123,13 +123,13 @@
 
 .bottomLink {
   margin-top: 0.75rem;
-  color: #0b3b52;
+  color: var(--heading);
   font-size: 1.45rem;
   text-align: center;
 }
 
 .bottomLink a {
-  color: #0b66a6;
+  color: var(--nav);
   text-decoration: underline;
   margin-left: 6px;
 }
@@ -149,7 +149,7 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  color: #0b3746;
+  color: var(--heading);
   font-size: 1.2rem;
   padding: 0 5px;
   display: flex;
@@ -160,5 +160,6 @@
 }
 
 .togglePassword:hover {
-  color: #0b66a6;
+  color: var(--nav);
 }
+

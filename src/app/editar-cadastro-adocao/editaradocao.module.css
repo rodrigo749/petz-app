@@ -1,7 +1,7 @@
-/* CONTAINER GERAL DA PÁGINA */
+/* CONTAINER GERAL DA PÃGINA */
 .cadastroPetContainer {
   width: 100%;
-  background-color: #274b65;
+  background-color: var(--bg-soft);
   display: flex;
   justify-content: center;
   padding: 50px 0;
@@ -27,13 +27,13 @@
 .adocaoContainer {
   width: 90%;
   max-width: 1300px;
-  background: #244c66;
+  background: var(--bg-soft);
   padding: 40px;
   display: flex;
   justify-content: space-between;
   gap: 40px;
   border-radius: 28px;
-  border: 6px solid #244c66;
+  border: 6px solid var(--bg-soft);
 }
 
 /* ============================
@@ -42,10 +42,10 @@
 
 .leftSide {
   width: 48%;
-  background: #f6feff;
+  background: var(--card);
   padding: 30px;
   border-radius: 25px;
-  border: 5px solid #c9e4ee;
+  border: 5px solid var(--card);
   box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.08);
   z-index: 1;
 }
@@ -54,10 +54,10 @@
 .uploadBox {
   width: 140px;
   height: 140px;
-  background-color: #b7d3e6;
+  background-color: var(--card);
   margin: 0 auto;
   border-radius: 24px;
-  border: 3px solid #6d93ad;
+  border: 3px solid var(--border);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -67,7 +67,7 @@
 }
 
 .uploadBox:hover {
-  background-color: #a8c7dc;
+  background-color: var(--card);
 }
 
 .iconeAddImg {
@@ -90,7 +90,7 @@
   border-radius: 12px;
 }
 
-/* DESCRIÇÃO */
+/* DESCRIÃ‡ÃƒO */
 .campoDescricao {
   position: relative;
   width: 100%;
@@ -112,7 +112,7 @@
   min-height: 250px;
   padding: 20px 20px 20px 60px;
   border-radius: 25px;
-  border: 4px solid #0f3b61;
+  border: 4px solid var(--heading);
   font-size: 16px;
   outline: none;
   resize: none;
@@ -121,7 +121,7 @@
 }
 
 .descricaoTextarea:focus {
-  border-color: #1b5b8f;
+  border-color: var(--heading);
 }
 
 /* ============================
@@ -130,10 +130,10 @@
 
 .rightSide {
   width: 48%;
-  background: #f6feff;
+  background: var(--card);
   padding: 30px;
   border-radius: 25px;
-  border: 5px solid #c9e4ee;
+  border: 5px solid var(--card);
   box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
@@ -144,7 +144,7 @@
 .tituloCadastro {
   font-size: 32px;
   font-weight: 700;
-  color: #285a78;
+  color: var(--heading);
   margin-bottom: 20px;
 }
 
@@ -166,14 +166,14 @@
   width: 100%;
   padding: 12px 20px 12px 55px;
   border-radius: 40px;
-  border: 4px solid #0f3b61;
+  border: 4px solid var(--heading);
   font-size: 16px;
   outline: none;
   background-color: #ffffff;
 }
 
 .campo input:focus {
-  border-color: #1b5b8f;
+  border-color: var(--heading);
 }
 
 .iconeInput {
@@ -187,7 +187,7 @@
 }
 
 /* ============================
-   BOTÕES DE AÇÃO (EDIÇÃO)
+   BOTÃ•ES DE AÃ‡ÃƒO (EDIÃ‡ÃƒO)
 ============================ */
 
 .botoesEdicao {
@@ -206,15 +206,15 @@
   font-size: 22px;
   font-weight: 700;
   color: white;
-  background-color: #024b91;
-  border: 4px solid #3e8abf;
+  background-color: var(--nav);
+  border: 4px solid var(--border);
   cursor: pointer;
   transition: 0.25s ease-in-out;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.25);
 }
 
 .btnSalvar:hover {
-  background-color: #004a91;
+  background-color: var(--nav-hover);
   transform: translateY(-2px);
 }
 
@@ -242,5 +242,6 @@
    MEDIA QUERIES (IGUAIS AO CADASTRO)
 ============================ */
 
-/* o conteúdo de media queries será igual ao arquivo original
-   para manter a responsividade idêntica */
+/* o conteÃºdo de media queries serÃ¡ igual ao arquivo original
+   para manter a responsividade idÃªntica */
+

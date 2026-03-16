@@ -3,12 +3,12 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: #0c2c42; /* Same as footer */
+  background-color: var(--heading); /* Same as footer */
   color: white;
   padding: 20px;
   z-index: 1000;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
-  border-top: 3px solid #d9783a; /* Highlight color */
+  border-top: 3px solid var(--accent-orange); /* Highlight color */
 }
 
 .content {
@@ -29,7 +29,7 @@
 }
 
 .content a {
-  color: #d9783a; /* Highlight color */
+  color: var(--accent-orange); /* Highlight color */
   text-decoration: underline;
   font-weight: bold;
 }
@@ -51,7 +51,7 @@
 }
 
 .accept {
-  background-color: #d9783a; /* Highlight color */
+  background-color: var(--accent-orange); /* Highlight color */
   color: white;
 }
 
@@ -61,7 +61,7 @@
 }
 
 .decline {
-  background-color: #475b5f; /* Muted color */
+  background-color: var(--muted); /* Muted color */
   color: white;
 }
 
@@ -80,3 +80,5 @@
     justify-content: center;
   }
 }
+
+

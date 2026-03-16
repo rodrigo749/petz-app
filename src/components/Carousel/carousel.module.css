@@ -33,10 +33,11 @@
 .card {
   min-width: 528px;
   max-width: 528px;
-  background: #274b65;
+  background: var(--card);
+  border: 2px solid #d8e3e4;
   border-radius: 12px;
   padding: 18px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px rgba(13, 56, 60, 0.09);
   scroll-snap-align: center;
   display: flex;
   gap: 16px;
@@ -46,9 +47,10 @@
 }
 
 .highlight {
-  background-color: #f5b25c !important;
-  transform: scale(1.08);
-  box-shadow: 0 12px 24px rgba(245, 178, 92, 0.4);
+  background-color: #f8fbfb !important;
+  border-color: var(--border);
+  transform: scale(1.03);
+  box-shadow: 0 12px 24px rgba(89, 163, 169, 0.2);
   z-index: 10;
 }
 
@@ -76,12 +78,12 @@
   font-weight: 800;
   font-size: 22px;
   margin-bottom: 10px;
-  color: #fff;
+  color: var(--heading);
 }
 
 .meta {
-  background: #fff;
-  color: #111;
+  background: #ffffff;
+  color: var(--text);
   padding: 12px 14px;
   border-radius: 8px;
   display: inline-block;
@@ -93,8 +95,8 @@
   display: inline-block;
   margin-top: 10px;
   padding: 8px 18px;
-  background: #fff;
-  color: #274b65;
+  background: var(--nav);
+  color: #fff;
   font-weight: 700;
   font-size: 14px;
   border-radius: 8px;
@@ -104,12 +106,12 @@
 }
 
 .detailsBtn:hover {
-  background: #e0e0e0;
+  background: var(--nav-hover);
   transform: scale(1.05);
 }
 
 .arrow {
-  background: rgba(255, 255, 255, 0.15);
+  background: var(--border);
   border: none;
   color: #fff;
   width: 44px;
@@ -122,7 +124,7 @@
 }
 
 .arrow:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: var(--heading);
   transform: scale(1.1);
 }
 

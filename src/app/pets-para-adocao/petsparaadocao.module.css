@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
-  background-color: #274b65;
+  background-color: var(--bg-soft);
   padding: 40px 0;
   display: flex;
   align-items: center;
@@ -41,8 +41,8 @@
   font-size: 24px;
   font-weight: bold;
   color: #ffffff;
-  background-color: #254d6b;
-  border: 5px solid #143750;
+  background-color: var(--heading);
+  border: 5px solid var(--heading);
   padding: 5px 20px;
   border-radius: 50;
   text-align: center;
@@ -92,7 +92,7 @@
 
 
 .card-pet {
-  background: #254b6b;
+  background: var(--heading);
   border-radius: 16px;
   padding: 15px;
   display: flex;
@@ -126,7 +126,7 @@
   background: white;
   border-radius: 12px;
   padding: 6px 10px;
-  color: #0f2a3d;
+  color: var(--heading);
 
   flex: 1;
   height: 160px;
@@ -176,3 +176,5 @@
   height: 20px;
   object-fit: contain;
 }
+
+

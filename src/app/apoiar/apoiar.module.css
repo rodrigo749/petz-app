@@ -1,7 +1,7 @@
 .apoiar-page {
   position: relative;
   min-height: 100vh;
-  background-color: #274b65;
+  background-color: var(--bg-soft);
   overflow: hidden;
 }
 
@@ -12,7 +12,7 @@
   background-image: none;
   background-repeat: repeat;
   background-size: 600px;
-  opacity: 0.50;              /* 👈 deixa suave */
+  opacity: 0.50;              /* ðŸ‘ˆ deixa suave */
   z-index: 0;
   top: 0;
   left: 0;
@@ -41,8 +41,8 @@
   font-size: 24px;
   font-weight: bold;
   color: #ffffff;
-  background-color: #254d6b;
-  border: 5px solid #143750;
+  background-color: var(--heading);
+  border: 5px solid var(--heading);
   padding: 5px 20px;
   border-radius: 50px;
   text-align: center;
@@ -56,8 +56,8 @@
 .grid-ongs {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 3 colunas iguais */
-  grid-row-gap: 70px;    /* espaço vertical entre as linhas */
-  grid-column-gap: 50px; /* espaço horizontal entre os cards da mesma linha */
+  grid-row-gap: 70px;    /* espaÃ§o vertical entre as linhas */
+  grid-column-gap: 50px; /* espaÃ§o horizontal entre os cards da mesma linha */
   justify-items: center;
 }
 
@@ -65,9 +65,9 @@
 
 
 .card-ong {
-  background: #7790a2;
+  background: var(--border);
   border-radius: 16px;
-  border-color: #143750;
+  border-color: var(--heading);
   border-style: solid;
   border-width: 2px;
   padding: 15px;
@@ -76,7 +76,7 @@
   color: white;
   width: 100%;
   max-width: 500px;   /* todos com a mesma largura */
-  height: 290px;      /* mais alto para descrição */
+  height: 290px;      /* mais alto para descriÃ§Ã£o */
   box-sizing: border-box;
   display: flex;
   flex-direction: row;   /* default: empilha horizontalmente */
@@ -93,7 +93,7 @@
   width: 135px;
   height: 135px;
   border-radius: 0px;
-  border-color: #0d66a6;
+  border-color: var(--nav);
   border-width: 1;
   border-style: solid;
   flex-shrink: 0; 
@@ -142,7 +142,7 @@
   top: 7%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 0 10px; /* um pouco de espaçamento nas laterais */
+  padding: 0 10px; /* um pouco de espaÃ§amento nas laterais */
   box-sizing: border-box;
 }
 
@@ -151,10 +151,10 @@
   margin: 0;             /* remove margens */
   font-size: 21px;
   font-weight: bold;
-  color: #ffb74d;
+  color: var(--accent-orange);
   text-align: center;  /* centraliza horizontalmente */
-  white-space: nowrap;   /* força o texto a ficar em uma linha */
-  overflow: hidden;      /* opcional: esconde o excesso se não couber */
+  white-space: nowrap;   /* forÃ§a o texto a ficar em uma linha */
+  overflow: hidden;      /* opcional: esconde o excesso se nÃ£o couber */
   text-overflow: ellipsis; /* opcional: coloca "..." se cortar */
   max-width: 100%;
   flex-shrink: 1;
@@ -165,9 +165,9 @@
 
 /* alteracao no botao para ser o mesmo modelo das paginas anteriores */
 .apoiar-btn {
-  background-color: #024b91;
+  background-color: var(--nav);
   color: white;
-  border: 2px solid #3e8abf;
+  border: 2px solid var(--border);
   border-radius: 24px;
   padding: 5px 25px;
   width: 140px;
@@ -193,7 +193,7 @@
 
 
 .descricao {
-  color: #ffb74d;
+  color: var(--accent-orange);
   font-size: 17px;
 }
 
@@ -234,7 +234,7 @@
   }
  
    .card-title {
-    width: 100%;            /* 🔒 limita o título ao card */
+    width: 100%;            /* ðŸ”’ limita o tÃ­tulo ao card */
     max-width: 100%;
     padding: 0 12px;        /* respiro lateral */
     box-sizing: border-box;
@@ -279,7 +279,7 @@
   }
 
   .grid-ongs {
-    grid-template-columns: 2fr 2fr; /* só uma coluna */
+    grid-template-columns: 2fr 2fr; /* sÃ³ uma coluna */
     gap: 30px;
   }
 
@@ -288,7 +288,7 @@
     align-items: center;
     text-align: center;
     height: auto; /* deixa o card crescer naturalmente */
-    padding-bottom: 60px; /* espaço pro botão */
+    padding-bottom: 60px; /* espaÃ§o pro botÃ£o */
     width: 100%;
     max-width: 100%;
     display: flex;
@@ -302,7 +302,7 @@
 
 
   .grid-ongs {
-    grid-template-columns: 2fr 2fr; /* só uma coluna */
+    grid-template-columns: 2fr 2fr; /* sÃ³ uma coluna */
     gap: 30px;
   }
 
@@ -311,7 +311,7 @@
     align-items: center;
     text-align: center;
     height: auto; /* deixa o card crescer naturalmente */
-    padding-bottom: 60px; /* espaço pro botão */
+    padding-bottom: 60px; /* espaÃ§o pro botÃ£o */
     width: 100%;
     max-width: 100%;
     display: flex;
@@ -334,7 +334,7 @@
     top: initial;
   }
 
-  /* título centralizado e sem absolute */
+  /* tÃ­tulo centralizado e sem absolute */
   .card-title {
     position: static;
     transform: none;
@@ -380,7 +380,7 @@
 
 
   .grid-ongs {
-    grid-template-columns: 1fr; /* só uma coluna */
+    grid-template-columns: 1fr; /* sÃ³ uma coluna */
     gap: 20px;
   }
 
@@ -389,7 +389,7 @@
     align-items: center;
     text-align: center;
     height: auto; /* deixa o card crescer naturalmente */
-    padding-bottom: 60px; /* espaço pro botão */
+    padding-bottom: 60px; /* espaÃ§o pro botÃ£o */
     width: 100%;
     max-width: 100%;
   }
@@ -411,7 +411,7 @@
     top: initial;
   }
 
-  /* título centralizado e sem absolute */
+  /* tÃ­tulo centralizado e sem absolute */
   .card-title {
     position: static;
     transform: none;
@@ -430,4 +430,6 @@
 
 
 }
+
+
 

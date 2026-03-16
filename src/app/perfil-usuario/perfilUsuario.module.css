@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  background-color: #274b65;
+  background-color: var(--bg-soft);
   position: relative;
   overflow: hidden;
 }
@@ -83,7 +83,7 @@
 }
 
 .button {
-  background: #4b8bf5;
+  background: var(--nav);
   color: #fff;
   border: none;
   padding: 0.5rem 0.9rem;
@@ -104,3 +104,5 @@
   .card { padding: 1rem; }
   .row strong { min-width: 90px; }
 }
+
+

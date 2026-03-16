@@ -32,7 +32,7 @@
 }
 
 .secondary:hover:not(:disabled) {
-  background: #e6a855;
+  background: var(--accent-orange);
 }
 
 .outline {
