@@ -14,7 +14,7 @@ const inter = Inter({
 
 export const metadata = {
   title: "Patas Perdidas",
-  description: "Plataforma para ONGs, adoção e busca de animais perdidos",
+  description: "Plataforma para adoção e busca de animais perdidos",
   icons: {
     icon: "/favicon.ico",
   },

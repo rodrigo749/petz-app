@@ -5,6 +5,11 @@ import Link from "next/link";
 import ModalPet from "@/components/ModalPet/ModalPet";
 import styles from "./PetCard.module.css";
 
+const getBaseUrl = () =>
+  (process.env.NEXT_PUBLIC_PETZ_API_URL || "http://localhost:3000")
+    .trim()
+    .replace(/\/$/, "");
+
 export default function PetCard({ pet, tipoPagina }) {
   const [open, setOpen] = useState(false);
   const [usuarioLogado, setUsuarioLogado] = useState(null);
@@ -14,18 +19,26 @@ export default function PetCard({ pet, tipoPagina }) {
     setUsuarioLogado(user);
   }, []);
 
-  // verifica se o pet pertence ao usuário logado
-  const ehDoUsuario = usuarioLogado && pet.usuarioId === usuarioLogado.id;
+  // aceita tanto português quanto inglês
+  const id = pet.id;
+  const nome = pet.nome || pet.name || "Sem nome";
+  const imagem = pet.imagem || pet.image || "/images/default.png";
+  const raca = pet.raca || pet.breed || "Não informada";
+  const genero = pet.genero || pet.gender || "Não informado";
+  const idade = pet.idade || pet.age || "Não informada";
+  const descricao = pet.descricao || pet.description || "Sem descrição";
+  const userId = pet.usuarioId || pet.userId || null;
+
+  const ehDoUsuario = usuarioLogado && userId === usuarioLogado.id;
 
   async function marcarComoAdotado() {
     try {
-      await fetch(`/api/pets/${pet.id}`, {
+      await fetch(`${getBaseUrl()}/api/pets/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status: "adotado" }),
       });
 
-      // recarrega a página para atualizar a listagem
       window.location.reload();
     } catch (error) {
       console.error("Erro ao marcar como adotado:", error);
@@ -35,30 +48,23 @@ export default function PetCard({ pet, tipoPagina }) {
   return (
     <>
       <div className={styles["card-pet"]}>
-        {/* IMAGEM */}
         <div className={styles["card-image-wrapper"]}>
           <img
-            src={pet.imagem || "/images/default.png"}
-            alt={pet.nome}
+            src={imagem}
+            alt={nome}
             className={styles["card-image"]}
           />
         </div>
 
-        {/* CONTEÚDO */}
         <div className={styles["content-column"]}>
           <div className={styles["card-text-box"]}>
-            <h3>{pet.nome}</h3>
-            <p>Raça: {pet.raca}</p>
-            <p>Gênero: {pet.genero}</p>
-            <p>Idade: {pet.idade}</p>
-            <p>Descrição: {pet.descricao}</p>
-
-            {/* Campos específicos removidos do cartão — aparecem apenas no modal */}
+            <h3>{nome}</h3>
+            <p>Raça: {raca}</p>
+            <p>Gênero: {genero}</p>
+            <p>Idade: {idade}</p>
+            <p>Descrição: {descricao}</p>
           </div>
 
-          {/* BOTÕES */}
-
-          {/* PÁGINA PÚBLICA → apenas ADOTAR */}
           {tipoPagina === "publica" && (
             <button
               className={styles["btn-adotar"]}
@@ -68,7 +74,6 @@ export default function PetCard({ pet, tipoPagina }) {
             </button>
           )}
 
-          {/* PÁGINA DE PETS PERDIDOS → apenas VER */}
           {tipoPagina === "perdidos" && (
             <button
               className={styles["btn-adotar"]}
@@ -78,7 +83,6 @@ export default function PetCard({ pet, tipoPagina }) {
             </button>
           )}
 
-          {/* PÁGINA DO USUÁRIO → ADOTADO + EDITAR (somente se for dono) */}
           {tipoPagina === "usuario" && ehDoUsuario && (
             <div className={styles["actions-wrapper"]}>
               <button
@@ -88,7 +92,7 @@ export default function PetCard({ pet, tipoPagina }) {
                 Adotado
               </button>
 
-              <Link href={`/editar-cadastro-adocao/${pet.id}`}>
+              <Link href={`/editar-cadastro-adocao/${id}`}>
                 <button className={styles["btn-editar"]}>Editar</button>
               </Link>
             </div>
@@ -96,7 +100,6 @@ export default function PetCard({ pet, tipoPagina }) {
         </div>
       </div>
 
-      {/* MODAL – existe na página pública e também para pets perdidos (ver) */}
       {open && (tipoPagina === "publica" || tipoPagina === "perdidos") && (
         <ModalPet pet={pet} onClose={() => setOpen(false)} />
       )}
