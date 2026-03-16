@@ -28,7 +28,7 @@ export default function ModalLogin({ onClose }) {
           <img src="/images/patinha.png" alt="patinha" className={styles.pawIcon} />
         </div>
 
-        <h2 className={styles.title}>Acesso restrito</h2>
+        <h2 className={styles.title}>Faça login ou registre-se</h2>
         <p className={styles.message}>
           Você precisa estar logado para contatar o dono do pet.
         </p>
