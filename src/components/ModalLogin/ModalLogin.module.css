@@ -1,0 +1,114 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+.modal {
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 36px 32px 28px;
+  width: min(420px, 90vw);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+  border: 4px solid #ecad5b;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+}
+
+.closeBtn {
+  background: #f7bb63;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: #143750;
+  cursor: pointer;
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  transition: background 0.12s;
+}
+
+.closeBtn:hover {
+  background: #ecad5b;
+}
+
+.iconWrapper {
+  margin-top: 8px;
+}
+
+.pawIcon {
+  width: 64px;
+  height: auto;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #024b91;
+  text-align: center;
+}
+
+.message {
+  font-size: 16px;
+  color: #143750;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.btnLogin {
+  background: #024b91;
+  color: #ffffff;
+  border: 3px solid #3e8abf;
+  border-radius: 40px;
+  padding: 12px 0;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.15s;
+}
+
+.btnLogin:hover {
+  background: #013a70;
+}
+
+.btnCancel {
+  background: transparent;
+  color: #7a8fa7;
+  border: 2px solid #7a8fa7;
+  border-radius: 40px;
+  padding: 10px 0;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.15s, color 0.15s;
+}
+
+.btnCancel:hover {
+  background: #f0f4f8;
+  color: #143750;
+}

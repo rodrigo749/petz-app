@@ -1,8 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import styles from "./ModalPet.module.css";
+import ModalLogin from "@/components/ModalLogin/ModalLogin";
 
 export default function ModalPet({ pet, onClose }) {
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
   function handleBackgroundClick(e) {
     if (e.target === e.currentTarget) {
@@ -11,6 +14,11 @@ export default function ModalPet({ pet, onClose }) {
   }
 
   function handleContact() {
+    const user = JSON.parse(localStorage.getItem("usuarioLogado"));
+    if (!user) {
+      setShowLoginModal(true);
+      return;
+    }
     const name = pet.responsavel || pet.nomeUsuario || "";
     const phone = pet.telefone || pet.phone || pet.contato || pet.whatsapp || "";
     const phoneDigits = phone.replace(/\D/g, "");
@@ -26,6 +34,7 @@ export default function ModalPet({ pet, onClose }) {
   }
 
   return (
+    <>
 <div className={styles.overlay} onClick={handleBackgroundClick}>
   <div className={styles.modal}>
     
@@ -107,5 +116,9 @@ export default function ModalPet({ pet, onClose }) {
   </div>
 </div>
 
+      {showLoginModal && (
+        <ModalLogin onClose={() => setShowLoginModal(false)} />
+      )}
+    </>
   );
 }
