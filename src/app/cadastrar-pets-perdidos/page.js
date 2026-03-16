@@ -4,18 +4,21 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./perdidos.module.css";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+
 export default function CadastrarPerdidos() {
   const router = useRouter();
 
   const [formData, setFormData] = useState({
-    nome: "",
-    especie: "",
-    raca: "",
+    name: "",
+    species: "",
+    breed: "",
     genero: "",
-    local: "",
-    dataPerda: "",
-    descricao: "",
-    recompensa: 0,
+    age: "",
+    location: "",
+    dateLost: "",
+    description: "",
+    reward: 0,
     imagemPreview: "",
   });
 
@@ -109,70 +112,69 @@ export default function CadastrarPerdidos() {
 
   // ================= SALVAR PET =================
   const salvarPet = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
+  setLoading(true);
 
-    setLoading(true);
+  try {
+    let finalImageUrl = "/images/semfoto.jpg";
 
-    try {
-      let finalImageUrl = "/images/semfoto.jpg";
-
-      // upload se tiver imagem
-      if (imagemFile) {
-        finalImageUrl = await uploadImage(imagemFile);
-      }
-
-      const payload = {
-        name: formData.nome.trim(),
-        species: formData.especie,
-        breed: formData.raca || null,
-        gender: formData.genero || null,
-        dateLost: formData.dataPerda || null,
-        location: formData.local || null,
-        reward: Number(formData.recompensa) || 0,
-        description: formData.descricao || null,
-        image: finalImageUrl,
-        status: "lost",
-        userId: 1,
-      };
-
-      const res = await fetch(`${getBaseUrl()}/api/pets`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-
-      if (!res.ok) {
-        throw new Error("Erro ao cadastrar pet");
-      }
-
-      alert("Pet cadastrado com sucesso!");
-
-      // limpar formulário
-      setFormData({
-        nome: "",
-        especie: "",
-        raca: "",
-        genero: "",
-        local: "",
-        dataPerda: "",
-        descricao: "",
-        recompensa: 0,
-        imagemPreview: "",
-      });
-
-      setImagemFile(null);
-
-      router.push("/meus-pets-perdidos");
-
-    } catch (error) {
-      console.error(error);
-      alert("Erro ao cadastrar pet");
-    } finally {
-      setLoading(false);
+    if (imagemFile) {
+      finalImageUrl = await uploadImage(imagemFile);
     }
-  };
+
+    const payload = {
+      name: formData.name.trim(),
+      species: formData.species,
+      breed: formData.breed || null,
+      gender: formData.genero || null,
+      age: Number(formData.age) || null,
+      dateLost: formData.dateLost || null,
+      location: formData.location || null,
+      reward: Number(formData.reward) || 0,
+      description: formData.description || null,
+      image: finalImageUrl,
+      status: "lost",
+      userId: 1,
+    };
+
+    const res = await fetch(`${getBaseUrl()}/api/pets`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!res.ok) {
+      const erro = await res.json();
+      console.error("Erro backend:", erro);
+      throw new Error("Erro ao cadastrar pet");
+    }
+
+    alert("Pet cadastrado com sucesso!");
+
+    setFormData({
+      name: "",
+      species: "",
+      breed: "",
+      genero: "",
+      age: "",
+      location: "",
+      dateLost: "",
+      description: "",
+      reward: 0,
+      imagemPreview: "",
+    });
+
+    setImagemFile(null);
+    router.push("/meus-pets-perdidos");
+  } catch (error) {
+    console.error(error);
+    alert("Erro ao cadastrar pet");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <main className={styles.cadastroPetContainer}>
@@ -239,9 +241,9 @@ export default function CadastrarPerdidos() {
               <img src="/images/patinha.png" className={styles.iconeInput} />
               <input
                 type="text"
-                placeholder="Nome"
-                value={formData.nome}
-                onChange={(e) => handleChange("nome", e.target.value)}
+                placeholder="Name"
+                value={formData.name}
+                onChange={(e) => handleChange("name", e.target.value)}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
               />
@@ -250,21 +252,21 @@ export default function CadastrarPerdidos() {
             <div className={styles.campo}>
               <img src="/images/patinha.png" className={styles.iconeInput} />
               <select
-                value={formData.especie}
-                onChange={(e) => handleChange("especie", e.target.value)}
+                value={formData.species}
+                onChange={(e) => handleChange("species", e.target.value)}
               >
-                <option value="" disabled>Selecione a espécie</option>
-                <option value="dog">Cachorro</option>
-                <option value="cat">Gato</option>
-                <option value="rabbit">Coelho</option>
-                <option value="guinea-pig">Porquinho-da-índia</option>
+                <option value="" disabled>Select species</option>
+                <option value="dog">Dog</option>
+                <option value="cat">Cat</option>
+                <option value="rabbit">Rabbit</option>
+                <option value="guinea-pig">Guinea Pig</option>
                 <option value="hamster">Hamster</option>
-                <option value="chinchila">Chinchila</option>
-                <option value="ferret">Furão</option>
-                <option value="cockatiel">Calopsita</option>
-                <option value="parakeet">Periquito</option>
-                <option value="parrot">Papagaio</option>
-                <option value="turtle">Tartaruga</option>
+                <option value="chinchilla">Chinchilla</option>
+                <option value="ferret">Ferret</option>
+                <option value="cockatiel">Cockatiel</option>
+                <option value="parakeet">Parakeet</option>
+                <option value="parrot">Parrot</option>
+                <option value="turtle">Turtle</option>
               </select>
             </div>
 
@@ -272,9 +274,9 @@ export default function CadastrarPerdidos() {
               <img src="/images/patinha.png" className={styles.iconeInput} />
               <input
                 type="text"
-                placeholder="Raça"
-                value={formData.raca}
-                onChange={(e) => handleChange("raca", e.target.value)}
+                placeholder="Breed"
+                value={formData.breed}
+                onChange={(e) => handleChange("breed", e.target.value)}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
               />
@@ -284,21 +286,31 @@ export default function CadastrarPerdidos() {
               <img src="/images/patinha.png" className={styles.iconeInput} />
               <input
                 type="text"
-                placeholder="Gênero"
+                placeholder="Gender"
                 value={formData.genero}
                 onChange={(e) => handleChange("genero", e.target.value)}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
               />
             </div>
+            <div className={styles.campo}>
+              <img src="/images/patinha.png" className={styles.iconeInput} />
+              <input
+                type="number"
+                placeholder="Age"
+                value={formData.age}
+                onChange={(e) => handleChange("age", e.target.value)}
+                
+              />
+            </div>
 
             <div className={styles.campo}>
               <img src="/images/patinha.png" className={styles.iconeInput} />
               <input
                 type="text"
-                placeholder="Local"
-                value={formData.local}
-                onChange={(e) => handleChange("local", e.target.value)}
+                placeholder="Location"
+                value={formData.location}
+                onChange={(e) => handleChange("location", e.target.value)}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
               />
@@ -308,8 +320,8 @@ export default function CadastrarPerdidos() {
               <img src="/images/patinha.png" className={styles.iconeInput} />
               <input
                 type="date"
-                value={formData.dataPerda}
-                onChange={(e) => handleChange("dataPerda", e.target.value)}
+                value={formData.dateLost}
+                onChange={(e) => handleChange("dateLost", e.target.value)}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
                 className={styles.dateInput}
@@ -335,15 +347,15 @@ export default function CadastrarPerdidos() {
               <img src="/images/patinha.png" className={styles.iconeInput} />
               <div className={styles.sliderContainer}>
                 <div className={styles.sliderHeader}>
-                  <span className={styles.sliderLabel}>Recompensa:</span>
-                  <span className={styles.valorRecompensa}>R$ {formData.recompensa}</span>
+                  <span className={styles.sliderLabel}>Reward:</span>
+                  <span className={styles.valorRecompensa}>R$ {formData.reward}</span>
                 </div>
                 <input
                   type="range"
                   min="0"
                   max="100000"
-                  value={formData.recompensa}
-                  onChange={(e) => handleChange("recompensa", e.target.value)}
+                  value={formData.reward}
+                  onChange={(e) => handleChange("reward", e.target.value)}
                   className={styles.slider}
                 />
                 <div className={styles.sliderMinMax}>

@@ -3,7 +3,6 @@
 import styles from "./ModalPet.module.css";
 
 export default function ModalPet({ pet, onClose }) {
-
   function handleBackgroundClick(e) {
     if (e.target === e.currentTarget) {
       onClose();
@@ -11,101 +10,98 @@ export default function ModalPet({ pet, onClose }) {
   }
 
   function handleContact() {
-    const name = pet.responsavel || pet.nomeUsuario || "";
-    const phone = pet.telefone || pet.phone || pet.contato || pet.whatsapp || "";
+    const ownerName = pet.owner || pet.ownerName || "";
+    const phone = pet.phone || pet.contact || pet.whatsapp || "";
     const phoneDigits = phone.replace(/\D/g, "");
 
     if (!phoneDigits) {
-      alert("Telefone do responsável não disponível.");
+      alert("Owner's phone number is not available.");
       return;
     }
 
-    const text = `Olá ${name || "responsável"}, estou entrando em contato pelo app sobre o pet ${pet.nome || ""}.`;
+    const text = `Hello ${ownerName || "owner"}, I'm contacting you through the app about the pet ${pet.name || ""}.`;
     const url = `https://wa.me/${phoneDigits}?text=${encodeURIComponent(text)}`;
     window.open(url, "_blank");
   }
 
   return (
-<div className={styles.overlay} onClick={handleBackgroundClick}>
-  <div className={styles.modal}>
-    
+    <div className={styles.overlay} onClick={handleBackgroundClick}>
+      <div className={styles.modal}>
+        <div className={styles.modalContent}>
+          {/* CLOSE BUTTON */}
+          <button className={styles.closeBtn} onClick={onClose}>
+            &times;
+          </button>
 
-    <div className={styles.modalContent}>
-      {/* BOTÃO DE FECHAR */}
-        <button className={styles.closeBtn} onClick={onClose}>
-          &times;
-        </button>
-
-      
-
-      {/* LADO ESQUERDO - IMAGEM */}
-      <div className={styles.imageBox}>
-        <img src={pet.imagem || "/images/default.png"} alt={pet.nome} />
-        <h2 className={styles.petName}>{pet.nome}</h2>
-      </div>
-
-      {/* LADO DIREITO - CAIXA AZUL */}
-      <div className={styles.infoBox}>
-
-      {/* área superior com texto de atualização e badge de recompensa */}
-      <div className={styles.topMeta}>
-        <div className={styles.updatedText}>{pet.atualizado || pet.atualizadoEm || 'Atualizado há 2 semanas'}</div>
-
-        {pet.recompensa && Number(pet.recompensa) > 0 && (
-          <div className={styles.rewardBadge} role="status" aria-label={`Recompensa ${pet.recompensa} reais`}>
-            {/* ícone moeda (esquerda) com wrapper para bolinha */}
-            <span className={styles.coinWrapper} aria-hidden>
-              <svg className={styles.coin} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <text x="12" y="16" textAnchor="middle" fontSize="12" fill="#1f7a2c" fontFamily="Arial">$</text>
-              </svg>
-            </span>
-
-            <span className={styles.rewardText}>Recompensa R$ {pet.recompensa}</span>
-
-            {/* ícone moeda (direita) com wrapper para bolinha */}
-            <span className={styles.coinWrapper} aria-hidden>
-              <svg className={styles.coin} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <text x="12" y="16" textAnchor="middle" fontSize="12" fill="#1f7a2c" fontFamily="Arial">$</text>
-              </svg>
-            </span>
+          {/* LEFT SIDE - IMAGE */}
+          <div className={styles.imageBox}>
+            <img src={pet.image || "/images/default.png"} alt={pet.name} />
+            <h2 className={styles.petName}>{pet.name}</h2>
           </div>
-        )}
-      </div>
 
-      {/* ícone de patinha no canto (ajustado) */}
-      <img
-        src="/images/patinha.png"
-        alt="patinha"
-        className={styles.pawIcon}
-      />
+          {/* RIGHT SIDE - BLUE BOX */}
+          <div className={styles.infoBox}>
+            {/* Top area with updated text and reward badge */}
+            <div className={styles.topMeta}>
+              <div className={styles.updatedText}>
+                {pet.updated || pet.updatedAt || "Updated 2 weeks ago"}
+              </div>
 
-      <div className={styles.infoColumns}>
+              {pet.reward && Number(pet.reward) > 0 && (
+                <div
+                  className={styles.rewardBadge}
+                  role="status"
+                  aria-label={`Reward ${pet.reward} reais`}
+                >
+            
+              
+                </div>
+              )}
+            </div>
 
-        <div className={styles.infoGroup}>
-          <p><strong>Raça:</strong> {pet.raca}</p>
-          <p><strong>Gênero:</strong> {pet.genero}</p>
-          <p><strong>Local:</strong> {pet.local}</p>
-          <p><strong>Data:</strong> {pet.data || '-'}</p>
+            {/* Paw icon */}
+            <img
+              src="/images/paw.png"
+              alt="paw"
+              className={styles.pawIcon}
+            />
+
+            <div className={styles.infoColumns}>
+              <div className={styles.infoGroup}>
+                <p>
+                  <strong>Breed:</strong> {pet.breed}
+                </p>
+                <p>
+                  <strong>Gender:</strong> {pet.gender}
+                </p>
+                <p>
+                  <strong>Location:</strong> {pet.location}
+                </p>
+                <p>
+                  <strong>Date:</strong> {pet.date || "-"}
+                </p>
+              </div>
+
+              <div className={styles.respEndGroup}>
+                <p>
+                  <strong>Reward:</strong> {pet.reward}
+                </p>
+              </div>
+            </div>
+
+            {/* DESCRIPTION */}
+            <div className={styles.descriptionBox}>
+              <p className={styles.descLabel}>Description:</p>
+              <p className={styles.descText}>{pet.description}</p>
+            </div>
+
+            {/* CONTACT BUTTON */}
+            <button className={styles.contactBtn} onClick={handleContact}>
+              Contact owner
+            </button>
+          </div>
         </div>
-
-        <div className={styles.respEndGroup}> 
-          <p><strong>Recompensa:</strong> {pet.recompensa}</p>
-        </div>
-      </div>  
-
-        {/* DESCRIÇÃO */}
-        <div className={styles.descriptionBox}>
-          <p className={styles.descLabel}>Descrição:</p>
-          <p className={styles.descText}>{pet.descricao}</p>
-        </div>
-
-        {/* BOTÃO */}
-        <button className={styles.contactBtn} onClick={handleContact}>Contatar dono</button>
-
       </div>
     </div>
-  </div>
-</div>
-
   );
 }
