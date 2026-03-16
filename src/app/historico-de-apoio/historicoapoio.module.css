@@ -15,7 +15,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url('/images/paww.svg');
+  background-image: none;
   background-repeat: repeat;
   background-size: 600px;
   opacity: 0.50;
@@ -374,7 +374,6 @@
 
   /* limita a 2 linhas com reticências */
   display: -webkit-box;
-  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }

@@ -5,6 +5,17 @@ import styles from './home.module.css'
 import Carousel from '../../components/Carousel'
 
 export default function HomePage() {
+  // remove global background on this page only
+  useEffect(() => {
+    try {
+      document.body.classList.add('no-site-bg');
+    } catch (e) {}
+    return () => {
+      try {
+        document.body.classList.remove('no-site-bg');
+      } catch (e) {}
+    };
+  }, []);
   const [perdidos, setPerdidos] = useState([])
   const [adocao, setAdocao] = useState([])
   const [totalEncontrados, setTotalEncontrados] = useState(0)
