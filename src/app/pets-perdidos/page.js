@@ -3,114 +3,83 @@
 import { useEffect, useState } from "react";
 import PetCard from "@/components/PetCard/PetCard";
 import styles from "./pets-perdidos.module.css";
-import { uploadImage, savePet } from "@/lib/apiPets";
+
+const getBaseUrl = () =>
+  (process.env.NEXT_PUBLIC_PETZ_API_URL || "http://localhost:3000")
+    .trim()
+    .replace(/\/$/, "");
 
 export default function PetsPerdidos() {
   const [pets, setPets] = useState([]);
-  const [showForm, setShowForm] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [erro, setErro] = useState("");
 
-  // form state
-  const [nome, setNome] = useState("");
-  const [raca, setRaca] = useState("");
-  const [genero, setGenero] = useState("");
-  const [local, setLocal] = useState("");
-  const [dataPerda, setDataPerda] = useState("");
-  const [descricao, setDescricao] = useState("");
-  const [recompensa, setRecompensa] = useState(0);
-  const [file, setFile] = useState(null);
-  const [preview, setPreview] = useState(null);
-  const [message, setMessage] = useState("");
-  const [loading, setLoading] = useState(false);
-
+  // ================= CARREGAR PETS =================
   async function carregarPets() {
-    const res = await fetch("/api/pets-perdidos");
-    const data = await res.json();
-    setPets(data);
-  }
-
-  useEffect(() => {
-    carregarPets();
-  }, []);
-
-  function handleFileChange(e) {
-    const f = e.target.files && e.target.files[0];
-    setFile(f);
-    if (f) {
-      const reader = new FileReader();
-      reader.onload = (ev) => setPreview(ev.target.result);
-      reader.readAsDataURL(f);
-    } else {
-      setPreview(null);
-    }
-  }
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-
-    // validação mínima
-    if (!nome.trim() || !descricao.trim()) {
-      setMessage("Por favor preencha pelo menos o nome e a descrição.");
-      return;
-    }
-
-    const body = {
-      nome,
-      raca,
-      genero,
-      data: dataPerda,
-      local,
-      recompensa,
-      descricao,
-      imagem: "",
-      status: "perdido",
-    };
-
     try {
       setLoading(true);
-      if (file) {
-        body.imagem = await uploadImage(file);
-      }
-      const created = await savePet(body);
-      setMessage("Pet cadastrado com sucesso!");
-      // limpar formulário
-      setNome("");
-      setRaca("");
-      setGenero("");
-      setLocal("");
-      setDataPerda("");
-      setDescricao("");
-      setRecompensa(0);
-      setFile(null);
-      setPreview(null);
+      setErro("");
 
-      // refresh list
-      carregarPets();
-      // optionally navigate to edit page if API returned created object with id
-      if (created && created.id) {
-        window.location.href = `/perdidos/${created.id}`;
+      const res = await fetch(`${getBaseUrl()}/api/pets`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cache: "no-store",
+      });
+
+      if (!res.ok) {
+        throw new Error("Erro ao buscar pets");
       }
-    } catch (err) {
-      console.error(err);
-      setMessage(err.message || "Erro ao salvar");
+
+      const data = await res.json();
+
+      // backend retorna { pets }
+      const listaPets = Array.isArray(data.pets) ? data.pets : [];
+
+      // filtrar apenas pets perdidos
+      const petsPerdidos = listaPets.filter(
+        (pet) => pet.status === "lost" || pet.status === "perdido"
+      );
+
+      setPets(petsPerdidos);
+    } catch (error) {
+      console.error("Erro ao carregar pets:", error);
+      setErro("Não foi possível carregar os pets perdidos.");
     } finally {
       setLoading(false);
     }
   }
+
+  // ================= CARREGAR AO ABRIR PÁGINA =================
+  useEffect(() => {
+    carregarPets();
+  }, []);
 
   return (
     <main className={styles["pets-page"]}>
       <div className={styles["cards-wrapper-container"]}>
         <h1 className={styles.titulo}>Pets Perdidos</h1>
 
-        <section className={styles["grid-pets"]}>
-          {pets.length > 0 ? (
-            pets.map((pet) => (
-              <PetCard key={pet.id} pet={pet} tipoPagina="perdidos" />
-            ))
-          ) : (
-            <p>Nenhum pet perdido no momento.</p>
-          )}
-        </section>
+        {loading && <p>Carregando pets...</p>}
+
+        {erro && <p>{erro}</p>}
+
+        {!loading && !erro && (
+          <section className={styles["grid-pets"]}>
+            {pets.length > 0 ? (
+              pets.map((pet) => (
+                <PetCard
+                  key={pet.id}
+                  pet={pet}
+                  tipoPagina="perdidos"
+                />
+              ))
+            ) : (
+              <p>Nenhum pet perdido no momento.</p>
+            )}
+          </section>
+        )}
       </div>
     </main>
   );
