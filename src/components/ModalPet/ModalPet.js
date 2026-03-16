@@ -1,8 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import styles from "./ModalPet.module.css";
+import ModalLogin from "@/components/ModalLogin/ModalLogin";
 
 export default function ModalPet({ pet, onClose }) {
+  const [showLoginModal, setShowLoginModal] = useState(false);
+
   function handleBackgroundClick(e) {
     if (e.target === e.currentTarget) {
       onClose();
@@ -10,8 +14,8 @@ export default function ModalPet({ pet, onClose }) {
   }
 
   function handleContact() {
-    const ownerName = pet.owner || pet.ownerName || "";
-    const phone = pet.phone || pet.contact || pet.whatsapp || "";
+    const name = pet.responsavel || pet.nomeUsuario || "";
+    const phone = pet.telefone || pet.phone || pet.contato || pet.whatsapp || "";
     const phoneDigits = phone.replace(/\D/g, "");
 
     if (!phoneDigits) {
@@ -25,13 +29,15 @@ export default function ModalPet({ pet, onClose }) {
   }
 
   return (
-    <div className={styles.overlay} onClick={handleBackgroundClick}>
-      <div className={styles.modal}>
-        <div className={styles.modalContent}>
-          {/* CLOSE BUTTON */}
-          <button className={styles.closeBtn} onClick={onClose}>
-            &times;
-          </button>
+<div className={styles.overlay} onClick={handleBackgroundClick}>
+  <div className={styles.modal}>
+    
+
+    <div className={styles.modalContent}>
+      {/* BOTÃO DE FECHAR */}
+        <button className={styles.closeBtn} onClick={onClose}>
+          &times;
+        </button>
 
           {/* LEFT SIDE - IMAGE */}
           <div className={styles.imageBox}>
@@ -95,13 +101,13 @@ export default function ModalPet({ pet, onClose }) {
               <p className={styles.descText}>{pet.description}</p>
             </div>
 
-            {/* CONTACT BUTTON */}
-            <button className={styles.contactBtn} onClick={handleContact}>
-              Contact owner
-            </button>
-          </div>
-        </div>
+        {/* BOTÃO */}
+        <button className={styles.contactBtn} onClick={handleContact}>Contatar dono</button>
+
       </div>
     </div>
+  </div>
+</div>
+
   );
 }

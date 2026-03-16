@@ -14,16 +14,17 @@ export default function MeusPetsPerdidos() {
   const [usuario, setUsuario] = useState(null);
   const [loading, setLoading] = useState(true);
   const [erro, setErro] = useState("");
-  
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("usuarioLogado"));
+    console.log("usuarioLogado localStorage:", user);
     setUsuario(user);
   }, []);
 
   useEffect(() => {
     async function carregarPets() {
-      if (!usuario || !usuario.id) {
+      if (usuario == null || usuario.id == null) {
+        console.log("Usuário sem id:", usuario);
         setPets([]);
         setLoading(false);
         return;
@@ -48,21 +49,20 @@ export default function MeusPetsPerdidos() {
         const data = await res.json();
         const listaPets = Array.isArray(data.pets) ? data.pets : [];
 
-        console.log("pet:", pet);
-        console.log("donoDoPet:", donoDoPet, "usuario.id:", usuario.id, "status:", statusPet);
+        console.log("Pets vindos do backend:", listaPets);
 
         const meusPetsPerdidos = listaPets.filter((pet) => {
-        const donoDoPet = pet.userId ?? pet.usuarioId;
-        const statusPet = pet.status;
-        
-        console.log("pet:", pet);
-        console.log("donoDoPet:", donoDoPet, "usuario.id:", usuario.id, "status:", statusPet);
-        
-        return (
-          Number(donoDoPet) === Number(usuario.id) &&
-          (statusPet === "lost" || statusPet === "perdido")
+          const donoDoPet = pet.userId ?? pet.usuarioId;
+          const statusPet = pet.status;
+
+          return (
+            Number(donoDoPet) === Number(usuario.id) &&
+            (statusPet === "lost" || statusPet === "perdido")
           );
         });
+
+        console.log("Meus pets perdidos filtrados:", meusPetsPerdidos);
+
         setPets(meusPetsPerdidos);
       } catch (error) {
         console.error("Erro ao carregar meus pets perdidos:", error);
@@ -74,8 +74,6 @@ export default function MeusPetsPerdidos() {
 
     carregarPets();
   }, [usuario]);
-  
-
 
   return (
     <main className={styles["pets-page"]}>
