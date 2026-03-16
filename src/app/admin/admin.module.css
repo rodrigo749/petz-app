@@ -1,69 +1,169 @@
+/* ===== DASHBOARD ===== */
 .container {
   min-height: 92vh;
-  background-color: #1a3a50;
-  padding: 2rem;
+  background: linear-gradient(160deg, #0f2a3d 0%, #1a3a50 50%, #0f2a3d 100%);
+  padding: 3rem 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  z-index: 0;
+}
+
+.pageInner {
+  width: 100%;
+  max-width: 860px;
 }
 
 .header {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.headerText h1 {
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 0.3rem;
+  letter-spacing: -0.5px;
+}
+
+.headerText p {
+  color: #7fb8d8;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.headerText strong {
+  color: #a8d8f0;
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.15), transparent);
   margin-bottom: 2rem;
 }
 
-.header h1 {
-  color: #fff;
-  font-size: 2rem;
-  margin-bottom: 0.25rem;
+.sectionLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #5a9abf;
+  margin: 0 0 1rem;
 }
 
-.header p {
-  color: #a0c4d8;
-  font-size: 1rem;
-}
-
-/* Cards de ação */
-.grid {
+/* Stat cards */
+.statsRow {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  max-width: 1000px;
-  margin: 0 auto;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 2.5rem;
 }
 
-.card {
+.statCard {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 1.5rem 1.75rem;
+  backdrop-filter: blur(4px);
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.statCard:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.statCardAdocao {
+  border-top: 3px solid #3b9eda;
+}
+
+.statCardPerdidos {
+  border-top: 3px solid #f5894e;
+}
+
+.statIconWrap {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: rgba(59, 158, 218, 0.2);
+  color: #7dcbf5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.statIconLost {
+  background: rgba(245, 137, 78, 0.2);
+  color: #fbb07a;
+}
+
+.statInfo {
   display: flex;
   flex-direction: column;
-  background: #f8ffff;
-  border-radius: 16px;
-  padding: 1.75rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.statNumber {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+
+.statLabel {
+  font-size: 0.88rem;
+  color: #7fb8d8;
+  font-weight: 500;
+}
+
+/* Action buttons grid */
+.actionsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.btnAction {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.1rem 1.5rem;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
   text-decoration: none;
-  color: inherit;
-  border: 3px solid transparent;
+  transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+  white-space: nowrap;
 }
 
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  border-color: #0d66a6;
+.btnAction:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  opacity: 0.93;
 }
 
-.cardIcon {
-  font-size: 2rem;
-  margin-bottom: 0.75rem;
+.btnPrimary {
+  background: linear-gradient(135deg, #0d66a6, #0a4f86);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.1);
 }
 
-.card h2 {
-  font-size: 1.15rem;
-  color: #0b3b52;
-  margin: 0 0 0.5rem;
+.btnSecondary {
+  background: rgba(255, 255, 255, 0.07);
+  color: #c8e8f7;
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-.card p {
-  font-size: 0.9rem;
-  color: #666;
-  margin: 0;
-  flex: 1;
+.btnSecondary:hover {
+  background: rgba(255, 255, 255, 0.12);
 }
 
 /* Tabela de gerenciamento */
@@ -236,6 +336,15 @@
 }
 
 @media (max-width: 640px) {
+  .statsRow,
+  .actionsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .headerText h1 {
+    font-size: 1.5rem;
+  }
+
   .table th,
   .table td {
     padding: 8px 10px;
@@ -245,9 +354,5 @@
   .actions {
     flex-direction: column;
     gap: 4px;
-  }
-
-  .grid {
-    grid-template-columns: 1fr;
   }
 }

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from 'react'
+import { PawPrint, Home } from 'lucide-react'
 import styles from './home.module.css'
 import Carousel from '../../components/Carousel'
 
@@ -126,7 +127,7 @@ export default function HomePage() {
       <section className={styles.statsSection}>
         <div className={styles.statsContainer}>
           <div className={`${styles.statCard} ${styles.statCardEncontrados}`}>
-            <div className={styles.statIcon}>🐾</div>
+            <div className={styles.statIcon}><PawPrint size={36} strokeWidth={1.5} /></div>
             <div className={styles.statNumber}>{totalEncontrados}</div>
             <div className={styles.statLabel}>Pets Encontrados</div>
             <p className={styles.statDescription}>
@@ -135,7 +136,7 @@ export default function HomePage() {
           </div>
 
           <div className={`${styles.statCard} ${styles.statCardAdotados}`}>
-            <div className={styles.statIcon}>🏠</div>
+            <div className={styles.statIcon}><Home size={36} strokeWidth={1.5} /></div>
             <div className={styles.statNumber}>{totalAdotados}</div>
             <div className={styles.statLabel}>Pets Adotados</div>
             <p className={styles.statDescription}>

@@ -360,7 +360,7 @@ export default function CadastrarPerdidos() {
                 />
                 <div className={styles.sliderMinMax}>
                   <span>R$ 0</span>
-                  <span>R$ 100.000</span>
+                  <span>R$ 1.000</span>
                 </div>
               </div>
             </div>
