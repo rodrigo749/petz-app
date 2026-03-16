@@ -34,12 +34,6 @@ export default function AdminDashboard() {
       href: "/admin/pets-perdidos",
     },
     {
-      icon: "💰",
-      title: "Histórico de Apoio",
-      desc: "Visualizar doações e apoios recebidos.",
-      href: "/historico-de-apoio",
-    },
-    {
       icon: "📝",
       title: "Cadastrar Pet Adoção",
       desc: "Cadastrar um novo pet disponível para adoção.",
@@ -63,7 +57,7 @@ export default function AdminDashboard() {
       <div className={styles.grid}>
         {cards.map((card, i) => (
           <Link key={i} href={card.href} className={styles.card}>
-            <span className={styles.cardIcon}>{card.icon}</span>
+          
             <h2>{card.title}</h2>
             <p>{card.desc}</p>
           </Link>

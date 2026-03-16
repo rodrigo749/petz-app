@@ -5,10 +5,6 @@ import { useRouter } from "next/navigation";
 import { FaPaw, FaEye, FaEyeSlash } from "react-icons/fa";
 import styles from "../../login-usuario/login.module.css";
 
-// Credenciais do admin — em produção devem vir do backend
-const ADMIN_EMAIL = "admin@petz.com";
-const ADMIN_PASSWORD = "admin123";
-
 export default function AdminLoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -16,7 +12,7 @@ export default function AdminLoginPage() {
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
@@ -25,19 +21,27 @@ export default function AdminLoginPage() {
       return;
     }
 
-    if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
-      const adminUser = {
-        id: 0,
-        nome: "Administrador",
-        email: ADMIN_EMAIL,
-        tipo: "admin",
-        imagem: "",
-      };
+    try {
+      const res = await fetch("http://localhost:3000/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error || "Erro ao autenticar.");
+        return;
+      }
+
+      const adminUser = data.user;
       localStorage.setItem("usuarioLogado", JSON.stringify(adminUser));
       window.dispatchEvent(new Event("auth-changed"));
       router.push("/admin");
-    } else {
-      setError("E-mail ou senha do administrador incorretos.");
+    } catch (err) {
+      console.error("Erro ao autenticar:", err);
+      setError("Erro ao conectar ao servidor.");
     }
   };
 
