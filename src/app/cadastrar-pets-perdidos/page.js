@@ -257,10 +257,7 @@ export default function CadastrarPerdidos() {
                 <option value="dog">Cachorro</option>
                 <option value="cat">Gato</option>
                 <option value="rabbit">Coelho</option>
-                <option value="guinea-pig">Porquinho-da-índia</option>
                 <option value="hamster">Hamster</option>
-                <option value="chinchila">Chinchila</option>
-                <option value="ferret">Furão</option>
                 <option value="cockatiel">Calopsita</option>
                 <option value="parakeet">Periquito</option>
                 <option value="parrot">Papagaio</option>
@@ -341,14 +338,14 @@ export default function CadastrarPerdidos() {
                 <input
                   type="range"
                   min="0"
-                  max="100000"
+                  max="1000"
                   value={formData.recompensa}
                   onChange={(e) => handleChange("recompensa", e.target.value)}
                   className={styles.slider}
                 />
                 <div className={styles.sliderMinMax}>
                   <span>R$ 0</span>
-                  <span>R$ 100.000</span>
+                  <span>R$ 1.000</span>
                 </div>
               </div>
             </div>
