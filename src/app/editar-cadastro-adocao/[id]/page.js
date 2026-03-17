@@ -4,6 +4,11 @@ import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import styles from "../editaradocao.module.css";
 
+const getBaseUrl = () =>
+  (process.env.NEXT_PUBLIC_PETZ_API_URL || "http://localhost:3000")
+    .trim()
+    .replace(/\/$/, "");
+
 export default function EditarCadastroAdocao() {
   const router = useRouter();
   const { id: petId } = useParams();
@@ -26,27 +31,29 @@ export default function EditarCadastroAdocao() {
       try {
         if (!petId) return;
 
-        const res = await fetch("/api/pets-adocao");
+        const res = await fetch(`${getBaseUrl()}/api/pets/${petId}`, {
+          cache: "no-store",
+        });
+
         if (!res.ok) {
-          console.error("Erro ao buscar pets:", res.status);
+          console.error("Erro ao buscar pet:", res.status);
           return;
         }
 
-        const data = await res.json();
-        const pet = data.find((p) => String(p.id) === String(petId));
+        const pet = await res.json();
 
-        if (!pet) {
+        if (!pet || !pet.id) {
           console.error("Pet não encontrado para o id:", petId);
           return;
         }
 
         setFormData({
-          nome: pet.nome || "",
-          raca: pet.raca || "",
-          genero: pet.genero || "",
-          idade: pet.idade || "",
-          descricao: pet.descricao || "",
-          imagem: pet.imagem || "",
+          nome: pet.nome || pet.name || "",
+          raca: pet.raca || pet.breed || "",
+          genero: pet.genero || pet.gender || "",
+          idade: pet.idade || pet.age || "",
+          descricao: pet.descricao || pet.description || "",
+          imagem: pet.imagem || pet.image || "",
         });
       } catch (error) {
         console.error("Erro ao carregar pet:", error);
@@ -98,13 +105,26 @@ export default function EditarCadastroAdocao() {
         imagemURL = uploadData.url;
       }
 
-      const petAtualizado = { ...formData, imagem: imagemURL };
+      const petAtualizado = {
+        name: formData.nome,
+        breed: formData.raca,
+        gender: formData.genero,
+        age: formData.idade,
+        description: formData.descricao,
+        image: imagemURL,
+      };
 
-      await fetch(`/api/pets-adocao/${petId}`, {
+      const token = localStorage.getItem("token") || "";
+      const res = await fetch(`${getBaseUrl()}/api/pets/${petId}`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
         body: JSON.stringify(petAtualizado),
       });
+
+      if (!res.ok) throw new Error("Erro ao atualizar pet");
 
       alert("Pet atualizado com sucesso!");
       router.push("/seus-pets-para-adocao");
@@ -118,7 +138,16 @@ export default function EditarCadastroAdocao() {
     if (!confirm("Tem certeza que deseja excluir este pet?")) return;
 
     try {
-      await fetch(`/api/pets-adocao/${petId}`, { method: "DELETE" });
+      const token = localStorage.getItem("token") || "";
+      const res = await fetch(`${getBaseUrl()}/api/pets/${petId}`, {
+        method: "DELETE",
+        headers: {
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+      });
+
+      if (!res.ok) throw new Error("Erro ao excluir pet");
+
       alert("Pet excluído com sucesso!");
       router.push("/seus-pets-para-adocao");
     } catch (error) {

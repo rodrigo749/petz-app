@@ -258,15 +258,7 @@ export default function CadastrarPerdidos() {
                 <option value="" disabled>Select species</option>
                 <option value="dog">Dog</option>
                 <option value="cat">Cat</option>
-                <option value="rabbit">Rabbit</option>
-                <option value="guinea-pig">Guinea Pig</option>
-                <option value="hamster">Hamster</option>
-                <option value="chinchilla">Chinchilla</option>
-                <option value="ferret">Ferret</option>
-                <option value="cockatiel">Cockatiel</option>
-                <option value="parakeet">Parakeet</option>
-                <option value="parrot">Parrot</option>
-                <option value="turtle">Turtle</option>
+                <option value="other">Other</option>
               </select>
             </div>
 
