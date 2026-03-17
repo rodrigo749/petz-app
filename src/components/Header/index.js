@@ -60,14 +60,20 @@ export default function Header() {
     <header className={styles.header}>
       <nav className={styles.nav}>
         <Link href="/" className={styles.logo}>
-          <Image
-            src="/images/Logo.png"
-            alt="Patas Perdidas"
-            width={180}
-            height={60}
-            priority
-            className={styles.logoImage}
-          />
+          <div className={styles.logoContent}>
+
+            <Image
+              src="/images/logo.svg"
+              alt="Desabandone focinho"
+              width={180}
+              height={60}
+              priority
+              className={styles.logoImage}
+            />
+
+          </div>
+
+
         </Link>
 
         {/* ================= DESKTOP MENU ================= */}
@@ -228,6 +234,7 @@ export default function Header() {
                             onClick={() => setMenuOpen(false)}
                             className={styles.mobileSubLink}
                           >
+                            {s.label}
                             {s.label}
                           </Link>
                         ))}
