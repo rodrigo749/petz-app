@@ -1,7 +1,7 @@
 .pets-page {
   width: 100%;
   min-height: 100vh;
-  background-color: #274b65;
+  background-color: var(--bg-soft);
   padding: 40px 0;
   position: relative;
   overflow: hidden;
@@ -34,7 +34,7 @@
 
 
 .titulo {
-  background-color: #25455d;
+  background-color: var(--heading);
   color: #FFFFFF;
   font-size: 20px;
   font-weight: 700;
@@ -42,7 +42,7 @@
   border-radius: 50px;
   text-align: center;
   margin: 0 auto 50px auto;
-  border: 5px solid #0E2A45;
+  border: 5px solid var(--heading);
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
@@ -86,8 +86,8 @@
 
 
 .card-pet {
-  background: #254b6b;
-  /* increased radius to match adoção page */
+  background: var(--heading);
+  /* increased radius to match adoÃ§Ã£o page */
   border-radius: 25px;
   padding: 15px;
   display: flex;
@@ -123,7 +123,7 @@
   /* larger inner box radius to match adocao styling */
   border-radius: 22px;
   padding: 6px 10px;
-  color: #0f2a3d;
+  color: var(--heading);
 
   flex: 1;
   height: 160px;   
@@ -173,3 +173,5 @@
   height: 20px;
   object-fit: contain;
 }
+
+

@@ -1,7 +1,7 @@
 /* ===== DASHBOARD ===== */
 .container {
   min-height: 92vh;
-  background: linear-gradient(160deg, #0f2a3d 0%, #1a3a50 50%, #0f2a3d 100%);
+  background: var(--bg);
   padding: 3rem 1.5rem;
   display: flex;
   align-items: flex-start;
@@ -22,7 +22,7 @@
 }
 
 .headerText h1 {
-  color: #fff;
+  color: var(--heading);
   font-size: 2rem;
   font-weight: 700;
   margin: 0 0 0.3rem;
@@ -30,18 +30,18 @@
 }
 
 .headerText p {
-  color: #7fb8d8;
+  color: var(--muted);
   font-size: 1rem;
   margin: 0;
 }
 
 .headerText strong {
-  color: #a8d8f0;
+  color: var(--heading);
 }
 
 .divider {
   height: 1px;
-  background: linear-gradient(90deg, rgba(255,255,255,0.15), transparent);
+  background: linear-gradient(90deg, rgba(15, 111, 120, 0.35), transparent);
   margin-bottom: 2rem;
 }
 
@@ -50,7 +50,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  color: #5a9abf;
+  color: var(--heading);
   margin: 0 0 1rem;
 }
 
@@ -66,33 +66,33 @@
   display: flex;
   align-items: center;
   gap: 1.25rem;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--card);
+  border: 2px solid var(--border);
   border-radius: 16px;
   padding: 1.5rem 1.75rem;
-  backdrop-filter: blur(4px);
+  backdrop-filter: none;
   transition: background 0.2s, border-color 0.2s;
 }
 
 .statCard:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.22);
+  background: #f7fbfb;
+  border-color: var(--heading);
 }
 
 .statCardAdocao {
-  border-top: 3px solid #3b9eda;
+  border-top: 4px solid var(--heading);
 }
 
 .statCardPerdidos {
-  border-top: 3px solid #f5894e;
+  border-top: 4px solid var(--accent-orange);
 }
 
 .statIconWrap {
   width: 56px;
   height: 56px;
   border-radius: 14px;
-  background: rgba(59, 158, 218, 0.2);
-  color: #7dcbf5;
+  background: rgba(89, 163, 169, 0.22);
+  color: var(--heading);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -100,8 +100,8 @@
 }
 
 .statIconLost {
-  background: rgba(245, 137, 78, 0.2);
-  color: #fbb07a;
+  background: rgba(244, 125, 47, 0.2);
+  color: #cf6d2f;
 }
 
 .statInfo {
@@ -112,14 +112,14 @@
 .statNumber {
   font-size: 2.4rem;
   font-weight: 800;
-  color: #fff;
+  color: var(--heading);
   line-height: 1;
   margin-bottom: 0.3rem;
 }
 
 .statLabel {
   font-size: 0.88rem;
-  color: #7fb8d8;
+  color: var(--muted);
   font-weight: 500;
 }
 
@@ -151,19 +151,19 @@
 }
 
 .btnPrimary {
-  background: linear-gradient(135deg, #0d66a6, #0a4f86);
+  background: var(--nav);
   color: #fff;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 4px solid #5fa8ae;
 }
 
 .btnSecondary {
-  background: rgba(255, 255, 255, 0.07);
-  color: #c8e8f7;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #f4f8f8;
+  color: var(--heading);
+  border: 2px solid var(--border);
 }
 
 .btnSecondary:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: #edf3f3;
 }
 
 /* Tabela de gerenciamento */
@@ -173,7 +173,7 @@
 }
 
 .tableContainer h1 {
-  color: #fff;
+  color: var(--heading);
   text-align: center;
   margin-bottom: 1.5rem;
 }
@@ -189,7 +189,7 @@
 
 .btnNovo {
   padding: 10px 24px;
-  background: linear-gradient(180deg, #0d66a6, #0a4f86);
+  background: var(--nav);
   color: #fff;
   border: none;
   border-radius: 999px;
@@ -206,7 +206,7 @@
 
 .btnVoltar {
   padding: 10px 24px;
-  background: #475569;
+  background: #5f777b;
   color: #fff;
   border: none;
   border-radius: 999px;
@@ -217,7 +217,7 @@
 }
 
 .btnVoltar:hover {
-  background: #64748b;
+  background: #4f6569;
 }
 
 .table {
@@ -226,11 +226,11 @@
   background: #fff;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px rgba(13, 56, 60, 0.12);
 }
 
 .table th {
-  background: #143750;
+  background: var(--nav);
   color: #fff;
   padding: 12px 16px;
   text-align: left;
@@ -240,9 +240,9 @@
 
 .table td {
   padding: 12px 16px;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid #d6e1e2;
   font-size: 0.9rem;
-  color: #333;
+  color: var(--text);
   vertical-align: middle;
 }
 
@@ -251,7 +251,7 @@
 }
 
 .table tr:hover td {
-  background: #f0f9ff;
+  background: #edf4f4;
 }
 
 .table img {
@@ -268,7 +268,7 @@
 
 .btnEditar {
   padding: 6px 14px;
-  background: #0d66a6;
+  background: var(--nav);
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -279,12 +279,12 @@
 }
 
 .btnEditar:hover {
-  background: #0a4f86;
+  background: var(--nav-hover);
 }
 
 .btnExcluir {
   padding: 6px 14px;
-  background: #dc2626;
+  background: #d35353;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -294,19 +294,19 @@
 }
 
 .btnExcluir:hover {
-  background: #b91c1c;
+  background: #bc4343;
 }
 
 .empty {
   text-align: center;
-  color: #a0c4d8;
+  color: var(--muted);
   padding: 3rem 1rem;
   font-size: 1.1rem;
 }
 
 .loading {
   text-align: center;
-  color: #a0c4d8;
+  color: var(--muted);
   padding: 3rem;
   font-size: 1.1rem;
 }
@@ -321,18 +321,18 @@
 }
 
 .statusAvailable {
-  background: #dcfce7;
-  color: #166534;
+  background: #deefe0;
+  color: #23663a;
 }
 
 .statusAdopted {
-  background: #dbeafe;
-  color: #1e40af;
+  background: #e2f0f1;
+  color: #1d5f66;
 }
 
 .statusLost {
-  background: #fef3c7;
-  color: #92400e;
+  background: #fdecd7;
+  color: #985321;
 }
 
 @media (max-width: 640px) {

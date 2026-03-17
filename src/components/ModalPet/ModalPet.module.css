@@ -23,7 +23,7 @@
   height: auto;
   box-shadow: 0 0 25px rgba(0,0,0,0.25);
   overflow: hidden;
-  border: 4px solid #ecad5b;
+  border: 4px solid var(--accent-orange);
   display: flex;
   flex-direction: column;
 }
@@ -37,10 +37,10 @@
 }
 
 /* ===========================
-    BOTÃO DE FECHAR
+    BOTÃƒO DE FECHAR
   ===========================*/
 .closeBtn {
-  background: #f7bb63;
+  background: var(--accent-orange);
   border: none;
   width: 30px;
   height: 30px;
@@ -49,7 +49,7 @@
   align-items: center;
   justify-content: center;
   font-size: 22px;
-  color: #143750;
+  color: var(--heading);
   cursor: pointer;
   z-index: 1200; 
   transition: background 0.12s, transform 0.12s;
@@ -76,13 +76,13 @@
 .petName {
   margin-top: 12px;
   padding: 10px 20px;
-  background-color: #024b91;
-  color: #f7bb63;
+  background-color: var(--nav);
+  color: var(--accent-orange);
   font-size: clamp(20px, 3vw, 36px);
   font-weight: 700;
   text-align: center;
   border-radius: 14px;
-  border: 3px solid #143750;
+  border: 3px solid var(--heading);
 }
 
 /* ===========================
@@ -93,7 +93,7 @@
   background: #7a8fa7;
   padding: 24px;
   border-radius: 16px;
-  border: 4px solid #143750;
+  border: 4px solid var(--heading);
   overflow-y: auto;
   position: relative;
 }
@@ -116,7 +116,7 @@
 }
 
 .infoColumns strong {
-  color: #f7bb63;
+  color: var(--accent-orange);
   font-weight: 700;
 }
 
@@ -130,45 +130,45 @@
 }
 
 /* ===========================
-   DESCRIÇÃO
+   DESCRIÃ‡ÃƒO
    =========================== */
 .descriptionBox {
   margin-top: 20px;
-  background: #f3f7fb;
+  background: var(--card);
   border-radius: 14px;
   width: 100%;
   padding: 18px;
   max-height: 260px;
-  border: 3px solid #143750;
+  border: 3px solid var(--heading);
   overflow-y: auto;
 }
 
 .descLabel {
   font-size: 20px;
   font-weight: 700;
-  color: #f7bb63;
+  color: var(--accent-orange);
   margin-bottom: 10px;
   margin-top: -10px;
 }
 
 .descText {
-  color: #143750;
+  color: var(--heading);
   font-size: 16px;
   line-height: 1.4;
 }
 
 /* ===========================
-   BOTÃO
+   BOTÃƒO
    =========================== */
 .contactBtn {
   position: absolute;
   bottom: 22px;
   left: 50%;
   transform: translateX(-50%);
-  background: #024b91;
+  background: var(--nav);
   color: white;
   padding: 12px 64px;
-  border: 3px solid #3e8abf;
+  border: 3px solid var(--border);
   border-radius: 40px;
   font-size: 16px;
   font-weight: 600;
@@ -272,7 +272,7 @@
     font-size: 15px;
   }
 
-  /* Em telas pequenas o botão passa a fluir dentro do conteúdo para evitar overflow */
+  /* Em telas pequenas o botÃ£o passa a fluir dentro do conteÃºdo para evitar overflow */
   .contactBtn {
     position: static;
     transform: none;
@@ -357,4 +357,7 @@
 
   
 }
+
+
+
 

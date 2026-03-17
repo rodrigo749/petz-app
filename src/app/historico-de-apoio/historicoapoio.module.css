@@ -4,7 +4,7 @@
 
 .page {
   min-height: 100vh;
-  background: #274b65;
+  background: var(--bg-soft);
   padding: 28px 0 40px;
   position: relative;
   overflow: hidden;
@@ -27,10 +27,10 @@
   width: 95%;
   max-width: 1400px;
   margin: 0 auto;
-  background: #f7ffff;
+  background: var(--card);
   border-radius: 36px;
   padding: 24px 22px 200px;
-  border: 4px solid #1d4870;
+  border: 4px solid var(--heading);
   z-index: 1;
 }
 
@@ -44,7 +44,7 @@
 }
 
 .titulo {
-  background-color: #25455d;
+  background-color: var(--heading);
   color: #ffffff;
   font-size: 20px;
   font-weight: 700;
@@ -54,14 +54,14 @@
   width: 100%;
   max-width: 350px;
   margin: 0 auto 26px auto;
-  border: 3px solid #0e2a45;
+  border: 3px solid var(--heading);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
 .loading {
   text-align: center;
   font-weight: 800;
-  color: #25455d;
+  color: var(--heading);
   padding: 40px 0;
 }
 
@@ -77,7 +77,7 @@
   padding: 20px;
 }
 
-/* cards do histórico (lista principal) */
+/* cards do histÃ³rico (lista principal) */
 .grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -87,9 +87,9 @@
 
 .card {
   width: min(520px, 100%);
-  background: #6f8ea3;
+  background: var(--border);
   border-radius: 28px;
-  border: 5px solid #0b2f49;
+  border: 5px solid var(--heading);
   padding: 26px 28px;
 }
 
@@ -100,7 +100,7 @@
 }
 
 .label {
-  color: #ffb74d;
+  color: var(--accent-orange);
   font-weight: 900;
   margin-right: 8px;
 }
@@ -110,7 +110,7 @@
   font-weight: 800;
 }
 
-/* botões base (usados na V2 e no topo V2) */
+/* botÃµes base (usados na V2 e no topo V2) */
 .btnExcluir {
   border: 2px solid #ff7376;
   background: #d82d2d;
@@ -144,7 +144,7 @@
 }
 
 /* =========================================================
-   V1 - TOPBAR COM PATINHAS + BOTÃO "Cadastrar Pix para Apoio"
+   V1 - TOPBAR COM PATINHAS + BOTÃƒO "Cadastrar Pix para Apoio"
    ========================================================= */
 
 .topBar {
@@ -219,11 +219,11 @@
 
 .modalPix {
   position: relative;
-  background: #7790a2;
+  background: var(--border);
   border-radius: 26px;
   padding: 28px;
   width: min(520px, 92%);
-  border: 4px solid #0b2f49;
+  border: 4px solid var(--heading);
   text-align: center;
 }
 
@@ -237,7 +237,7 @@
   border-radius: 50%;
 
   border: none;
-  background: #25455d;
+  background: var(--heading);
   color: #fff;
 
   font-size: 18px;
@@ -250,16 +250,16 @@
 }
 
 .btnFechar:hover {
-  background: #1d3a50;
+  background: var(--heading);
 }
 
 .modalTitulo {
-  color: #ffb74d;
+  color: var(--accent-orange);
   font-weight: 900;
   margin-bottom: 12px;
 }
 
-/* descrição do modal — sem foto */
+/* descriÃ§Ã£o do modal â€” sem foto */
 .modalDescricao {
   color: #fff;
   font-size: 15px;
@@ -278,13 +278,13 @@
 
 .cnpjBox input {
   border-radius: 12px;
-  border: 2px solid #0b2f49;
+  border: 2px solid var(--heading);
   padding: 6px 10px;
   font-weight: 700;
 }
 
 .modalCnpjLabel {
-  color: #25455d;
+  color: var(--heading);
   font-weight: 900;
 }
 
@@ -308,8 +308,8 @@
 /* =========================================================
    V2 - TOPBAR (SEM PATINHAS)
    - QR pequeno + "Pix"
-   - Descrição + CNPJ
-   - Botões Excluir / Editar
+   - DescriÃ§Ã£o + CNPJ
+   - BotÃµes Excluir / Editar
    ========================================================= */
 
 .topBarV2 {
@@ -327,7 +327,7 @@
   align-items: center;
   gap: 14px;
 
-  border: 4px solid #1d4870;
+  border: 4px solid var(--heading);
 }
 
 .topBarV2Left {
@@ -342,8 +342,8 @@
   height: 90px;
   object-fit: contain;
   border-radius: 14px;
-  border: 2px solid #0b2f49;
-  background: #f7ffff;
+  border: 2px solid var(--heading);
+  background: var(--card);
   padding: 6px;
 
   position: relative;
@@ -358,13 +358,13 @@
 
 
 .topBarV2DescricaoLabel {
-  color: #f6a623; 
+  color: var(--accent-orange); 
   font-weight: 1000;
   white-space: nowrap;
 }
 
 .topBarV2DescricaoTexto {
-  color: #0b2f49;
+  color: var(--heading);
   font-weight: 1100;
   line-height: 1.25;
   margin: 0;
@@ -372,7 +372,7 @@
   /* permite quebrar linha */
   white-space: normal;
 
-  /* limita a 2 linhas com reticências */
+  /* limita a 2 linhas com reticÃªncias */
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;
@@ -383,7 +383,7 @@
 
 .topBarV2DescricaoBox {
   background: #ffffff;
-  border: 3px solid #3e8abf;
+  border: 3px solid var(--border);
   border-radius: 24px;
   padding: 12px 18px;
 
@@ -420,7 +420,7 @@
   gap: 8px;
 
   background: #ffffff;
-  border: 3px solid #3e8abf;
+  border: 3px solid var(--border);
   border-radius: 24px;
   padding: 10px 14px;
 
@@ -430,7 +430,7 @@
 
 .topBarV2Cnpj {
   font-weight: 900;
-  color: #0b2f49;
+  color: var(--heading);
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -475,7 +475,7 @@
    ========================================================= */
 
 .pixBox {
-  border: 3px solid #1d4870;
+  border: 3px solid var(--heading);
   border-radius: 22px;
   padding: 14px;
   background: #ffffff;
@@ -512,12 +512,12 @@
 }
 
 .pixDescricaoLabel {
-  color: #25455d;
+  color: var(--heading);
   font-weight: 900;
 }
 
 .pixDescricaoTexto {
-  color: #0b2f49;
+  color: var(--heading);
   font-weight: 800;
 }
 
@@ -533,19 +533,19 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  border: 3px solid #1d4870;
+  border: 3px solid var(--heading);
   border-radius: 999px;
   padding: 6px 12px;
-  background: #f7ffff;
+  background: var(--card);
 }
 
 .pixCnpj {
   font-weight: 900;
-  color: #0b2f49;
+  color: var(--heading);
 }
 
 .btnCopiar {
-  border: 3px solid #0b2f49;
+  border: 3px solid var(--heading);
   background: #ffffff;
   border-radius: 10px;
   padding: 4px 10px;
@@ -587,7 +587,7 @@
     justify-content: center;
   }
 
-  /* a descrição no tablet pode quebrar */
+  /* a descriÃ§Ã£o no tablet pode quebrar */
   .topBarV2Descricao {
     white-space: normal;
   }
@@ -662,8 +662,8 @@
 }
 
 .apoioCard {
-  background: #5f86a2;
-  border: 4px solid #1b3b52;
+  background: var(--border);
+  border: 4px solid var(--heading);
   border-radius: 28px;
   padding: 22px 26px;
   min-height: 118px;
@@ -680,7 +680,7 @@
 }
 
 .apoioLabel {
-  color: #f6a623; /* laranja do protótipo */
+  color: var(--accent-orange); /* laranja do protÃ³tipo */
   font-weight: 1000;
   min-width: 64px;
 }
@@ -696,4 +696,6 @@
     grid-template-columns: 1fr;
   }
 }
+
+
 

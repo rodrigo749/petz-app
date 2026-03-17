@@ -1,7 +1,7 @@
 .pets-page {
   width: 100%;
   min-height: 100vh;
-  background-color: #274b65;
+  background-color: var(--bg-soft);
   padding: 40px 0;
   position: relative;
   overflow: hidden;
@@ -34,7 +34,7 @@
 }
 
 .titulo {
-  background-color: #25455d;
+  background-color: var(--heading);
   color: #FFFFFF;
   font-size: 20px;
   font-weight: 700;
@@ -43,7 +43,7 @@
   text-align: center;
   width: fit-content;
   margin: 0 auto 50px auto;
-  border: 5px solid #0E2A45;
+  border: 5px solid var(--heading);
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
@@ -57,7 +57,7 @@
 
 /* Card horizontal */
 .card-pet {
-  background: #254b6b;
+  background: var(--heading);
   border-radius: 16px;
   padding: 15px;
 
@@ -104,7 +104,7 @@
   background: white;
   border-radius: 12px;
   padding: 12px;
-  color: #0f2a3d;
+  color: var(--heading);
 
   height: 180px;
   box-sizing: border-box;
@@ -127,11 +127,11 @@
   line-height: 1.25;
 }
 
-/* Botão central inferior */
+/* BotÃ£o central inferior */
 .btn-adotar {
-  background-color: #024b91;
+  background-color: var(--nav);
   color: white;
-  border: 2px solid #3e8abf;
+  border: 2px solid var(--border);
 
   padding: 8px 26px;
   border-radius: 24px;
@@ -149,8 +149,10 @@
 }
 
 .btn-adotar:hover {
-  background-color: #e4a34e;
+  background-color: var(--accent-orange);
   border: 2px solid #ee9530;
 }
+
+
 
 

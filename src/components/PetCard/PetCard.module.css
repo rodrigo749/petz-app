@@ -1,5 +1,5 @@
 .card-pet {
-  background: #254b6b;
+  background: var(--heading);
   border-radius: 16px;
   padding: 15px;
   display: flex;
@@ -21,7 +21,7 @@
   border-radius: 22px;
   overflow: hidden;
   flex-shrink: 0;
-  border: 4px solid #6088a4;
+  border: 4px solid var(--border);
   box-shadow: inset 0 0 8px rgba(0,0,0,0.06);
 }
 
@@ -29,8 +29,8 @@
   display: block; /* remove gaps abaixo da imagem */
   width: 100%;
   height: 100%;
-  object-fit: cover; /* preenche o container mantendo proporção */
-  /* herda o border-radius do wrapper para garantir cantos idênticos */
+  object-fit: cover; /* preenche o container mantendo proporÃ§Ã£o */
+  /* herda o border-radius do wrapper para garantir cantos idÃªnticos */
   border-radius: inherit;
 }
 
@@ -43,14 +43,14 @@
   align-items: center;
 }
 
-/* Área de texto */
+/* Ãrea de texto */
 .card-text-box {
   width: 100%;
   background: white;
   /* larger inner box radius to match adoption styling */
   border-radius: 22px;
   padding: 12px;
-  color: #0f2a3d;
+  color: var(--heading);
   height: 180px;
   box-sizing: border-box;
   display: flex;
@@ -74,9 +74,9 @@
 
 
 .btn-adotar {
-  background-color: #024b91;
+  background-color: var(--nav);
   color: white;
-  border: 2px solid #3e8abf;
+  border: 2px solid var(--border);
   border-radius: 24px;
 
   width: 130px;
@@ -97,8 +97,8 @@
 }
 
 .btn-adotar:hover {
-  background-color: #d69846;
-  border-color: #ca6e04;
+  background-color: var(--accent-orange);
+  border-color: var(--accent-orange);
 }
 
 .actions-wrapper .btn-adotar {
@@ -110,7 +110,7 @@
 }
 
 /* ================================
-   BOTÃO "ADOTADO" (VERDE)
+   BOTÃƒO "ADOTADO" (VERDE)
    ================================ */
 
 .btn-adotado {
@@ -135,12 +135,12 @@
 }
 
 /* ================================
-   BOTÃO "EDITAR"
+   BOTÃƒO "EDITAR"
    ================================ */
 
 .btn-editar {
-  background-color: #024a8d;
-  border: 2px solid #3e8abf;
+  background-color: var(--nav);
+  border: 2px solid var(--border);
   color: white;
 
   width: 130px;
@@ -155,12 +155,12 @@
 }
 
 .btn-editar:hover {
-  background-color: #1467b6;
-  border-color: #55a6db;
+  background-color: var(--nav-hover);
+  border-color: var(--border);
 }
 
 /* ================================
-   CONTAINER DOS BOTÕES
+   CONTAINER DOS BOTÃ•ES
    ================================ */
 
 .actions-wrapper {
@@ -183,4 +183,6 @@
   line-height: 35px;        /* centraliza o texto */
   text-align: center;
 }
+
+
 

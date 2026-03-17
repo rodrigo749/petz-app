@@ -2,8 +2,8 @@
   position: sticky;
   top: 0;
   z-index: 50;
-  background: #143750;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  background: var(--nav);
+  box-shadow: 0 2px 10px rgba(7, 51, 55, 0.18);
 }
 
 .nav {
@@ -55,7 +55,7 @@
   padding: 0.5rem 0;
   border-bottom: 2px solid transparent;
   border-radius: 12px;
-  background-color: #143750;
+  background-color: transparent;
   width: 135px;
   display: flex;
   align-items: center;
@@ -66,14 +66,14 @@
 }
 
 .link:hover {
-  background-color:#2e4b60;
+  background-color: rgba(255, 255, 255, 0.14);
 }
 
 .dropdownMenu {
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: #eeeeee;
+  background-color: #f2f5f5;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
   min-width: 180px;
@@ -84,7 +84,7 @@
 
 .dropdownItem {
   display: block;
-  color: rgb(87, 87, 87);
+  color: var(--text);
   text-decoration: none;
   padding: 0.75rem 1rem;
   font-weight: 500;
@@ -104,16 +104,16 @@ button.dropdownItem,
 }
 
 .dropdownItem:hover {
-  background-color: #bdbdbd;
+  background-color: #dce6e7;
 }
 
 /* Match image: first item lighter, second item darker */
 .dropdownMenu .dropdownItem:first-child {
-  background: #f5f5f5;
-  color: #666666;
+  background: #f4f7f7;
+  color: var(--muted);
 }
 .dropdownMenu .dropdownItem:nth-child(2) {
-  background: #d6d6d6;
+  background: #e4ecec;
 }
 
 /* Make sure button elements using .dropdownItem don't show default button borders */
@@ -190,7 +190,7 @@ button.dropdownItem,
   overflow: hidden;
   background: white;
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  border: 2px solid rgba(255,255,255,0.15);
+  border: 2px solid rgba(255, 255, 255, 0.35);
   cursor: pointer;
   padding: 0;
 }
@@ -208,13 +208,13 @@ button.dropdownItem,
   height: 100%;
   align-items: center;
   justify-content: center;
-  color: #143750;
+  color: var(--heading);
 }
 
 /* Profile dropdown items — reuse .dropdownMenu + .dropdownItem from nav */
 
 .profileWrap .dropdownMenu .dropdownItem {
-  color: #666666;
+  color: var(--muted);
   text-decoration: none;
   padding: 8px 12px;
   font-weight: 500;
@@ -232,7 +232,7 @@ button.dropdownItem,
 
 .profileWrap .dropdownMenu .dropdownItem:hover,
 .profileWrap .dropdownMenu .dropdownItem:focus {
-  background-color: #f3f3f3;
+  background-color: #e7efef;
 }
 
 /* Mobile Menu */
@@ -256,7 +256,7 @@ button.dropdownItem,
   bottom: 0;
   width: 85%;
   max-width: 400px;
-  background: #143750;
+  background: var(--nav);
   display: flex;
   flex-direction: column;
   animation: slideInRight 0.3s;
@@ -309,7 +309,7 @@ button.dropdownItem,
 }
 
 .mobileLink:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.14);
 }
 
 .mobileSubLinks {
@@ -327,11 +327,11 @@ button.dropdownItem,
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
   transition: all 0.2s;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .mobileSubLink:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.2);
 }
 
 /* Animations */

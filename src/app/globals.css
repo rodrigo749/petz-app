@@ -5,9 +5,18 @@
 }
 
 :root {
-  --nav: #10374a;
-  --bg: #f0f4f6;
-  --muted: #475b5f;
+  --nav: #0a6f74;
+  --nav-hover: #0c8086;
+  --bg: #cdd8da;
+  --bg-soft: #dbe3e4;
+  --card: #eef3f3;
+  --muted: #4a6166;
+  --text: #2f3f43;
+  --heading: #0f6f78;
+  --border: #59a3a9;
+  --accent-orange: #f47d2f;
+  --accent-yellow: #f0b907;
+  --danger: #c93a3a;
   --background: #ffffff;
 }
 
@@ -28,7 +37,8 @@ body {
   position: relative;
   min-height: 100vh;
   overflow: auto;
-  color: var(--foreground);
+  color: var(--text);
+  background: var(--bg);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -38,35 +48,6 @@ body {
   -ms-overflow-style: none; /* IE and Edge */
 }
 
-/* Global background placed in a pseudo-element behind everything.
-   Using a very low z-index (-9999) ensures it stays below all stacking contexts.
-*/
-/* Global background applied directly on html for reliability */
-html {
-  background-image: url('/images/Patas.png');
-  background-repeat: repeat;
-  background-position: center center;
-  background-size: auto; /* não distorce */
-  background-attachment: fixed;
-}
-
-/* disable previous pseudo-element approach (kept for reference) */
-html::before {
-  display: none;
-}
-
-/* Fallback/background element (inserted into layout) */
-.site-bg {
-  position: fixed;
-  inset: 0;
-  z-index: 1; /* bem atrás de todo o conteúdo */
-  pointer-events: none;
-  background-image: url('/images/Patas.png');
-  background-repeat: repeat;
-  background-position: center center;
-  background-size: 760px;
-  opacity: 0.65;
-}
 
 /* If body has this class, hide the global background (used by home page) */
 body.no-site-bg .site-bg,
@@ -151,7 +132,7 @@ a {
 /* footer styles */
 
 .footer {
-  background-color: #0c2c42;
+  background-color: var(--nav);
   color: #fff;
   padding: 2rem 1rem;
   text-align: center;
@@ -172,7 +153,7 @@ a {
 }
 
 .footer-logo p {
-  color: #ddd;
+  color: #deecee;
   font-size: 0.9rem;
   margin-bottom: 1.5rem;
 }
@@ -192,12 +173,12 @@ a {
 }
 
 .footer-links a:hover {
-  color: #d9783a;
+  color: #ffd08f;
 }
 
 .footer-copy {
   font-size: 0.85rem;
-  color: #ccc;
+  color: #deecee;
 }
 
 /* Responsivo */
@@ -223,7 +204,7 @@ a {
 }
 
 .footer-icons a:hover {
-  color: #d9783a; /* cor de destaque */
+  color: #ffd08f;
   transform: scale(1.15);
 }
 

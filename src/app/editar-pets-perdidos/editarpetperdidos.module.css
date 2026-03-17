@@ -3,7 +3,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  background: #274b65;
+  background: var(--bg-soft);
   padding: 50px 20px;
   min-height: 100vh;
   position: relative;
@@ -27,7 +27,7 @@
 .cadastroWrapper {
   width: 100%;
   max-width: 1750px;
-  background:#284c65;
+  background:var(--heading);
   border-radius: 10px;
   padding: 40px 20px;
   display: grid;
@@ -35,7 +35,7 @@
   gap: 50px;
 }
 
-/* Visual grouping: left (upload+descrição) and right (form) cards */
+/* Visual grouping: left (upload+descriÃ§Ã£o) and right (form) cards */
 .colEsquerda,
 .colDireita {
   background: #ffffff;
@@ -73,9 +73,9 @@
 .uploadBox {
   width: 180px;
   height: 180px;
-  background-color: #b7d3e6;
+  background-color: var(--card);
   border-radius: 24px;
-  border: 3px solid #6d93ad;
+  border: 3px solid var(--border);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -86,7 +86,7 @@
 }
 
 .uploadBox:hover {
-  background-color: #a8c7dc;
+  background-color: var(--card);
 }
 
 .uploadIcon {
@@ -114,10 +114,10 @@
   margin-bottom: 0px;
 }
 
-/* DESCRIÇÃO BOX */
+/* DESCRIÃ‡ÃƒO BOX */
 .descricaoBox {
   border-radius: 20px;
-  border: 6px solid #254460;
+  border: 6px solid var(--heading);
   padding: 15px;
 }
 .descLabel {
@@ -154,7 +154,7 @@
 }
 .tituloCadastro {
   font-size: 33px;
-  color: #285a78;
+  color: var(--heading);
 }
 .iconHome {
   width: 40px;
@@ -177,7 +177,7 @@
   height: 48px;
   padding-left: 50px;
   border-radius: 30px;
-  border: 2px solid #254460;
+  border: 2px solid var(--heading);
   outline: none;
   font-size: 16px;
   gap: 20px;
@@ -197,7 +197,7 @@
 }
 .recompensaLabel {
   font-weight: 700;
-  color: #254460;
+  color: var(--heading);
   font-size: 14px;
   text-align: center;
   width: 100%;
@@ -237,7 +237,7 @@
   color: red;
 }
 
-/* BOTÃO */
+/* BOTÃƒO */
 .btnCadastrar {
   margin-top: 10px;
   height: 48px;
@@ -245,7 +245,7 @@
   border-radius: 30px;
   border: none;
   cursor: pointer;
-  background: #0053a4;
+  background: var(--nav);
   color: white;
   font-size: 18px;
   font-weight: bold;
@@ -291,14 +291,14 @@
   flex: 1;
   height: 44px;
   border-radius: 22px;
-  border: 2px solid #254460;
+  border: 2px solid var(--heading);
   background: white;
-  color: #254460;
+  color: var(--heading);
   font-weight: 700;
   cursor: pointer;
 }
 .genderBtnActive {
-  background: #254460;
+  background: var(--heading);
   color: white;
 }
 
@@ -308,4 +308,6 @@
     grid-template-columns: 1fr;
   }
 }
+
+
 

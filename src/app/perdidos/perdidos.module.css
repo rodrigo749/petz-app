@@ -1,6 +1,6 @@
 .page {
   min-height: 100vh;
-  background: #274b65; /* fundo azul consistente */
+  background: var(--bg-soft); /* fundo azul consistente */
   padding: 2.5rem 1rem;
   position: relative;
   overflow: hidden;
@@ -22,17 +22,17 @@
 .container {
   max-width: 1180px;
   margin: 0 auto;
-  background: #f8ffff; /* caixa branca por trás de todos os pets */
+  background: var(--card); /* caixa branca por trÃ¡s de todos os pets */
   border-radius: 20px;
   padding: 2.5rem;
-  border: 6px solid #d9d9d9; /* mesma borda das outras páginas */
+  border: 6px solid #d9d9d9; /* mesma borda das outras pÃ¡ginas */
   z-index: 1;
 }
 
 .title {
   text-align: center;
   font-size: 2rem;
-  color: #0b3b52;
+  color: var(--heading);
   margin: 0 0 1.2rem 0;
 }
 
@@ -66,20 +66,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #e6eef2;
+  background: var(--card);
   border-radius: 12px;
   flex-shrink: 0;
 }
 
 .photoSvg {
-  color: #143750;
+  color: var(--heading);
   width: 64px;
   height: 64px;
 }
 
 .info {
   background: #fff;
-  color: #0b3746;
+  color: var(--heading);
   padding: 22px;
   border-radius: 12px;
   font-size: 1rem;
@@ -105,3 +105,5 @@
   .grid { grid-template-columns: 1fr; }
   .photoIcon { width: 140px; height: 100px; }
 }
+
+
