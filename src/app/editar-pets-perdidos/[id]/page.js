@@ -4,6 +4,11 @@ import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import styles from "../editarpetperdidos.module.css";
 
+const getBaseUrl = () =>
+  (process.env.NEXT_PUBLIC_PETZ_API_URL || "http://localhost:3000")
+    .trim()
+    .replace(/\/$/, "");
+
 export default function EditarPetPerdidosId() {
   const router = useRouter();
   const { id } = useParams();
@@ -31,7 +36,9 @@ export default function EditarPetPerdidosId() {
     async function carregarPet() {
       if (!id) return;
       try {
-        const res = await fetch(`/api/pets-perdidos/${id}`);
+        const res = await fetch(`${getBaseUrl()}/api/pets/${id}`, {
+          cache: "no-store",
+        });
         if (!res.ok) {
           console.error("Erro ao buscar pet perdido:", res.status);
           setCarregando(false);
@@ -41,16 +48,16 @@ export default function EditarPetPerdidosId() {
   // Permitir edição por qualquer visitante; não há bloqueio client-side de dono
 
         setFormData({
-          nome: pet.nome || "",
-          raca: pet.raca || "",
-          genero: pet.genero || "",
-          local: pet.local || "",
-          data: pet.data || "",
-          descricao: pet.descricao || "",
-          recompensa: pet.recompensa || 0,
-          imagem: pet.imagem || "",
+          nome: pet.nome || pet.name || "",
+          raca: pet.raca || pet.breed || "",
+          genero: pet.genero || pet.gender || "",
+          local: pet.local || pet.location || "",
+          data: pet.data || pet.dateLost || "",
+          descricao: pet.descricao || pet.description || "",
+          recompensa: pet.recompensa || pet.reward || 0,
+          imagem: pet.imagem || pet.image || "",
         });
-        setPreview(pet.imagem || null);
+        setPreview(pet.imagem || pet.image || null);
       } catch (err) {
         console.error("Erro ao carregar pet:", err);
       } finally {
@@ -111,21 +118,23 @@ export default function EditarPetPerdidosId() {
       }
 
       const payload = {
-        nome: formData.nome,
-        raca: formData.raca,
-        genero: formData.genero,
-        local: formData.local,
-        data: formData.data,
-        descricao: formData.descricao,
-        recompensa: Number(formData.recompensa) || 0,
-        imagem: imagemURL || "",
+        name: formData.nome,
+        breed: formData.raca,
+        gender: formData.genero,
+        location: formData.local,
+        dateLost: formData.data,
+        description: formData.descricao,
+        reward: Number(formData.recompensa) || 0,
+        image: imagemURL || "",
       };
 
       const logged = JSON.parse(localStorage.getItem('usuarioLogado') || 'null');
       const headers = { "Content-Type": "application/json" };
       if (logged && logged.id) headers['x-usuario-id'] = String(logged.id);
+      const token = localStorage.getItem("token") || "";
+      if (token) headers['Authorization'] = `Bearer ${token}`;
 
-      const res = await fetch(`/api/pets-perdidos/${id}`, {
+      const res = await fetch(`${getBaseUrl()}/api/pets/${id}`, {
         method: "PUT",
         headers,
         body: JSON.stringify(payload),
@@ -155,8 +164,10 @@ export default function EditarPetPerdidosId() {
   const logged = JSON.parse(localStorage.getItem('usuarioLogado') || 'null');
   const delHeaders = {};
   if (logged && logged.id) delHeaders['x-usuario-id'] = String(logged.id);
+  const token = localStorage.getItem("token") || "";
+  if (token) delHeaders['Authorization'] = `Bearer ${token}`;
 
-  const res = await fetch(`/api/pets-perdidos/${id}`, { method: "DELETE", headers: delHeaders });
+  const res = await fetch(`${getBaseUrl()}/api/pets/${id}`, { method: "DELETE", headers: delHeaders });
       if (!res.ok) throw new Error("Falha ao remover");
       setStatusMessage("Pet excluído com sucesso!");
       setTimeout(() => router.push("/perdidos"), 1000);

@@ -5,6 +5,11 @@ import { PawPrint, Home } from 'lucide-react'
 import styles from './home.module.css'
 import Carousel from '../../components/Carousel'
 
+const getBaseUrl = () =>
+  (process.env.NEXT_PUBLIC_PETZ_API_URL || "http://localhost:3000")
+    .trim()
+    .replace(/\/$/, "");
+
 export default function HomePage() {
   // remove global background on this page only
   useEffect(() => {
@@ -34,61 +39,59 @@ export default function HomePage() {
   }, [])
 
   async function carregarPets() {
-    // Buscar pets perdidos e encontrados a partir do endpoint de pets-perdidos
     try {
-      const resPerdidos = await fetch("/api/pets-perdidos");
-      const dataPerdidos = await resPerdidos.json();
+      const res = await fetch(`${getBaseUrl()}/api/pets`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        cache: "no-store",
+      });
 
-      const petsPerdidos = dataPerdidos
-        .filter(p => p.status === 'perdido')
+      if (!res.ok) throw new Error("Erro ao buscar pets");
+
+      const data = await res.json();
+      const listaPets = Array.isArray(data.pets) ? data.pets : Array.isArray(data) ? data : [];
+
+      // Pets perdidos para o carrossel
+      const petsPerdidos = listaPets
+        .filter(p => p.status === 'lost' || p.status === 'perdido')
         .map(pet => ({
           id: pet.id,
-          name: pet.nome,
-          breed: pet.raca,
-          gender: pet.genero,
-          location: pet.local || pet.descricao || "",
-          img: pet.imagem || "https://via.placeholder.com/300x200",
+          name: pet.nome || pet.name,
+          breed: pet.raca || pet.breed,
+          gender: pet.genero || pet.gender,
+          location: pet.local || pet.location || pet.descricao || pet.description || "",
+          img: pet.imagem || pet.image || "/images/semfoto.jpg",
           link: "/pets-perdidos"
         }));
 
       setPerdidos(petsPerdidos);
 
-      // Contar pets encontrados (status: encontrado ou achado)
-      const encontrados = dataPerdidos.filter(
-        p => p.status === 'encontrado' || p.status === 'achado'
-      );
+      // Contar pets encontrados (status "found" no backend)
+      const encontrados = listaPets.filter(p => p.status === 'found');
       setTotalEncontrados(encontrados.length);
-    } catch (err) {
-      console.error("Erro carregando pets perdidos:", err);
-      setPerdidos([]);
-      setTotalEncontrados(0);
-    }
-
-    // Buscar pets adotados a partir do endpoint de pets-adocao
-    try {
-      const resAdocao = await fetch("/api/pets-adocao");
-      const dataAdocao = await resAdocao.json();
 
       // Pets disponíveis para adoção (para o carrossel)
-      const petsParaAdocao = dataAdocao
-        .filter(p => p.status === 'adocao')
+      const petsParaAdocao = listaPets
+        .filter(p => p.status === 'available' || p.status === 'adocao')
         .map(pet => ({
           id: pet.id,
-          name: pet.nome,
-          breed: pet.raca,
-          gender: pet.genero,
-          age: pet.idade || "",
-          img: pet.imagem || "https://via.placeholder.com/300x200",
+          name: pet.nome || pet.name,
+          breed: pet.raca || pet.breed,
+          gender: pet.genero || pet.gender,
+          age: pet.idade || pet.age || "",
+          img: pet.imagem || pet.image || "/images/semfoto.jpg",
           link: "/pets-para-adocao"
         }));
       setAdocao(petsParaAdocao);
 
-      // Contar pets já adotados
-      const adotados = dataAdocao.filter(p => p.status === 'adotado');
+      // Contar pets já adotados (status "adopted" no backend)
+      const adotados = listaPets.filter(p => p.status === 'adopted');
       setTotalAdotados(adotados.length);
     } catch (err) {
-      console.error("Erro carregando pets adotados:", err);
+      console.error("Erro ao carregar pets:", err);
+      setPerdidos([]);
       setAdocao([]);
+      setTotalEncontrados(0);
       setTotalAdotados(0);
     }
   }
@@ -105,7 +108,7 @@ export default function HomePage() {
         <div className={styles.inner}>
           <h1>Bem Vindo{nomeUsuario ? `, ${nomeUsuario}` : ""}!</h1>
           <p>
-            Cada clique transforma vidas: aqui você pode reencontrar seu pet, adotar com amor ou doar para quem precisa. 
+            Cada clique transforma vidas: aqui você pode reencontrar seu pet, adotar com amor ou doar para quem precisa.
             Juntos, criamos lindas histórias de afeto, esperança e recomeços.
           </p>
         </div>
@@ -148,4 +151,4 @@ export default function HomePage() {
 
     </div>
   )
-}  
+}

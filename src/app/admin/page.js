@@ -6,7 +6,7 @@ import Link from "next/link";
 import { PawPrint, Search, ListChecks, FilePlus } from "lucide-react";
 import styles from "./admin.module.css";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+const API_URL = process.env.NEXT_PUBLIC_PETZ_API_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
 
 export default function AdminDashboard() {
   const router = useRouter();
@@ -26,11 +26,11 @@ export default function AdminDashboard() {
 
   async function carregarContagens() {
     try {
-      const res = await fetch(`${API_URL}/api/pets`);
+      const res = await fetch(`${API_URL}/api/pets`, { cache: "no-store" });
       const data = await res.json();
-      const lista = Array.isArray(data) ? data : [];
-      setCountAdocao(lista.filter((p) => p.status === "available" || p.status === "adopted").length);
-      setCountPerdidos(lista.filter((p) => p.status === "lost").length);
+      const lista = Array.isArray(data.pets) ? data.pets : Array.isArray(data) ? data : [];
+      setCountAdocao(lista.filter((p) => p.status === "available" || p.status === "adopted" || p.status === "adocao" || p.status === "adotado").length);
+      setCountPerdidos(lista.filter((p) => p.status === "lost" || p.status === "perdido").length);
     } catch {
       // ignore
     }
