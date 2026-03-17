@@ -1,9 +1,5 @@
-# TODO: Add copy button next to email on apoiar page
+Logo moved to the left in header by reducing .nav left padding to 1rem.
 
-Steps:
-1. [x] Update page.js - Wrapped email in .email-container, added copy button with navigator.clipboard.
-2. [x] Update module.css - Added .email-container (flex, same position), .copy-button styles (orange theme match).
-3. [x] Test copy functionality - Click button copies 'carolbazoli@gmail.com'.
+Updated petz-app/src/components/Header/header.module.css.
 
-Task complete. Reload /apoiar to test.
-
+Preview changes: cd petz-app && npm run dev
