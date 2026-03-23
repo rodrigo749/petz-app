@@ -57,6 +57,16 @@
   flex-direction: column;
   justify-content: flex-start;
   overflow: hidden;
+  overflow-x: hidden;
+}
+
+.card-text-box p {
+  font-size: 13px;
+  margin-bottom: 4px;
+  line-height: 1.25;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
 }
 
 .card-text-box h3 {
@@ -74,9 +84,9 @@
 
 
 .btn-adotar {
-  background-color: var(--nav);
+  background-color: #187f89;
   color: white;
-  border: 2px solid var(--border);
+  border: 2px solid #59a3a9;
   border-radius: 24px;
 
   width: 130px;
@@ -96,10 +106,7 @@
   transition: 0.2s;
 }
 
-.btn-adotar:hover {
-  background-color: var(--accent-orange);
-  border-color: var(--accent-orange);
-}
+
 
 .actions-wrapper .btn-adotar {
   position: relative;

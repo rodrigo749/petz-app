@@ -131,14 +131,23 @@
   flex: 1;
   height: 160px;
   width: 170px;
-  max-width: none;
-  flex: none;       /* mesma altura em todos */
+  max-width: 100%;
   box-sizing: border-box;
-  overflow: hidden;       /* impede o texto de estourar o card */
+  overflow: hidden;
+  overflow-x: hidden;       /* impede horizontal stretch */
 
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+}
+
+.card-text-box p {
+  font-size: 13px;
+  margin-bottom: 4px;
+  line-height: 1.25;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
 }
 
 .card-text-box h3 {

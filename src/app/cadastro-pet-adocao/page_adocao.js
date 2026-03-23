@@ -276,13 +276,14 @@ export default function CadastroAdocao() {
               className={styles.iconeDescricao}
             />
 
-            <textarea
+<textarea
               className={styles.descricaoTextarea}
               placeholder="Descreva o pet aqui..."
               value={formData.descricao}
               onChange={(e) => handleChange("descricao", e.target.value)}
               onFocus={handleFocus}
               onBlur={handleBlur}
+              maxLength={2000}
             ></textarea>
           </div>
         </section>

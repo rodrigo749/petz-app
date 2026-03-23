@@ -73,7 +73,7 @@ export default function ModalPet({ pet, onClose }) {
 
             {/* Paw icon */}
             <img
-              src="/images/paw.png"
+              src="/images/patinhabranca.png"
               alt="paw"
               className={styles.pawIcon}
             />

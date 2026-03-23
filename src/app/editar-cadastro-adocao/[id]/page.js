@@ -212,7 +212,7 @@ export default function EditarCadastroAdocao() {
               className={styles.iconeDescricao}
             />
 
-            <textarea
+<textarea
               name="descricao"
               className={styles.descricaoTextarea}
               placeholder="Descreva o pet aqui..."
@@ -220,6 +220,7 @@ export default function EditarCadastroAdocao() {
               onFocus={handleFocus}
               onBlur={handleBlur}
               onChange={handleChange}
+              maxLength={2000}
             ></textarea>
           </div>
         </section>

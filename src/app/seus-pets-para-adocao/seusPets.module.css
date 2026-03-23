@@ -108,11 +108,22 @@
 
   height: 180px;
   box-sizing: border-box;
+  max-width: 100%;
+  overflow: hidden;
+  overflow-x: hidden;
 
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  overflow: hidden;
+}
+
+.card-text-box p {
+  font-size: 13px;
+  margin-bottom: 4px;
+  line-height: 1.25;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
 }
 
 .card-text-box h3 {
