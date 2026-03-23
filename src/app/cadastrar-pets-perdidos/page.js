@@ -46,7 +46,10 @@ export default function CadastrarPerdidos() {
     if (!res.ok) throw new Error("Erro no upload");
 
     const data = await res.json();
-    return data.url;
+    if (data.blob && data.mimeType) {
+      return `data:${data.mimeType};base64,${data.blob}`;
+    }
+    return data.url || null;
   };
 
   // ================= IMAGEM =================

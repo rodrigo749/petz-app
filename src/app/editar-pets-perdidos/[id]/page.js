@@ -114,7 +114,11 @@ export default function EditarPetPerdidosId() {
           body: imgData,
         });
         const uploadData = await uploadRes.json();
-        imagemURL = uploadData.url;
+        if (uploadData.blob && uploadData.mimeType) {
+          imagemURL = `data:${uploadData.mimeType};base64,${uploadData.blob}`;
+        } else {
+          imagemURL = uploadData.url;
+        }
       }
 
       const payload = {
