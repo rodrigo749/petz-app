@@ -19,7 +19,7 @@
 /* Variants */
 .primary {
   background: linear-gradient(180deg, var(--blue-medium), var(--blue-primary));
-  color: white;
+  color: #0a6f74;
 }
 
 .primary:hover:not(:disabled) {
@@ -44,7 +44,7 @@
 
 .outline:hover:not(:disabled) {
   background: var(--blue-primary);
-  color: white;
+  color: #0a6f74;
 }
 
 /* Sizes */

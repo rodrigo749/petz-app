@@ -93,6 +93,14 @@
 .carousel::-webkit-scrollbar {
   display: none;
 }
+.blockPet {
+  display: flex;
+  gap: 100px;
+  align-items: center;
+  padding: 0 20px; /* Ajuste o padding para um valor fixo */
+  background: transparent; /* Certifique-se de que o fundo seja transparente */
+  border: none; /* Remove qualquer borda que possa estar causando a listra */
+}
 
 .cards {
   display: flex;

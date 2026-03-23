@@ -1,9 +1,11 @@
 "use client"
 
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import { PawPrint, Home } from 'lucide-react'
 import styles from './home.module.css'
 import Carousel from '../../components/Carousel'
+import Button from "../../components/Button";
 
 const getBaseUrl = () =>
   (process.env.NEXT_PUBLIC_PETZ_API_URL || "http://localhost:3000")
@@ -11,7 +13,8 @@ const getBaseUrl = () =>
     .replace(/\/$/, "");
 
 export default function HomePage() {
-  // remove global background on this page only
+  const router = useRouter()
+
   useEffect(() => {
     try {
       document.body.classList.add('no-site-bg');
@@ -22,6 +25,7 @@ export default function HomePage() {
       } catch (e) {}
     };
   }, []);
+
   const [perdidos, setPerdidos] = useState([])
   const [adocao, setAdocao] = useState([])
   const [totalEncontrados, setTotalEncontrados] = useState(0)
@@ -51,7 +55,6 @@ export default function HomePage() {
       const data = await res.json();
       const listaPets = Array.isArray(data.pets) ? data.pets : Array.isArray(data) ? data : [];
 
-      // Pets perdidos para o carrossel
       const petsPerdidos = listaPets
         .filter(p => p.status === 'lost' || p.status === 'perdido')
         .map(pet => ({
@@ -66,11 +69,10 @@ export default function HomePage() {
 
       setPerdidos(petsPerdidos);
 
-      // Contar pets encontrados (status "found" no backend)
       const encontrados = listaPets.filter(p => p.status === 'found');
       setTotalEncontrados(encontrados.length);
+     
 
-      // Pets disponíveis para adoção (para o carrossel)
       const petsParaAdocao = listaPets
         .filter(p => p.status === 'available' || p.status === 'adocao')
         .map(pet => ({
@@ -84,11 +86,11 @@ export default function HomePage() {
         }));
       setAdocao(petsParaAdocao);
 
-      // Contar pets já adotados (status "adopted" no backend)
       const adotados = listaPets.filter(p => p.status === 'adopted');
       setTotalAdotados(adotados.length);
     } catch (err) {
       console.error("Erro ao carregar pets:", err);
+      console.log(token);
       setPerdidos([]);
       setAdocao([]);
       setTotalEncontrados(0);
@@ -114,19 +116,37 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Carrossel de pets para adoção */}
+      <section className={styles.blockPet}>
+        
+        <Button
+          variant="primary"
+          size="large"
+          onClick={() => router.push('/cadastrar-pets-perdidos')}
+        >
+          Cadastrar Pets Perdidos
+        </Button>
+      </section>
+      <section className={styles.blockPet}>
+        
+        <Button
+          variant="primary"
+          size="large"
+          onClick={() => router.push('/cadastro-pet-adocao')}
+        >
+          Cadastrar Pets Para adoção
+        </Button>
+      </section>
+
       <section className={styles.block}>
         <h3 className={styles.title}>Pets para adoção</h3>
         <Carousel items={adocao} />
       </section>
 
-      {/* Carrossel de perdidos */}
       <section className={styles.block}>
         <h3 className={styles.title}>Perdidos recentemente</h3>
         <Carousel items={perdidos} />
       </section>
 
-      {/* Cards de estatísticas */}
       <section className={styles.statsSection}>
         <div className={styles.statsContainer}>
           <div className={`${styles.statCard} ${styles.statCardEncontrados}`}>
@@ -148,7 +168,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
     </div>
   )
 }
