@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import styles from "../editarpetperdidos.module.css";
+import { convertBlobToImageUrl, revokeImageUrl } from '@/lib/blobUtils';
 
 const getBaseUrl = () =>
   (process.env.NEXT_PUBLIC_PETZ_API_URL || "http://localhost:3000")
@@ -23,7 +24,7 @@ export default function EditarPetPerdidosId() {
     data: "",
     descricao: "",
     recompensa: 0,
-    imagem: "",
+    image: "",
   });
 
   const [imagemFile, setImagemFile] = useState(null);
@@ -47,6 +48,7 @@ export default function EditarPetPerdidosId() {
         const pet = await res.json();
   // Permitir edição por qualquer visitante; não há bloqueio client-side de dono
 
+        const petImage = pet.imagem || pet.image || "";
         setFormData({
           nome: pet.nome || pet.name || "",
           raca: pet.raca || pet.breed || "",
@@ -55,9 +57,9 @@ export default function EditarPetPerdidosId() {
           data: pet.data || pet.dateLost || "",
           descricao: pet.descricao || pet.description || "",
           recompensa: pet.recompensa || pet.reward || 0,
-          imagem: pet.imagem || pet.image || "",
+          image: petImage,
         });
-        setPreview(pet.imagem || pet.image || null);
+        setPreview(convertBlobToImageUrl(petImage, 'image/jpeg') || petImage || null);
       } catch (err) {
         console.error("Erro ao carregar pet:", err);
       } finally {
@@ -94,6 +96,42 @@ export default function EditarPetPerdidosId() {
     }
   };
 
+  const uploadImage = async (file) => {
+    // Validações
+    if (!file) throw new Error("Nenhum arquivo fornecido");
+    if (!file.type?.startsWith("image/")) throw new Error("Arquivo não é imagem");
+    if (file.size > 5 * 1024 * 1024) throw new Error("Imagem maior que 5MB");
+
+    const baseUrl = getBaseUrl();
+    const fd = new FormData();
+    fd.append('file', file);
+
+    try {
+      const res = await fetch(`${baseUrl}/api/upload`, {
+        method: "POST",
+        body: fd
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || "Erro no upload");
+      }
+
+      // ✅ Agora retorna objeto com blob e mimeType
+      if (data.blob && data.mimeType) {
+        return {
+          blob: data.blob,        // String base64 da imagem
+          mimeType: data.mimeType // Tipo MIME (ex: "image/jpeg")
+        };
+      }
+
+      throw new Error("Resposta do servidor sem blob");
+    } catch (error) {
+      throw new Error(`Falha no upload: ${error.message}`);
+    }
+  };
+
   const salvarEdicao = async (e) => {
     e?.preventDefault?.();
     if (!id) {
@@ -104,17 +142,10 @@ export default function EditarPetPerdidosId() {
     try {
       setLoading(true);
 
-      let imagemURL = formData.imagem;
+      let imageBlob = null;
       if (imagemFile) {
-        const imgData = new FormData();
-        imgData.append("file", imagemFile);
-
-        const uploadRes = await fetch("/api/upload", {
-          method: "POST",
-          body: imgData,
-        });
-        const uploadData = await uploadRes.json();
-        imagemURL = uploadData.url;
+        const uploadedImage = await uploadImage(imagemFile);
+        imageBlob = uploadedImage.blob;
       }
 
       const payload = {
@@ -125,7 +156,7 @@ export default function EditarPetPerdidosId() {
         dateLost: formData.data,
         description: formData.descricao,
         reward: Number(formData.recompensa) || 0,
-        image: imagemURL || "",
+        image: imageBlob || formData.image || null,
       };
 
       const logged = JSON.parse(localStorage.getItem('usuarioLogado') || 'null');

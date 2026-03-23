@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./adocao.module.css";
+import { convertBlobToImageUrl } from '@/lib/blobUtils';
 import useSafeToast from "@/components/Toast/useSafeToast";
 
 export default function CadastroAdocao() {
@@ -28,52 +29,40 @@ export default function CadastroAdocao() {
       .trim()
       .replace(/\/$/, "");
 
-  // upload robusto (mesmo padrão do cadastro de usuário)
   const uploadImage = async (file) => {
+    // Validações
     if (!file) throw new Error("Nenhum arquivo fornecido");
-    if (!file.type || !file.type.startsWith("image/")) throw new Error("Arquivo não é imagem");
-    const maxMB = 5;
-    if (file.size > maxMB * 1024 * 1024) throw new Error(`Imagem maior que ${maxMB}MB`);
+    if (!file.type?.startsWith("image/")) throw new Error("Arquivo não é imagem");
+    if (file.size > 5 * 1024 * 1024) throw new Error("Imagem maior que 5MB");
 
     const baseUrl = getBaseUrl();
-    const configs = [
-      { url: `${baseUrl}/api/upload`, field: "file" },
-      { url: `${baseUrl}/api/upload`, field: "imagem" },
-      { url: `${baseUrl}/upload`, field: "file" },
-      { url: `${baseUrl}/upload`, field: "imagem" },
-    ];
+    const fd = new FormData();
+    fd.append('file', file);
 
-    let lastErr = null;
-    for (const cfg of configs) {
-      try {
-        const fd = new FormData();
-        fd.append(cfg.field, file);
-        const res = await fetch(cfg.url, { method: "POST", body: fd });
-        const text = await res.text().catch(() => "");
-        let data = {};
-        try { data = text ? JSON.parse(text) : {}; } catch { data = { raw: text }; }
+    try {
+      const res = await fetch(`${baseUrl}/api/upload`, {
+        method: "POST",
+        body: fd
+      });
 
-        if (!res.ok) {
-          lastErr = new Error(data?.message || data?.raw || `Upload falhou (${res.status})`);
-          continue;
-        }
+      const data = await res.json();
 
-        const returned =
-          data?.url || data?.path || data?.fileUrl || data?.filename ||
-          data?.file || data?.file_path || data?.filepath || null;
-        if (returned && typeof returned === "string") {
-          return returned.startsWith("/") ? `${baseUrl}${returned}` : returned;
-        }
-        if (typeof data === "string" && data) {
-          return data.startsWith("/") ? `${baseUrl}${data}` : data;
-        }
-
-        lastErr = new Error("Upload OK mas resposta não contém URL");
-      } catch (err) {
-        lastErr = err;
+      if (!res.ok) {
+        throw new Error(data.message || "Erro no upload");
       }
+
+      // ✅ Agora retorna objeto com blob e mimeType
+      if (data.blob && data.mimeType) {
+        return {
+          blob: data.blob,        // String base64 da imagem
+          mimeType: data.mimeType // Tipo MIME (ex: "image/jpeg")
+        };
+      }
+
+      throw new Error("Resposta do servidor sem blob");
+    } catch (error) {
+      throw new Error(`Falha no upload: ${error.message}`);
     }
-    throw lastErr || new Error("Falha no upload da imagem");
   };
 
   // ── form handlers ──
@@ -156,10 +145,13 @@ export default function CadastroAdocao() {
 
     try {
       // 1. upload da imagem (se houver)
-      let finalImageUrl = "";
+      let imageBlob = null;
+      let imageMimeType = 'image/jpeg';
       if (imagemFile) {
         try {
-          finalImageUrl = await uploadImage(imagemFile);
+          const uploadedImage = await uploadImage(imagemFile);
+          imageBlob = uploadedImage.blob;
+          imageMimeType = uploadedImage.mimeType;
         } catch (uploadErr) {
           console.error("Erro upload:", uploadErr);
           showToast("Erro ao enviar imagem. Verifique o servidor.", "error");
@@ -178,7 +170,7 @@ export default function CadastroAdocao() {
         description: formData.descricao.trim() || null,
         status: "available",                      // pet para adoção
         userId: usuario.id,
-        imagem: finalImageUrl || "/images/semfoto.jpg",
+        image: imageBlob || null,  // ✅ Envia blob
       };
 
       // 3. enviar para o backend

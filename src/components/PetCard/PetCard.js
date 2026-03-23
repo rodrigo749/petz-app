@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import ModalPet from "@/components/ModalPet/ModalPet";
 import styles from "./PetCard.module.css";
+import { convertBlobToImageUrl, revokeImageUrl } from '@/lib/blobUtils';
 
 const getBaseUrl = () =>
   (process.env.NEXT_PUBLIC_PETZ_API_URL || "http://localhost:3000")
@@ -13,16 +14,45 @@ const getBaseUrl = () =>
 export default function PetCard({ pet, tipoPagina }) {
   const [open, setOpen] = useState(false);
   const [usuarioLogado, setUsuarioLogado] = useState(null);
+  const [imagemUrl, setImagemUrl] = useState("/images/semfoto.jpg");
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("usuarioLogado"));
     setUsuarioLogado(user);
   }, []);
 
+  useEffect(() => {
+    // Se tiver imagem no pet
+    if (pet?.image) {
+      // Tenta converter blob
+      const url = convertBlobToImageUrl(pet.image, 'image/jpeg');
+      if (url) {
+        setImagemUrl(url);
+      } else if (typeof pet.image === 'string' && (pet.image.startsWith('http') || pet.image.startsWith('/'))) {
+        // É uma URL, usar direto
+        setImagemUrl(pet.image);
+      }
+    } else if (pet?.imagem) {
+      // Campo alternativo (compatibilidade)
+      const url = convertBlobToImageUrl(pet.imagem, 'image/jpeg');
+      if (url) {
+        setImagemUrl(url);
+      } else {
+        setImagemUrl(pet.imagem);
+      }
+    }
+
+    // Limpeza ao desmontar
+    return () => {
+      if (imagemUrl.startsWith('blob:')) {
+        revokeImageUrl(imagemUrl);
+      }
+    };
+  }, [pet?.image, pet?.imagem]);
+
   // aceita tanto português quanto inglês
   const id = pet.id;
   const nome = pet.nome || pet.name || "Sem nome";
-  const imagem = pet.imagem || pet.image || "/images/default.png";
   const raca = pet.raca || pet.breed || "Não informada";
   const genero = pet.genero || pet.gender || "Não informado";
   const idade = pet.idade || pet.age || "Não informada";
@@ -50,7 +80,7 @@ export default function PetCard({ pet, tipoPagina }) {
       <div className={styles["card-pet"]}>
         <div className={styles["card-image-wrapper"]}>
           <img
-            src={imagem}
+            src={imagemUrl}
             alt={nome}
             className={styles["card-image"]}
           />

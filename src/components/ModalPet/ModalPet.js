@@ -1,11 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./ModalPet.module.css";
 import ModalLogin from "@/components/ModalLogin/ModalLogin";
+import { convertBlobToImageUrl, revokeImageUrl } from '@/lib/blobUtils';
 
 export default function ModalPet({ pet, onClose }) {
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [imagemUrl, setImagemUrl] = useState("/images/semfoto.jpg");
+
+  useEffect(() => {
+    if (pet?.image) {
+      const url = convertBlobToImageUrl(pet.image, 'image/jpeg');
+      setImagemUrl(url || (typeof pet.image === 'string' ? pet.image : "/images/semfoto.jpg"));
+    }
+
+    return () => {
+      if (imagemUrl?.startsWith('blob:')) {
+        revokeImageUrl(imagemUrl);
+      }
+    };
+  }, [pet?.image]);
 
   function handleBackgroundClick(e) {
     if (e.target === e.currentTarget) {
@@ -47,7 +62,7 @@ export default function ModalPet({ pet, onClose }) {
 
           {/* LEFT SIDE - IMAGE */}
           <div className={styles.imageBox}>
-            <img src={pet.image || "/images/default.png"} alt={pet.name} />
+            <img src={imagemUrl} alt={pet.name} />
             <h2 className={styles.petName}>{pet.name}</h2>
           </div>
 

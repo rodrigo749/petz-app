@@ -31,53 +31,40 @@ export default function CadastroPage() {
   const getBaseUrl = () =>
     (process.env.NEXT_PUBLIC_PETZ_API_URL || `http://localhost:${process.env.PORT || 3000}`).trim().replace(/\/$/, "");
 
-  // upload robusto (FormData) -> retorna URL absoluta
   const uploadImage = async (file) => {
+    // Validações
     if (!file) throw new Error("Nenhum arquivo fornecido");
-    if (!file.type || !file.type.startsWith("image/")) throw new Error("Arquivo não é imagem");
-    const maxMB = 5;
-    if (file.size > maxMB * 1024 * 1024) throw new Error(`Imagem maior que ${maxMB}MB`);
+    if (!file.type?.startsWith("image/")) throw new Error("Arquivo não é imagem");
+    if (file.size > 5 * 1024 * 1024) throw new Error("Imagem maior que 5MB");
 
     const baseUrl = getBaseUrl();
-    const configs = [
-      { url: `${baseUrl}/api/upload`, field: "file" },
-      { url: `${baseUrl}/api/upload`, field: "imagem" },
-      { url: `${baseUrl}/upload`, field: "file" },
-      { url: `${baseUrl}/upload`, field: "imagem" }
-    ];
+    const fd = new FormData();
+    fd.append('file', file);
 
-    let lastErr = null;
-    for (const cfg of configs) {
-      try {
-        const fd = new FormData();
-        fd.append(cfg.field, file);
-        const res = await fetch(cfg.url, { method: "POST", body: fd });
-        const text = await res.text().catch(() => "");
-        let data = {};
-        try { data = text ? JSON.parse(text) : {}; } catch { data = { raw: text }; }
+    try {
+      const res = await fetch(`${baseUrl}/api/upload`, {
+        method: "POST",
+        body: fd
+      });
 
-        if (!res.ok) {
-          lastErr = new Error(data?.message || data?.raw || `Upload falhou (${res.status})`);
-          continue;
-        }
+      const data = await res.json();
 
-        const returned = data?.url || data?.path || data?.fileUrl || data?.filename || data?.file || data?.file_path || data?.filepath || null;
-        if (returned && typeof returned === "string") {
-          return returned.startsWith("/") ? `${baseUrl}${returned}` : returned;
-        }
-
-        if (typeof data === "string" && data) {
-          return data.startsWith("/") ? `${baseUrl}${data}` : data;
-        }
-
-        lastErr = new Error("Upload OK mas resposta não contém URL");
-      } catch (err) {
-        lastErr = err;
-        // tenta próximo endpoint
+      if (!res.ok) {
+        throw new Error(data.message || "Erro no upload");
       }
-    }
 
-    throw lastErr || new Error("Falha no upload da imagem");
+      // ✅ Agora retorna objeto com blob e mimeType
+      if (data.blob && data.mimeType) {
+        return {
+          blob: data.blob,        // String base64 da imagem
+          mimeType: data.mimeType // Tipo MIME (ex: "image/jpeg")
+        };
+      }
+
+      throw new Error("Resposta do servidor sem blob");
+    } catch (error) {
+      throw new Error(`Falha no upload: ${error.message}`);
+    }
   };
 
   // form handlers
@@ -158,11 +145,13 @@ export default function CadastroPage() {
     }
 
     try {
-      let finalImageUrl = "";
-
+      let imagemBlob = null;
+      let imagemMimeType = 'image/jpeg';
       if (imageFile) {
         try {
-          finalImageUrl = await uploadImage(imageFile);
+          const uploadedImage = await uploadImage(imageFile);
+          imagemBlob = uploadedImage.blob;
+          imagemMimeType = uploadedImage.mimeType;
         } catch (uploadErr) {
           showToast("Erro ao enviar imagem. Verifique o servidor.", "error");
           setLoading(false);
@@ -177,7 +166,7 @@ export default function CadastroPage() {
         email: formData.email,
         telefone: formData.telefone,
         password: formData.password,
-        imagem: finalImageUrl,
+        foto: imagemBlob || null,
         tipo: "usuario"
       };
 

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./perdidos.module.css";
+import { convertBlobToImageUrl } from '@/lib/blobUtils';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
 
@@ -34,19 +35,39 @@ export default function CadastrarPerdidos() {
 
   // ================= UPLOAD =================
   const uploadImage = async (file) => {
+    // Validações
+    if (!file) throw new Error("Nenhum arquivo fornecido");
+    if (!file.type?.startsWith("image/")) throw new Error("Arquivo não é imagem");
+    if (file.size > 5 * 1024 * 1024) throw new Error("Imagem maior que 5MB");
+
     const baseUrl = getBaseUrl();
     const fd = new FormData();
-    fd.append("file", file);
+    fd.append('file', file);
 
-    const res = await fetch(`${baseUrl}/api/upload`, {
-      method: "POST",
-      body: fd,
-    });
+    try {
+      const res = await fetch(`${baseUrl}/api/upload`, {
+        method: "POST",
+        body: fd
+      });
 
-    if (!res.ok) throw new Error("Erro no upload");
+      const data = await res.json();
 
-    const data = await res.json();
-    return data.url;
+      if (!res.ok) {
+        throw new Error(data.message || "Erro no upload");
+      }
+
+      // ✅ Agora retorna objeto com blob e mimeType
+      if (data.blob && data.mimeType) {
+        return {
+          blob: data.blob,        // String base64 da imagem
+          mimeType: data.mimeType // Tipo MIME (ex: "image/jpeg")
+        };
+      }
+
+      throw new Error("Resposta do servidor sem blob");
+    } catch (error) {
+      throw new Error(`Falha no upload: ${error.message}`);
+    }
   };
 
   // ================= IMAGEM =================
@@ -116,10 +137,10 @@ export default function CadastrarPerdidos() {
   setLoading(true);
 
   try {
-    let finalImageUrl = "/images/semfoto.jpg";
-
+    let imageBlob = null;
     if (imagemFile) {
-      finalImageUrl = await uploadImage(imagemFile);
+      const uploadedImage = await uploadImage(imagemFile);
+      imageBlob = uploadedImage.blob;
     }
 
     const payload = {
@@ -132,7 +153,7 @@ export default function CadastrarPerdidos() {
       location: formData.location || null,
       reward: Number(formData.reward) || 0,
       description: formData.description || null,
-      image: finalImageUrl,
+      image: imageBlob || null,  // ✅ Blob
       status: "lost",
       userId: 1,
     };
