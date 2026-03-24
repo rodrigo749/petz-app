@@ -11,11 +11,11 @@
 
 .cards-wrapper-container {
   width: 95%;
-  max-width: 1300px;
+  max-width: 1400px;
   margin: 0 auto;
   background: #ffffff;
   border-radius: 40px;
-  padding: 40px 20px;
+  padding: 20px 20px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
   inset: 1;
   z-index: 1;
@@ -38,19 +38,18 @@
 }
 
 .titulo {
-  font-size: 24px;
-  font-weight: bold;
-  color: #ffffff;
   background-color: var(--heading);
-  border: 5px solid var(--heading);
-  padding: 5px 20px;
-  border-radius: 50;
+  color: #FFFFFF;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 7px 2rem;
+  border-radius: 50px;
   text-align: center;
-  display: block;
-  width: 1250px;
-  margin: 0 auto 30px auto;
-
+  margin: 0 auto 50px auto;
+  border: 5px solid var(--heading);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
+
 
 /* Ajustes adicionais para telas muito grandes */
 @media (min-width:1200px) {
