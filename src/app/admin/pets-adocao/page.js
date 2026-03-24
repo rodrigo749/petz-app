@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import styles from "../admin.module.css";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+const API_URL = process.env.NEXT_PUBLIC_PETZ_API_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
 
 export default function AdminPetsAdocao() {
   const router = useRouter();
@@ -24,9 +24,9 @@ export default function AdminPetsAdocao() {
   async function carregarPets() {
     try {
       setLoading(true);
-      const res = await fetch(`${API_URL}/api/pets`);
+      const res = await fetch(`${API_URL}/api/pets`, { cache: "no-store" });
       const data = await res.json();
-      const lista = Array.isArray(data) ? data : [];
+      const lista = Array.isArray(data.pets) ? data.pets : Array.isArray(data) ? data : [];
       // Filtrar apenas pets com status available ou adopted
       const adocao = lista.filter(
         (p) => p.status === "available" || p.status === "adopted"

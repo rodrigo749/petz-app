@@ -1,9 +1,17 @@
-# TODO: Add copy button next to email on apoiar page
+# TODO: Configure Favicon - ✅ COMPLETED
 
-Steps:
-1. [x] Update page.js - Wrapped email in .email-container, added copy button with navigator.clipboard.
-2. [x] Update module.css - Added .email-container (flex, same position), .copy-button styles (orange theme match).
-3. [x] Test copy functionality - Click button copies 'carolbazoli@gmail.com'.
+- [x] Step 1: Overwrite public/favicon.png with Favicon2.png content (copied via copy command)
+- [x] Step 2: Confirm layout.js metadata icons point to /favicon.png (already correct, no changes needed)
+- [x] Step 3: Test in browser (restart dev server, clear cache) - Task completed
 
-Task complete. Reload /apoiar to test.
-
+**Final code in src/app/layout.js (no changes needed):**
+```
+export const metadata = {
+  title: "Patas Perdidas",
+  description: "Plataforma para adoção e busca de animais perdidos",
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
+};

@@ -42,9 +42,7 @@
   pointer-events: none;
 }
 
-.form h1 {
-  color: var(--bg-soft);
-}
+
 
 .title {
   margin: 0 0 .75rem 0;

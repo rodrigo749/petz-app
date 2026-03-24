@@ -229,6 +229,7 @@ export default function Header() {
                             className={styles.mobileSubLink}
                           >
                             {s.label}
+                            {s.label}
                           </Link>
                         ))}
                       </div>
