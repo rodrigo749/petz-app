@@ -61,7 +61,7 @@ export default function Header() {
       <nav className={styles.nav}>
         <Link href="/" className={styles.logo}>
           <Image
-            src="/images/Logo.png"
+            src="/images/novanovaogo.png"
             alt="Patas Perdidas"
             width={180}
             height={60}
@@ -170,10 +170,10 @@ export default function Header() {
             <div className={styles.sheet}>
               <div className={styles.sheetHeader}>
                 <Image
-                  src="/images/Logo.png"
+                  src="/images/novalogo.png"
                   alt="Patas Perdidas"
-                  width={150}
-                  height={50}
+                  width={200}
+                  height={100}
                 />
                 <button
                   onClick={() => setMenuOpen(false)}
