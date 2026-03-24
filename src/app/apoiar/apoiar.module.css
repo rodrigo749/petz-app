@@ -1,103 +1,266 @@
 .apoiar-page {
-  position: relative;
   min-height: 100vh;
   background-color: #f7f3ec !important;
   background-image: none !important;
   overflow: hidden;
+}
+
+.heroContent {
+  min-height: 100vh;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 40px 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 32px;
+  box-sizing: border-box;
+}
+
+.leftColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 28px;
   z-index: 2;
 }
 
+.rightColumn {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  min-height: 100%;
+}
+
+.textBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
 .topLeftMessage {
-  position: absolute;
-  top: 20px;
-  left: 80px;
   color: #0f5c5c;
-  font-size: 85px;
-  font-family: 'Baloo Thambi 2', cursive;
-  font-weight: bold;
-  z-index: 10;
+  font-size: clamp(2.8rem, 5vw, 5.3rem);
+  font-family: "Baloo Thambi 2", cursive;
+  font-weight: 700;
+  line-height: 0.95;
+  margin: 0;
 }
 
 .topLeft2Message {
-  position: absolute;
-  top: 110px;
-  left: 80px;
   color: #d48d15;
-  font-size: 50px;
-  font-family: 'Baloo Thambi 2', cursive;
-  font-weight: bold;
-  z-index: 10;
+  font-size: clamp(1.7rem, 3vw, 3.1rem);
+  font-family: "Baloo Thambi 2", cursive;
+  font-weight: 700;
+  line-height: 1.05;
+  margin: 0;
+  max-width: 700px;
 }
 
 .scanText {
-  position: absolute;
-  top: 205px;
-  left: 220px;
   color: #0f5c5c;
-  font-size: 40px;
-  font-family: 'Baloo Thambi 2', cursive;
-  font-weight: bold;
-  z-index: 10;
+  font-size: clamp(1.4rem, 2.4vw, 2.5rem);
+  font-family: "Baloo Thambi 2", cursive;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1;
+  text-align: center;
+}
+
+.qrBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-top: 18px;
+  margin-left: 0;
+  text-align: center;
+}
+
+.qrImage {
+  width: 120%;
+  max-width: 1200px;
+  margin-top: -55px;
+  margin-bottom: -55px;
+}
+
+.qrImage img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 .email-container {
-  position: absolute;
-  top: 745px;
-  left: 110px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
-  z-index: 50;
+  justify-content: center;
+  gap: 8px;
+  margin: 0;
 }
 
 .scanChave {
   color: #0f5c5c;
-  font-size: 40px;
-  font-family: 'Baloo Thambi 2', cursive;
-  font-weight: bold;
+  font-size: clamp(1.05rem, 1.8vw, 2rem);
+  font-family: "Baloo Thambi 2", cursive;
+  font-weight: 700;
+  word-break: break-word;
+  text-align: center;
+  margin: 0;
 }
 
 .copy-button {
   background-color: #0f5c5c;
   color: white;
-  border: none;
-  padding: 4px 18px;
+  border: 2px solid #b87a12;
+  padding: 8px 18px;
   border-radius: 30px;
-  border-color: #b87a12;
-  border-width: 2px;
-  border-style: solid;
   cursor: pointer;
-  font-family: 'Baloo Thambi 2', cursive;
-  font-weight: bold;
-  font-size: 24px;
+  font-family: "Baloo Thambi 2", cursive;
+  font-weight: 700;
+  font-size: clamp(1rem, 1.2vw, 1.4rem);
   transition: background-color 0.2s;
-
 }
 
 .copy-button:hover {
   background-color: #b87a12;
 }
 
-.qrImage {
-  position: absolute;
-  top: 15px;
-  left: -460px;
-  z-index: 10;
-}
-
-.qrImage img {
-  width: 1750px;
-  height: auto;
+.petIllustration {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 }
 
 .dogs-image {
-  position: fixed;
-  bottom: -560px;
-  right: -800px;
-  z-index: 10;
+  width: 100%;
+  max-width: 900px;
 }
 
 .dogs-image img {
-  width: 2400px;
+  width: 100%;
   height: auto;
+  display: block;
+  transform: scale(3.5) translate(35%, 44%);
+  transform-origin: bottom right;
+}
+
+/* notebook menor */
+@media (max-width: 1200px) {
+  .heroContent {
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 24px;
+    padding: 32px 28px;
+  }
+
+  .dogs-image {
+    max-width: 580px;
+  }
+
+  .qrImage {
+    max-width: 360px;
+    margin-top: -10px;
+    margin-bottom: -10px;
+  }
+}
+
+/* tablet */
+@media (max-width: 992px) {
+  .heroContent {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 28px 20px;
+    gap: 24px;
+  }
+
+  .leftColumn {
+    align-items: center;
+  }
+
+  .textBlock {
+    align-items: center;
+  }
+
+  .topLeft2Message {
+    max-width: 650px;
+  }
+
+  .qrBlock {
+    align-items: center;
+    margin-top: 16px;
+  }
+
+  .email-container {
+    justify-content: center;
+  }
+
+  .rightColumn {
+    justify-content: center;
+  }
+
+  .dogs-image {
+    max-width: 500px;
+  }
+}
+
+/* celular */
+@media (max-width: 768px) {
+  .heroContent {
+    padding: 24px 16px 20px;
+    gap: 20px;
+  }
+
+  .qrImage {
+    width: 100%;
+    max-width: 280px;
+    margin-top: -6px;
+    margin-bottom: -6px;
+  }
+
+  .email-container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .scanChave {
+    text-align: center;
+  }
+
+  .copy-button {
+    width: 100%;
+    max-width: 220px;
+  }
+
+  .dogs-image {
+    max-width: 360px;
+  }
+}
+
+/* celular pequeno */
+@media (max-width: 480px) {
+  .topLeftMessage {
+    font-size: clamp(2.2rem, 10vw, 3rem);
+  }
+
+  .topLeft2Message {
+    font-size: clamp(1.3rem, 6vw, 1.9rem);
+  }
+
+  .scanText {
+    font-size: clamp(1.1rem, 5vw, 1.5rem);
+  }
+
+  .qrImage {
+    max-width: 240px;
+    margin-top: -4px;
+    margin-bottom: -4px;
+  }
+
+  .dogs-image {
+    max-width: 280px;
+  }
 }
