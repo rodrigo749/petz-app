@@ -45,7 +45,7 @@ export default function Header() {
         { label: "Sair", href: "/logout" },
       ]
     : [
-        { label: "Editar perfil", href: "/editar-perfil-usuario" },
+        { label: "Editar perfil", href: "/editar-usuario" },
         { label: "Meus pets Perdidos", href: "/meus-pets-perdidos" },
         { label: "Sair", href: "/logout" },
       ];
@@ -228,7 +228,6 @@ export default function Header() {
                             onClick={() => setMenuOpen(false)}
                             className={styles.mobileSubLink}
                           >
-                            {s.label}
                             {s.label}
                           </Link>
                         ))}
