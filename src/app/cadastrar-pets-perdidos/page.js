@@ -294,15 +294,41 @@ const salvarPet = async (e) => {
                 onBlur={handleBlur}
               />
             </div>
-            <div className={styles.campo}>
+
+          <div className={`${styles.campo} ${styles.campoIdade}`}>
               <img src="/images/patinha.png" className={styles.iconeInput} />
               <input
                 type="number"
                 placeholder="Age"
-                value={formData.age}
-                onChange={(e) => handleChange("age", e.target.value)}
-                
+                value={formData.idade}
+                onChange={(e) => handleChange("idade", e.target.value)}
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+                min="0"
+                className={styles.inputIdade}
               />
+              <div className={styles.botoesIdade}>
+                <button 
+                  type="button" 
+                  className={styles.btnIdade}
+                  onClick={() => {
+                    const current = parseInt(formData.idade) || 0;
+                    handleChange("idade", String(current + 1));
+                  }}
+                >
+                  ▲
+                </button>
+                <button 
+                  type="button" 
+                  className={styles.btnIdade}
+                  onClick={() => {
+                    const current = parseInt(formData.idade) || 0;
+                    if (current > 0) handleChange("idade", String(current - 1));
+                  }}
+                >
+                  ▼
+                </button>
+              </div>
             </div>
 
             <div className={styles.campo}>
@@ -354,7 +380,7 @@ const salvarPet = async (e) => {
                 <input
                   type="range"
                   min="0"
-                  max="100000"
+                  max="1000"
                   value={formData.reward}
                   onChange={(e) => handleChange("reward", e.target.value)}
                   className={styles.slider}
@@ -365,6 +391,7 @@ const salvarPet = async (e) => {
                 </div>
               </div>
             </div>
+            
 
             <button 
               type="submit" 
