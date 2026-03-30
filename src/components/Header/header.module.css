@@ -173,7 +173,11 @@ button.dropdownItem,
   position: relative;
   display: flex;
   align-items: center;
-  margin-left: 0.75rem;
+  /* ensure the profile/avatar stays at the right edge instead of centering
+     when the middle menu is hidden (mobile). Using auto pushes it to the
+     end of the flex container while preserving layout on desktop. */
+  margin-left: auto;
+  margin-right: 0.5rem;
   /* padding-bottom creates an invisible "bridge" so the mouse
      can travel from the avatar to the dropdown without triggering
      mouseleave — same technique used by .dropdown containers */
@@ -399,6 +403,32 @@ button.dropdownItem,
     height: 70px;
   }
 
+
+/* Ensure on small/medium screens the logo takes remaining space so the
+   avatar and toggle stay grouped on the right instead of the avatar
+   being centered between logo and toggle. This keeps layout stable
+   when .desktop is hidden. */
+@media (max-width: 1023px) {
+  .nav {
+    /* align items from the left, we'll use logo to push the others */
+    justify-content: flex-start;
+  }
+
+  .logo {
+    /* take remaining space so following items (profile/toggle) stay right */
+    margin-right: auto;
+  }
+
+  /* ensure profile and toggle remain close to the right edge */
+  .profileWrap {
+    margin-left: 0;
+    margin-right: 0.5rem;
+  }
+
+  .toggle {
+    margin-right: 0.25rem;
+  }
+}
   .logoImage {
     max-height: 400px
     ;
