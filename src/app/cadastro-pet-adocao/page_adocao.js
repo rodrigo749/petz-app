@@ -144,15 +144,15 @@ export default function CadastroAdocao() {
 
     // verifica usuário logado (desabilitado para testes)
     let usuario = { id: 1 };
-    // try {
-    //   usuario = JSON.parse(localStorage.getItem("usuarioLogado") || "null");
-    // } catch {}
+     try {
+      usuario = JSON.parse(localStorage.getItem("usuarioLogado") || "null");
+     } catch {}
 
-    // if (!usuario || !usuario.id) {
-    //   showToast("Você precisa estar logado para cadastrar um pet.", "warning");
-    //   setLoading(false);
-    //   return;
-    // }
+     if (!usuario || !usuario.id) {
+      showToast("Você precisa estar logado para cadastrar um pet.", "warning");
+      setLoading(false);
+      return;
+     }
 
     try {
       // 1. upload da imagem (se houver)
