@@ -117,24 +117,22 @@ export default function HomePage() {
       </section>
 
       <section className={styles.blockPet}>
-        
-        <Button
-          variant="primary"
-          size="large"
-          onClick={() => router.push('/cadastrar-pets-perdidos')}
-        >
-          Cadastrar Pets Perdidos
-        </Button>
-      </section>
-      <section className={styles.blockPet}>
-        
-        <Button
-          variant="primary"
-          size="large"
-          onClick={() => router.push('/cadastro-pet-adocao')}
-        >
-          Cadastrar Pets Para adoção
-        </Button>
+        <div className={styles.buttonGroup}>
+          <Button
+            variant="primary"
+            size="large"
+            onClick={() => router.push('/cadastrar-pets-perdidos')}
+          >
+            Cadastrar Pets Perdidos
+          </Button>
+          <Button
+            variant="primary"
+            size="large"
+            onClick={() => router.push('/cadastro-pet-adocao')}
+          >
+            Cadastrar Pets Para adoção
+          </Button>
+        </div>
       </section>
 
       <section className={styles.block}>
