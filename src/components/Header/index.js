@@ -45,7 +45,7 @@ export default function Header() {
         { label: "Sair", href: "/logout" },
       ]
     : [
-        { label: "Editar perfil", href: "/editar-perfil-usuario" },
+        { label: "Editar perfil", href: "/editar-usuario" },
         { label: "Meus pets Perdidos", href: "/meus-pets-perdidos" },
         { label: "Sair", href: "/logout" },
       ];
@@ -60,20 +60,14 @@ export default function Header() {
     <header className={styles.header}>
       <nav className={styles.nav}>
         <Link href="/" className={styles.logo}>
-          <div className={styles.logoContent}>
-
-            <Image
-              src="/images/logo.svg"
-              alt="Desabandone focinho"
-              width={180}
-              height={60}
-              priority
-              className={styles.logoImage}
-            />
-
-          </div>
-
-
+          <Image
+            src="/images/novanovaogo.png"
+            alt="Patas Perdidas"
+            width={180}
+            height={60}
+            priority
+            className={styles.logoImage}
+          />
         </Link>
 
         {/* ================= DESKTOP MENU ================= */}
@@ -176,10 +170,10 @@ export default function Header() {
             <div className={styles.sheet}>
               <div className={styles.sheetHeader}>
                 <Image
-                  src="/images/Logo.png"
+                  src="/images/novalogo.png"
                   alt="Patas Perdidas"
-                  width={150}
-                  height={50}
+                  width={200}
+                  height={100}
                 />
                 <button
                   onClick={() => setMenuOpen(false)}
@@ -234,7 +228,6 @@ export default function Header() {
                             onClick={() => setMenuOpen(false)}
                             className={styles.mobileSubLink}
                           >
-                            {s.label}
                             {s.label}
                           </Link>
                         ))}
