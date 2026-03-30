@@ -65,7 +65,9 @@ export default function CadastroPage() {
         if (returned && typeof returned === "string") {
           return returned.startsWith("/") ? `${baseUrl}${returned}` : returned;
         }
-
+        if (data?.blob && data?.mimeType) {
+          return `data:${data.mimeType};base64,${data.blob}`;
+        }
         if (typeof data === "string" && data) {
           return data.startsWith("/") ? `${baseUrl}${data}` : data;
         }

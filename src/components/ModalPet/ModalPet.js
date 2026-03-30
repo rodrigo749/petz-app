@@ -3,6 +3,7 @@
 import { useState } from "react";
 import styles from "./ModalPet.module.css";
 import ModalLogin from "@/components/ModalLogin/ModalLogin";
+import { getImageSrc } from "@/lib/apiPets";
 
 export default function ModalPet({ pet, onClose }) {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -47,7 +48,7 @@ export default function ModalPet({ pet, onClose }) {
 
           {/* LEFT SIDE - IMAGE */}
           <div className={styles.imageBox}>
-            <img src={pet.image || "/images/default.png"} alt={pet.name} />
+            <img src={getImageSrc(pet.image || pet.imagem || "")} alt={pet.name} />
             <h2 className={styles.petName}>{pet.name}</h2>
           </div>
 
