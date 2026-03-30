@@ -61,7 +61,7 @@ export default function Header() {
       <nav className={styles.nav}>
         <Link href="/" className={styles.logo}>
           <Image
-            src="/images/novanovaogo.png"
+            src="/images/logo.svg"
             alt="Patas Perdidas"
             width={180}
             height={60}
@@ -170,7 +170,7 @@ export default function Header() {
             <div className={styles.sheet}>
               <div className={styles.sheetHeader}>
                 <Image
-                  src="/images/novalogo.png"
+                  src="/images/logo.svg"
                   alt="Patas Perdidas"
                   width={200}
                   height={100}
