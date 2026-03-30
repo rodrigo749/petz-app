@@ -93,6 +93,13 @@
 .carousel::-webkit-scrollbar {
   display: none;
 }
+.blockPet {
+  display: flex;
+  align-items: center;
+  padding: 40px 20px;
+  background: transparent;
+  border: none;
+}
 
 .cards {
   display: flex;
@@ -262,6 +269,21 @@
   margin: 0;
 }
 
+@media screen and (max-width: 480px) {
+  .buttonGroup {
+    flex-direction: column !important;
+    gap: 12px;
+    margin: 0 auto;
+    max-width: 90vw;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .buttonGroup {
+    margin-left: 100px;
+  }
+}
+
 @media screen and (max-width: 900px) {
   .hero h1 {
     font-size: 28px;
@@ -325,7 +347,16 @@
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 600px) and (min-width: 590px) {
+  .buttonGroup {
+    flex-direction: column !important;
+    align-items: stretch;
+    margin: 0 auto !important;
+    margin-left: 0 !important;
+    width: 100%;
+    max-width: 400px;
+    gap: 12px;
+  }
   .hero h1 {
     font-size: 24px;
   }
@@ -396,4 +427,13 @@
     font-size: 12px;
     min-width: 40px
   }
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 16px;
+  flex-direction: row;
+  align-items: center;
+  margin: 0 auto;
+  max-width: fit-content;
 }

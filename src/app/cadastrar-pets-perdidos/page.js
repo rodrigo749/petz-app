@@ -111,11 +111,19 @@ export default function CadastrarPerdidos() {
   }, []);
 
   // ================= SALVAR PET =================
-  const salvarPet = async (e) => {
+const salvarPet = async (e) => {
   e.preventDefault();
   setLoading(true);
 
   try {
+    const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
+
+    if (!usuarioLogado || !usuarioLogado.id) {
+      alert("Usuário não está logado.");
+      setLoading(false);
+      return;
+    }
+
     let finalImageUrl = "/images/semfoto.jpg";
 
     if (imagemFile) {
@@ -127,14 +135,14 @@ export default function CadastrarPerdidos() {
       species: formData.species,
       breed: formData.breed || null,
       gender: formData.genero || null,
-      age: Number(formData.age) || null,
+      age: formData.age ? Number(formData.age) : null,
       dateLost: formData.dateLost || null,
       location: formData.location || null,
-      reward: Number(formData.reward) || 0,
+      reward: formData.reward ? Number(formData.reward) : 0,
       description: formData.description || null,
       image: finalImageUrl,
       status: "lost",
-      userId: 1,
+      userId: usuarioLogado.id,
     };
 
     const res = await fetch(`${getBaseUrl()}/api/pets`, {
@@ -145,10 +153,11 @@ export default function CadastrarPerdidos() {
       body: JSON.stringify(payload),
     });
 
+    const respData = await res.json().catch(() => ({}));
+
     if (!res.ok) {
-      const erro = await res.json();
-      console.error("Erro backend:", erro);
-      throw new Error("Erro ao cadastrar pet");
+      console.error("Erro backend:", respData);
+      throw new Error(respData?.message || "Erro ao cadastrar pet");
     }
 
     alert("Pet cadastrado com sucesso!");
@@ -170,7 +179,7 @@ export default function CadastrarPerdidos() {
     router.push("/meus-pets-perdidos");
   } catch (error) {
     console.error(error);
-    alert("Erro ao cadastrar pet");
+    alert(error.message || "Erro ao cadastrar pet");
   } finally {
     setLoading(false);
   }
@@ -222,7 +231,7 @@ export default function CadastrarPerdidos() {
             />
             <textarea
               placeholder="Descreva o pet aqui..."
-              value={formData.descricao}
+              value={formData.descdescriptionricao}
               onChange={(e) => handleChange("descricao", e.target.value)}
               onFocus={handleFocus}
               onBlur={handleBlur}
