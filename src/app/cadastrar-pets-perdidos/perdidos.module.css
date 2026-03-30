@@ -126,6 +126,7 @@
   border-color: var(--heading);
 }
 
+
 /* ===========================
    COLUNA DIREITA
 =========================== */
@@ -157,6 +158,31 @@
   display: flex;
   flex-direction: column;
   gap: 18px;
+}
+
+.botoesIdade {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.btnIdade {
+  width: 20px;
+  height: 17px;
+  background-color: var(--heading);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
 }
 
 /* CAMPOS COM PATINHA */
@@ -263,6 +289,16 @@
 .btnCadastrar:hover {
   background-color: var(--nav-hover);
   transform: translateY(-2px);
+}
+
+.inputIdade::-webkit-outer-spin-button,
+.inputIdade::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.inputIdade:focus {
+  border-color: var(--heading);
 }
 
 
